@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vlocity CME EPC — Easy Learning Guide</title>
+  <style>
+    :root {
+      --primary: #0176d3;
+      --primary-dark: #014486;
+      --accent: #1b96ff;
+      --success: #2e844a;
+      --warning: #fe9339;
+      --danger: #ea001e;
+      --bg: #f3f3f3;
+      --card: #ffffff;
+      --text: #181818;
+      --muted: #706e6b;
+      --border: #dddbda;
+      --sidebar-width: 280px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* Header */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--accent) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 700; }
+    .hero p { font-size: 1.1rem; opacity: 0.95; max-width: 700px; margin: 0 auto; }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    /* Layout */
+    .layout {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      flex-shrink: 0;
+    }
+    .sidebar h3 {
+      padding: 0 1.25rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .sidebar a {
+      display: block;
+      padding: 0.45rem 1.25rem;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .sidebar a:hover { background: #eef4ff; color: var(--primary); }
+    .sidebar a.active { border-left-color: var(--primary); background: #eef4ff; color: var(--primary); font-weight: 600; }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 2rem;
+      min-width: 0;
+    }
+
+    /* Sections */
+    section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    section h2 {
+      color: var(--primary-dark);
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #eef4ff;
+    }
+    section h3 {
+      color: var(--primary);
+      font-size: 1.15rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+    section p { margin-bottom: 1rem; color: #333; }
+    section ul, section ol { margin: 0.5rem 0 1rem 1.5rem; }
+    section li { margin-bottom: 0.4rem; }
+
+    /* Callouts */
+    .tip, .note, .example-box, .warning {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .tip { background: #eef4ff; border-left: 4px solid var(--primary); }
+    .note { background: #f9f9f9; border-left: 4px solid var(--muted); }
+    .example-box { background: #f0fdf4; border-left: 4px solid var(--success); }
+    .warning { background: #fff8f0; border-left: 4px solid var(--warning); }
+    .tip strong, .note strong, .example-box strong { display: block; margin-bottom: 0.3rem; }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin: 0.15rem;
+    }
+    .tag-blue { background: #eef4ff; color: var(--primary); }
+    .tag-green { background: #e8f5e9; color: var(--success); }
+    .tag-orange { background: #fff3e0; color: #e65100; }
+    .tag-purple { background: #f3e5f5; color: #7b1fa2; }
+
+    /* UI Mockups */
+    .ui-mock {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1.25rem 0;
+      background: #fafafa;
+    }
+    .ui-mock-header {
+      background: #032d60;
+      color: white;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .ui-mock-header .dots { display: flex; gap: 5px; }
+    .ui-mock-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green { background: #28c840; }
+    .ui-mock-body { padding: 1.25rem; }
+
+    /* Form mock */
+    .form-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .form-row label { color: var(--muted); font-weight: 500; }
+    .form-row input, .form-row select {
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: white;
+      font-size: 0.85rem;
+    }
+
+    /* Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .data-table th {
+      background: #032d60;
+      color: white;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .data-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table tr:nth-child(even) { background: #f9f9f9; }
+
+    /* Workflow steps */
+    .workflow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.25rem 0;
+      align-items: center;
+    }
+    .workflow-step {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      min-width: 100px;
+    }
+    .workflow-arrow { color: var(--muted); font-size: 1.2rem; }
+
+    /* Hierarchy tree */
+    .tree {
+      font-family: "Consolas", monospace;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.25rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .tree .highlight { color: #4ec9b0; }
+    .tree .comment { color: #6a9955; }
+
+    /* Bundle visual */
+    .bundle-viz {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.5rem;
+    }
+    .bundle-root {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .bundle-children {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .bundle-child {
+      background: white;
+      border: 2px solid var(--accent);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    .bundle-child small { display: block; color: var(--muted); font-size: 0.75rem; margin-top: 0.2rem; }
+    .bundle-connector { color: var(--muted); font-size: 1.5rem; }
+
+    /* Layer diagram */
+    .layers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .layer {
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .layer-1 { background: #1565c0; color: white; }
+    .layer-2 { background: #1976d2; color: white; margin-left: 1.5rem; }
+    .layer-3 { background: #42a5f5; color: white; margin-left: 3rem; }
+    .layer-4 { background: #90caf9; color: #0d47a1; margin-left: 4.5rem; }
+
+    /* Compare cards */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 700px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      background: #fafafa;
+    }
+    .compare-card h4 {
+      color: var(--primary-dark);
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    /* Lifecycle timeline */
+    .lifecycle {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 800px) { .lifecycle { grid-template-columns: 1fr 1fr; } }
+    .lifecycle-item {
+      text-align: center;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+    .lc-current { background: #e8f5e9; border: 2px solid var(--success); }
+    .lc-future { background: #e3f2fd; border: 2px solid #2196f3; }
+    .lc-past { background: #fff8e1; border: 2px solid var(--warning); }
+    .lc-retired { background: #ffebee; border: 2px solid var(--danger); }
+    .lifecycle-item strong { display: block; margin-bottom: 0.3rem; }
+
+    /* Cart mock */
+    .cart-mock {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 700px) { .cart-mock { grid-template-columns: 1fr; } }
+    .cart-panel {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      background: white;
+    }
+    .cart-panel h5 { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; text-transform: uppercase; }
+    .cart-item {
+      padding: 0.5rem;
+      border-bottom: 1px solid #eee;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        max-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Vlocity CME Enterprise Product Catalog (EPC)</h1>
+  <p>A simple, visual guide to understand how Vlocity EPC works — based on the official Vlocity documentation.</p>
+  <span class="badge">Communications, Media &amp; Energy · Salesforce</span>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <h3>Topics</h3>
+    <a href="#overview">1. What is EPC?</a>
+    <a href="#benefits">2. Business Benefits</a>
+    <a href="#features">3. Key Features</a>
+    <a href="#tmforum">4. TM Forum Model</a>
+    <a href="#apps">5. Designer vs Console</a>
+    <a href="#workflow">6. Product Creation Flow</a>
+    <a href="#picklists">7. Picklists</a>
+    <a href="#categories">8. Attribute Categories</a>
+    <a href="#attributes">9. Attributes &amp; Overrides</a>
+    <a href="#object-types">10. Object Types</a>
+    <a href="#specifications">11. Product Specifications</a>
+    <a href="#offerings">12. Offerings</a>
+    <a href="#rules">13. Attribute &amp; Context Rules</a>
+    <a href="#bundles">14. Bundles &amp; Cardinality</a>
+    <a href="#pricing">15. Pricing</a>
+    <a href="#lifecycle">16. Product Lifecycle</a>
+    <a href="#projects">17. EPC Projects</a>
+    <a href="#console">18. Product Console</a>
+    <a href="#catalogs">19. Catalogs</a>
+    <a href="#guided">20. Guided Selling</a>
+  </nav>
+
+  <main class="main">
+
+    <!-- 1. OVERVIEW -->
+    <section id="overview">
+      <h2>1. What is Vlocity EPC?</h2>
+      <p><strong>Enterprise Product Catalog (EPC)</strong> is Vlocity's central place to create, manage, and sell products and services. Think of it as one master catalog that your sales team (CPQ), order team, and billing systems all use together.</p>
+
+      <div class="tip">
+        <strong>Simple analogy</strong>
+        EPC is like a restaurant menu that the kitchen, waiters, and cashier all share. When the chef adds a new dish once, everyone sees it — no duplicate menus in different departments.
+      </div>
+
+      <h3>What EPC contains</h3>
+      <ul>
+        <li><strong>Commercial catalog</strong> — what customers see and buy (offers, prices, bundles)</li>
+        <li><strong>Technical catalog</strong> — how products are delivered (services, resources, fulfillment)</li>
+      </ul>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Enterprise Architecture — Where EPC Sits
+        </div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1">Sales Channels (Web, Store, Call Center) <span>→ uses EPC</span></div>
+            <div class="layer layer-2">Vlocity CPQ (Configure, Price, Quote) <span>→ reads EPC</span></div>
+            <div class="layer layer-3">Vlocity Order Management <span>→ fulfills from EPC</span></div>
+            <div class="layer layer-4">Billing &amp; Backend Systems <span>→ receives product data</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p>EPC uses a <strong>metadata-driven</strong> approach — products are defined once as reusable building blocks, then combined into offers, bundles, and promotions.</p>
+    </section>
+
+    <!-- 2. BENEFITS -->
+    <section id="benefits">
+      <h2>2. Business Benefits</h2>
+      <p>Companies in telecom, media, and energy use EPC to launch products faster and at lower cost.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>Benefit Area</th><th>What It Means (Simple English)</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-green">Time-to-Market</span></td>
+            <td>Launch new products faster by reusing components</td>
+            <td>Create a "5G Plan" offer in days instead of months by reusing existing data plan specs</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue">Cost-to-Market</span></td>
+            <td>Less duplicate data and fewer manual steps</td>
+            <td>One color picklist used across 50 phone models — update once, applies everywhere</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-purple">Innovation</span></td>
+            <td>Build complex bundles and promotions easily</td>
+            <td>Triple-play bundle: Internet + TV + Phone with special pricing in one package</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-orange">Consistency</span></td>
+            <td>Same product data across all channels</td>
+            <td>Online store and call center show the same iPhone price and options</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. FEATURES -->
+    <section id="features">
+      <h2>3. Key Solution Features</h2>
+      <ul>
+        <li><strong>Single catalog</strong> — commercial + technical products in one model</li>
+        <li><strong>Reusable components</strong> — attributes, picklists, object types shared across products</li>
+        <li><strong>Simple &amp; complex bundles</strong> — sell products alone or as packages</li>
+        <li><strong>Flexible pricing</strong> — flat, tiered, attribute-based, promotions, adjustments</li>
+        <li><strong>Rules engine</strong> — control what customers can buy and at what price</li>
+        <li><strong>Role-based access</strong> — product managers, admins, and developers each see what they need</li>
+        <li><strong>TM Forum compliant</strong> — follows industry standards (SID model)</li>
+        <li><strong>Versioning &amp; Projects</strong> — track changes and release safely</li>
+      </ul>
+    </section>
+
+    <!-- 4. TM FORUM -->
+    <section id="tmforum">
+      <h2>4. TM Forum &amp; SID Model</h2>
+      <p>Vlocity EPC follows the <strong>TM Forum Frameworx</strong> standard. Products are split into layers — from what marketing sells to what the network delivers.</p>
+
+      <div class="layers">
+        <div class="layer layer-1">🛒 Product Offering — What marketing sells (with price)</div>
+        <div class="layer layer-2">📋 Product Specification — What the product includes (color, speed, storage)</div>
+        <div class="layer layer-3">⚙️ Customer Facing Service (CFS) — Technical service (e.g., broadband internet)</div>
+        <div class="layer layer-4">🔧 Resource Facing Service / Physical Resources — Network equipment, IP address, port</div>
+      </div>
+
+      <div class="example-box">
+        <strong>Example: Home Internet Package</strong>
+        <ul>
+          <li><strong>Offer:</strong> "Fiber 100 Mbps Plan — $49/month"</li>
+          <li><strong>Product Spec:</strong> Router + 100 Mbps speed + SLA</li>
+          <li><strong>Service Spec:</strong> Fiber broadband service with authentication</li>
+          <li><strong>Resource Spec:</strong> ONT device, IP port, local loop connection</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. APPS -->
+    <section id="apps">
+      <h2>5. Product Designer vs Product Console</h2>
+      <p>Vlocity has two admin tools. Both manage the same catalog, but with different interfaces.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>🎨 Vlocity Product Designer (New)</h4>
+          <ul>
+            <li>Built with Lightning Web Components (LWC)</li>
+            <li>Modern UI with drag-and-drop</li>
+            <li>Better search and performance</li>
+            <li>Best for: attributes, offers, specs, bundles, layouts</li>
+            <li>Open via App Launcher → "Vlocity Product Designer"</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <h4>🖥️ Vlocity Product Console (Legacy)</h4>
+          <ul>
+            <li>Built with Angular dashboard</li>
+            <li>Facet-based navigation on the left</li>
+            <li>Still needed for some pricing elements</li>
+            <li>Best for: price lists, pricing plans, promotions setup</li>
+            <li>Open via App Launcher → "Vlocity Product Console"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Important</strong>
+        Both tools can work together. Products created in Console can usually be viewed in Designer (if attributes use the "General Properties" layout).
+      </div>
+    </section>
+
+    <!-- 6. WORKFLOW -->
+    <section id="workflow">
+      <h2>6. Product Creation Workflow</h2>
+      <p>Before you sell an iPhone 11, you build reusable pieces first. Here is the recommended order:</p>
+
+      <div class="workflow">
+        <div class="workflow-step">Picklists</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Categories</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Attributes</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Object Types</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Specifications</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Offerings</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Bundles</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">Pricing</div>
+      </div>
+
+      <div class="example-box">
+        <strong>Example: iPhone 11 Offering</strong>
+        <ol>
+          <li>Create <strong>Smart Phone</strong> object type with shared attributes (Brand, Storage, OS)</li>
+          <li>Create picklists: iPhone 11 Colors (black, white, red…) and Storage (64GB, 128GB, 256GB)</li>
+          <li>Create <strong>iPhone</strong> product specification linked to Smart Phone object type</li>
+          <li>Create <strong>iPhone 11 Offer</strong> with price $699 — this is what customers order</li>
+          <li>Create <strong>New Account Bundle</strong>: iPhone 11 + Apple Watch + Data Plan with $50 discount</li>
+        </ol>
+      </div>
+
+      <div class="tree">
+<span class="comment">// Object Type Hierarchy Example</span>
+<span class="highlight">Base Product</span>
+  └── <span class="highlight">Smart Device</span>
+        ├── <span class="highlight">Smart Phone</span>  → iPhone Spec, Samsung Spec
+        └── <span class="highlight">Smart Wearable</span>  → Apple Watch Spec
+      </div>
+    </section>
+
+    <!-- 7. PICKLISTS -->
+    <section id="picklists">
+      <h2>7. Picklists</h2>
+      <p>A <strong>picklist</strong> is a dropdown list of choices. When a customer picks a color or storage size, those options come from a picklist.</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Product Designer → Vlocity Picklists → New
+        </div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Picklist Name</label><input value="iPhone 11 Colors" readonly></div>
+          <div class="form-row"><label>Code</label><input value="PKL_IPHONE11_COLOR" readonly></div>
+          <div class="form-row"><label>Data Type</label><select><option>Text</option></select></div>
+          <h3 style="margin-top:1rem;font-size:0.95rem;">Picklist Items</h3>
+          <table class="data-table">
+            <thead><tr><th>Value</th><th>Label</th><th>Default</th><th>Active</th></tr></thead>
+            <tbody>
+              <tr><td>black</td><td>Black</td><td>✓</td><td>Yes</td></tr>
+              <tr><td>white</td><td>White</td><td></td><td>Yes</td></tr>
+              <tr><td>red</td><td>Red</td><td></td><td>Yes</td></tr>
+              <tr><td>purple</td><td>Purple</td><td></td><td>Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Rules to remember</strong>
+        Create picklists <em>before</em> attributes. Picklists can be reused across many products. Use naming like <code>PKL_BANDWIDTH</code> for codes.
+      </div>
+    </section>
+
+    <!-- 8. CATEGORIES -->
+    <section id="categories">
+      <h2>8. Attribute Categories</h2>
+      <p>Categories <strong>group related attributes</strong>. They appear as section headings in the shopping cart when customers configure a product.</p>
+
+      <div class="example-box">
+        <strong>Example categories by Monique (product modeler)</strong>
+        <ul>
+          <li><strong>Smart Devices</strong> — Color, OS, Brand, Storage (shared by phones and wearables)</li>
+          <li><strong>Wearables</strong> — Band Type (only for smartwatches)</li>
+        </ul>
+      </div>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Vlocity Cart — Attribute Categories at Runtime
+        </div>
+        <div class="ui-mock-body cart-mock">
+          <div class="cart-panel">
+            <h5>Smart Devices</h5>
+            <div class="form-row"><label>Color</label><select><option>Black</option><option>White</option></select></div>
+            <div class="form-row"><label>Storage</label><select><option>64 GB</option><option>128 GB</option></select></div>
+            <div class="form-row"><label>Brand</label><input value="Apple" readonly></div>
+          </div>
+          <div class="cart-panel">
+            <h5>Wearables</h5>
+            <div class="form-row"><label>Band Type</label><select><option>Sport Band</option><option>Leather</option></select></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. ATTRIBUTES -->
+    <section id="attributes">
+      <h2>9. Attributes &amp; Overrides</h2>
+      <p>An <strong>attribute</strong> describes a product feature — like color, download speed, or IMEI number. Attributes are stored as JSON on the Product record and power CPQ, pricing, and order fulfillment.</p>
+
+      <h3>Attributes vs Fields</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th>Attributes</th><th>Fields (Salesforce)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Who creates?</strong></td><td>Product Manager</td><td>System Administrator</td></tr>
+          <tr><td><strong>Best for</strong></td><td>Product-specific options (color, speed)</td><td>Common properties for all products (Orderable flag)</td></tr>
+          <tr><td><strong>Storage</strong></td><td>One JSON blob per product</td><td>Separate Salesforce field per property</td></tr>
+          <tr><td><strong>Customer sees?</strong></td><td>Yes — in cart configuration</td><td>Usually internal only</td></tr>
+        </tbody>
+      </table>
+
+      <h3>SmartWatch Attribute Example</h3>
+      <table class="data-table">
+        <thead><tr><th>Attribute</th><th>Example Value</th><th>When Set</th></tr></thead>
+        <tbody>
+          <tr><td>Brand</td><td>Apple</td><td>Design time</td></tr>
+          <tr><td>Band Color</td><td>Gray</td><td>Customer selects at order</td></tr>
+          <tr><td>Capacity</td><td>8 GB</td><td>Design time default</td></tr>
+          <tr><td>IMEI</td><td>Assigned during provisioning</td><td>Order fulfillment</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Overrides</h3>
+      <p>Child products inherit attributes from their object type, but you can <strong>override</strong> values at the product level. You cannot delete inherited attributes — only change their values or picklist defaults.</p>
+
+      <div class="example-box">
+        <strong>Example: Download Speed Override</strong>
+        Smart Phone object type has Download Speed picklist (25 MB, 50 MB, 100 MB) with default 25 MB.
+        For a premium fiber offer, override the default to 50 MB on that specific product only.
+      </div>
+
+      <h3>Special Flags (Technical Products)</h3>
+      <ul>
+        <li><strong>Encrypted</strong> — protects PII like SSN or phone numbers</li>
+        <li><strong>Not Assetizable</strong> — temporary data (e.g., one-time login password) not stored after order completes</li>
+      </ul>
+    </section>
+
+    <!-- 10. OBJECT TYPES -->
+    <section id="object-types">
+      <h2>10. Object Types</h2>
+      <p>An <strong>object type</strong> is a reusable template — like a "class" in programming. Products inherit fields, attributes, and layouts from their object type.</p>
+
+      <div class="tip">
+        <strong>"Is-A" inheritance</strong>
+        iPhone <em>is a</em> Smart Phone, which <em>is a</em> Smart Device. Each level adds more specific attributes.
+      </div>
+
+      <div class="tree">
+<span class="highlight">Base Product</span>          <span class="comment">← all fields, created once at setup</span>
+  └── <span class="highlight">Smart Device</span>       <span class="comment">← Brand, Size, Storage, Color, OS</span>
+        ├── <span class="highlight">Smart Phone</span>    <span class="comment">← inherits all above</span>
+        └── <span class="highlight">Smart Wearable</span> <span class="comment">← + Band Type attribute</span>
+      </div>
+
+      <h3>Layout Management</h3>
+      <p>Layouts control which attributes appear and in what order. In Product Designer, use the <strong>General Properties</strong> facet with drag-and-drop sections.</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Layout Management — Smart Phone Object Type
+        </div>
+        <div class="ui-mock-body">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem;">Drag attributes from the panel → drop into sections</p>
+          <div class="form-row"><label>Brand</label><input value="Apple" readonly></div>
+          <div class="form-row"><label>Color</label><select><option>Black</option></select></div>
+          <div class="form-row"><label>Storage</label><select><option>128 GB</option></select></div>
+          <div class="form-row"><label>Operating System</label><input value="iOS 17" readonly></div>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Best practice</strong>
+        Define the base object type first. Create child object types only after attributes and layout are ready — children inherit via deep copy.
+      </div>
+    </section>
+
+    <!-- 11. SPECIFICATIONS -->
+    <section id="specifications">
+      <h2>11. Product Specifications</h2>
+      <p>A <strong>product specification</strong> is the actual product definition — what it includes, but not necessarily the price. Customers usually don't order specs directly; they order <em>offerings</em>.</p>
+
+      <h3>Specification Types</h3>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Purpose</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-blue">Product Spec</span></td><td>Physical or digital product details</td><td>iPhone with color, storage, OS</td></tr>
+          <tr><td><span class="tag tag-green">Offer Spec</span></td><td>Commercial product with pricing</td><td>iPhone 11 — $699/month plan</td></tr>
+          <tr><td><span class="tag tag-orange">Service Spec</span></td><td>Customer-facing service (CFS)</td><td>Internet 100 Mbps fiber service</td></tr>
+          <tr><td><span class="tag tag-purple">Resource Spec</span></td><td>Network resources</td><td>IP port, router, cable</td></tr>
+        </tbody>
+      </table>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Create New Product — iPhone Specification
+        </div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Product Name</label><input value="iPhone" readonly></div>
+          <div class="form-row"><label>Product Code</label><input value="C-DPP-001" readonly></div>
+          <div class="form-row"><label>Specification Type</label><select><option>Product Specification</option></select></div>
+          <div class="form-row"><label>Object Type</label><input value="Smart Phone" readonly></div>
+          <div class="form-row"><label>Orderable</label><input value="☐ No (spec only)" readonly></div>
+          <div class="form-row"><label>Active</label><input value="☑ Yes" readonly></div>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>One object type → many specs</strong>
+        From "Smart Phone" object type you can create both iPhone spec and Samsung Galaxy spec. Each spec sets different attribute values.
+      </div>
+    </section>
+
+    <!-- 12. OFFERINGS -->
+    <section id="offerings">
+      <h2>12. Offerings</h2>
+      <p>An <strong>offering</strong> is what customers actually buy. It has a price, is marked <strong>Orderable</strong>, and appears in the catalog and cart.</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h4>Product Specification</h4>
+          <p>Defines WHAT the product is</p>
+          <p>Orderable: <strong>No</strong></p>
+          <p>Has pricing: <strong>No</strong> (per TM Forum)</p>
+        </div>
+        <div class="compare-card">
+          <h4>Offering (Offer Spec)</h4>
+          <p>Defines WHAT + HOW MUCH</p>
+          <p>Orderable: <strong>Yes</strong></p>
+          <p>Has pricing: <strong>Yes</strong></p>
+        </div>
+      </div>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Vlocity Cart — Customer sees the Offering
+        </div>
+        <div class="ui-mock-body">
+          <div class="cart-item"><span>📱 iPhone 11 — 128GB Black</span><strong>$699.00</strong></div>
+          <div class="cart-item"><span>📶 4G LTE Data Plan (Unlimited)</span><strong>$45.00/mo</strong></div>
+          <div class="cart-item" style="border:none;font-weight:700;"><span>Total</span><span>$699.00 + $45.00/mo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. RULES -->
+    <section id="rules">
+      <h2>13. Attribute Rules &amp; Context Rules</h2>
+
+      <h3>Attribute Rules (Configuration Rules)</h3>
+      <p>Control which attribute options appear based on other selections. Each rule has <strong>Conditions</strong> (when) and <strong>Actions</strong> (what happens).</p>
+
+      <div class="example-box">
+        <strong>Example: Apple Watch Series 5</strong>
+        <p><strong>Condition:</strong> Watch Size = 44mm</p>
+        <p><strong>Action:</strong> Exclude "Silver" from Color picklist</p>
+        <p><em>Result: If customer picks 44mm watch, silver is not shown as a color option.</em></p>
+      </div>
+
+      <table class="data-table">
+        <thead><tr><th>Action Type</th><th>What It Does</th></tr></thead>
+        <tbody>
+          <tr><td>Constrain</td><td>Include or exclude picklist values</td></tr>
+          <tr><td>Assign</td><td>Set an attribute to a specific value</td></tr>
+          <tr><td>Disable</td><td>Show attribute but prevent editing</td></tr>
+          <tr><td>Require</td><td>Force customer to fill in the attribute</td></tr>
+          <tr><td>Hide</td><td>Remove from UI (still in data)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Context Rules (Qualification Rules)</h3>
+      <p>Control <strong>who can see or buy</strong> a product. Used for eligibility — e.g., only customers in certain locations see the 5G plan.</p>
+
+      <div class="example-box">
+        <strong>Example: 5G Ultra Plan</strong>
+        Qualification rule checks customer location. Only eligible customers see the plan in the "Qualified" tab in Vlocity Cart. Others see it as "Disqualified."
+      </div>
+    </section>
+
+    <!-- 14. BUNDLES -->
+    <section id="bundles">
+      <h2>14. Bundles &amp; Cardinality</h2>
+      <p>A <strong>bundle</strong> sells multiple products together. Products connect using a "Has-A" relationship (parent contains children).</p>
+
+      <div class="bundle-viz">
+        <div class="bundle-root">📦 New Customer Bundle (Root Offer)</div>
+        <div class="bundle-connector">│</div>
+        <div class="bundle-children">
+          <div class="bundle-child">📱 iPhone 11<small>Min: 1 · Max: 1 · Default: 1</small></div>
+          <div class="bundle-child">📶 4G LTE Plan<small>Min: 1 · Max: 1 · Default: 1</small></div>
+          <div class="bundle-child">💬 Unlimited Talk<small>Min: 1 · Max: 1 · Default: 1</small></div>
+          <div class="bundle-child">🎬 Netflix<small>Min: 0 · Max: 1 · Default: 1</small></div>
+        </div>
+      </div>
+
+      <h3>Two Types of Cardinality</h3>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Controls</th><th>Fields</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>PCI Cardinality</strong></td>
+            <td>How many of ONE child product</td>
+            <td>Min Quantity, Max Quantity, Default Quantity</td>
+          </tr>
+          <tr>
+            <td><strong>Group Cardinality</strong></td>
+            <td>Total children across all items</td>
+            <td>Min Children Quantity, Max Children Quantity</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <strong>Example: TV Bundle</strong>
+        Triple-play bundle includes Internet + CATV + Phone. Default: 1 of each.
+        Customer wants 3 set-top boxes for CATV → Min=1, Max=5 on the CATV child item allows this.
+        Cart blocks quantity outside Min/Max range.
+      </div>
+
+      <h3>Creating a Bundle (Product Designer)</h3>
+      <ol>
+        <li>Open the parent offering → <strong>Structure</strong> tab</li>
+        <li>Drag products from Quick Add panel onto the tree</li>
+        <li>Set Min / Default / Max quantities in Edit Relationship panel</li>
+        <li>Optionally override attributes or pricing per child</li>
+        <li>Click Save → refresh product hierarchy cache</li>
+      </ol>
+    </section>
+
+    <!-- 15. PRICING -->
+    <section id="pricing">
+      <h2>15. Pricing</h2>
+      <p>For a product to appear in Vlocity Cart, it needs: an <strong>active price</strong>, <strong>active status</strong>, and valid <strong>effective dates</strong>.</p>
+
+      <h3>Adjustments vs Overrides</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th>Adjustment</th><th>Override</th></tr></thead>
+        <tbody>
+          <tr><td><strong>How it works</strong></td><td>Changes price by % or amount from base</td><td>Replaces base price completely</td></tr>
+          <tr><td><strong>Example</strong></td><td>20% off data plan for 6 months</td><td>iPhone $699 → $649 in bundle</td></tr>
+          <tr><td><strong>Base price</strong></td><td>Stays unchanged</td><td>Stays unchanged (override is separate entry)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Bundle Pricing Strategies</h3>
+      <ul>
+        <li><strong>Parent has price</strong> — parent price + all child prices = total</li>
+        <li><strong>Parent price = $0</strong> — total is sum of child prices only (Virtual Price)</li>
+      </ul>
+
+      <div class="example-box">
+        <strong>Example: New Account Bundle Pricing</strong>
+        iPhone 11 alone: <strong>$699</strong><br>
+        Same iPhone inside "New Account Bundle": <strong>$649</strong> (offer override — $50 discount)<br>
+        Bundle also includes Data Plan ($45/mo) + Netflix (free promo for 3 months)
+      </div>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Pricing Tab — iPhone 11 Offer
+        </div>
+        <div class="ui-mock-body">
+          <h3 style="font-size:0.95rem;">Prices</h3>
+          <table class="data-table">
+            <thead><tr><th>Price List</th><th>Amount</th><th>Frequency</th><th>Active</th></tr></thead>
+            <tbody>
+              <tr><td>Standard PL</td><td>$699.00</td><td>One-time</td><td>Yes</td></tr>
+            </tbody>
+          </table>
+          <h3 style="font-size:0.95rem;margin-top:1rem;">Promotions &amp; Offers</h3>
+          <table class="data-table">
+            <thead><tr><th>Name</th><th>Type</th><th>Amount</th><th>Context</th></tr></thead>
+            <tbody>
+              <tr><td>New Account Discount</td><td>Override</td><td>$649.00</td><td>Bundle only</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Where to create pricing elements</strong>
+        Price lists, pricing plans, time plans, and promotions are created in <strong>Product Console</strong>. Prices for offers are assigned in <strong>Product Designer</strong>.
+      </div>
+    </section>
+
+    <!-- 16. LIFECYCLE -->
+    <section id="lifecycle">
+      <h2>16. Product Lifecycle &amp; Selling Period</h2>
+      <p>Every commercial product goes through lifecycle stages controlled by <strong>selling period dates</strong>.</p>
+
+      <div class="lifecycle">
+        <div class="lifecycle-item lc-current"><strong>🟢 Current</strong>Available for sale now</div>
+        <div class="lifecycle-item lc-future"><strong>🔵 Future</strong>Can pre-order; fulfills later</div>
+        <div class="lifecycle-item lc-past"><strong>🟡 Past</strong>No new sales; existing orders OK</div>
+        <div class="lifecycle-item lc-retired"><strong>🔴 Retired</strong>No sales, no fulfillment</div>
+      </div>
+
+      <h3>Key Date Fields</h3>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Selling Start Date</td><td>When customers can start ordering</td></tr>
+          <tr><td>Fulfillment Start Date</td><td>When product can be delivered (supports pre-orders)</td></tr>
+          <tr><td>Selling End Date</td><td>When new orders stop</td></tr>
+          <tr><td>End of Life Date</td><td>When product is fully retired</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Date rule (must always be true)</strong>
+        Selling Start ≤ Fulfillment Start ≤ Selling End ≤ End of Life
+      </div>
+
+      <div class="tip">
+        <strong>After changing dates</strong>
+        Run: Product Hierarchy Maintenance → Clear Managed Platform Cache → Refresh Pricebook (in that order).
+      </div>
+    </section>
+
+    <!-- 17. PROJECTS -->
+    <section id="projects">
+      <h2>17. EPC Projects</h2>
+      <p><strong>Projects</strong> track every change you make in Product Designer — like a change log for your catalog. Only available in Product Designer (not Console).</p>
+
+      <h3>How Projects Work</h3>
+      <ul>
+        <li>Create a project (work set) and set one as <strong>default</strong></li>
+        <li>All creates, edits, and deletes are automatically logged to the default project</li>
+        <li>Each item shows: type, name, version, and action (Add / Change / Delete)</li>
+        <li>Export released projects via IDX Workbench to move changes to other orgs</li>
+      </ul>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Project: Q1 2026 Product Launch — Items
+        </div>
+        <div class="ui-mock-body">
+          <table class="data-table">
+            <thead><tr><th>Item Type</th><th>Name</th><th>Action</th><th>Version</th></tr></thead>
+            <tbody>
+              <tr><td>Picklist</td><td>iPhone 15 Colors</td><td>Add</td><td>v1.0</td></tr>
+              <tr><td>Attribute</td><td>ATT_STORAGE_512</td><td>Add</td><td>—</td></tr>
+              <tr><td>Product</td><td>iPhone 15 Offer</td><td>Change</td><td>v2.0</td></tr>
+              <tr><td>Product</td><td>Old iPhone 13 Offer</td><td>Delete</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. CONSOLE -->
+    <section id="console">
+      <h2>18. Vlocity Product Console</h2>
+      <p>The Product Console is the original admin tool with a dashboard layout. Still required for several setup tasks.</p>
+
+      <h3>Console Sections</h3>
+      <table class="data-table">
+        <thead><tr><th>Section</th><th>What You Do There</th></tr></thead>
+        <tbody>
+          <tr><td>Product Management</td><td>Create products, promotions, migration plans</td></tr>
+          <tr><td>Pricing</td><td>Price lists, pricing plans, time plans, cost tables</td></tr>
+          <tr><td>Rules</td><td>Context rules (eligibility) + Advanced rules (compatibility)</td></tr>
+          <tr><td>Foundations</td><td>Attributes and picklists</td></tr>
+          <tr><td>Metadata</td><td>Object types and string translations</td></tr>
+          <tr><td>Layout Management</td><td>Facets, sections, and field layout</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Facets (Left Navigation per Product)</h3>
+      <p>When you open a product in Console, facets like General Properties, Product Structure, Pricing, and Context Rules appear on the left. In Product Designer, only <strong>General Properties</strong> is editable — other facets are rebuilt as tabs.</p>
+
+      <div class="tip">
+        <strong>Maintenance jobs to know</strong>
+        <ul style="margin-top:0.5rem;">
+          <li><code>EPCProductAttribJSONBatchJob</code> — syncs attribute JSON after changes</li>
+          <li><code>EPCFixCompiledAttributeOverrideBatchJob</code> — fixes override JSON</li>
+          <li><code>Product Hierarchy Maintenance</code> — updates bundle hierarchy cache</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 19. CATALOGS -->
+    <section id="catalogs">
+      <h2>19. Catalogs &amp; Catalog Relationships</h2>
+      <p>Catalogs organize products into categories for digital commerce and CPQ browsing. Products must be added to a catalog to be sellable through catalog-driven channels.</p>
+
+      <h3>Setup Order</h3>
+      <div class="workflow">
+        <div class="workflow-step">1. Root Catalog</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">2. Product Catalogs</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">3. Relationships</div>
+        <span class="workflow-arrow">→</span>
+        <div class="workflow-step">4. Add Products</div>
+      </div>
+
+      <div class="tree">
+<span class="highlight">Root Catalog</span>  <span class="comment">← Is Catalog Root = true</span>
+  ├── <span class="highlight">Voice</span>       <span class="comment">← child catalog</span>
+  ├── <span class="highlight">Data</span>        <span class="comment">← child catalog</span>
+  └── <span class="highlight">Devices</span>     <span class="comment">← child catalog</span>
+        └── Products: iPhone 11 Offer, Samsung S24 Offer...
+      </div>
+
+      <div class="example-box">
+        <strong>Example: Digital Commerce Catalog</strong>
+        Create catalog "Mobile Devices" with unique catalog code (no spaces) and linked price list.
+        Add iPhone 11 Offer and Samsung S24 Offer as catalog product relationships with effective dates.
+      </div>
+    </section>
+
+    <!-- 20. GUIDED SELLING -->
+    <section id="guided">
+      <h2>20. Guided Selling</h2>
+      <p><strong>Guided selling</strong> uses step-by-step questions (OmniScript) to help customers or agents find the right products — preventing invalid combinations and enabling upsell/cross-sell.</p>
+
+      <h3>What It Does</h3>
+      <ul>
+        <li>Dynamic questionnaire recommends products</li>
+        <li>Prevents selling incompatible product combinations</li>
+        <li>Works on web, mobile, and call center (omnichannel)</li>
+        <li>Uses CPQ APIs inside OmniScript to create cart, add products, and checkout</li>
+      </ul>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Guided Selling OmniScript — Example Flow
+        </div>
+        <div class="ui-mock-body">
+          <div style="background:#eef4ff;padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+            <strong>Step 1:</strong> What type of service do you need?<br>
+            ○ Mobile &nbsp; ○ Internet &nbsp; ● Both (Bundle)
+          </div>
+          <div style="background:#eef4ff;padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+            <strong>Step 2:</strong> How much data do you use per month?<br>
+            ○ Light (&lt;5GB) &nbsp; ● Medium (5-20GB) &nbsp; ○ Heavy (20GB+)
+          </div>
+          <div style="background:#e8f5e9;padding:1rem;border-radius:8px;">
+            <strong>Recommended:</strong> Triple Play Bundle — Internet 100Mbps + Unlimited Mobile + Netflix<br>
+            <button style="margin-top:0.5rem;padding:0.4rem 1rem;background:var(--primary);color:white;border:none;border-radius:6px;cursor:pointer;">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Key CPQ APIs Used in OmniScript</h3>
+      <table class="data-table">
+        <thead><tr><th>API Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>createCart</td><td>Create a new order/cart</td></tr>
+          <tr><td>getCarts</td><td>Get cart summary (top section)</td></tr>
+          <tr><td>getCartsItems</td><td>Get line items in cart</td></tr>
+          <tr><td>getCartsProducts</td><td>Search and list available products</td></tr>
+          <tr><td>checkout</td><td>Submit the order</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Quick Reference -->
+    <section id="quick-ref">
+      <h2>Quick Reference Cheat Sheet</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Simple Definition</th></tr></thead>
+        <tbody>
+          <tr><td>EPC</td><td>Central product catalog for the whole company</td></tr>
+          <tr><td>Picklist</td><td>Dropdown list of allowed values</td></tr>
+          <tr><td>Attribute</td><td>A product feature (color, speed, IMEI)</td></tr>
+          <tr><td>Object Type</td><td>Reusable template — products inherit from it</td></tr>
+          <tr><td>Product Spec</td><td>Product definition (what it is)</td></tr>
+          <tr><td>Offering</td><td>Product + price (what customers buy)</td></tr>
+          <tr><td>Bundle</td><td>Multiple products sold together</td></tr>
+          <tr><td>Cardinality</td><td>Min/max quantity rules for bundle items</td></tr>
+          <tr><td>PCI</td><td>Product Child Item — link between parent and child in bundle</td></tr>
+          <tr><td>Adjustment</td><td>Price change based on base price (% or amount)</td></tr>
+          <tr><td>Override</td><td>Price replacement — ignores base price</td></tr>
+          <tr><td>PLE</td><td>Price List Entry — a price record for a product</td></tr>
+          <tr><td>Context Rule</td><td>Eligibility rule — who can buy a product</td></tr>
+          <tr><td>Attribute Rule</td><td>Configuration rule — what options appear</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Based on Vlocity CME Enterprise Product Catalog (EPC) Documentation · © 2021 Vlocity LLC, a Salesforce company<br>
+  Created as an easy-learning guide — open this file in any web browser.
+</footer>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar a');
+
+  function updateActiveLink() {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.offsetTop - 120;
+      if (window.scrollY >= top) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  updateActiveLink();
+</script>
+
+</body>
+</html>
