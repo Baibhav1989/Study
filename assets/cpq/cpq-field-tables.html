@@ -1,0 +1,240 @@
+<!-- CPQ Required & Optional Field Reference (from CME_CPQ_PDF-en.pdf) -->
+
+<!-- PRICING SECTION TABLES -->
+<h4>Table 3 — Price List: General Properties</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Name</td><td class="req-yes">Yes</td><td>Price list name</td><td>Identifies the list in Product Console and cart header picklist</td></tr>
+    <tr><td>Code</td><td class="req-yes">Yes</td><td>Unique identifier — uppercase, no spaces (e.g., PL-B2B)</td><td>Referenced by integrations and pricing configuration</td></tr>
+    <tr><td>Description</td><td>No</td><td>Description of the price list (e.g., Commercial/Business)</td><td>Admin documentation only</td></tr>
+    <tr><td>Price Book</td><td class="req-yes">Yes</td><td>Salesforce price book linked to this price list</td><td>Multiple price lists can share one price book</td></tr>
+    <tr><td>Parent Price List</td><td>No</td><td>Parent list whose pricing this list inherits</td><td>Child lists inherit parent pricing; add exceptions in child</td></tr>
+    <tr><td>Sequence</td><td>No</td><td>Display order among price lists</td><td>Controls sort in picklists</td></tr>
+    <tr><td>Currency Code</td><td class="req-yes">Yes</td><td>Currency for all entries in this list</td><td>Must match pricing element currency</td></tr>
+    <tr><td>Loyalty Code</td><td>No</td><td>Loyalty indicator for points pricing (typically PTS)</td><td>Used with loyalty pricing variables</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 4 — Price List: Effectivity</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Is Active</td><td class="req-yes">Yes</td><td>When selected, the price list can be used in carts</td><td>Inactive lists are hidden from cart price list picklist</td></tr>
+    <tr><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time the price list becomes available</td><td>Must be current or list cannot be selected</td></tr>
+    <tr><td>Effective Until</td><td>No</td><td>Date/time the price list expires</td><td>After this date the list is no longer usable</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 5–7 — Pricing Element Charge: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Pricing Variable (search)</td></tr>
+    <tr><td>Pricing Variable</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Recurring or One-time charge type filter</td><td>Finds matching pricing variables</td></tr>
+    <tr><td>Pricing Variable</td><td>Frequency</td><td>Conditional</td><td>Daily, Weekly, Monthly, Yearly — shown for recurring</td><td>Matches recurring variable frequency</td></tr>
+    <tr><td>Pricing Variable</td><td>Type</td><td class="req-yes">Yes</td><td>Price (customer charge) or Cost (company cost)</td><td>Separates revenue vs cost elements</td></tr>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Payment type, amount, recurrence (e.g., $9.99 Monthly)</td><td>Admin identification in Pricing Elements facet</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — uppercase, no spaces or special chars</td><td>System identifier for the element</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Currency/loyalty amount shown in cart (e.g., $10)</td><td>Customer-facing price label</td></tr>
+    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>Do <strong>not</strong> select when creating a pricing element charge</td><td>Base Price is set on PLE, not on element</td></tr>
+    <tr><td class="section-header" colspan="5">Currency Value</td></tr>
+    <tr><td>Currency Value</td><td>Charge</td><td class="req-yes">Yes</td><td>Charge amount</td><td>Actual price or cost value</td></tr>
+    <tr><td>Currency Value</td><td>Currency Code</td><td class="req-yes">Yes</td><td>Charge currency</td><td>Must align with price list currency</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 8)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time element becomes available</td><td>Must be current to appear in PLE search</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time for element availability</td><td>Element ignored after this date</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Element status — must be selected</td><td>Inactive elements excluded from PLE creation</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 21–23 — Price List Entry (PLE): Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes*</td><td>Price list storing this entry (*shown when creating from product)</td><td>Links product price to a specific list</td></tr>
+    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes*</td><td>Product being priced (*shown when creating from price list)</td><td>Which catalog item gets this price</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td class="req-yes">Yes</td><td>Payment type and amount shown in Products list (e.g., $9.99 Monthly)</td><td>Customer sees this in cart product list</td></tr>
+    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>When checked, this is the default/list price</td><td>Default price before context rules and promos</td></tr>
+    <tr><td>General Properties</td><td>Virtual Price</td><td>No</td><td>Replaces parent bundle price with sum of child prices</td><td>Rare — used for virtual bundle pricing</td></tr>
+    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Element</td></tr>
+    <tr><td>Pricing Variable</td><td>Charge Type / Sub-Type</td><td class="req-yes">Yes</td><td>Search filters for one-time/recurring and standard/fee</td><td>Select variable then matching pricing element</td></tr>
+    <tr><td>Pricing Element</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>Element from same price list with charge amount</td><td>Combines with variable to form runtime price</td></tr>
+    <tr><td class="section-header" colspan="5">Time Plan/Policy (Table 22)</td></tr>
+    <tr><td>Time Plan/Policy</td><td>Time Plan</td><td>No</td><td>Duration of pricing (e.g., 24-month promo window)</td><td>Limits how long adjustment/price applies</td></tr>
+    <tr><td>Time Plan/Policy</td><td>Time Policy</td><td>No</td><td>When pricing starts/stops within the plan</td><td>Cycle start, end of month, purchase date, etc.</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 23)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time price becomes available</td><td>Must be current or product won't show in cart</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time — PLE ignored after this</td><td>Enables scheduled price changes over time</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Price list entry status</td><td>Must be checked for price to appear in cart</td></tr>
+  </tbody>
+</table>
+
+<!-- PROMOTIONS SECTION TABLES -->
+<h4>Table 63–66 — Promotion: Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties (Table 63)</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Promotion name</td><td>Shown in Promotions list in cart</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — all caps, no spaces</td><td>System identifier; used in APIs</td></tr>
+    <tr><td>General Properties</td><td>Description</td><td>No</td><td>Details shown with promo name (e.g., "20% off data plan for 6 months")</td><td>Helps agents understand offer</td></tr>
+    <tr><td>General Properties</td><td>Redeemable Code</td><td>No</td><td>Customer code to become eligible</td><td>eCommerce / self-service redemption</td></tr>
+    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list storing the promotion</td><td>Must match cart price list or promo won't appear</td></tr>
+    <tr><td class="section-header" colspan="5">Duration (Table 64)</td></tr>
+    <tr><td>Duration</td><td>Commitment Duration Time Plan</td><td>No</td><td>Time plan defining promo commitment duration</td><td>How long promo pricing applies</td></tr>
+    <tr><td>Duration</td><td>Commitment Duration Time Policy</td><td>No</td><td>When promo pricing starts and ends</td><td>Aligns with billing cycles</td></tr>
+    <tr><td class="section-header" colspan="5">Additional Properties (Table 65)</td></tr>
+    <tr><td>Additional Properties</td><td>Orderable</td><td class="req-yes">Yes*</td><td>Promotion appears in cart Promotions list</td><td>*Required to sell promo from cart sidebar</td></tr>
+    <tr><td>Additional Properties</td><td>Service Continuation</td><td>No</td><td>Not Applicable / Manual Opt-In / Manual Opt-Out after commitment ends</td><td>Controls post-promo subscription behavior</td></tr>
+    <tr><td>Additional Properties</td><td>Follow-on Promotion</td><td>No</td><td>Next promo starting when commitment ends</td><td>Requires <code>PromotionExpirationBatch</code></td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 66)</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion available for use</td><td>Unchecked promos hidden from Qualified tab</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Start date/time — must be current</td><td>Promo not sellable before this date</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time</td><td>Promo expires after this date</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 67–70 — Promotion Product: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties (Table 67)</td></tr>
+    <tr><td>General Properties</td><td>Action Type</td><td class="req-yes">Yes</td><td>Add / Update / Add-Update — how promo affects cart or assets</td><td>Add=new cart; Update=change order assets</td></tr>
+    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes</td><td>Product or bundle included in promotion</td><td>Must be from same price list as promo</td></tr>
+    <tr><td>General Properties</td><td>Update Scope</td><td class="req-yes">Yes</td><td>Update Item Only vs Update Item and Child Items</td><td>Controls whether bundle children get promo price</td></tr>
+    <tr><td class="section-header" colspan="5">Selection Criteria (Table 68)</td></tr>
+    <tr><td>Selection Criteria</td><td>Parent Offer Product</td><td>No</td><td>Action attempted inside this root offer</td><td>Scoped bundle promos</td></tr>
+    <tr><td>Selection Criteria</td><td>Selection Context Product</td><td>No</td><td>Action attempted inside this selection product</td><td>Nested bundle targeting</td></tr>
+    <tr><td>Selection Criteria</td><td>Selection Context Rule</td><td>No</td><td>Rule qualifying the selection product</td><td>Conditional promo application</td></tr>
+    <tr><td class="section-header" colspan="5">Cardinality (Table 69)</td></tr>
+    <tr><td>Cardinality</td><td>Minimum Quantity</td><td>No</td><td>Minimum units customer must purchase</td><td>Enforced when promo added to cart</td></tr>
+    <tr><td>Cardinality</td><td>Quantity</td><td>No</td><td>Default quantity added</td><td>Pre-filled qty when promo applied</td></tr>
+    <tr><td>Cardinality</td><td>Maximum Quantity</td><td>No</td><td>Maximum units — cannot exceed bundle max</td><td>Prevents over-selling promo products</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 70)</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion product available</td><td>Inactive products skipped at runtime</td></tr>
+    <tr><td>Effectivity</td><td>Effective From / Until</td><td>No</td><td>Date range for this promo product</td><td>Can differ from parent promo dates</td></tr>
+  </tbody>
+</table>
+
+<!-- DISCOUNTS SECTION TABLES -->
+<h4>Table 78–79 — New Discount: Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Required Fields (Table 78)</td></tr>
+    <tr><td>Required</td><td>Name</td><td class="req-yes">Yes</td><td>Discount name</td><td>Shown in Product Console and cart</td></tr>
+    <tr><td>Required</td><td>Code</td><td class="req-yes">Yes</td><td>Unique discount code</td><td>Used by pricing plan step Apply Context Discounts</td></tr>
+    <tr><td>Required</td><td>Discount Type</td><td class="req-yes">Yes</td><td>Order / Account / Contract</td><td>Order=one cart; Account=all future orders; Contract=frame deal</td></tr>
+    <tr><td>Required</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list scope for discount items</td><td>Products must exist on this list</td></tr>
+    <tr><td class="section-header" colspan="5">Optional Fields (Table 79)</td></tr>
+    <tr><td>Optional</td><td>Description</td><td>No</td><td>Brief discount description</td><td>Admin documentation</td></tr>
+    <tr><td>Optional</td><td>Discount Duration</td><td>No</td><td>Months discount applies</td><td>Expires after duration unless end date set</td></tr>
+    <tr><td>Optional</td><td>Applies to All Items in Cart</td><td>No</td><td>Discount applies to entire cart — ignores discount items</td><td>Disables Discount Items facet when checked</td></tr>
+    <tr><td>Optional</td><td>Active</td><td class="req-yes">Yes*</td><td>Activate the discount</td><td>*Required for discount to take effect on submit</td></tr>
+    <tr><td>Optional</td><td>Effective From / Until</td><td>No</td><td>Effectivity window</td><td>Controls visibility in cart selectables list</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 80–82 — Discount Items &amp; Pricing</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Discount Items — General Properties (Table 80)</td></tr>
+    <tr><td>Discount Items</td><td>Types</td><td class="req-yes">Yes</td><td>Product or Catalog/Category to discount</td><td>Catalog = group of products</td></tr>
+    <tr><td>Discount Items</td><td>Product or Catalog/Category</td><td class="req-yes">Yes</td><td>Specific item receiving the discount</td><td>Product must be on price list first</td></tr>
+    <tr><td>Discount Items</td><td>Active</td><td class="req-yes">Yes</td><td>Discount item is active</td><td>Inactive items ignored at runtime</td></tr>
+    <tr><td>Discount Items</td><td>Effective From / Until</td><td>No</td><td>Item effectivity — end date overrides duration</td><td>Fine-grained discount scheduling</td></tr>
+    <tr><td class="section-header" colspan="5">Discount Pricing — Price List Entry (Table 81)</td></tr>
+    <tr><td>Discount Pricing</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list for discount adjustment</td><td>Same list as discounted products</td></tr>
+    <tr><td>Discount Pricing</td><td>Display Text</td><td>No</td><td>Description of the discount adjustment</td><td>Shown in Price Details flyout</td></tr>
+    <tr><td>Discount Pricing</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Select <strong>Adjustment</strong></td><td>Filters pricing variables</td></tr>
+    <tr><td>Discount Pricing</td><td>Sub-Type</td><td class="req-yes">Yes</td><td>Select <strong>Standard</strong></td><td>Standard adjustment (not penalty fee)</td></tr>
+    <tr><td>Discount Pricing</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>One-time or recurring adjustment/percentage element</td><td>Adjustment Value must not be empty</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 82)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From / Until / Active</td><td>Active=Yes</td><td>Start/end dates and active flag for discount pricing</td><td>Inactive pricing = discount not applied in cart</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 83–84 — Custom Discount in Cart</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Required (Table 83)</td></tr>
+    <tr><td>Definition</td><td>Name</td><td class="req-yes">Yes</td><td>Custom discount name</td><td>Created by agent in cart</td></tr>
+    <tr><td>Definition</td><td>Applicable Allocation</td><td class="req-yes">Yes</td><td>Order-based, Account-based, or Contract-based</td><td>Determines persistence after submit</td></tr>
+    <tr><td class="section-header" colspan="5">Optional (Table 84)</td></tr>
+    <tr><td>Definition</td><td>Description</td><td>No</td><td>Brief description</td><td>Agent notes</td></tr>
+    <tr><td>Discount Amount</td><td>One Time / Recurring Charges</td><td>No</td><td>Percentage or absolute discount amount</td><td>Applied via pricing at runtime</td></tr>
+    <tr><td>Applicable</td><td>Active Period</td><td>No</td><td>Duration in months only</td><td>How long account/contract discount lasts</td></tr>
+    <tr><td>Applicable</td><td>End Date</td><td>No</td><td>Custom discount end date</td><td>Overrides active period if set</td></tr>
+    <tr><td>Criteria</td><td>Matching criteria / All items in cart</td><td>No</td><td>Specific category+product or entire cart</td><td>Scope of custom discount</td></tr>
+  </tbody>
+</table>
+
+<!-- CHANGE OF PLANS SECTION TABLES -->
+<h4>Table 91–93 — Offer Migration Plan: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Offer Migration Plan — Required (Table 91)</td></tr>
+    <tr><td>Plan</td><td>Name</td><td class="req-yes">Yes</td><td>Offer migration plan name</td><td>Admin identification</td></tr>
+    <tr><td>Plan</td><td>Code</td><td class="req-yes">Yes</td><td>Unique plan code</td><td>System reference</td></tr>
+    <tr><td>Plan</td><td>Account Scope</td><td class="req-yes">Yes</td><td>Account scope — currently Same Account only</td><td>Limits which accounts can use plan</td></tr>
+    <tr><td>Plan</td><td>Product Family</td><td class="req-yes">Yes</td><td>Product family (Internet, TV, Wireless, etc.)</td><td>Subset of Product2.ProductFamily</td></tr>
+    <tr><td>Plan</td><td>Migration Method</td><td class="req-yes">Yes</td><td>Any-to-Any or Specific Offers</td><td>Any=unrestricted; Specific=mapped pairs only</td></tr>
+    <tr><td class="section-header" colspan="5">Optional (Table 92)</td></tr>
+    <tr><td>Plan</td><td>Description / Business Reason</td><td>No</td><td>Plan description and business rationale</td><td>Documentation</td></tr>
+    <tr><td>Plan</td><td>Active / Effectivity Start / End</td><td>Active=Yes</td><td>Activate plan and set date range</td><td>Inactive plans block Replace in cart</td></tr>
+    <tr><td class="section-header" colspan="5">Component Mappings — Required (Table 93)</td></tr>
+    <tr><td>Mappings</td><td>Source Product</td><td class="req-yes">Yes</td><td>Original offer/plan being migrated from</td><td>Asset must match source for Replace</td></tr>
+    <tr><td>Mappings</td><td>Target Product</td><td class="req-yes">Yes</td><td>New offer/plan to migrate to</td><td>Shown in Replace picker when eligible</td></tr>
+    <tr><td>Mappings</td><td>Active</td><td class="req-yes">Yes</td><td>Mapping is active</td><td>Inactive mappings ignored at runtime</td></tr>
+  </tbody>
+</table>
+
+<!-- MULTI-SITE SECTION TABLES -->
+<h4>Table 95–97 — Multi-Site Setup: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Object</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Premises (Table 95)</td></tr>
+    <tr><td>Premises</td><td>Name</td><td class="req-yes">Yes</td><td>Service point / premises name</td><td>Identifies location in group page</td></tr>
+    <tr><td>Premises</td><td>Street Address</td><td class="req-yes">Yes</td><td>Street address</td><td>Location addressing</td></tr>
+    <tr><td>Premises</td><td>City / State / Postal Code</td><td class="req-yes">Yes</td><td>City, state, postal code</td><td>Full address for service delivery</td></tr>
+    <tr><td>Premises</td><td>Country / Premises Type / Status</td><td>No</td><td>Country, type (Duplex, Commercial), status (Connected, Vacant)</td><td>Extended location metadata</td></tr>
+    <tr><td class="section-header" colspan="5">Service Point (Table 96)</td></tr>
+    <tr><td>Service Point</td><td>Service Point Name</td><td class="req-yes">Yes</td><td>Name for the service point</td><td>Grouped on multi-site quote</td></tr>
+    <tr><td>Service Point</td><td>Premises</td><td class="req-yes">Yes</td><td>Premises this service applies to</td><td>Links service to physical location</td></tr>
+    <tr><td>Service Point</td><td>Service Type</td><td class="req-yes">Yes</td><td>Type of service (phone, internet, TV)</td><td>Filters eligible products per site</td></tr>
+    <tr><td>Service Point</td><td>Status / Activation Date</td><td>No</td><td>Connected/Vacant/Inactive; activation date</td><td>Lifecycle tracking</td></tr>
+    <tr><td class="section-header" colspan="5">Field Settings for Group Page (Table 97)</td></tr>
+    <tr><td>Field Settings</td><td>Name</td><td class="req-yes">Yes</td><td>Grouping object field display name</td><td>Column header on groups page</td></tr>
+    <tr><td>Field Settings</td><td>Feature</td><td class="req-yes">Yes</td><td>Enter <code>MultiServiceFields</code></td><td>Identifies multi-site column config</td></tr>
+    <tr><td>Field Settings</td><td>Field Name</td><td class="req-yes">Yes</td><td>API name (e.g., <code>vlocity_cmt__City__c</code> or relationship notation)</td><td>Data bound to column</td></tr>
+    <tr><td>Field Settings</td><td>Inclusion</td><td class="req-yes">Yes</td><td>When checked, field appears as table column</td><td>Controls visible group page columns</td></tr>
+  </tbody>
+</table>
+
+<!-- TABLE 50 ENHANCED -->
+<h4>Table 50 — Pricing Element for Costs: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Cost element name</td><td>Admin identification on Costs tab</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique cost code</td><td>System identifier</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Brief cost description</td><td>Admin-facing label</td></tr>
+    <tr><td>General Properties</td><td>Help Text</td><td>No</td><td>Tooltip/help for admins</td><td>Optional guidance text</td></tr>
+    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Currency Value</td></tr>
+    <tr><td>Pricing Variable</td><td>Pricing Variable</td><td class="req-yes">Yes</td><td>One-time or recurring cost variable (OT_STD_CST, REC_MNTH_STD_CST)</td><td>Search and select from results</td></tr>
+    <tr><td>Currency Value</td><td>Cost</td><td class="req-yes">Yes</td><td>Cost amount to apply</td><td>Company cost — not customer price</td></tr>
+    <tr><td>Currency Value</td><td>Currency Code</td><td>No</td><td>Default USD</td><td>Currency for cost value</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date cost becomes active</td><td>Cost ignored before this date</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>Optional end date</td><td>Cost not applied after this date</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Activate the cost element</td><td>Required for margin calculation</td></tr>
+  </tbody>
+</table>

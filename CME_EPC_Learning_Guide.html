@@ -423,6 +423,143 @@
     }
     .state-arrow { color: var(--muted); }
 
+    /* CPQ figure / screenshot mockups (from PDF figures) */
+    .fig-gallery { display: flex; flex-direction: column; gap: 2rem; margin: 1.5rem 0; }
+    .fig-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+    }
+    .fig-caption {
+      background: #032d60;
+      color: white;
+      padding: 0.65rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .fig-caption span { opacity: 0.75; font-weight: 400; margin-left: 0.5rem; font-size: 0.8rem; }
+    .fig-body { padding: 1rem; position: relative; }
+    .fig-callout {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--warning);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .fig-annotated {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      align-items: start;
+      font-size: 0.82rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border);
+    }
+    .fig-annotated .fig-callout { margin-top: 0.1rem; }
+    .fig-layout-3col {
+      display: grid;
+      grid-template-columns: 220px 1fr 280px;
+      gap: 0.5rem;
+      min-height: 200px;
+      font-size: 0.78rem;
+    }
+    @media (max-width: 900px) { .fig-layout-3col { grid-template-columns: 1fr; } }
+    .fig-zone {
+      border: 2px dashed #90caf9;
+      border-radius: 8px;
+      padding: 0.5rem;
+      background: #f8fbff;
+      position: relative;
+    }
+    .fig-zone-label {
+      position: absolute;
+      top: -0.55rem;
+      left: 0.5rem;
+      background: #1976d2;
+      color: white;
+      font-size: 0.65rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .fig-total-bar {
+      grid-column: 1 / -1;
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    .step-block {
+      border-left: 3px solid var(--primary);
+      padding: 0.75rem 0 0.75rem 1rem;
+      margin: 1rem 0;
+      background: #fafafa;
+      border-radius: 0 8px 8px 0;
+    }
+    .step-block h4 { color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+    /* Official doc screenshots (from CPQ PDF) */
+    .doc-screenshot {
+      margin: 1.25rem 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .doc-screenshot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-screenshot figcaption {
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      background: #fafafa;
+      border-top: 1px solid #eee;
+    }
+    .doc-screenshot figcaption strong { color: var(--primary-dark); }
+    .field-table-section td.section-header {
+      background: #eef4ff;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .pdf-fig-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin: 1rem 0 2rem;
+    }
+    .pdf-fig-grid .doc-screenshot { margin: 0; }
+    .pdf-fig-grid .doc-screenshot img { cursor: zoom-in; }
+    .fig-toc a {
+      display: inline-block;
+      margin: 0.25rem 0.5rem 0.25rem 0;
+      color: var(--primary);
+      font-size: 0.88rem;
+      text-decoration: none;
+    }
+    .fig-toc a:hover { text-decoration: underline; }
+    #cpq-figures h3 { margin-top: 2rem; scroll-margin-top: 80px; }
+    .req-yes { color: #c23934; font-weight: 700; white-space: nowrap; }
+    .req-no { color: var(--muted); }
+    .field-ref-intro { margin: 1rem 0; padding: 0.75rem 1rem; background: #eef4ff; border-radius: 6px; border-left: 4px solid var(--primary); font-size: 0.92rem; }
+
+
     /* Footer */
     footer {
       text-align: center;
@@ -1244,13 +1381,24 @@
     <a href="#cpq-overview">1. What is CPQ?</a>
     <a href="#cpq-flow">2. Order Capture Flow</a>
     <a href="#cpq-cart">3. Vlocity Cart</a>
-    <a href="#cpq-macd">4. MACD &amp; Assets</a>
-    <a href="#cpq-rules">5. Rules in CPQ</a>
-    <a href="#cpq-pricing">6. CPQ Pricing</a>
-    <a href="#cpq-api-intro">7. Cart-Based APIs</a>
-    <a href="#cpq-api-core">8. Core CPQ APIs</a>
-    <a href="#cpq-api-examples">9. API Examples</a>
-    <a href="#cpq-hooks">10. Hooks &amp; Integration</a>
+    <a href="#cpq-cards">4. Vlocity Cards</a>
+    <a href="#cpq-figures">CPQ PDF Screens (94 Figs)</a>
+    <a href="#cpq-macd">5. MACD &amp; Assets</a>
+    <a href="#cpq-rules">6. Rules in CPQ</a>
+    <a href="#cpq-pricing">7. CPQ Pricing &amp; PLE</a>
+    <a href="#cpq-cost-margin">Cost &amp; Margin Setup</a>
+    <a href="#cpq-promotions">8. Promotions</a>
+    <a href="#cpq-discounts">9. Discounts</a>
+    <a href="#cpq-flow-mgmt">10. Flow Management</a>
+    <a href="#cpq-change-plans">11. Change of Plans</a>
+    <a href="#cpq-multisite">12. Multi-Site Quote</a>
+    <a href="#cpq-inflight">13. In-Flight Orders</a>
+    <a href="#cpq-future">14. Future-Dated Orders</a>
+    <a href="#cpq-api-intro">15. Cart-Based APIs</a>
+    <a href="#cpq-api-core">16. Core CPQ APIs</a>
+    <a href="#cpq-api-examples">17. API Examples</a>
+    <a href="#cpq-hooks">18. Hooks &amp; OM Integration</a>
+    <a href="#cpq-fields-ref">CPQ Required Fields</a>
     <a href="#cpq-ref">Quick Reference</a>
   </nav>
   <main class="main">
@@ -1321,10 +1469,848 @@
         <li>Click <strong>Submit Order</strong> when done</li>
       </ol>
       <div class="warning"><strong>Important</strong> Do not clone Vlocity orders using Salesforce Clone — it can cause serious errors.</div>
+      <h3>Cart Tabs &amp; Line Item Actions</h3>
+      <ul>
+        <li><strong>Cart tab</strong> — all line items; expand arrows to see bundle children</li>
+        <li><strong>Promotions tab</strong> — promotions applied to the cart (filter: All, Active, Expired, Canceled)</li>
+        <li><strong>Blue flag</strong> = draft line item; <strong>orange flag</strong> = asset (existing service)</li>
+        <li><strong>Show Actions</strong> — Inspect, Clone, Configure, Delete</li>
+        <li><strong>Cardinality</strong> — min/max quantity enforced per bundle child (e.g., max 2 TV products)</li>
+      </ul>
+      <div class="note"><strong>Promotions vs Products lists</strong> Above each list are <strong>Qualified</strong> and <strong>Disqualified</strong> tabs. Context rules decide what the customer can buy. A promotion must belong to the same price list as the order or it will not appear.</div>
+    </section>
+
+    <section id="cpq-cards">
+      <h2>4. Vlocity Cards for CPQ</h2>
+      <p><strong>Vlocity Cards</strong> are UI building blocks (cards, layouts, templates) that power the CPQ cart. The main page is <strong>HybridCPQ</strong> Visualforce — not the standard Console Cards page.</p>
+      <div class="tip"><strong>Three layers</strong><br><strong>Layout</strong> = structure and API calls &nbsp;|&nbsp; <strong>Template</strong> = HTML/CSS space &nbsp;|&nbsp; <strong>Card</strong> = renders data on screen</div>
+
+      <h3>How the Cart Page Fits Together</h3>
+      <div class="workflow">
+        <div class="workflow-step">cpq-base-grid</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Header + Price List</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Left Sidebar (Products/Promos)</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Product Cart</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Total Bar</div>
+      </div>
+
+      <h3>Main CPQ Cart Cards (HybridCPQ)</h3>
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>Type</th><th>What It Does</th><th>Data Source</th></tr></thead>
+        <tbody>
+          <tr><td><code>cpq-base-grid</code></td><td>layout / template</td><td>Three-column cart shell with total bar at bottom</td><td>—</td></tr>
+          <tr><td><code>cpq-header</code></td><td>card</td><td>Cart header text and buttons</td><td><code>getCarts</code></td></tr>
+          <tr><td><code>cpq-base-header-pricelist</code></td><td>layout / template</td><td>Price list picklist (top-left); calls <code>changePricelist</code></td><td><code>getPriceLists</code></td></tr>
+          <tr><td><code>cpq-base-header-payment-choice</code></td><td>layout / template</td><td>Payment choice drop-down</td><td><code>getListsOfValues</code></td></tr>
+          <tr><td><code>cpq-left-sidebar</code></td><td>layout / template</td><td>Sidebar holding Products and Promotions lists</td><td>—</td></tr>
+          <tr><td><code>cpq-product-list</code></td><td>layout / template</td><td>Product list with search and filters</td><td><code>getCartsProducts</code></td></tr>
+          <tr><td><code>cpq-product-item</code></td><td>card / template</td><td>Each product row in the list; opens Product Details flyout</td><td>—</td></tr>
+          <tr><td><code>cpq-product-filters</code></td><td>layout / template</td><td>Filterable attributes panel (Reset / Apply)</td><td><code>getCartsAttributes</code></td></tr>
+          <tr><td><code>cpq-promotions-list</code></td><td>layout / template</td><td>Promotions list in left sidebar</td><td><code>getCartsPromotions</code></td></tr>
+          <tr><td><code>cpq-promotion-item</code></td><td>card / template</td><td>Each promotion in the list</td><td>—</td></tr>
+          <tr><td><code>cpq-product-cart</code></td><td>layout / template</td><td>Right panel — cart line items</td><td><code>getCartsItems</code></td></tr>
+          <tr><td><code>cpq-product-cart-item</code></td><td>card / template</td><td>Each root line item in cart</td><td>—</td></tr>
+          <tr><td><code>cpq-product-cart-item-child</code></td><td>card / layout / template</td><td>Child items in a bundle hierarchy</td><td>—</td></tr>
+          <tr><td><code>cpq-product-cart-config</code></td><td>layout / template</td><td>Configuration panel (attributes, lookups)</td><td>—</td></tr>
+          <tr><td><code>cpq-product-card-config-card</code></td><td>card</td><td>Editable fields on config panel</td><td>—</td></tr>
+          <tr><td><code>cpq-total-bar</code></td><td>layout / template</td><td>Bottom totals bar</td><td><code>getCarts</code></td></tr>
+          <tr><td><code>cpq-total-bar-card</code></td><td>card</td><td>Renders total bar content</td><td>—</td></tr>
+          <tr><td><code>cpq-total-card</code></td><td>template</td><td>Text, buttons, styling for totals</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Dialog &amp; Flyout Cards</h3>
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>Type</th><th>What It Does</th><th>Data Source</th></tr></thead>
+        <tbody>
+          <tr><td><code>cpq-product-details</code></td><td>card</td><td>Product Details dialog</td><td>—</td></tr>
+          <tr><td><code>cpq-product-item-more</code></td><td>layout / template</td><td>Flyout wrapper for product details</td><td><code>getCartsProducts</code></td></tr>
+          <tr><td><code>cpq-cart-item-detail</code></td><td>card / layout</td><td>Line Item Details dialog</td><td><code>getCartsItems</code></td></tr>
+          <tr><td><code>cpq-cart-item-lookup</code></td><td>layout / template</td><td>Lookup field dialog (e.g., service account, site)</td><td><code>getAvailableSites</code></td></tr>
+          <tr><td><code>cpq-product-cart-item-cell-detail</code></td><td>flyout</td><td>Price Details dialog (info icon)</td><td>—</td></tr>
+          <tr><td><code>cpq-product-cart-item-cell-pricing</code></td><td>flyout</td><td>Apply Discount dialog (pencil icon)</td><td>—</td></tr>
+          <tr><td><code>cpq-cart-promotions</code></td><td>card / layout</td><td>Applied promotions in cart</td><td><code>getPromotionsAppliedToCart</code></td></tr>
+          <tr><td><code>cpq-slds-prompt</code></td><td>layout / template</td><td>Customizable prompts in cart</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Asset &amp; Review Cart Cards (<code>comp-assets-*</code>)</h3>
+      <p>Used on Account asset pages and the read-only <strong>Review Cart</strong> Visualforce page.</p>
+      <table class="data-table">
+        <thead><tr><th>Name</th><th>What It Does</th><th>Data Source</th></tr></thead>
+        <tbody>
+          <tr><td><code>comp-assets-base-grid</code></td><td>Page shell for assets / review cart</td><td>—</td></tr>
+          <tr><td><code>comp-assets-header</code></td><td>Top banner on asset pages</td><td><code>getAccounts</code></td></tr>
+          <tr><td><code>comp-assets-contract</code></td><td>Assets grouped by contract</td><td><code>getAssetsByContract</code></td></tr>
+          <tr><td><code>comp-assets-no-contract</code></td><td>Assets not tied to a contract</td><td><code>getAssetsByAccount</code></td></tr>
+          <tr><td><code>comp-assets-product-item</code></td><td>Each asset line (by contract view)</td><td>—</td></tr>
+          <tr><td><code>comp-assets-product-item-child</code></td><td>Child products in an asset bundle</td><td>—</td></tr>
+          <tr><td><code>comp-assets-promotions</code></td><td>Promotions tab on asset pages</td><td><code>getAppliedPromotionsByAccount</code></td></tr>
+          <tr><td><code>comp-cart-review</code></td><td>Read-only review of submitted cart</td><td><code>getCartsItems</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Theme &amp; Utility Templates</h3>
+      <ul>
+        <li><code>cpq-theme-variables</code>, <code>cpq-base-theme-variables</code>, <code>comp-assets-theme-variables</code> — CSS variables for styling</li>
+        <li><code>cpq-card-blank</code> — empty starter template for custom views</li>
+        <li><code>cpq-card-mixin</code> — bundle hierarchy indentation in cart</li>
+        <li><code>cpq-config-attr-custom-action-template1/2</code> — custom actions in config panel (e.g., phone lookup)</li>
+      </ul>
+
+      <h3>Customizing Cards</h3>
+      <p>Edit cards in the <strong>Vlocity Cards</strong> tab (Setup or App Launcher). Override JavaScript via <code>CPQOverrideService</code> and pre/post hooks on controllers like <code>CPQCartItemController</code> (<code>beforeAddToCartHook</code>, <code>afterDeleteItemFromCartHook</code>, etc.).</p>
+    </section>
+
+    <section id="cpq-figures">
+      <h2>CPQ UI Figures &amp; PDF Screenshots</h2>
+      <p>All <strong>94 numbered figures</strong> and additional procedure screens extracted from <strong>CME_CPQ_PDF-en.pdf</strong> (1,015 pages). Click any image to open full size.</p>
+      <ul>
+        <li><strong>Numbered figures</strong> — official diagrams and UI screenshots (Figure 1–94)</li>
+        <li><strong>Procedure screens</strong> — Product Console, cost/margin, promotions, discounts, flow, change of plans, multi-site, OM setup pages</li>
+        <li><strong>Field tables</strong> — see topic sections (Cost &amp; Margin, MACD, etc.) for field Description and Use columns</li>
+      </ul>
+      <div class="note">Images are in <code>assets/cpq/pdf-figures/</code> and <code>assets/cpq/pdf-screens/</code>. Open this HTML from the <code>Study</code> folder.</div>
+
+      <nav class="fig-toc" style="margin:1.25rem 0;padding:1rem;background:#f9f9f9;border-radius:8px;border:1px solid #dddbda;">
+        <strong>Jump to figure group:</strong>
+        <a href="#cpq-pdf-figures">All Figures</a> ·
+        <a href="#cpq-fig-order-capture-pricing-flow">Order Flow</a> ·
+        <a href="#cpq-fig-vlocity-cart-cards">Cart &amp; Cards</a> ·
+        <a href="#cpq-fig-asset-based-ordering-abo">ABO</a> ·
+        <a href="#cpq-fig-pricing-hooks-matrices">Pricing</a> ·
+        <a href="#cpq-fig-context-rules-framework">Context Rules</a> ·
+        <a href="#cpq-fig-advanced-rules-framework">Advanced Rules</a> ·
+        <a href="#cpq-fig-promotions-discounts">Promos</a> ·
+        <a href="#cpq-fig-change-of-plans-multiplay">Change Plans</a> ·
+        <a href="#cpq-pdf-screens">Extra Screens</a>
+      </nav>
+
+      <h3 id="cpq-pdf-figures">All CPQ PDF Figures (94 numbered figures)</h3>
+      <p>Extracted from <strong>CME_CPQ_PDF-en.pdf</strong> — each image is the PDF page containing that figure. PDF page number shown in caption.</p>
+      <h3 id="cpq-fig-order-capture-pricing-flow">Order Capture &amp; Pricing Flow</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-001">
+          <a href="assets/cpq/pdf-figures/page-0025.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0025.png" alt="Figure 1: Vlocity Order Pricing Flow"></a>
+          <figcaption><strong>Figure 1.</strong> Vlocity Order Pricing Flow <span>(PDF page 25)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-002">
+          <a href="assets/cpq/pdf-figures/page-0026.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0026.png" alt="Figure 2: Process Flow"></a>
+          <figcaption><strong>Figure 2.</strong> Process Flow <span>(PDF page 26)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-vlocity-cart-cards">Vlocity Cart &amp; Cards</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-003">
+          <a href="assets/cpq/pdf-figures/page-0057.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0057.png" alt="Figure 3: Vlocity Cart with Product List and Product Line Items"></a>
+          <figcaption><strong>Figure 3.</strong> Vlocity Cart with Product List and Product Line Items <span>(PDF page 57)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-004">
+          <a href="assets/cpq/pdf-figures/page-0058.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0058.png" alt="Figure 4: Vlocity Cart with Configuration Panel"></a>
+          <figcaption><strong>Figure 4.</strong> Vlocity Cart with Configuration Panel <span>(PDF page 58)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-005">
+          <a href="assets/cpq/pdf-figures/page-0059.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0059.png" alt="Figure 5: Vlocity Cart Basic View"></a>
+          <figcaption><strong>Figure 5.</strong> Vlocity Cart Basic View <span>(PDF page 59)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-006">
+          <a href="assets/cpq/pdf-figures/page-0060.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0060.png" alt="Figure 6: Vlocity Cart Promotion List and Tab"></a>
+          <figcaption><strong>Figure 6.</strong> Vlocity Cart Promotion List and Tab <span>(PDF page 60)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-007">
+          <a href="assets/cpq/pdf-figures/page-0061.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0061.png" alt="Figure 7: Product Details Dialog Box"></a>
+          <figcaption><strong>Figure 7.</strong> Product Details Dialog Box <span>(PDF page 61)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-008">
+          <a href="assets/cpq/pdf-figures/page-0062.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0062.png" alt="Figure 8: Line Item Details Dialog Box"></a>
+          <figcaption><strong>Figure 8.</strong> Line Item Details Dialog Box <span>(PDF page 62)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-009">
+          <a href="assets/cpq/pdf-figures/page-0063.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0063.png" alt="Figure 9: Cart Item Lookup Field Dialog Box"></a>
+          <figcaption><strong>Figure 9.</strong> Cart Item Lookup Field Dialog Box <span>(PDF page 63)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-010">
+          <a href="assets/cpq/pdf-figures/page-0064.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0064.png" alt="Figure 10: Vlocity Cart with Filterable Attributes List"></a>
+          <figcaption><strong>Figure 10.</strong> Vlocity Cart with Filterable Attributes List <span>(PDF page 64)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-011">
+          <a href="assets/cpq/pdf-figures/page-0065.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0065.png" alt="Figure 11: Vlocity Assets Cards-Based Visualforce Page"></a>
+          <figcaption><strong>Figure 11.</strong> Vlocity Assets Cards-Based Visualforce Page <span>(PDF page 65)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-012">
+          <a href="assets/cpq/pdf-figures/page-0151.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0151.png" alt="Figure 12: Payment Choice Dialog Box"></a>
+          <figcaption><strong>Figure 12.</strong> Payment Choice Dialog Box <span>(PDF page 151)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-asset-based-ordering-abo">Asset-Based Ordering (ABO)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-013">
+          <a href="assets/cpq/pdf-figures/page-0196.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0196.png" alt="Figure 13: Asset-Based Ordering Process with IDs"></a>
+          <figcaption><strong>Figure 13.</strong> Asset-Based Ordering Process with IDs <span>(PDF page 196)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-014">
+          <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 14: Service Assets Visualforce Page"></a>
+          <figcaption><strong>Figure 14.</strong> Service Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-015">
+          <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 15: Billing Assets Visualforce Page"></a>
+          <figcaption><strong>Figure 15.</strong> Billing Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-016">
+          <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 16: All Assets Visualforce Page"></a>
+          <figcaption><strong>Figure 16.</strong> All Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-017">
+          <a href="assets/cpq/pdf-figures/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0202.png" alt="Figure 17: All Assets Cards-Based Visualforce Page"></a>
+          <figcaption><strong>Figure 17.</strong> All Assets Cards-Based Visualforce Page <span>(PDF page 202)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-018">
+          <a href="assets/cpq/pdf-figures/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0202.png" alt="Figure 18: Review Order Cart (Read Only) Visualforce Page"></a>
+          <figcaption><strong>Figure 18.</strong> Review Order Cart (Read Only) Visualforce Page <span>(PDF page 202)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-order-quote-manager-legacy">Order/Quote Manager (Legacy)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-019">
+          <a href="assets/cpq/pdf-figures/page-0259.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0259.png" alt="Figure 19: Example Summary Header"></a>
+          <figcaption><strong>Figure 19.</strong> Example Summary Header <span>(PDF page 259)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-020">
+          <a href="assets/cpq/pdf-figures/page-0268.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0268.png" alt="Figure 20: Configure Product, Simple Product"></a>
+          <figcaption><strong>Figure 20.</strong> Configure Product, Simple Product <span>(PDF page 268)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-021">
+          <a href="assets/cpq/pdf-figures/page-0269.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0269.png" alt="Figure 21: Configure Product, Product Bundle"></a>
+          <figcaption><strong>Figure 21.</strong> Configure Product, Product Bundle <span>(PDF page 269)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-pricing-hooks-matrices">Pricing, Hooks &amp; Matrices</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-022">
+          <a href="assets/cpq/pdf-figures/page-0328.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0328.png" alt="Figure 22: Price Details Popup"></a>
+          <figcaption><strong>Figure 22.</strong> Price Details Popup <span>(PDF page 328)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-023">
+          <a href="assets/cpq/pdf-figures/page-0333.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0333.png" alt="Figure 23: Interface Implementation"></a>
+          <figcaption><strong>Figure 23.</strong> Interface Implementation <span>(PDF page 333)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-024">
+          <a href="assets/cpq/pdf-figures/page-0334.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0334.png" alt="Figure 24: Price Details Popup"></a>
+          <figcaption><strong>Figure 24.</strong> Price Details Popup <span>(PDF page 334)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-025">
+          <a href="assets/cpq/pdf-figures/page-0335.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0335.png" alt="Figure 25: Custom Class Implementation"></a>
+          <figcaption><strong>Figure 25.</strong> Custom Class Implementation <span>(PDF page 335)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-026">
+          <a href="assets/cpq/pdf-figures/page-0336.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0336.png" alt="Figure 26: Custom Class Implementation"></a>
+          <figcaption><strong>Figure 26.</strong> Custom Class Implementation <span>(PDF page 336)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-027">
+          <a href="assets/cpq/pdf-figures/page-0340.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0340.png" alt="Figure 27: Pricing Products Without Attribute-Based Pricing"></a>
+          <figcaption><strong>Figure 27.</strong> Pricing Products Without Attribute-Based Pricing <span>(PDF page 340)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-028">
+          <a href="assets/cpq/pdf-figures/page-0341.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0341.png" alt="Figure 28: Pricing Products With Attribute-Based Pricing"></a>
+          <figcaption><strong>Figure 28.</strong> Pricing Products With Attribute-Based Pricing <span>(PDF page 341)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-029">
+          <a href="assets/cpq/pdf-figures/page-0349.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0349.png" alt="Figure 29: Types of Attribute-Based Pricing and Their Calculation Matrices"></a>
+          <figcaption><strong>Figure 29.</strong> Types of Attribute-Based Pricing and Their Calculation Matrices <span>(PDF page 349)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-030">
+          <a href="assets/cpq/pdf-figures/page-0352.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0352.png" alt="Figure 30: Entering new data for inputs to SourceTargetAttributePricingMatrix"></a>
+          <figcaption><strong>Figure 30.</strong> Entering new data for inputs to SourceTargetAttributePricingMatrix <span>(PDF page 352)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-031">
+          <a href="assets/cpq/pdf-figures/page-0354.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0354.png" alt="Figure 31: Entering input data to the Range AttributePricingMatrix"></a>
+          <figcaption><strong>Figure 31.</strong> Entering input data to the Range AttributePricingMatrix <span>(PDF page 354)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-032">
+          <a href="assets/cpq/pdf-figures/page-0358.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0358.png" alt="Figure 32: Target Product Name needs Include In Calculation Output flag checked"></a>
+          <figcaption><strong>Figure 32.</strong> Target Product Name needs Include In Calculation Output flag checked <span>(PDF page 358)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-033">
+          <a href="assets/cpq/pdf-figures/page-0365.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0365.png" alt="Figure 33: Price Details icon"></a>
+          <figcaption><strong>Figure 33.</strong> Price Details icon <span>(PDF page 365)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-034">
+          <a href="assets/cpq/pdf-figures/page-0366.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0366.png" alt="Figure 34: Pricing Details dialog box"></a>
+          <figcaption><strong>Figure 34.</strong> Pricing Details dialog box <span>(PDF page 366)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-035">
+          <a href="assets/cpq/pdf-figures/page-0391.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0391.png" alt="Figure 35: Vlocity Calculation Matrix for a Pricing Matrix"></a>
+          <figcaption><strong>Figure 35.</strong> Vlocity Calculation Matrix for a Pricing Matrix <span>(PDF page 391)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-036">
+          <a href="assets/cpq/pdf-figures/page-0398.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0398.png" alt="Figure 36: Life Insurance Matrix"></a>
+          <figcaption><strong>Figure 36.</strong> Life Insurance Matrix <span>(PDF page 398)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-context-rules-framework">Context Rules Framework</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-037">
+          <a href="assets/cpq/pdf-figures/page-0432.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0432.png" alt="Figure 37: Context Rules Framework Components"></a>
+          <figcaption><strong>Figure 37.</strong> Context Rules Framework Components <span>(PDF page 432)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-038">
+          <a href="assets/cpq/pdf-figures/page-0434.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0434.png" alt="Figure 38: Types of Context Rules"></a>
+          <figcaption><strong>Figure 38.</strong> Types of Context Rules <span>(PDF page 434)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-039">
+          <a href="assets/cpq/pdf-figures/page-0435.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0435.png" alt="Figure 39: Where Do Qualification Context Rules for Products Run?"></a>
+          <figcaption><strong>Figure 39.</strong> Where Do Qualification Context Rules for Products Run? <span>(PDF page 435)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-040">
+          <a href="assets/cpq/pdf-figures/page-0436.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0436.png" alt="Figure 40: Order of Operations"></a>
+          <figcaption><strong>Figure 40.</strong> Order of Operations <span>(PDF page 436)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-041">
+          <a href="assets/cpq/pdf-figures/page-0437.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0437.png" alt="Figure 41: Where Do Qualification Context Rules for Promotions Run?"></a>
+          <figcaption><strong>Figure 41.</strong> Where Do Qualification Context Rules for Promotions Run? <span>(PDF page 437)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-042">
+          <a href="assets/cpq/pdf-figures/page-0438.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0438.png" alt="Figure 42: Using Qualification Context Rules To Control Displaying the Price Lists"></a>
+          <figcaption><strong>Figure 42.</strong> Using Qualification Context Rules To Control Displaying the Price Lists <span>(PDF page 438)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-043">
+          <a href="assets/cpq/pdf-figures/page-0440.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0440.png" alt="Figure 43: Tightest Match User Experience"></a>
+          <figcaption><strong>Figure 43.</strong> Tightest Match User Experience <span>(PDF page 440)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-044">
+          <a href="assets/cpq/pdf-figures/page-0441.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0441.png" alt="Figure 44: Condition Weight Formula"></a>
+          <figcaption><strong>Figure 44.</strong> Condition Weight Formula <span>(PDF page 441)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-045">
+          <a href="assets/cpq/pdf-figures/page-0442.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0442.png" alt="Figure 45: Calculating Multiple Rule Condition Weights"></a>
+          <figcaption><strong>Figure 45.</strong> Calculating Multiple Rule Condition Weights <span>(PDF page 442)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-046">
+          <a href="assets/cpq/pdf-figures/page-0444.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0444.png" alt="Figure 46: Where Do Qualification Context Rules for Pricing Adjustments Run?"></a>
+          <figcaption><strong>Figure 46.</strong> Where Do Qualification Context Rules for Pricing Adjustments Run? <span>(PDF page 444)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-047">
+          <a href="assets/cpq/pdf-figures/page-0451.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0451.png" alt="Figure 47: Message to the User Regarding a Penalty"></a>
+          <figcaption><strong>Figure 47.</strong> Message to the User Regarding a Penalty <span>(PDF page 451)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-048">
+          <a href="assets/cpq/pdf-figures/page-0451.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0451.png" alt="Figure 48: Viewing a Canceled Promotion"></a>
+          <figcaption><strong>Figure 48.</strong> Viewing a Canceled Promotion <span>(PDF page 451)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-049">
+          <a href="assets/cpq/pdf-figures/page-0452.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0452.png" alt="Figure 49: Viewing a Penalty Applied by a Penalty Rule"></a>
+          <figcaption><strong>Figure 49.</strong> Viewing a Penalty Applied by a Penalty Rule <span>(PDF page 452)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-050">
+          <a href="assets/cpq/pdf-figures/page-0457.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0457.png" alt="Figure 50: Context Rule Components"></a>
+          <figcaption><strong>Figure 50.</strong> Context Rule Components <span>(PDF page 457)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-051">
+          <a href="assets/cpq/pdf-figures/page-0458.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0458.png" alt="Figure 51: Rule Sets"></a>
+          <figcaption><strong>Figure 51.</strong> Rule Sets <span>(PDF page 458)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-052">
+          <a href="assets/cpq/pdf-figures/page-0460.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0460.png" alt="Figure 52: Header Rule Processing Logic"></a>
+          <figcaption><strong>Figure 52.</strong> Header Rule Processing Logic <span>(PDF page 460)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-053">
+          <a href="assets/cpq/pdf-figures/page-0461.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0461.png" alt="Figure 53: Setting a Header Rule in the Rule Set General Properties Facet"></a>
+          <figcaption><strong>Figure 53.</strong> Setting a Header Rule in the Rule Set General Properties Facet <span>(PDF page 461)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-054">
+          <a href="assets/cpq/pdf-figures/page-0464.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0464.png" alt="Figure 54: Setting a Failure Message for a Rule Set"></a>
+          <figcaption><strong>Figure 54.</strong> Setting a Failure Message for a Rule Set <span>(PDF page 464)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-055">
+          <a href="assets/cpq/pdf-figures/page-0465.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0465.png" alt="Figure 55: Failure Message Appears in Vlocity Cart"></a>
+          <figcaption><strong>Figure 55.</strong> Failure Message Appears in Vlocity Cart <span>(PDF page 465)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-056">
+          <a href="assets/cpq/pdf-figures/page-0478.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0478.png" alt="Figure 56: No Pricing Adjustment Rule Set at Run Time"></a>
+          <figcaption><strong>Figure 56.</strong> No Pricing Adjustment Rule Set at Run Time <span>(PDF page 478)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-057">
+          <a href="assets/cpq/pdf-figures/page-0489.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0489.png" alt="Figure 57: Context Dimensions"></a>
+          <figcaption><strong>Figure 57.</strong> Context Dimensions <span>(PDF page 489)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-058">
+          <a href="assets/cpq/pdf-figures/page-0490.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0490.png" alt="Figure 58: Condition Weight Formula"></a>
+          <figcaption><strong>Figure 58.</strong> Condition Weight Formula <span>(PDF page 490)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-059">
+          <a href="assets/cpq/pdf-figures/page-0491.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0491.png" alt="Figure 59: Calculating Multiple Rule Condition Weights"></a>
+          <figcaption><strong>Figure 59.</strong> Calculating Multiple Rule Condition Weights <span>(PDF page 491)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-060">
+          <a href="assets/cpq/pdf-figures/page-0499.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0499.png" alt="Figure 60: Context Rule Components"></a>
+          <figcaption><strong>Figure 60.</strong> Context Rule Components <span>(PDF page 499)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-061">
+          <a href="assets/cpq/pdf-figures/page-0500.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0500.png" alt="Figure 61: Accessing Context Mappings From a Context Scope"></a>
+          <figcaption><strong>Figure 61.</strong> Accessing Context Mappings From a Context Scope <span>(PDF page 500)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-062">
+          <a href="assets/cpq/pdf-figures/page-0502.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0502.png" alt="Figure 62: Tracing the Object Hierarchy using Source Expressions"></a>
+          <figcaption><strong>Figure 62.</strong> Tracing the Object Hierarchy using Source Expressions <span>(PDF page 502)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-063">
+          <a href="assets/cpq/pdf-figures/page-0503.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0503.png" alt="Figure 63: Using Source Expressions for Virtual Objects"></a>
+          <figcaption><strong>Figure 63.</strong> Using Source Expressions for Virtual Objects <span>(PDF page 503)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-064">
+          <a href="assets/cpq/pdf-figures/page-0504.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0504.png" alt="Figure 64: Root and Second-Level Context Scopes"></a>
+          <figcaption><strong>Figure 64.</strong> Root and Second-Level Context Scopes <span>(PDF page 504)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-065">
+          <a href="assets/cpq/pdf-figures/page-0505.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0505.png" alt="Figure 65: Any and Second-Level Context Scopes"></a>
+          <figcaption><strong>Figure 65.</strong> Any and Second-Level Context Scopes <span>(PDF page 505)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-066">
+          <a href="assets/cpq/pdf-figures/page-0505.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0505.png" alt="Figure 66: Any.Account Context Scope"></a>
+          <figcaption><strong>Figure 66.</strong> Any.Account Context Scope <span>(PDF page 505)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-067">
+          <a href="assets/cpq/pdf-figures/page-0507.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0507.png" alt="Figure 67: Virtual Context Scopes"></a>
+          <figcaption><strong>Figure 67.</strong> Virtual Context Scopes <span>(PDF page 507)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-068">
+          <a href="assets/cpq/pdf-figures/page-0510.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0510.png" alt="Figure 68: Sample Response"></a>
+          <figcaption><strong>Figure 68.</strong> Sample Response <span>(PDF page 510)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-069">
+          <a href="assets/cpq/pdf-figures/page-0512.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0512.png" alt="Figure 69: Setting a Failure Message for a Rule Set"></a>
+          <figcaption><strong>Figure 69.</strong> Setting a Failure Message for a Rule Set <span>(PDF page 512)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-070">
+          <a href="assets/cpq/pdf-figures/page-0513.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0513.png" alt="Figure 70: Failure Message Appears in Vlocity Cart"></a>
+          <figcaption><strong>Figure 70.</strong> Failure Message Appears in Vlocity Cart <span>(PDF page 513)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-071">
+          <a href="assets/cpq/pdf-figures/page-0516.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0516.png" alt="Figure 71: Functions"></a>
+          <figcaption><strong>Figure 71.</strong> Functions <span>(PDF page 516)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-advanced-rules-framework">Advanced Rules Framework</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-072">
+          <a href="assets/cpq/pdf-figures/page-0527.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0527.png" alt="Figure 72: Rule Processing Diagram"></a>
+          <figcaption><strong>Figure 72.</strong> Rule Processing Diagram <span>(PDF page 527)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-073">
+          <a href="assets/cpq/pdf-figures/page-0528.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0528.png" alt="Figure 73: Availability and Eligibility Rule Process Diagram"></a>
+          <figcaption><strong>Figure 73.</strong> Availability and Eligibility Rule Process Diagram <span>(PDF page 528)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-074">
+          <a href="assets/cpq/pdf-figures/page-0531.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0531.png" alt="Figure 74: Compatibility Rule Process Diagram"></a>
+          <figcaption><strong>Figure 74.</strong> Compatibility Rule Process Diagram <span>(PDF page 531)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-075">
+          <a href="assets/cpq/pdf-figures/page-0533.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0533.png" alt="Figure 75: Rule Object Detail"></a>
+          <figcaption><strong>Figure 75.</strong> Rule Object Detail <span>(PDF page 533)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-076">
+          <a href="assets/cpq/pdf-figures/page-0533.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0533.png" alt="Figure 76: Rule Filter Object"></a>
+          <figcaption><strong>Figure 76.</strong> Rule Filter Object <span>(PDF page 533)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-077">
+          <a href="assets/cpq/pdf-figures/page-0534.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0534.png" alt="Figure 77: Figure: Rule Action Object"></a>
+          <figcaption><strong>Figure 77.</strong> Figure: Rule Action Object <span>(PDF page 534)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-078">
+          <a href="assets/cpq/pdf-figures/page-0534.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0534.png" alt="Figure 78: Rule Variable Object"></a>
+          <figcaption><strong>Figure 78.</strong> Rule Variable Object <span>(PDF page 534)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-079">
+          <a href="assets/cpq/pdf-figures/page-0539.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0539.png" alt="Figure 79: Sample Evaluation Entity Filter"></a>
+          <figcaption><strong>Figure 79.</strong> Sample Evaluation Entity Filter <span>(PDF page 539)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-080">
+          <a href="assets/cpq/pdf-figures/page-0540.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0540.png" alt="Figure 80: Sample Qualification Download Speed"></a>
+          <figcaption><strong>Figure 80.</strong> Sample Qualification Download Speed <span>(PDF page 540)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-081">
+          <a href="assets/cpq/pdf-figures/page-0542.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0542.png" alt="Figure 81: Entity Filter Object Detail Page"></a>
+          <figcaption><strong>Figure 81.</strong> Entity Filter Object Detail Page <span>(PDF page 542)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-082">
+          <a href="assets/cpq/pdf-figures/page-0548.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0548.png" alt="Figure 82: Vlocity Rule Builder"></a>
+          <figcaption><strong>Figure 82.</strong> Vlocity Rule Builder <span>(PDF page 548)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-083">
+          <a href="assets/cpq/pdf-figures/page-0552.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0552.png" alt="Figure 83: Entity Filter"></a>
+          <figcaption><strong>Figure 83.</strong> Entity Filter <span>(PDF page 552)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-084">
+          <a href="assets/cpq/pdf-figures/page-0554.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0554.png" alt="Figure 84: Products Not Available List"></a>
+          <figcaption><strong>Figure 84.</strong> Products Not Available List <span>(PDF page 554)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-085">
+          <a href="assets/cpq/pdf-figures/page-0555.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0555.png" alt="Figure 85: Products Not Eligible Related List"></a>
+          <figcaption><strong>Figure 85.</strong> Products Not Eligible Related List <span>(PDF page 555)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-086">
+          <a href="assets/cpq/pdf-figures/page-0558.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0558.png" alt="Figure 86: Rule Builder, Advanced Eligibility Rule"></a>
+          <figcaption><strong>Figure 86.</strong> Rule Builder, Advanced Eligibility Rule <span>(PDF page 558)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-087">
+          <a href="assets/cpq/pdf-figures/page-0561.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0561.png" alt="Figure 87: Rule Builder, Compatibility Rule"></a>
+          <figcaption><strong>Figure 87.</strong> Rule Builder, Compatibility Rule <span>(PDF page 561)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-promotions-discounts">Promotions &amp; Discounts</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-088">
+          <a href="assets/cpq/pdf-figures/page-0562.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0562.png" alt="Figure 88: Price Book Entry Edit Page"></a>
+          <figcaption><strong>Figure 88.</strong> Price Book Entry Edit Page <span>(PDF page 562)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-089">
+          <a href="assets/cpq/pdf-figures/page-0590.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0590.png" alt="Figure 89: Bundle Currently in the Cart"></a>
+          <figcaption><strong>Figure 89.</strong> Bundle Currently in the Cart <span>(PDF page 590)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-090">
+          <a href="assets/cpq/pdf-figures/page-0590.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0590.png" alt="Figure 90: Promotional Pricing Applied to Bundle"></a>
+          <figcaption><strong>Figure 90.</strong> Promotional Pricing Applied to Bundle <span>(PDF page 590)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-091">
+          <a href="assets/cpq/pdf-figures/page-0591.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0591.png" alt="Figure 91: iPhone X Intro Promo Discounts Two Products in iPhone X Intro Bundle"></a>
+          <figcaption><strong>Figure 91.</strong> iPhone X Intro Promo Discounts Two Products in iPhone X Intro Bundle <span>(PDF page 591)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-092">
+          <a href="assets/cpq/pdf-figures/page-0591.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0591.png" alt="Figure 92: Unlimited Talk + Text Promotion Discounts One Product in iPhone X"></a>
+          <figcaption><strong>Figure 92.</strong> Unlimited Talk + Text Promotion Discounts One Product in iPhone X <span>(PDF page 591)</span></figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="fig-093">
+          <a href="assets/cpq/pdf-figures/page-0594.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0594.png" alt="Figure 93: Cancel Promotion Dialog Box"></a>
+          <figcaption><strong>Figure 93.</strong> Cancel Promotion Dialog Box <span>(PDF page 594)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-fig-change-of-plans-multiplay">Change of Plans &amp; Multiplay</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-094">
+          <a href="assets/cpq/pdf-figures/page-0637.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0637.png" alt="Figure 94: Replace, Upgrade, or Downgrade Offers"></a>
+          <figcaption><strong>Figure 94.</strong> Replace, Upgrade, or Downgrade Offers <span>(PDF page 637)</span></figcaption>
+        </figure>
+      </div>
+      <h3 id="cpq-pdf-screens">Additional CPQ PDF Screens (procedures &amp; tables)</h3>
+      <p>Key setup pages from the PDF that contain UI walkthroughs, field tables, or configuration screens without a numbered Figure caption.</p>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="screen-6">
+          <a href="assets/cpq/pdf-screens/screen-page-0006.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0006.png" alt="CPQ PDF page 6"></a>
+          <figcaption><strong>PDF page 6</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-7">
+          <a href="assets/cpq/pdf-screens/screen-page-0007.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0007.png" alt="CPQ PDF page 7"></a>
+          <figcaption><strong>PDF page 7</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-8">
+          <a href="assets/cpq/pdf-screens/screen-page-0008.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0008.png" alt="CPQ PDF page 8"></a>
+          <figcaption><strong>PDF page 8</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-9">
+          <a href="assets/cpq/pdf-screens/screen-page-0009.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0009.png" alt="CPQ PDF page 9"></a>
+          <figcaption><strong>PDF page 9</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-275">
+          <a href="assets/cpq/pdf-screens/screen-page-0275.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0275.png" alt="CPQ PDF page 275"></a>
+          <figcaption><strong>PDF page 275</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-276">
+          <a href="assets/cpq/pdf-screens/screen-page-0276.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0276.png" alt="CPQ PDF page 276"></a>
+          <figcaption><strong>PDF page 276</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-277">
+          <a href="assets/cpq/pdf-screens/screen-page-0277.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0277.png" alt="CPQ PDF page 277"></a>
+          <figcaption><strong>PDF page 277</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-278">
+          <a href="assets/cpq/pdf-screens/screen-page-0278.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0278.png" alt="CPQ PDF page 278"></a>
+          <figcaption><strong>PDF page 278</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-279">
+          <a href="assets/cpq/pdf-screens/screen-page-0279.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0279.png" alt="CPQ PDF page 279"></a>
+          <figcaption><strong>PDF page 279</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-280">
+          <a href="assets/cpq/pdf-screens/screen-page-0280.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0280.png" alt="CPQ PDF page 280"></a>
+          <figcaption><strong>PDF page 280</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-281">
+          <a href="assets/cpq/pdf-screens/screen-page-0281.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0281.png" alt="CPQ PDF page 281"></a>
+          <figcaption><strong>PDF page 281</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-282">
+          <a href="assets/cpq/pdf-screens/screen-page-0282.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0282.png" alt="CPQ PDF page 282"></a>
+          <figcaption><strong>PDF page 282</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-284">
+          <a href="assets/cpq/pdf-screens/screen-page-0284.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0284.png" alt="CPQ PDF page 284"></a>
+          <figcaption><strong>PDF page 284</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-287">
+          <a href="assets/cpq/pdf-screens/screen-page-0287.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0287.png" alt="CPQ PDF page 287"></a>
+          <figcaption><strong>PDF page 287</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-288">
+          <a href="assets/cpq/pdf-screens/screen-page-0288.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0288.png" alt="CPQ PDF page 288"></a>
+          <figcaption><strong>PDF page 288</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-292">
+          <a href="assets/cpq/pdf-screens/screen-page-0292.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0292.png" alt="CPQ PDF page 292"></a>
+          <figcaption><strong>PDF page 292</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-297">
+          <a href="assets/cpq/pdf-screens/screen-page-0297.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0297.png" alt="CPQ PDF page 297"></a>
+          <figcaption><strong>PDF page 297</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-386">
+          <a href="assets/cpq/pdf-screens/screen-page-0386.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0386.png" alt="CPQ PDF page 386"></a>
+          <figcaption><strong>PDF page 386</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-387">
+          <a href="assets/cpq/pdf-screens/screen-page-0387.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0387.png" alt="CPQ PDF page 387"></a>
+          <figcaption><strong>PDF page 387</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-389">
+          <a href="assets/cpq/pdf-screens/screen-page-0389.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0389.png" alt="CPQ PDF page 389"></a>
+          <figcaption><strong>PDF page 389</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-390">
+          <a href="assets/cpq/pdf-screens/screen-page-0390.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0390.png" alt="CPQ PDF page 390"></a>
+          <figcaption><strong>PDF page 390</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-392">
+          <a href="assets/cpq/pdf-screens/screen-page-0392.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0392.png" alt="CPQ PDF page 392"></a>
+          <figcaption><strong>PDF page 392</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-393">
+          <a href="assets/cpq/pdf-screens/screen-page-0393.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0393.png" alt="CPQ PDF page 393"></a>
+          <figcaption><strong>PDF page 393</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-394">
+          <a href="assets/cpq/pdf-screens/screen-page-0394.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0394.png" alt="CPQ PDF page 394"></a>
+          <figcaption><strong>PDF page 394</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-395">
+          <a href="assets/cpq/pdf-screens/screen-page-0395.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0395.png" alt="CPQ PDF page 395"></a>
+          <figcaption><strong>PDF page 395</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-396">
+          <a href="assets/cpq/pdf-screens/screen-page-0396.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0396.png" alt="CPQ PDF page 396"></a>
+          <figcaption><strong>PDF page 396</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-397">
+          <a href="assets/cpq/pdf-screens/screen-page-0397.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0397.png" alt="CPQ PDF page 397"></a>
+          <figcaption><strong>PDF page 397</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-399">
+          <a href="assets/cpq/pdf-screens/screen-page-0399.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0399.png" alt="CPQ PDF page 399"></a>
+          <figcaption><strong>PDF page 399</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-400">
+          <a href="assets/cpq/pdf-screens/screen-page-0400.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0400.png" alt="CPQ PDF page 400"></a>
+          <figcaption><strong>PDF page 400</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-559">
+          <a href="assets/cpq/pdf-screens/screen-page-0559.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0559.png" alt="CPQ PDF page 559"></a>
+          <figcaption><strong>PDF page 559</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-569">
+          <a href="assets/cpq/pdf-screens/screen-page-0569.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0569.png" alt="CPQ PDF page 569"></a>
+          <figcaption><strong>PDF page 569</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-570">
+          <a href="assets/cpq/pdf-screens/screen-page-0570.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0570.png" alt="CPQ PDF page 570"></a>
+          <figcaption><strong>PDF page 570</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-571">
+          <a href="assets/cpq/pdf-screens/screen-page-0571.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0571.png" alt="CPQ PDF page 571"></a>
+          <figcaption><strong>PDF page 571</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-572">
+          <a href="assets/cpq/pdf-screens/screen-page-0572.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0572.png" alt="CPQ PDF page 572"></a>
+          <figcaption><strong>PDF page 572</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-573">
+          <a href="assets/cpq/pdf-screens/screen-page-0573.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0573.png" alt="CPQ PDF page 573"></a>
+          <figcaption><strong>PDF page 573</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-575">
+          <a href="assets/cpq/pdf-screens/screen-page-0575.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0575.png" alt="CPQ PDF page 575"></a>
+          <figcaption><strong>PDF page 575</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-576">
+          <a href="assets/cpq/pdf-screens/screen-page-0576.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0576.png" alt="CPQ PDF page 576"></a>
+          <figcaption><strong>PDF page 576</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-578">
+          <a href="assets/cpq/pdf-screens/screen-page-0578.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0578.png" alt="CPQ PDF page 578"></a>
+          <figcaption><strong>PDF page 578</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-579">
+          <a href="assets/cpq/pdf-screens/screen-page-0579.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0579.png" alt="CPQ PDF page 579"></a>
+          <figcaption><strong>PDF page 579</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-581">
+          <a href="assets/cpq/pdf-screens/screen-page-0581.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0581.png" alt="CPQ PDF page 581"></a>
+          <figcaption><strong>PDF page 581</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-582">
+          <a href="assets/cpq/pdf-screens/screen-page-0582.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0582.png" alt="CPQ PDF page 582"></a>
+          <figcaption><strong>PDF page 582</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-583">
+          <a href="assets/cpq/pdf-screens/screen-page-0583.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0583.png" alt="CPQ PDF page 583"></a>
+          <figcaption><strong>PDF page 583</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-587">
+          <a href="assets/cpq/pdf-screens/screen-page-0587.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0587.png" alt="CPQ PDF page 587"></a>
+          <figcaption><strong>PDF page 587</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-588">
+          <a href="assets/cpq/pdf-screens/screen-page-0588.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0588.png" alt="CPQ PDF page 588"></a>
+          <figcaption><strong>PDF page 588</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-592">
+          <a href="assets/cpq/pdf-screens/screen-page-0592.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0592.png" alt="CPQ PDF page 592"></a>
+          <figcaption><strong>PDF page 592</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-597">
+          <a href="assets/cpq/pdf-screens/screen-page-0597.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0597.png" alt="CPQ PDF page 597"></a>
+          <figcaption><strong>PDF page 597</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-598">
+          <a href="assets/cpq/pdf-screens/screen-page-0598.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0598.png" alt="CPQ PDF page 598"></a>
+          <figcaption><strong>PDF page 598</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-599">
+          <a href="assets/cpq/pdf-screens/screen-page-0599.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0599.png" alt="CPQ PDF page 599"></a>
+          <figcaption><strong>PDF page 599</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-600">
+          <a href="assets/cpq/pdf-screens/screen-page-0600.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0600.png" alt="CPQ PDF page 600"></a>
+          <figcaption><strong>PDF page 600</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-601">
+          <a href="assets/cpq/pdf-screens/screen-page-0601.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0601.png" alt="CPQ PDF page 601"></a>
+          <figcaption><strong>PDF page 601</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-602">
+          <a href="assets/cpq/pdf-screens/screen-page-0602.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0602.png" alt="CPQ PDF page 602"></a>
+          <figcaption><strong>PDF page 602</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-603">
+          <a href="assets/cpq/pdf-screens/screen-page-0603.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0603.png" alt="CPQ PDF page 603"></a>
+          <figcaption><strong>PDF page 603</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-604">
+          <a href="assets/cpq/pdf-screens/screen-page-0604.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0604.png" alt="CPQ PDF page 604"></a>
+          <figcaption><strong>PDF page 604</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-605">
+          <a href="assets/cpq/pdf-screens/screen-page-0605.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0605.png" alt="CPQ PDF page 605"></a>
+          <figcaption><strong>PDF page 605</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-610">
+          <a href="assets/cpq/pdf-screens/screen-page-0610.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0610.png" alt="CPQ PDF page 610"></a>
+          <figcaption><strong>PDF page 610</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-611">
+          <a href="assets/cpq/pdf-screens/screen-page-0611.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0611.png" alt="CPQ PDF page 611"></a>
+          <figcaption><strong>PDF page 611</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-613">
+          <a href="assets/cpq/pdf-screens/screen-page-0613.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0613.png" alt="CPQ PDF page 613"></a>
+          <figcaption><strong>PDF page 613</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-615">
+          <a href="assets/cpq/pdf-screens/screen-page-0615.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0615.png" alt="CPQ PDF page 615"></a>
+          <figcaption><strong>PDF page 615</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-616">
+          <a href="assets/cpq/pdf-screens/screen-page-0616.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0616.png" alt="CPQ PDF page 616"></a>
+          <figcaption><strong>PDF page 616</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-617">
+          <a href="assets/cpq/pdf-screens/screen-page-0617.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0617.png" alt="CPQ PDF page 617"></a>
+          <figcaption><strong>PDF page 617</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-618">
+          <a href="assets/cpq/pdf-screens/screen-page-0618.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0618.png" alt="CPQ PDF page 618"></a>
+          <figcaption><strong>PDF page 618</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-619">
+          <a href="assets/cpq/pdf-screens/screen-page-0619.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0619.png" alt="CPQ PDF page 619"></a>
+          <figcaption><strong>PDF page 619</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-620">
+          <a href="assets/cpq/pdf-screens/screen-page-0620.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0620.png" alt="CPQ PDF page 620"></a>
+          <figcaption><strong>PDF page 620</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-628">
+          <a href="assets/cpq/pdf-screens/screen-page-0628.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0628.png" alt="CPQ PDF page 628"></a>
+          <figcaption><strong>PDF page 628</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-629">
+          <a href="assets/cpq/pdf-screens/screen-page-0629.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0629.png" alt="CPQ PDF page 629"></a>
+          <figcaption><strong>PDF page 629</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-632">
+          <a href="assets/cpq/pdf-screens/screen-page-0632.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0632.png" alt="CPQ PDF page 632"></a>
+          <figcaption><strong>PDF page 632</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-633">
+          <a href="assets/cpq/pdf-screens/screen-page-0633.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0633.png" alt="CPQ PDF page 633"></a>
+          <figcaption><strong>PDF page 633</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-638">
+          <a href="assets/cpq/pdf-screens/screen-page-0638.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0638.png" alt="CPQ PDF page 638"></a>
+          <figcaption><strong>PDF page 638</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-643">
+          <a href="assets/cpq/pdf-screens/screen-page-0643.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0643.png" alt="CPQ PDF page 643"></a>
+          <figcaption><strong>PDF page 643</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-644">
+          <a href="assets/cpq/pdf-screens/screen-page-0644.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0644.png" alt="CPQ PDF page 644"></a>
+          <figcaption><strong>PDF page 644</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-651">
+          <a href="assets/cpq/pdf-screens/screen-page-0651.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0651.png" alt="CPQ PDF page 651"></a>
+          <figcaption><strong>PDF page 651</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-652">
+          <a href="assets/cpq/pdf-screens/screen-page-0652.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0652.png" alt="CPQ PDF page 652"></a>
+          <figcaption><strong>PDF page 652</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-656">
+          <a href="assets/cpq/pdf-screens/screen-page-0656.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0656.png" alt="CPQ PDF page 656"></a>
+          <figcaption><strong>PDF page 656</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-657">
+          <a href="assets/cpq/pdf-screens/screen-page-0657.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0657.png" alt="CPQ PDF page 657"></a>
+          <figcaption><strong>PDF page 657</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-658">
+          <a href="assets/cpq/pdf-screens/screen-page-0658.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0658.png" alt="CPQ PDF page 658"></a>
+          <figcaption><strong>PDF page 658</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-663">
+          <a href="assets/cpq/pdf-screens/screen-page-0663.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0663.png" alt="CPQ PDF page 663"></a>
+          <figcaption><strong>PDF page 663</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-675">
+          <a href="assets/cpq/pdf-screens/screen-page-0675.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0675.png" alt="CPQ PDF page 675"></a>
+          <figcaption><strong>PDF page 675</strong> — setup / procedure screen</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="screen-689">
+          <a href="assets/cpq/pdf-screens/screen-page-0689.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0689.png" alt="CPQ PDF page 689"></a>
+          <figcaption><strong>PDF page 689</strong> — setup / procedure screen</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="cpq-macd">
-      <h2>4. MACD &amp; Asset-Based Ordering</h2>
+      <h2>5. MACD &amp; Asset-Based Ordering</h2>
       <p><strong>MACD</strong> = Move, Add, Change, Delete. Used when customers already have active services (assets) and want to modify them.</p>
       <table class="data-table">
         <thead><tr><th>Action</th><th>Meaning</th><th>Example</th></tr></thead>
@@ -1336,10 +2322,53 @@
         </tbody>
       </table>
       <p>Assets can be converted back to Quote or Order for changes. Each asset has an <strong>Asset Reference ID</strong> used across CPQ and Order Management.</p>
+      <h3>Asset-Based Ordering (ABO) Flow</h3>
+      <ol>
+        <li>Open Account → view assets on cards-based VF page (<code>comp-assets-*</code> cards)</li>
+        <li>Select asset(s) → <strong>Change to Quote</strong> or <strong>Change to Order</strong></li>
+        <li>Configure changes in Vlocity Cart → Submit → new/updated assets created</li>
+      </ol>
+      <h3>Field Mapper</h3>
+      <p><strong>Field Mapper</strong> copies custom fields between Quote/Order/Asset during ABO. Add Field Settings records to define which fields map. You can add filters and edit mappings in Setup.</p>
+      <div class="note"><strong>Sub-Actions on change orders</strong> Move, Replace, Reassign, and Cancel relate to Change of Plans. Action values on line items: Add, Existing, Change, Disconnect, Suspend, Resume.</div>
+
+      <h3>Asset Management &amp; Billing Assets (Figure 15)</h3>
+      <p>On the Account record page, assets appear in related lists or cards-based Visualforce pages. Select one or more assets, then use the action buttons to start a MACD change order.</p>
+
+      <figure class="doc-screenshot">
+        <img src="assets/cpq/asset-management-billing.png" alt="Asset Management and Billing Assets Visualforce pages showing asset table with Change To Quote and Change To Order buttons">
+        <figcaption><strong>Figure 15 — Billing Assets Visualforce Page</strong> (top: Asset Management related list; bottom: Billing Assets VF page). Select assets with checkboxes, then click an action button.</figcaption>
+      </figure>
+
+      <h4>Asset Table — Column Fields</h4>
+      <table class="data-table field-table-section">
+        <thead><tr><th>Column / Field</th><th>Description</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td>Checkbox</td><td>Row selector for bulk MACD actions</td><td>Select one or more assets before clicking Change To Quote / Order / Move</td></tr>
+          <tr><td>Asset Name</td><td>Product or bundle name (blue link)</td><td>Click to open asset detail; ▶ arrow expands bundle children</td></tr>
+          <tr><td>Serial Number</td><td>Unique instance ID (e.g., VLO-BUN-0012)</td><td>Track specific hardware or service instance across CPQ and OM</td></tr>
+          <tr><td>Quantity</td><td>Number of units the customer owns</td><td>Used in billing and when cloning asset to cart</td></tr>
+          <tr><td>Status</td><td>Commercial lifecycle (e.g., Purchased)</td><td>Whether asset is commercially active or cancelled</td></tr>
+          <tr><td>Provisioning Status</td><td>Technical state (e.g., Active)</td><td>Whether service is live in the network / fulfillment system</td></tr>
+          <tr><td>Recurring Total</td><td>Monthly/periodic charge for this asset</td><td>Impact on customer MRR; shown when changing plans</td></tr>
+          <tr><td>One Time Total</td><td>Non-recurring charge paid for asset</td><td>Upfront cost; used in Compare view during Replace</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Action Buttons</h4>
+      <table class="data-table">
+        <thead><tr><th>Button</th><th>Description</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Change To Quote</strong></td><td>Creates a new Quote with selected assets as Existing line items</td><td>Modify services in quote stage before converting to order</td></tr>
+          <tr><td><strong>Change To Order</strong></td><td>Creates a new Order with selected assets as Existing line items</td><td>Direct MACD — upgrade, downgrade, disconnect, Replace Offer</td></tr>
+          <tr><td><strong>Move</strong></td><td>Initiates move to new location/account (Asset Management only)</td><td>Transfer service to new premises or service account</td></tr>
+        </tbody>
+      </table>
+      <div class="tip">Buttons are enabled only when at least one asset is selected. Assets load on <code>comp-assets-*</code> cards pages or standard Account related lists.</div>
     </section>
 
     <section id="cpq-rules">
-      <h2>5. Rules in CPQ</h2>
+      <h2>6. Rules in CPQ</h2>
       <table class="data-table">
         <thead><tr><th>Framework</th><th>Purpose</th><th>When to Use</th></tr></thead>
         <tbody>
@@ -1348,23 +2377,704 @@
           <tr><td><strong>Attribute Rules</strong></td><td>Configure options on one product</td><td>Hide color when size = 44mm</td></tr>
         </tbody>
       </table>
+      <h3>Context Rules in CPQ</h3>
+      <ul>
+        <li><strong>Rule sets &amp; dimensions</strong> — define who/where/when a product or promo is eligible</li>
+        <li><strong>Qualified / Disqualified tabs</strong> — context rules filter what appears in Products and Promotions lists</li>
+        <li><strong>Context actions</strong> — apply penalties, discounts, or other effects when conditions match</li>
+        <li><strong>Penalty rules</strong> — e.g., fee when canceling a promotion early</li>
+      </ul>
+      <div class="tip">After editing rules, run <strong>Clear Managed Platform Cache</strong> → <strong>Refresh Platform Cache</strong> before testing.</div>
     </section>
 
     <section id="cpq-pricing">
-      <h2>6. CPQ Pricing Overview</h2>
+      <h2>7. CPQ Pricing &amp; Price List Entries</h2>
+      <p>For a product to appear in the cart Products list it needs: an <strong>assigned price</strong>, <strong>Active</strong> status, and <strong>Orderable</strong> status.</p>
+
+      <h3>Pricing Building Blocks</h3>
+      <table class="data-table">
+        <thead><tr><th>Component</th><th>Role</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Price List</td><td>Container for all prices</td><td>Consumer Price List 2026</td></tr>
+          <tr><td>PLE (Price List Entry)</td><td>Base price for one product</td><td>iPhone 11 = $699 one-time</td></tr>
+          <tr><td>Pricing Element</td><td>Charge definition (recurring, usage, loyalty, cost)</td><td>$45/mo data plan charge</td></tr>
+          <tr><td>Pricing Variable</td><td>Named value used in calculations</td><td>REC_MNTH_CHARGE_STD, OT_STD_CST</td></tr>
+          <tr><td>Time Plan / Time Policy</td><td>Duration and start/end of pricing</td><td>12-month commitment, cycle start</td></tr>
+          <tr><td>Pricing Plan</td><td>Runtime sequence of pricing steps</td><td>Availability → Eligibility → Price → Tax</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Step-by-Step: Create a Price List Entry (PLE)</h3>
+      <div class="step-block"><h4>From Price List</h4>
+        <ol>
+          <li>Product Console → search Price List → open → <strong>Price List Entries</strong> → <strong>New</strong></li>
+          <li>General Properties: select Product, enter Display Text, check <strong>Base Price</strong> if default list price</li>
+          <li>Pricing Variable: search → select variable → select matching <strong>Pricing Element</strong></li>
+          <li>Time Plan / Time Policy (optional) → Effectivity dates → check <strong>Active</strong> → Save</li>
+        </ol>
+      </div>
+      <div class="step-block"><h4>From Product</h4>
+        <ol>
+          <li>Product Console → open Product → <strong>Pricing</strong> facet → <strong>Charges</strong> tab → <strong>New</strong></li>
+          <li>Same fields as above; Price List field appears because you started from the product</li>
+        </ol>
+      </div>
+
+<div class="field-ref-intro"><strong>Field reference (CPQ PDF Tables 3–23):</strong> Required fields are marked <span class="req-yes">Yes</span>. Product must have assigned price, Active status, and Orderable status to appear in cart.</div>
+
+      <h4>Table 3 — Price List: General Properties</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Name</td><td class="req-yes">Yes</td><td>Price list name</td><td>Identifies the list in Product Console and cart header picklist</td></tr>
+    <tr><td>Code</td><td class="req-yes">Yes</td><td>Unique identifier — uppercase, no spaces (e.g., PL-B2B)</td><td>Referenced by integrations and pricing configuration</td></tr>
+    <tr><td>Description</td><td>No</td><td>Description of the price list (e.g., Commercial/Business)</td><td>Admin documentation only</td></tr>
+    <tr><td>Price Book</td><td class="req-yes">Yes</td><td>Salesforce price book linked to this price list</td><td>Multiple price lists can share one price book</td></tr>
+    <tr><td>Parent Price List</td><td>No</td><td>Parent list whose pricing this list inherits</td><td>Child lists inherit parent pricing; add exceptions in child</td></tr>
+    <tr><td>Sequence</td><td>No</td><td>Display order among price lists</td><td>Controls sort in picklists</td></tr>
+    <tr><td>Currency Code</td><td class="req-yes">Yes</td><td>Currency for all entries in this list</td><td>Must match pricing element currency</td></tr>
+    <tr><td>Loyalty Code</td><td>No</td><td>Loyalty indicator for points pricing (typically PTS)</td><td>Used with loyalty pricing variables</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 4 — Price List: Effectivity</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Is Active</td><td class="req-yes">Yes</td><td>When selected, the price list can be used in carts</td><td>Inactive lists are hidden from cart price list picklist</td></tr>
+    <tr><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time the price list becomes available</td><td>Must be current or list cannot be selected</td></tr>
+    <tr><td>Effective Until</td><td>No</td><td>Date/time the price list expires</td><td>After this date the list is no longer usable</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 5–7 — Pricing Element Charge: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Pricing Variable (search)</td></tr>
+    <tr><td>Pricing Variable</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Recurring or One-time charge type filter</td><td>Finds matching pricing variables</td></tr>
+    <tr><td>Pricing Variable</td><td>Frequency</td><td>Conditional</td><td>Daily, Weekly, Monthly, Yearly — shown for recurring</td><td>Matches recurring variable frequency</td></tr>
+    <tr><td>Pricing Variable</td><td>Type</td><td class="req-yes">Yes</td><td>Price (customer charge) or Cost (company cost)</td><td>Separates revenue vs cost elements</td></tr>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Payment type, amount, recurrence (e.g., $9.99 Monthly)</td><td>Admin identification in Pricing Elements facet</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — uppercase, no spaces or special chars</td><td>System identifier for the element</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Currency/loyalty amount shown in cart (e.g., $10)</td><td>Customer-facing price label</td></tr>
+    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>Do <strong>not</strong> select when creating a pricing element charge</td><td>Base Price is set on PLE, not on element</td></tr>
+    <tr><td class="section-header" colspan="5">Currency Value</td></tr>
+    <tr><td>Currency Value</td><td>Charge</td><td class="req-yes">Yes</td><td>Charge amount</td><td>Actual price or cost value</td></tr>
+    <tr><td>Currency Value</td><td>Currency Code</td><td class="req-yes">Yes</td><td>Charge currency</td><td>Must align with price list currency</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 8)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time element becomes available</td><td>Must be current to appear in PLE search</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time for element availability</td><td>Element ignored after this date</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Element status — must be selected</td><td>Inactive elements excluded from PLE creation</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 21–23 — Price List Entry (PLE): Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes*</td><td>Price list storing this entry (*shown when creating from product)</td><td>Links product price to a specific list</td></tr>
+    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes*</td><td>Product being priced (*shown when creating from price list)</td><td>Which catalog item gets this price</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td class="req-yes">Yes</td><td>Payment type and amount shown in Products list (e.g., $9.99 Monthly)</td><td>Customer sees this in cart product list</td></tr>
+    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>When checked, this is the default/list price</td><td>Default price before context rules and promos</td></tr>
+    <tr><td>General Properties</td><td>Virtual Price</td><td>No</td><td>Replaces parent bundle price with sum of child prices</td><td>Rare — used for virtual bundle pricing</td></tr>
+    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Element</td></tr>
+    <tr><td>Pricing Variable</td><td>Charge Type / Sub-Type</td><td class="req-yes">Yes</td><td>Search filters for one-time/recurring and standard/fee</td><td>Select variable then matching pricing element</td></tr>
+    <tr><td>Pricing Element</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>Element from same price list with charge amount</td><td>Combines with variable to form runtime price</td></tr>
+    <tr><td class="section-header" colspan="5">Time Plan/Policy (Table 22)</td></tr>
+    <tr><td>Time Plan/Policy</td><td>Time Plan</td><td>No</td><td>Duration of pricing (e.g., 24-month promo window)</td><td>Limits how long adjustment/price applies</td></tr>
+    <tr><td>Time Plan/Policy</td><td>Time Policy</td><td>No</td><td>When pricing starts/stops within the plan</td><td>Cycle start, end of month, purchase date, etc.</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 23)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time price becomes available</td><td>Must be current or product won't show in cart</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time — PLE ignored after this</td><td>Enables scheduled price changes over time</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Price list entry status</td><td>Must be checked for price to appear in cart</td></tr>
+  </tbody>
+</table>
+
+
+      <h3>Adjustments vs Overrides vs Manual Changes</h3>
       <ul>
-        <li><strong>Price Lists &amp; PLEs</strong> — base prices for products</li>
-        <li><strong>Adjustments</strong> — % or amount off base price</li>
-        <li><strong>Overrides</strong> — replace base price entirely</li>
-        <li><strong>Promotions</strong> — time-limited discounts</li>
-        <li><strong>Pricing Plans</strong> — sequence of pricing steps at runtime</li>
-        <li><strong>Usage Pricing</strong> — charge based on consumption</li>
-        <li><strong>Loyalty Pricing</strong> — pay with loyalty points instead of currency</li>
+        <li><strong>Adjustment</strong> — % or amount off base price</li>
+        <li><strong>Override</strong> — replaces base price entirely</li>
+        <li><strong>Manual in cart</strong> — agent edits via Apply Discount flyout (<code>applyAdjustment</code> API)</li>
       </ul>
+      <p><strong>Pricing hooks:</strong> <code>CpqAppHandlerHook</code> and <code>PricingVariableCalculationHook</code> inject custom logic. Repricing APIs refresh prices when account context changes.</p>
+    </section>
+
+    <section id="cpq-cost-margin">
+      <h2>Cost &amp; Margin Setup (Full Walkthrough)</h2>
+      <p>Cost and margin lets agents see profit on each line item. Margins are calculated automatically once price and cost are configured.</p>
+      <div class="workflow">
+        <div class="workflow-step">Enable Feature</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Pricing Element for Cost</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Define Cost on Product</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">View in Cart</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">(Optional) Margin Ranges</div>
+      </div>
+
+      <h3>Step 1: Enable Cost and Margin</h3>
+      <ol>
+        <li>App Launcher → <strong>Vlocity CMT Administration Console</strong></li>
+        <li>Custom Settings → <strong>Enable Features</strong></li>
+        <li>Toggle <strong>Cost and Margin</strong> ON → Click <strong>Enable</strong></li>
+      </ol>
+      <div class="warning"><strong>Warning</strong> Do not disable after enabling — existing quotes/orders using costs become invalid.</div>
+      <p>After enable, cart view dropdown shows <strong>AdvancedPricing + CostMargin</strong> with new columns: Recurring Cost, One Time Cost, Recurring Margin, One Time Margin, and margin totals in the total bar.</p>
+
+      <h3>Step 2: Creating a Pricing Element for Costs</h3>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Product Console — Price List → Pricing Elements → Costs tab → New</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Name *</label><input value="Internet Recurring Cost" readonly></div>
+          <div class="form-row"><label>Code *</label><input value="INT_REC_COST" readonly></div>
+          <div class="form-row"><label>Display Text</label><input value="Monthly network cost" readonly></div>
+          <div class="form-row"><label>Help Text</label><input value="Internal cost — not shown to customer" readonly></div>
+          <div class="form-row"><label>Pricing Variable</label><input value="🔍 REC_MNTH_STD_CST (search & select)" readonly></div>
+          <div class="form-row"><label>Cost *</label><input value="40.00" readonly></div>
+          <div class="form-row"><label>Currency Code</label><input value="USD" readonly></div>
+          <div class="form-row"><label>Effective From *</label><input value="2026-01-01" readonly></div>
+          <div class="form-row"><label>Effective Until</label><input value="" readonly placeholder="Optional"></div>
+          <div class="form-row"><label>Active</label><input type="checkbox" checked disabled></div>
+        </div>
+      </div>
+
+<h4>Table 50 — Pricing Element for Costs: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Cost element name</td><td>Admin identification on Costs tab</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique cost code</td><td>System identifier</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Brief cost description</td><td>Admin-facing label</td></tr>
+    <tr><td>General Properties</td><td>Help Text</td><td>No</td><td>Tooltip/help for admins</td><td>Optional guidance text</td></tr>
+    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Currency Value</td></tr>
+    <tr><td>Pricing Variable</td><td>Pricing Variable</td><td class="req-yes">Yes</td><td>One-time or recurring cost variable (OT_STD_CST, REC_MNTH_STD_CST)</td><td>Search and select from results</td></tr>
+    <tr><td>Currency Value</td><td>Cost</td><td class="req-yes">Yes</td><td>Cost amount to apply</td><td>Company cost — not customer price</td></tr>
+    <tr><td>Currency Value</td><td>Currency Code</td><td>No</td><td>Default USD</td><td>Currency for cost value</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date cost becomes active</td><td>Cost ignored before this date</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>Optional end date</td><td>Cost not applied after this date</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Activate the cost element</td><td>Required for margin calculation</td></tr>
+  </tbody>
+</table>
+
+
+            <div class="step-block"><h4>Steps (doc procedure)</h4>
+        <ol>
+          <li>Product Console → search Price List → edit (pencil)</li>
+          <li><strong>Pricing Elements</strong> facet → <strong>Costs</strong> tab → <strong>New</strong></li>
+          <li>Search Pricing Variable → select cost variable (one-time or recurring)</li>
+          <li>Fill required fields per table above → <strong>Save</strong></li>
+        </ol>
+      </div>
+
+      <h3>Step 3: Defining Costs Using a Product or Price List</h3>
+      <div class="step-block"><h4>Steps (from CPQ documentation)</h4>
+        <ol>
+          <li>App Launcher → search <strong>Vlocity Product Console</strong></li>
+          <li>Search and edit the <strong>product</strong> (Pricing facet) or <strong>price list</strong> (Price List Entries facet)</li>
+          <li>Click the <strong>Costs</strong> tab (next to Charges)</li>
+          <li>Click <strong>New</strong> → fill required fields (Table 51 below) → optional Context Rules tab</li>
+          <li>Click <strong>Save</strong> — cost appears in Costs tab grid</li>
+        </ol>
+      </div>
+
+      <figure class="doc-screenshot">
+        <img src="assets/cpq/product-console-costs-4g-plan.png" alt="Vlocity Product Console 4G Data Plan Pricing Costs tab showing B2B and B2C cost entries">
+        <figcaption><strong>Product Console — 4G Data Plan → Pricing → COSTS tab.</strong> Example: B2B Price List uses One Time Std Cost at $20 USD (Active); B2C Price List uses One Time Cost at $10 USD (Inactive).</figcaption>
+      </figure>
+
+      <h4>Costs Tab — Grid Column Fields</h4>
+      <table class="data-table field-table-section">
+        <thead><tr><th>Column</th><th>Description</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td>Actions (✎ / 🗑)</td><td>Edit or delete the cost price list entry</td><td>Modify cost amount, effectivity, or remove assignment</td></tr>
+          <tr><td>Price List</td><td>Which price list this cost applies to</td><td>Same product can have different costs for B2B vs B2C segments</td></tr>
+          <tr><td>Display Text</td><td>Label shown for this cost entry</td><td>Admin-facing reason (e.g., "Cost for this plan")</td></tr>
+          <tr><td>Pricing Variable</td><td>Cost variable type (One Time Std Cost, Recurring, etc.)</td><td>Determines one-time vs recurring cost calculation path</td></tr>
+          <tr><td>Pricing Element</td><td>Linked element: Name, Code, Calculation Type, Charge amount</td><td>Must be created on price list first (Step 2); holds the $ value</td></tr>
+          <tr><td>Time Plan / Time Policy</td><td>When cost applies over time</td><td>Optional — for time-bound cost structures</td></tr>
+          <tr><td>Context Rules</td><td>Qualification rules for this cost</td><td>e.g., higher cost when selling in a specific region</td></tr>
+          <tr><td>Effectivity — Active</td><td>Yes/No — is cost evaluated at runtime?</td><td>Must be Yes for pricing service to use the cost</td></tr>
+          <tr><td>Effectivity — Start / End</td><td>Effective date range</td><td>Cost ignored outside this window</td></tr>
+        </tbody>
+      </table>
+
+      <figure class="doc-screenshot">
+        <img src="assets/cpq/table-51-cost-fields.png" alt="Table 51 Required and Optional Fields for defining costs on product or price list">
+        <figcaption><strong>Table 51 — Required and Optional Fields</strong> when creating a new cost on Product → Pricing → Costs (or Price List → Entries → Costs).</figcaption>
+      </figure>
+
+      <h4>Table 51 — Required Fields &amp; Descriptions (from CPQ PDF)</h4>
+      <table class="data-table field-table-section">
+        <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td class="section-header" colspan="5">General Properties</td></tr>
+          <tr><td>General Properties</td><td>Product or Price List</td><td class="req-yes">Yes</td><td>Search for the product or price list to apply the cost to</td><td>Links cost to catalog item — start from product or from price list</td></tr>
+          <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Enter the reason for applying a cost to the price list</td><td>Shown in Costs grid; documents why cost exists</td></tr>
+          <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>Not used in costs — leave unchecked</td><td>Base Price applies to customer charges only, not internal cost</td></tr>
+          <tr><td>General Properties</td><td>Virtual Price</td><td>No</td><td>Optional; not used in costs — leave unchecked</td><td>Ignored at runtime for cost entries</td></tr>
+          <tr><td class="section-header" colspan="5">Pricing Variable</td></tr>
+          <tr><td>Pricing Variable</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Search charge type — one-time cost or recurring cost</td><td>Maps to OT_STD_CST vs REC_MNTH_STD_CST variables</td></tr>
+          <tr><td>Pricing Variable</td><td>Sub-Type</td><td class="req-yes">Yes</td><td>Select <strong>standard cost</strong></td><td>Identifies row as standard company cost (not penalty fee)</td></tr>
+          <tr><td class="section-header" colspan="5">Pricing Element</td></tr>
+          <tr><td>Pricing Element</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>Select element defined on price list first (see Step 2: Creating a Pricing Element for Costs)</td><td>Provides the actual cost amount (e.g., $20 USD)</td></tr>
+          <tr><td class="section-header" colspan="5">Time Plan / Policy</td></tr>
+          <tr><td>Time Plan/Policy</td><td>Time Plan</td><td>No</td><td>Optionally specify a time plan for this cost</td><td>Duration window for cost applicability</td></tr>
+          <tr><td>Time Plan/Policy</td><td>Time Policy</td><td>No</td><td>Optionally specify a time policy for this cost</td><td>Start/stop rules within the time plan</td></tr>
+          <tr><td class="section-header" colspan="5">Effectivity</td></tr>
+          <tr><td>Effectivity</td><td>Effective From</td><td>No</td><td>Optionally specify the start date</td><td>Cost not evaluated before this date</td></tr>
+          <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>Optionally specify the end date</td><td>Cost not evaluated after this date</td></tr>
+          <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Mark costs as Active to be evaluated by the pricing service</td><td><strong>Required</strong> for margin calculation in cart</td></tr>
+        </tbody>
+      </table>
+      <p>After saving, click the <strong>Context Rules</strong> tab to add rule sets — e.g., apply a higher cost when the same product sells in New York vs San Francisco.</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">New Cost Entry — form fields (same as Table 51)</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Product *</label><input value="4G Data Plan" readonly></div>
+          <div class="form-row"><label>Display Text</label><input value="Cost for this plan" readonly></div>
+          <div class="form-row"><label>Base Price</label><input type="checkbox" disabled> <span style="font-size:0.8rem;color:var(--muted);">Leave unchecked</span></div>
+          <div class="form-row"><label>Virtual Price</label><input type="checkbox" disabled> <span style="font-size:0.8rem;color:var(--muted);">Leave unchecked</span></div>
+          <div class="form-row"><label>Charge Type *</label><select><option>One Time Std Cost</option></select></div>
+          <div class="form-row"><label>Sub-Type *</label><select><option>Standard Cost</option></select></div>
+          <div class="form-row"><label>Pricing Element *</label><input value="One Time Standard Cost — 20 USD" readonly></div>
+          <div class="form-row"><label>Effective From</label><input value="Apr 5, 2019" readonly></div>
+          <div class="form-row"><label>Active</label><input type="checkbox" checked disabled></div>
+        </div>
+      </div>
+
+      <h4>Quick Reference — Table 51 (condensed)</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Description &amp; Use</th></tr></thead>
+        <tbody>
+          <tr><td>Product or Price List</td><td>Link cost to a specific product (from Product → Pricing) or price list entry (from Price List → Entries → Costs)</td></tr>
+          <tr><td>Display Text</td><td>Reason/label for this cost on the price list entry</td></tr>
+          <tr><td>Base Price</td><td><strong>Not used</strong> for costs — leave unchecked</td></tr>
+          <tr><td>Virtual Price</td><td><strong>Ignored</strong> at runtime for costs</td></tr>
+          <tr><td>Charge Type (Pricing Variable)</td><td>Search charge type — choose <strong>One-Time</strong> or <strong>Recurring</strong> cost</td></tr>
+          <tr><td>Sub-Type</td><td>Select <strong>Standard Cost</strong></td></tr>
+          <tr><td>Pricing Element</td><td>Select the cost pricing element created in Step 2 (must exist on same price list first)</td></tr>
+          <tr><td>Time Plan / Time Policy</td><td>Optional — when cost applies over time</td></tr>
+          <tr><td>Effective From / Until</td><td>Effectivity window for this cost assignment</td></tr>
+          <tr><td>Active</td><td>Must be checked for pricing service to evaluate the cost</td></tr>
+          <tr><td>Context Rules tab</td><td>Optional — e.g., higher cost in New York vs San Francisco</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note"><strong>Important</strong> Adjustments and overrides do <em>not</em> apply to costs. You must create pricing elements for costs before assigning costs on products.</div>
+
+      <h3>Step 4: Margin Formulas (automatic in cart)</h3>
+      <table class="data-table">
+        <thead><tr><th>Metric</th><th>Formula</th></tr></thead>
+        <tbody>
+          <tr><td>One Time Margin (line)</td><td>((oneTimePriceTotal − oneTimeCostTotal) / oneTimeCostTotal) × 100 — 0 if cost is 0</td></tr>
+          <tr><td>Recurring Margin (line)</td><td>((recurringPriceTotal − recurringCostTotal) / recurringCostTotal) × 100</td></tr>
+          <tr><td>Order Margin Total (header)</td><td>((priceTotal − costTotal) / costTotal) × 100</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Step 5 (Optional): Define &amp; Validate Margin Ranges</h3>
+      <p>Prevent agents from selling below minimum margin. Uses calculation matrix + procedure + pricing plan step <strong>Load Margin Ranges</strong>.</p>
+      <ol>
+        <li><strong>DataRaptor (Extract)</strong> — extract Product Code, Id, Quantity from OrderItem/QuoteLineItem</li>
+        <li><strong>Calculation Matrix</strong> — input: Product Code, Qty; output columns (Percentage type):
+          <ul>
+            <li>One Time Margin Lower Bound / Upper Bound</li>
+            <li>Recurring Margin Lower Bound / Upper Bound</li>
+            <li>(If usage pricing) Usage Margin Lower/Upper Bound</li>
+          </ul>
+        </li>
+        <li><strong>Calculation Procedure</strong> — Matrix Lookup step → enable → highest priority</li>
+        <li><strong>Pricing Plan</strong> — edit Load Margin Ranges step; set one of:
+          <ul>
+            <li><code>OpportunityMarginRangeVCPName</code> = procedure name</li>
+            <li><code>QuoteMarginRangeVCPName</code> = procedure name</li>
+            <li><code>OrderMarginRangeVCPName</code> = procedure name</li>
+          </ul>
+        </li>
+        <li>Test in cart — violation shows error; submit blocked until resolved</li>
+      </ol>
+
+      <h3>Cost &amp; Margin Pricing Variables (OOTB)</h3>
+      <table class="data-table">
+        <thead><tr><th>Variable</th><th>Code</th><th>Binds To</th></tr></thead>
+        <tbody>
+          <tr><td>One Time Std Cost</td><td>OT_STD_CST</td><td>OrderItem, QuoteLineItem, Asset</td></tr>
+          <tr><td>One Time Std Cost Total</td><td>OT_STD_CST_TOTAL</td><td>Line item</td></tr>
+          <tr><td>Recurring Monthly Std Cost</td><td>REC_MNTH_STD_CST</td><td>Line item</td></tr>
+          <tr><td>Recurring Monthly Std Cost Total</td><td>REC_MNTH_STD_CST_TOTAL</td><td>Line item</td></tr>
+          <tr><td>One Time Margin</td><td>OT_MARGIN</td><td>Line item — calculated automatically</td></tr>
+          <tr><td>Recurring Monthly Margin</td><td>REC_MNTH_MARGIN</td><td>Line item</td></tr>
+          <tr><td>Parent Margin Total</td><td>PARENT_MARGIN_TOTAL</td><td>Opportunity, Quote, Order header</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Vlocity Cards for Cost &amp; Margin</h3>
+      <table class="data-table">
+        <thead><tr><th>Layout</th><th>Card</th><th>State</th><th>Fields Added</th></tr></thead>
+        <tbody>
+          <tr><td><code>cpq-product-cart</code></td><td><code>cpq-product-cart-item</code></td><td>CustomView_CPQAdvancedPricingCostandMargin</td><td>Recurring Cost, Recurring Cost Total, One Time Cost, One Time Cost Total, Recurring Margin, One Time Margin</td></tr>
+          <tr><td><code>cpq-total-bar</code></td><td><code>cpq-total-bar-card</code></td><td>Active Opportunity/Quote/Order</td><td>Recurring Margin Total, One Time Margin Total, Order Margin Total</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="cpq-promotions">
+      <h2>8. Promotions</h2>
+      <p>A <strong>promotion</strong> is a time-limited offer that bundles products and discounted pricing. Promotions differ from discounts — promotions are catalog offers; discounts are negotiated reductions tied to order, account, or contract.</p>
+      <h3>Key Concepts</h3>
+      <ul>
+        <li>Promotion must use the <strong>same price list</strong> as the cart or it won't appear</li>
+        <li><strong>Orderable promotions</strong> — can be added directly from Promotions list</li>
+        <li><strong>Follow-on promotion</strong> — starts after another promo's commitment ends; run <code>PromotionExpirationBatch</code></li>
+        <li><strong>Update Scope</strong> — Update Item Only vs Update Item and Child Items (for bundle promos)</li>
+      </ul>
+
+      <h3>Step-by-Step: Create a Promotion</h3>
+      <div class="step-block"><h4>Define Basic Promotion Settings</h4>
+        <ol>
+          <li>Product Console → Promotions → <strong>New</strong></li>
+          <li>Fill General Properties (see field table below)</li>
+          <li>Add products to promotion → set price changes (adjustment/override per product)</li>
+          <li>Activate promotion → add to cart from Promotions tab</li>
+        </ol>
+      </div>
+<h4>Table 63–66 — Promotion: Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties (Table 63)</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Promotion name</td><td>Shown in Promotions list in cart</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — all caps, no spaces</td><td>System identifier; used in APIs</td></tr>
+    <tr><td>General Properties</td><td>Description</td><td>No</td><td>Details shown with promo name (e.g., "20% off data plan for 6 months")</td><td>Helps agents understand offer</td></tr>
+    <tr><td>General Properties</td><td>Redeemable Code</td><td>No</td><td>Customer code to become eligible</td><td>eCommerce / self-service redemption</td></tr>
+    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list storing the promotion</td><td>Must match cart price list or promo won't appear</td></tr>
+    <tr><td class="section-header" colspan="5">Duration (Table 64)</td></tr>
+    <tr><td>Duration</td><td>Commitment Duration Time Plan</td><td>No</td><td>Time plan defining promo commitment duration</td><td>How long promo pricing applies</td></tr>
+    <tr><td>Duration</td><td>Commitment Duration Time Policy</td><td>No</td><td>When promo pricing starts and ends</td><td>Aligns with billing cycles</td></tr>
+    <tr><td class="section-header" colspan="5">Additional Properties (Table 65)</td></tr>
+    <tr><td>Additional Properties</td><td>Orderable</td><td class="req-yes">Yes*</td><td>Promotion appears in cart Promotions list</td><td>*Required to sell promo from cart sidebar</td></tr>
+    <tr><td>Additional Properties</td><td>Service Continuation</td><td>No</td><td>Not Applicable / Manual Opt-In / Manual Opt-Out after commitment ends</td><td>Controls post-promo subscription behavior</td></tr>
+    <tr><td>Additional Properties</td><td>Follow-on Promotion</td><td>No</td><td>Next promo starting when commitment ends</td><td>Requires <code>PromotionExpirationBatch</code></td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 66)</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion available for use</td><td>Unchecked promos hidden from Qualified tab</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Start date/time — must be current</td><td>Promo not sellable before this date</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time</td><td>Promo expires after this date</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 67–70 — Promotion Product: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties (Table 67)</td></tr>
+    <tr><td>General Properties</td><td>Action Type</td><td class="req-yes">Yes</td><td>Add / Update / Add-Update — how promo affects cart or assets</td><td>Add=new cart; Update=change order assets</td></tr>
+    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes</td><td>Product or bundle included in promotion</td><td>Must be from same price list as promo</td></tr>
+    <tr><td>General Properties</td><td>Update Scope</td><td class="req-yes">Yes</td><td>Update Item Only vs Update Item and Child Items</td><td>Controls whether bundle children get promo price</td></tr>
+    <tr><td class="section-header" colspan="5">Selection Criteria (Table 68)</td></tr>
+    <tr><td>Selection Criteria</td><td>Parent Offer Product</td><td>No</td><td>Action attempted inside this root offer</td><td>Scoped bundle promos</td></tr>
+    <tr><td>Selection Criteria</td><td>Selection Context Product</td><td>No</td><td>Action attempted inside this selection product</td><td>Nested bundle targeting</td></tr>
+    <tr><td>Selection Criteria</td><td>Selection Context Rule</td><td>No</td><td>Rule qualifying the selection product</td><td>Conditional promo application</td></tr>
+    <tr><td class="section-header" colspan="5">Cardinality (Table 69)</td></tr>
+    <tr><td>Cardinality</td><td>Minimum Quantity</td><td>No</td><td>Minimum units customer must purchase</td><td>Enforced when promo added to cart</td></tr>
+    <tr><td>Cardinality</td><td>Quantity</td><td>No</td><td>Default quantity added</td><td>Pre-filled qty when promo applied</td></tr>
+    <tr><td>Cardinality</td><td>Maximum Quantity</td><td>No</td><td>Maximum units — cannot exceed bundle max</td><td>Prevents over-selling promo products</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 70)</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion product available</td><td>Inactive products skipped at runtime</td></tr>
+    <tr><td>Effectivity</td><td>Effective From / Until</td><td>No</td><td>Date range for this promo product</td><td>Can differ from parent promo dates</td></tr>
+  </tbody>
+</table>
+
+
+            </table>
+
+      <h3>Working with Promotions in Cart</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>What Happens</th></tr></thead>
+        <tbody>
+          <tr><td>Add promotion</td><td>Products in promo added to cart (if missing); prices updated with strikethrough old price</td></tr>
+          <tr><td>Qualified tab</td><td>Promos customer can buy now (context rules passed)</td></tr>
+          <tr><td>Disqualified tab</td><td>Promos not eligible — may become eligible if account changes</td></tr>
+          <tr><td>Delete promotion</td><td>Deep delete (default) removes promo + products; shallow delete removes promo only</td></tr>
+          <tr><td>Cancel promotion</td><td>On change order — cancel active promo on assets; penalty rules may apply</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>API:</strong> <code>addPromo</code> / POST <code>.../carts/{id}/promotions</code> adds a promotion programmatically.</div>
+    </section>
+
+    <section id="cpq-discounts">
+      <h2>9. Discounts</h2>
+      <p>A <strong>discount</strong> is a negotiated price reduction on products, catalogs, or the whole cart. Discounts go through: <strong>Create → Negotiate → Approve → Activate → Apply</strong>.</p>
+      <h3>Three Discount Types</h3>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Who Creates</th><th>When Applied</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Order-Based</strong></td><td>CSR in cart (one-time)</td><td>Current order/quote only</td><td>10% courtesy discount today</td></tr>
+          <tr><td><strong>Account-Based</strong></td><td>Product admin</td><td>All future orders on account until expiry</td><td>15% off internet for ABC Corp employees</td></tr>
+          <tr><td><strong>Contract-Based</strong></td><td>Product admin / frame agreement</td><td>Orders under that contract</td><td>5% off accessories in frame deal</td></tr>
+        </tbody>
+      </table>
+      <h3>Discount Lifecycle</h3>
+      <div class="ui-mock">
+        <div class="ui-mock-header">Product Console — Discount → New</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Name *</label><input value="ABC Corp 10% Internet" readonly></div>
+          <div class="form-row"><label>Code *</label><input value="ABC_INT_10" readonly></div>
+          <div class="form-row"><label>Discount Type *</label><select><option>Order</option><option>Account</option><option>Contract</option></select></div>
+          <div class="form-row"><label>Price List *</label><input value="Enterprise PL" readonly></div>
+          <div class="form-row"><label>Discount Duration</label><input value="12 months" readonly></div>
+          <div class="form-row"><label>Applies to All Items in Cart</label><input type="checkbox" disabled></div>
+          <div class="form-row"><label>Active</label><input type="checkbox" checked disabled></div>
+        </div>
+      </div>
+<h4>Table 78–79 — New Discount: Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Required Fields (Table 78)</td></tr>
+    <tr><td>Required</td><td>Name</td><td class="req-yes">Yes</td><td>Discount name</td><td>Shown in Product Console and cart</td></tr>
+    <tr><td>Required</td><td>Code</td><td class="req-yes">Yes</td><td>Unique discount code</td><td>Used by pricing plan step Apply Context Discounts</td></tr>
+    <tr><td>Required</td><td>Discount Type</td><td class="req-yes">Yes</td><td>Order / Account / Contract</td><td>Order=one cart; Account=all future orders; Contract=frame deal</td></tr>
+    <tr><td>Required</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list scope for discount items</td><td>Products must exist on this list</td></tr>
+    <tr><td class="section-header" colspan="5">Optional Fields (Table 79)</td></tr>
+    <tr><td>Optional</td><td>Description</td><td>No</td><td>Brief discount description</td><td>Admin documentation</td></tr>
+    <tr><td>Optional</td><td>Discount Duration</td><td>No</td><td>Months discount applies</td><td>Expires after duration unless end date set</td></tr>
+    <tr><td>Optional</td><td>Applies to All Items in Cart</td><td>No</td><td>Discount applies to entire cart — ignores discount items</td><td>Disables Discount Items facet when checked</td></tr>
+    <tr><td>Optional</td><td>Active</td><td class="req-yes">Yes*</td><td>Activate the discount</td><td>*Required for discount to take effect on submit</td></tr>
+    <tr><td>Optional</td><td>Effective From / Until</td><td>No</td><td>Effectivity window</td><td>Controls visibility in cart selectables list</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 80–82 — Discount Items &amp; Pricing</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Discount Items — General Properties (Table 80)</td></tr>
+    <tr><td>Discount Items</td><td>Types</td><td class="req-yes">Yes</td><td>Product or Catalog/Category to discount</td><td>Catalog = group of products</td></tr>
+    <tr><td>Discount Items</td><td>Product or Catalog/Category</td><td class="req-yes">Yes</td><td>Specific item receiving the discount</td><td>Product must be on price list first</td></tr>
+    <tr><td>Discount Items</td><td>Active</td><td class="req-yes">Yes</td><td>Discount item is active</td><td>Inactive items ignored at runtime</td></tr>
+    <tr><td>Discount Items</td><td>Effective From / Until</td><td>No</td><td>Item effectivity — end date overrides duration</td><td>Fine-grained discount scheduling</td></tr>
+    <tr><td class="section-header" colspan="5">Discount Pricing — Price List Entry (Table 81)</td></tr>
+    <tr><td>Discount Pricing</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list for discount adjustment</td><td>Same list as discounted products</td></tr>
+    <tr><td>Discount Pricing</td><td>Display Text</td><td>No</td><td>Description of the discount adjustment</td><td>Shown in Price Details flyout</td></tr>
+    <tr><td>Discount Pricing</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Select <strong>Adjustment</strong></td><td>Filters pricing variables</td></tr>
+    <tr><td>Discount Pricing</td><td>Sub-Type</td><td class="req-yes">Yes</td><td>Select <strong>Standard</strong></td><td>Standard adjustment (not penalty fee)</td></tr>
+    <tr><td>Discount Pricing</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>One-time or recurring adjustment/percentage element</td><td>Adjustment Value must not be empty</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 82)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From / Until / Active</td><td>Active=Yes</td><td>Start/end dates and active flag for discount pricing</td><td>Inactive pricing = discount not applied in cart</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 83–84 — Custom Discount in Cart</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Required (Table 83)</td></tr>
+    <tr><td>Definition</td><td>Name</td><td class="req-yes">Yes</td><td>Custom discount name</td><td>Created by agent in cart</td></tr>
+    <tr><td>Definition</td><td>Applicable Allocation</td><td class="req-yes">Yes</td><td>Order-based, Account-based, or Contract-based</td><td>Determines persistence after submit</td></tr>
+    <tr><td class="section-header" colspan="5">Optional (Table 84)</td></tr>
+    <tr><td>Definition</td><td>Description</td><td>No</td><td>Brief description</td><td>Agent notes</td></tr>
+    <tr><td>Discount Amount</td><td>One Time / Recurring Charges</td><td>No</td><td>Percentage or absolute discount amount</td><td>Applied via pricing at runtime</td></tr>
+    <tr><td>Applicable</td><td>Active Period</td><td>No</td><td>Duration in months only</td><td>How long account/contract discount lasts</td></tr>
+    <tr><td>Applicable</td><td>End Date</td><td>No</td><td>Custom discount end date</td><td>Overrides active period if set</td></tr>
+    <tr><td>Criteria</td><td>Matching criteria / All items in cart</td><td>No</td><td>Specific category+product or entire cart</td><td>Scope of custom discount</td></tr>
+  </tbody>
+</table>
+
+
+            <ol>
+        <li><strong>Define</strong> — Product Console → Discount (+ icon): fields above</li>
+        <li><strong>Discount Items</strong> — link products/categories and adjustment (% or absolute)</li>
+        <li><strong>Approve</strong> — enable approval workflow; submit for approval when threshold exceeded</li>
+        <li><strong>Activate</strong> — discount takes effect on submit</li>
+        <li><strong>Apply in cart</strong> — pricing plan step uses <code>PricingPlanService</code></li>
+      </ol>
+      <h3>Cart Behavior Scenarios</h3>
+      <table class="data-table">
+        <thead><tr><th>Scenario</th><th>Checkout</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>No products, no discounts</td><td>Disabled</td><td>Must add at least one product or discount</td></tr>
+          <tr><td>Account discount only, no products</td><td>Disabled until Submit</td><td>Creates account discount record on submit</td></tr>
+          <tr><td>Contract discount, contract not active</td><td>Disabled until Activated</td><td>Frame agreement may be created</td></tr>
+          <tr><td>Products + multiple discounts</td><td>Enabled</td><td>Contract discounts copied to contract on submit</td></tr>
+        </tbody>
+      </table>
+      <p>Agents can also create <strong>custom discounts</strong> directly in Vlocity Cart and edit discounts already in the cart.</p>
+    </section>
+
+    <section id="cpq-flow-mgmt">
+      <h2>10. Flow Management</h2>
+      <p><strong>Flows</strong> define the sequential processing of rules, logic, and custom Apex at runtime. Vlocity extends Salesforce Flows with sequencing for orders, quotes, and pricing.</p>
+      <div class="tip"><strong>Sample pricing flow steps:</strong> Preselect filter → Select product → Check compatibility → Price order → Submit order → Update status → Asset delta</div>
+      <h3>Enabling a Flow</h3>
+      <ol>
+        <li>Setup → Quick Find: <strong>Flows</strong></li>
+        <li>Click the flow name (e.g., <strong>Pricing Rules Flow</strong>)</li>
+        <li>In Flow Versions, click <strong>Activate</strong> on the version to use</li>
+      </ol>
+      <p>Only <strong>one version</strong> can be active at a time. Deactivate the current version before activating another.</p>
+      <h3>Adding a Rule to Pricing Rules Flow</h3>
+      <ol>
+        <li>Setup → Flows → open <strong>Pricing Rules Flow</strong> (deactivate active version first if needed; save as new version)</li>
+        <li>Drag <code>vlocity_cmt__RuleAction</code> from Apex palette into the flow</li>
+        <li>Set inputs: <code>ruleType</code> = Pricing, <code>ruleName</code> = exact rule name, <code>doCommit</code> = {!GlobalConstant.True}</li>
+        <li>Connect the step under the <strong>Is Order</strong> branch as the last step</li>
+        <li>Save and activate</li>
+      </ol>
+      <p>Each rule action invokes one rule by name and type. The <code>doCommit</code> flag marks the final rule action in the sequence.</p>
+    </section>
+
+    <section id="cpq-change-plans">
+      <h2>11. Change of Plans (Replace Offers)</h2>
+      <p><strong>Change of Plans</strong> lets customers migrate from one plan/offer to another without losing service identifiers (phone number, email, etc.). Also called <strong>Replace Offers</strong>.</p>
+      <h3>Why Use It?</h3>
+      <ul>
+        <li><strong>Service continuity</strong> — no interruption when upgrading/downgrading</li>
+        <li><strong>Same identifiers</strong> — MSISDN, email stay the same</li>
+        <li><strong>History &amp; traceability</strong> — view asset change history</li>
+        <li><strong>Change fees</strong> — auto-add fee products via rules when downgrading, etc.</li>
+      </ul>
+      <h3>Offer Migration Plan Setup</h3>
+      <ol>
+        <li>Product Designer / Console → <strong>Offer Migration Plan</strong> → New</li>
+        <li>Required: Name, Code, Account Scope, Product Family, Migration Method</li>
+        <li><strong>Any-to-Any</strong> — upgrade/downgrade between any offers (with optional exception mappings)</li>
+        <li><strong>Specific Offers</strong> — only mapped source → target pairs allowed</li>
+        <li>Add <strong>Offer Migration Component Mappings</strong>: Source Product → Target Product</li>
+      </ol>
+<h4>Table 91–93 — Offer Migration Plan: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Offer Migration Plan — Required (Table 91)</td></tr>
+    <tr><td>Plan</td><td>Name</td><td class="req-yes">Yes</td><td>Offer migration plan name</td><td>Admin identification</td></tr>
+    <tr><td>Plan</td><td>Code</td><td class="req-yes">Yes</td><td>Unique plan code</td><td>System reference</td></tr>
+    <tr><td>Plan</td><td>Account Scope</td><td class="req-yes">Yes</td><td>Account scope — currently Same Account only</td><td>Limits which accounts can use plan</td></tr>
+    <tr><td>Plan</td><td>Product Family</td><td class="req-yes">Yes</td><td>Product family (Internet, TV, Wireless, etc.)</td><td>Subset of Product2.ProductFamily</td></tr>
+    <tr><td>Plan</td><td>Migration Method</td><td class="req-yes">Yes</td><td>Any-to-Any or Specific Offers</td><td>Any=unrestricted; Specific=mapped pairs only</td></tr>
+    <tr><td class="section-header" colspan="5">Optional (Table 92)</td></tr>
+    <tr><td>Plan</td><td>Description / Business Reason</td><td>No</td><td>Plan description and business rationale</td><td>Documentation</td></tr>
+    <tr><td>Plan</td><td>Active / Effectivity Start / End</td><td>Active=Yes</td><td>Activate plan and set date range</td><td>Inactive plans block Replace in cart</td></tr>
+    <tr><td class="section-header" colspan="5">Component Mappings — Required (Table 93)</td></tr>
+    <tr><td>Mappings</td><td>Source Product</td><td class="req-yes">Yes</td><td>Original offer/plan being migrated from</td><td>Asset must match source for Replace</td></tr>
+    <tr><td>Mappings</td><td>Target Product</td><td class="req-yes">Yes</td><td>New offer/plan to migrate to</td><td>Shown in Replace picker when eligible</td></tr>
+    <tr><td>Mappings</td><td>Active</td><td class="req-yes">Yes</td><td>Mapping is active</td><td>Inactive mappings ignored at runtime</td></tr>
+  </tbody>
+</table>
+
+
+            <h3>Replacing Plans in Cart (Agent Steps)</h3>
+      <ol>
+        <li>Account → select root asset → <strong>Change to Order</strong> or <strong>Change to Quote</strong></li>
+        <li>Set future date if needed → Cart opens with Action = <strong>Existing</strong></li>
+        <li>In qualified products list → click <strong>Replace</strong> → pick new plan → <strong>Apply</strong></li>
+        <li>Old line: Action = Disconnect; new line: Action = Add</li>
+        <li>Optional: expand disconnected item → <strong>Compare</strong> old vs new recurring/one-time totals</li>
+        <li><strong>Create Order</strong> → old asset disconnected, new asset active (Sub-Action: Replace or Reassign)</li>
+      </ol>
+      <h3>Multiplay Transform (Merge / Split / Transform)</h3>
+      <p>For bundled offers (Triple Play, family mobile plans):</p>
+      <ol>
+        <li>Account → select assets → <strong>Change To Order</strong></li>
+        <li>Cart → <strong>Transform Multiplay Offers</strong></li>
+        <li>Per component choose: <strong>Keep</strong>, <strong>Replace</strong>, or <strong>Disconnect</strong></li>
+        <li>Set <strong>Group number</strong> — items in same group merge into one new bundle</li>
+        <li>CPQ runs eligibility rules, filters price list, finds matching multiplay bundles</li>
+      </ol>
+      <div class="note"><strong>ReplaceOffer API</strong> supports custom field copy via Field Settings (<code>COPFieldsToCopyDuringReplace</code>, <code>COPFieldsToCopyDuringCreatingAsset</code>).</div>
+    </section>
+
+    <section id="cpq-multisite">
+      <h2>12. Multi-Site Quote &amp; Order Capture</h2>
+      <p><strong>Multi-Site</strong> lets you quote/order the same product configuration for many locations (hotels, branches, service points) grouped together.</p>
+      <div class="tip"><strong>Example:</strong> ABC Hotels needs internet + cable at 200 locations in the Netherlands. Group locations, apply one config per group, validate/price/submit once.</div>
+      <h3>Two Structures</h3>
+      <table class="data-table">
+        <thead><tr><th>Structure</th><th>How It Works</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Single</strong></td><td>One master Quote/Order; groups map to line items</td></tr>
+          <tr><td><strong>Multiple</strong></td><td>Master Quote/Order with child Quotes/Orders per group member</td></tr>
+        </tbody>
+      </table>
+      <h3>Multi-Site Workflow</h3>
+      <ol>
+        <li><strong>Define objects</strong> — Premises → Account → Service Point (Fall '20+: also Subscriber, Service Account)</li>
+        <li><strong>Configure</strong> — OmniScript <code>MultiService/CPQConfiguration</code>: set <code>cartStrategy</code> to single, multiple, or select</li>
+        <li><strong>Enable bulk actions</strong> — CPQ Configuration Setting <code>EnableMultiSiteBulkAction</code> = true (Apply to Group, Validate/Price, Submit on groups page)</li>
+        <li><strong>Create Opportunity</strong> → <strong>Master Quote/Order</strong> → <strong>Groups</strong> (add service points/locations)</li>
+        <li><strong>Cart</strong> — configure products → Apply to Groups → Validate &amp; Price → Submit master</li>
+      </ol>
+      <h3>Key Setup Objects</h3>
+      <ul>
+        <li><strong>Premises</strong> — building/complex with address</li>
+        <li><strong>Service Point</strong> — service entry point at a Premises (phone, internet, TV)</li>
+        <li><strong>CPQ Group Member Type</strong> metadata — which objects can be grouped (activate Premises, Service Account, Subscriber tabs)</li>
+        <li><strong>Field Settings</strong> — columns shown on group page (e.g., StreetAddress, PostalCode)</li>
+      </ul>
+<h4>Table 95–97 — Multi-Site Setup: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Object</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Premises (Table 95)</td></tr>
+    <tr><td>Premises</td><td>Name</td><td class="req-yes">Yes</td><td>Service point / premises name</td><td>Identifies location in group page</td></tr>
+    <tr><td>Premises</td><td>Street Address</td><td class="req-yes">Yes</td><td>Street address</td><td>Location addressing</td></tr>
+    <tr><td>Premises</td><td>City / State / Postal Code</td><td class="req-yes">Yes</td><td>City, state, postal code</td><td>Full address for service delivery</td></tr>
+    <tr><td>Premises</td><td>Country / Premises Type / Status</td><td>No</td><td>Country, type (Duplex, Commercial), status (Connected, Vacant)</td><td>Extended location metadata</td></tr>
+    <tr><td class="section-header" colspan="5">Service Point (Table 96)</td></tr>
+    <tr><td>Service Point</td><td>Service Point Name</td><td class="req-yes">Yes</td><td>Name for the service point</td><td>Grouped on multi-site quote</td></tr>
+    <tr><td>Service Point</td><td>Premises</td><td class="req-yes">Yes</td><td>Premises this service applies to</td><td>Links service to physical location</td></tr>
+    <tr><td>Service Point</td><td>Service Type</td><td class="req-yes">Yes</td><td>Type of service (phone, internet, TV)</td><td>Filters eligible products per site</td></tr>
+    <tr><td>Service Point</td><td>Status / Activation Date</td><td>No</td><td>Connected/Vacant/Inactive; activation date</td><td>Lifecycle tracking</td></tr>
+    <tr><td class="section-header" colspan="5">Field Settings for Group Page (Table 97)</td></tr>
+    <tr><td>Field Settings</td><td>Name</td><td class="req-yes">Yes</td><td>Grouping object field display name</td><td>Column header on groups page</td></tr>
+    <tr><td>Field Settings</td><td>Feature</td><td class="req-yes">Yes</td><td>Enter <code>MultiServiceFields</code></td><td>Identifies multi-site column config</td></tr>
+    <tr><td>Field Settings</td><td>Field Name</td><td class="req-yes">Yes</td><td>API name (e.g., <code>vlocity_cmt__City__c</code> or relationship notation)</td><td>Data bound to column</td></tr>
+    <tr><td>Field Settings</td><td>Inclusion</td><td class="req-yes">Yes</td><td>When checked, field appears as table column</td><td>Controls visible group page columns</td></tr>
+  </tbody>
+</table>
+
+
+            <p>View results on Account → Orders related list. Add <strong>Quote/Order Product Rollups</strong> to see total qty and price per product across groups.</p>
+    </section>
+
+    <section id="cpq-inflight">
+      <h2>13. In-Flight Orders</h2>
+      <p>An <strong>in-flight order</strong> is submitted to Order Management but not yet fully fulfilled. CPQ supports amendments, supplemental orders, and cancellation before PONR.</p>
+      <table class="data-table">
+        <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Supplemental order</strong></td><td>Amendment to an in-flight order (Add/Change/Disconnect items)</td></tr>
+          <tr><td><strong>Follow-on order</strong></td><td>New order linked to original after fulfillment</td></tr>
+          <tr><td><strong>Freeze / Unfreeze</strong></td><td>Pause/resume fulfillment in OM while amending</td></tr>
+          <tr><td><strong>PONR</strong></td><td>Point of No Return — order cannot be changed after this</td></tr>
+        </tbody>
+      </table>
+      <h3>Order Statuses (CPQ)</h3>
+      <ul>
+        <li><strong>Ready To Submit</strong> — not yet sent to OM</li>
+        <li><strong>Amend Requested</strong> — freeze requested; supplemental order allowed</li>
+        <li><strong>Amended / Activated / Cancelled</strong> — fulfillment complete; assets created or canceled</li>
+      </ul>
+      <p>Use <strong>Amend In-Flight Orders</strong> UI to create supplemental orders. View amendment history and OM status notifications on the order record.</p>
+    </section>
+
+    <section id="cpq-future">
+      <h2>14. Future-Dated Orders &amp; Order Queuing</h2>
+      <p>Orders can be scheduled for a <strong>future effective date</strong>. CPQ queues them until the date arrives, then submits via batch.</p>
+      <ol>
+        <li>Create change order → specify date/time in <strong>Future Dated Orders</strong> dialog</li>
+        <li>Order stays queued until effective date</li>
+        <li>Schedule <strong>Submit-Batch Job</strong> for queued orders (runs pending submissions automatically)</li>
+      </ol>
+      <p>You can also <strong>cancel a submitted order</strong> before PONR or create a <strong>change order</strong> on active assets with a future request date.</p>
     </section>
 
     <section id="cpq-api-intro">
-      <h2>7. Cart-Based APIs</h2>
+      <h2>15. Cart-Based APIs</h2>
       <p>CPQ exposes <strong>Cart-Based APIs</strong> through the <code>CpqAppHandler</code> Apex class. Use them from OmniScripts, Lightning, mobile apps, or custom integrations.</p>
       <table class="data-table">
         <thead><tr><th>Property</th><th>Value</th></tr></thead>
@@ -1378,7 +3088,7 @@
     </section>
 
     <section id="cpq-api-core">
-      <h2>8. Core CPQ APIs &amp; Functions</h2>
+      <h2>16. Core CPQ APIs &amp; Functions</h2>
       <table class="data-table">
         <thead><tr><th>Remote Method</th><th>REST Endpoint</th><th>What It Does</th></tr></thead>
         <tbody>
@@ -1395,12 +3105,17 @@
           <tr><td><code>checkout</code></td><td>POST .../items/checkout</td><td>Submit order (create assets)</td></tr>
           <tr><td><code>cloneItems</code></td><td>POST .../items/clone</td><td>Clone a line item</td></tr>
           <tr><td><code>addPromo</code></td><td>POST .../promotions</td><td>Add promotion to cart</td></tr>
+          <tr><td><code>putItemAttributes</code></td><td>PUT .../items (attributes)</td><td>Modify line item attributes</td></tr>
+          <tr><td><code>getCartsPromotions</code></td><td>GET .../promotions</td><td>List promotions for cart</td></tr>
+          <tr><td><code>getPriceLists</code></td><td>GET price lists</td><td>Price list picklist in header</td></tr>
+          <tr><td><code>changePricelist</code></td><td>POST change pricelist</td><td>Switch cart price list</td></tr>
+          <tr><td><code>ReplaceOffer</code></td><td>Change of Plans API</td><td>Replace source offer with target offer</td></tr>
         </tbody>
       </table>
     </section>
 
     <section id="cpq-api-examples">
-      <h2>9. CPQ API Examples</h2>
+      <h2>17. CPQ API Examples</h2>
 
       <h3>Example 1: createCart — Create an Order</h3>
       <p>OmniScript Remote Action: Remote Class = <code>vlocity_cmt.CpqAppHandler</code>, Remote Method = <code>createCart</code></p>
@@ -1461,10 +3176,281 @@
     </section>
 
     <section id="cpq-hooks">
-      <h2>10. Hooks &amp; Order Management Integration</h2>
-      <p><strong>CpqAppHandlerHook</strong> — run custom Apex logic before/after CPQ API calls (e.g., custom pricing by zip code).</p>
-      <p><strong>Order Management Integration</strong> — CPQ sends Submit Order, Freeze, and Unfreeze requests to OM when orders are submitted.</p>
+      <h2>18. Hooks &amp; Order Management Integration</h2>
+      <h3>CPQ Hooks</h3>
+      <p><strong>CpqAppHandlerHook</strong> — run custom Apex before/after CPQ API calls (e.g., custom pricing by zip code).</p>
+      <p><strong>Pricing hooks</strong> — <code>PricingVariableCalculationHook</code> for custom variable math; card-level pre/post hooks via <code>CPQOverrideService</code>.</p>
       <div class="tip"><strong>After catalog/rule changes</strong> Run Clear Managed Platform Cache → Refresh Platform Cache so CPQ picks up changes.</div>
+
+      <h3>Order Management Integration Layer (Odin)</h3>
+      <p>CPQ sends orders to external OM systems and receives status notifications back.</p>
+      <table class="data-table">
+        <thead><tr><th>Direction</th><th>Mechanism</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>CPQ → OM</td><td>Submit Order, Freeze, Unfreeze requests</td><td>Order payload with line items, actions, promotions</td></tr>
+          <tr><td>OM → CPQ</td><td><code>OdinService.notify()</code> or REST POST <code>/odin/v1/notifications</code></td><td>Order Activated, OrderItem Rejected (PONR)</td></tr>
+        </tbody>
+      </table>
+      <h3>Notification Types</h3>
+      <ul>
+        <li><strong>Submit:</strong> Accepted, Provisionally Accepted, Rejected</li>
+        <li><strong>Order level:</strong> Accepted, Activated, In Progress, Queued, Rejected</li>
+        <li><strong>Order item level:</strong> Accepted, Activated, Assetized, In Progress, Rejected</li>
+      </ul>
+      <p><strong>DataRaptors:</strong> <code>OrderBackSync</code> and <code>OrderItemBackSync</code> map notification fields to Order/OrderItem records. Use <code>updateMethod: directfieldupdate</code> in the <code>fields.meta</code> block to skip DataRaptor for better performance.</p>
+      <div class="code-block"><span class="cmt">// Invoke OM notification from Apex</span>
+vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
+  new Map&lt;String, Object&gt; {
+    'orderId' => ordId,
+    'state' => 'Activated',
+    'fields' => new Map&lt;String, Object&gt; {
+      'vlocity_cmt__JeopardyStatus__c' => 'Green'
+    }
+  }
+});</div>
+      <p><strong>Odin hooks:</strong> Implement pre/post hooks on notification handlers (e.g., <code>OdinOIAssetizeHandlerHookImplementation</code>) for custom logic during assetization.</p>
+    </section>
+
+    <section id="cpq-fields-ref">
+      <h2>CPQ Required Fields — Master Reference</h2>
+      <p>Consolidated field tables from <strong>CME_CPQ_PDF-en.pdf</strong>. Each CPQ topic section also includes the relevant tables inline. Fields marked <span class="req-yes">Yes</span> are required (asterisk in Product Console).</p>
+      <nav class="fig-toc" style="margin:1rem 0;">
+        <a href="#cpq-pricing">Pricing &amp; PLE</a> ·
+        <a href="#cpq-cost-margin">Cost &amp; Margin</a> ·
+        <a href="#cpq-promotions">Promotions</a> ·
+        <a href="#cpq-discounts">Discounts</a> ·
+        <a href="#cpq-change-plans">Change of Plans</a> ·
+        <a href="#cpq-multisite">Multi-Site</a> ·
+        <a href="#cpq-macd">MACD / Assets</a>
+      </nav>
+<h4>Table 3 — Price List: General Properties</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Name</td><td class="req-yes">Yes</td><td>Price list name</td><td>Identifies the list in Product Console and cart header picklist</td></tr>
+    <tr><td>Code</td><td class="req-yes">Yes</td><td>Unique identifier — uppercase, no spaces (e.g., PL-B2B)</td><td>Referenced by integrations and pricing configuration</td></tr>
+    <tr><td>Description</td><td>No</td><td>Description of the price list (e.g., Commercial/Business)</td><td>Admin documentation only</td></tr>
+    <tr><td>Price Book</td><td class="req-yes">Yes</td><td>Salesforce price book linked to this price list</td><td>Multiple price lists can share one price book</td></tr>
+    <tr><td>Parent Price List</td><td>No</td><td>Parent list whose pricing this list inherits</td><td>Child lists inherit parent pricing; add exceptions in child</td></tr>
+    <tr><td>Sequence</td><td>No</td><td>Display order among price lists</td><td>Controls sort in picklists</td></tr>
+    <tr><td>Currency Code</td><td class="req-yes">Yes</td><td>Currency for all entries in this list</td><td>Must match pricing element currency</td></tr>
+    <tr><td>Loyalty Code</td><td>No</td><td>Loyalty indicator for points pricing (typically PTS)</td><td>Used with loyalty pricing variables</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 4 — Price List: Effectivity</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Is Active</td><td class="req-yes">Yes</td><td>When selected, the price list can be used in carts</td><td>Inactive lists are hidden from cart price list picklist</td></tr>
+    <tr><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time the price list becomes available</td><td>Must be current or list cannot be selected</td></tr>
+    <tr><td>Effective Until</td><td>No</td><td>Date/time the price list expires</td><td>After this date the list is no longer usable</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 5–7 — Pricing Element Charge: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Pricing Variable (search)</td></tr>
+    <tr><td>Pricing Variable</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Recurring or One-time charge type filter</td><td>Finds matching pricing variables</td></tr>
+    <tr><td>Pricing Variable</td><td>Frequency</td><td>Conditional</td><td>Daily, Weekly, Monthly, Yearly — shown for recurring</td><td>Matches recurring variable frequency</td></tr>
+    <tr><td>Pricing Variable</td><td>Type</td><td class="req-yes">Yes</td><td>Price (customer charge) or Cost (company cost)</td><td>Separates revenue vs cost elements</td></tr>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Payment type, amount, recurrence (e.g., $9.99 Monthly)</td><td>Admin identification in Pricing Elements facet</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — uppercase, no spaces or special chars</td><td>System identifier for the element</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Currency/loyalty amount shown in cart (e.g., $10)</td><td>Customer-facing price label</td></tr>
+    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>Do <strong>not</strong> select when creating a pricing element charge</td><td>Base Price is set on PLE, not on element</td></tr>
+    <tr><td class="section-header" colspan="5">Currency Value</td></tr>
+    <tr><td>Currency Value</td><td>Charge</td><td class="req-yes">Yes</td><td>Charge amount</td><td>Actual price or cost value</td></tr>
+    <tr><td>Currency Value</td><td>Currency Code</td><td class="req-yes">Yes</td><td>Charge currency</td><td>Must align with price list currency</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 8)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time element becomes available</td><td>Must be current to appear in PLE search</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time for element availability</td><td>Element ignored after this date</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Element status — must be selected</td><td>Inactive elements excluded from PLE creation</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 21–23 — Price List Entry (PLE): Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes*</td><td>Price list storing this entry (*shown when creating from product)</td><td>Links product price to a specific list</td></tr>
+    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes*</td><td>Product being priced (*shown when creating from price list)</td><td>Which catalog item gets this price</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td class="req-yes">Yes</td><td>Payment type and amount shown in Products list (e.g., $9.99 Monthly)</td><td>Customer sees this in cart product list</td></tr>
+    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>When checked, this is the default/list price</td><td>Default price before context rules and promos</td></tr>
+    <tr><td>General Properties</td><td>Virtual Price</td><td>No</td><td>Replaces parent bundle price with sum of child prices</td><td>Rare — used for virtual bundle pricing</td></tr>
+    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Element</td></tr>
+    <tr><td>Pricing Variable</td><td>Charge Type / Sub-Type</td><td class="req-yes">Yes</td><td>Search filters for one-time/recurring and standard/fee</td><td>Select variable then matching pricing element</td></tr>
+    <tr><td>Pricing Element</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>Element from same price list with charge amount</td><td>Combines with variable to form runtime price</td></tr>
+    <tr><td class="section-header" colspan="5">Time Plan/Policy (Table 22)</td></tr>
+    <tr><td>Time Plan/Policy</td><td>Time Plan</td><td>No</td><td>Duration of pricing (e.g., 24-month promo window)</td><td>Limits how long adjustment/price applies</td></tr>
+    <tr><td>Time Plan/Policy</td><td>Time Policy</td><td>No</td><td>When pricing starts/stops within the plan</td><td>Cycle start, end of month, purchase date, etc.</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 23)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time price becomes available</td><td>Must be current or product won't show in cart</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time — PLE ignored after this</td><td>Enables scheduled price changes over time</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Price list entry status</td><td>Must be checked for price to appear in cart</td></tr>
+  </tbody>
+</table>
+<h4>Table 50 — Pricing Element for Costs: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Cost element name</td><td>Admin identification on Costs tab</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique cost code</td><td>System identifier</td></tr>
+    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Brief cost description</td><td>Admin-facing label</td></tr>
+    <tr><td>General Properties</td><td>Help Text</td><td>No</td><td>Tooltip/help for admins</td><td>Optional guidance text</td></tr>
+    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Currency Value</td></tr>
+    <tr><td>Pricing Variable</td><td>Pricing Variable</td><td class="req-yes">Yes</td><td>One-time or recurring cost variable (OT_STD_CST, REC_MNTH_STD_CST)</td><td>Search and select from results</td></tr>
+    <tr><td>Currency Value</td><td>Cost</td><td class="req-yes">Yes</td><td>Cost amount to apply</td><td>Company cost — not customer price</td></tr>
+    <tr><td>Currency Value</td><td>Currency Code</td><td>No</td><td>Default USD</td><td>Currency for cost value</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date cost becomes active</td><td>Cost ignored before this date</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>Optional end date</td><td>Cost not applied after this date</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Activate the cost element</td><td>Required for margin calculation</td></tr>
+  </tbody>
+</table>
+<h4>Table 63–66 — Promotion: Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties (Table 63)</td></tr>
+    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Promotion name</td><td>Shown in Promotions list in cart</td></tr>
+    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — all caps, no spaces</td><td>System identifier; used in APIs</td></tr>
+    <tr><td>General Properties</td><td>Description</td><td>No</td><td>Details shown with promo name (e.g., "20% off data plan for 6 months")</td><td>Helps agents understand offer</td></tr>
+    <tr><td>General Properties</td><td>Redeemable Code</td><td>No</td><td>Customer code to become eligible</td><td>eCommerce / self-service redemption</td></tr>
+    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list storing the promotion</td><td>Must match cart price list or promo won't appear</td></tr>
+    <tr><td class="section-header" colspan="5">Duration (Table 64)</td></tr>
+    <tr><td>Duration</td><td>Commitment Duration Time Plan</td><td>No</td><td>Time plan defining promo commitment duration</td><td>How long promo pricing applies</td></tr>
+    <tr><td>Duration</td><td>Commitment Duration Time Policy</td><td>No</td><td>When promo pricing starts and ends</td><td>Aligns with billing cycles</td></tr>
+    <tr><td class="section-header" colspan="5">Additional Properties (Table 65)</td></tr>
+    <tr><td>Additional Properties</td><td>Orderable</td><td class="req-yes">Yes*</td><td>Promotion appears in cart Promotions list</td><td>*Required to sell promo from cart sidebar</td></tr>
+    <tr><td>Additional Properties</td><td>Service Continuation</td><td>No</td><td>Not Applicable / Manual Opt-In / Manual Opt-Out after commitment ends</td><td>Controls post-promo subscription behavior</td></tr>
+    <tr><td>Additional Properties</td><td>Follow-on Promotion</td><td>No</td><td>Next promo starting when commitment ends</td><td>Requires <code>PromotionExpirationBatch</code></td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 66)</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion available for use</td><td>Unchecked promos hidden from Qualified tab</td></tr>
+    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Start date/time — must be current</td><td>Promo not sellable before this date</td></tr>
+    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time</td><td>Promo expires after this date</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 67–70 — Promotion Product: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">General Properties (Table 67)</td></tr>
+    <tr><td>General Properties</td><td>Action Type</td><td class="req-yes">Yes</td><td>Add / Update / Add-Update — how promo affects cart or assets</td><td>Add=new cart; Update=change order assets</td></tr>
+    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes</td><td>Product or bundle included in promotion</td><td>Must be from same price list as promo</td></tr>
+    <tr><td>General Properties</td><td>Update Scope</td><td class="req-yes">Yes</td><td>Update Item Only vs Update Item and Child Items</td><td>Controls whether bundle children get promo price</td></tr>
+    <tr><td class="section-header" colspan="5">Selection Criteria (Table 68)</td></tr>
+    <tr><td>Selection Criteria</td><td>Parent Offer Product</td><td>No</td><td>Action attempted inside this root offer</td><td>Scoped bundle promos</td></tr>
+    <tr><td>Selection Criteria</td><td>Selection Context Product</td><td>No</td><td>Action attempted inside this selection product</td><td>Nested bundle targeting</td></tr>
+    <tr><td>Selection Criteria</td><td>Selection Context Rule</td><td>No</td><td>Rule qualifying the selection product</td><td>Conditional promo application</td></tr>
+    <tr><td class="section-header" colspan="5">Cardinality (Table 69)</td></tr>
+    <tr><td>Cardinality</td><td>Minimum Quantity</td><td>No</td><td>Minimum units customer must purchase</td><td>Enforced when promo added to cart</td></tr>
+    <tr><td>Cardinality</td><td>Quantity</td><td>No</td><td>Default quantity added</td><td>Pre-filled qty when promo applied</td></tr>
+    <tr><td>Cardinality</td><td>Maximum Quantity</td><td>No</td><td>Maximum units — cannot exceed bundle max</td><td>Prevents over-selling promo products</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 70)</td></tr>
+    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion product available</td><td>Inactive products skipped at runtime</td></tr>
+    <tr><td>Effectivity</td><td>Effective From / Until</td><td>No</td><td>Date range for this promo product</td><td>Can differ from parent promo dates</td></tr>
+  </tbody>
+</table>
+<h4>Table 78–79 — New Discount: Required &amp; Optional Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Required Fields (Table 78)</td></tr>
+    <tr><td>Required</td><td>Name</td><td class="req-yes">Yes</td><td>Discount name</td><td>Shown in Product Console and cart</td></tr>
+    <tr><td>Required</td><td>Code</td><td class="req-yes">Yes</td><td>Unique discount code</td><td>Used by pricing plan step Apply Context Discounts</td></tr>
+    <tr><td>Required</td><td>Discount Type</td><td class="req-yes">Yes</td><td>Order / Account / Contract</td><td>Order=one cart; Account=all future orders; Contract=frame deal</td></tr>
+    <tr><td>Required</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list scope for discount items</td><td>Products must exist on this list</td></tr>
+    <tr><td class="section-header" colspan="5">Optional Fields (Table 79)</td></tr>
+    <tr><td>Optional</td><td>Description</td><td>No</td><td>Brief discount description</td><td>Admin documentation</td></tr>
+    <tr><td>Optional</td><td>Discount Duration</td><td>No</td><td>Months discount applies</td><td>Expires after duration unless end date set</td></tr>
+    <tr><td>Optional</td><td>Applies to All Items in Cart</td><td>No</td><td>Discount applies to entire cart — ignores discount items</td><td>Disables Discount Items facet when checked</td></tr>
+    <tr><td>Optional</td><td>Active</td><td class="req-yes">Yes*</td><td>Activate the discount</td><td>*Required for discount to take effect on submit</td></tr>
+    <tr><td>Optional</td><td>Effective From / Until</td><td>No</td><td>Effectivity window</td><td>Controls visibility in cart selectables list</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 80–82 — Discount Items &amp; Pricing</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Discount Items — General Properties (Table 80)</td></tr>
+    <tr><td>Discount Items</td><td>Types</td><td class="req-yes">Yes</td><td>Product or Catalog/Category to discount</td><td>Catalog = group of products</td></tr>
+    <tr><td>Discount Items</td><td>Product or Catalog/Category</td><td class="req-yes">Yes</td><td>Specific item receiving the discount</td><td>Product must be on price list first</td></tr>
+    <tr><td>Discount Items</td><td>Active</td><td class="req-yes">Yes</td><td>Discount item is active</td><td>Inactive items ignored at runtime</td></tr>
+    <tr><td>Discount Items</td><td>Effective From / Until</td><td>No</td><td>Item effectivity — end date overrides duration</td><td>Fine-grained discount scheduling</td></tr>
+    <tr><td class="section-header" colspan="5">Discount Pricing — Price List Entry (Table 81)</td></tr>
+    <tr><td>Discount Pricing</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list for discount adjustment</td><td>Same list as discounted products</td></tr>
+    <tr><td>Discount Pricing</td><td>Display Text</td><td>No</td><td>Description of the discount adjustment</td><td>Shown in Price Details flyout</td></tr>
+    <tr><td>Discount Pricing</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Select <strong>Adjustment</strong></td><td>Filters pricing variables</td></tr>
+    <tr><td>Discount Pricing</td><td>Sub-Type</td><td class="req-yes">Yes</td><td>Select <strong>Standard</strong></td><td>Standard adjustment (not penalty fee)</td></tr>
+    <tr><td>Discount Pricing</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>One-time or recurring adjustment/percentage element</td><td>Adjustment Value must not be empty</td></tr>
+    <tr><td class="section-header" colspan="5">Effectivity (Table 82)</td></tr>
+    <tr><td>Effectivity</td><td>Effective From / Until / Active</td><td>Active=Yes</td><td>Start/end dates and active flag for discount pricing</td><td>Inactive pricing = discount not applied in cart</td></tr>
+  </tbody>
+</table>
+
+<h4>Table 83–84 — Custom Discount in Cart</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Required (Table 83)</td></tr>
+    <tr><td>Definition</td><td>Name</td><td class="req-yes">Yes</td><td>Custom discount name</td><td>Created by agent in cart</td></tr>
+    <tr><td>Definition</td><td>Applicable Allocation</td><td class="req-yes">Yes</td><td>Order-based, Account-based, or Contract-based</td><td>Determines persistence after submit</td></tr>
+    <tr><td class="section-header" colspan="5">Optional (Table 84)</td></tr>
+    <tr><td>Definition</td><td>Description</td><td>No</td><td>Brief description</td><td>Agent notes</td></tr>
+    <tr><td>Discount Amount</td><td>One Time / Recurring Charges</td><td>No</td><td>Percentage or absolute discount amount</td><td>Applied via pricing at runtime</td></tr>
+    <tr><td>Applicable</td><td>Active Period</td><td>No</td><td>Duration in months only</td><td>How long account/contract discount lasts</td></tr>
+    <tr><td>Applicable</td><td>End Date</td><td>No</td><td>Custom discount end date</td><td>Overrides active period if set</td></tr>
+    <tr><td>Criteria</td><td>Matching criteria / All items in cart</td><td>No</td><td>Specific category+product or entire cart</td><td>Scope of custom discount</td></tr>
+  </tbody>
+</table>
+<h4>Table 91–93 — Offer Migration Plan: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Offer Migration Plan — Required (Table 91)</td></tr>
+    <tr><td>Plan</td><td>Name</td><td class="req-yes">Yes</td><td>Offer migration plan name</td><td>Admin identification</td></tr>
+    <tr><td>Plan</td><td>Code</td><td class="req-yes">Yes</td><td>Unique plan code</td><td>System reference</td></tr>
+    <tr><td>Plan</td><td>Account Scope</td><td class="req-yes">Yes</td><td>Account scope — currently Same Account only</td><td>Limits which accounts can use plan</td></tr>
+    <tr><td>Plan</td><td>Product Family</td><td class="req-yes">Yes</td><td>Product family (Internet, TV, Wireless, etc.)</td><td>Subset of Product2.ProductFamily</td></tr>
+    <tr><td>Plan</td><td>Migration Method</td><td class="req-yes">Yes</td><td>Any-to-Any or Specific Offers</td><td>Any=unrestricted; Specific=mapped pairs only</td></tr>
+    <tr><td class="section-header" colspan="5">Optional (Table 92)</td></tr>
+    <tr><td>Plan</td><td>Description / Business Reason</td><td>No</td><td>Plan description and business rationale</td><td>Documentation</td></tr>
+    <tr><td>Plan</td><td>Active / Effectivity Start / End</td><td>Active=Yes</td><td>Activate plan and set date range</td><td>Inactive plans block Replace in cart</td></tr>
+    <tr><td class="section-header" colspan="5">Component Mappings — Required (Table 93)</td></tr>
+    <tr><td>Mappings</td><td>Source Product</td><td class="req-yes">Yes</td><td>Original offer/plan being migrated from</td><td>Asset must match source for Replace</td></tr>
+    <tr><td>Mappings</td><td>Target Product</td><td class="req-yes">Yes</td><td>New offer/plan to migrate to</td><td>Shown in Replace picker when eligible</td></tr>
+    <tr><td>Mappings</td><td>Active</td><td class="req-yes">Yes</td><td>Mapping is active</td><td>Inactive mappings ignored at runtime</td></tr>
+  </tbody>
+</table>
+<h4>Table 95–97 — Multi-Site Setup: Required Fields</h4>
+<table class="data-table field-table-section">
+  <thead><tr><th>Object</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td class="section-header" colspan="5">Premises (Table 95)</td></tr>
+    <tr><td>Premises</td><td>Name</td><td class="req-yes">Yes</td><td>Service point / premises name</td><td>Identifies location in group page</td></tr>
+    <tr><td>Premises</td><td>Street Address</td><td class="req-yes">Yes</td><td>Street address</td><td>Location addressing</td></tr>
+    <tr><td>Premises</td><td>City / State / Postal Code</td><td class="req-yes">Yes</td><td>City, state, postal code</td><td>Full address for service delivery</td></tr>
+    <tr><td>Premises</td><td>Country / Premises Type / Status</td><td>No</td><td>Country, type (Duplex, Commercial), status (Connected, Vacant)</td><td>Extended location metadata</td></tr>
+    <tr><td class="section-header" colspan="5">Service Point (Table 96)</td></tr>
+    <tr><td>Service Point</td><td>Service Point Name</td><td class="req-yes">Yes</td><td>Name for the service point</td><td>Grouped on multi-site quote</td></tr>
+    <tr><td>Service Point</td><td>Premises</td><td class="req-yes">Yes</td><td>Premises this service applies to</td><td>Links service to physical location</td></tr>
+    <tr><td>Service Point</td><td>Service Type</td><td class="req-yes">Yes</td><td>Type of service (phone, internet, TV)</td><td>Filters eligible products per site</td></tr>
+    <tr><td>Service Point</td><td>Status / Activation Date</td><td>No</td><td>Connected/Vacant/Inactive; activation date</td><td>Lifecycle tracking</td></tr>
+    <tr><td class="section-header" colspan="5">Field Settings for Group Page (Table 97)</td></tr>
+    <tr><td>Field Settings</td><td>Name</td><td class="req-yes">Yes</td><td>Grouping object field display name</td><td>Column header on groups page</td></tr>
+    <tr><td>Field Settings</td><td>Feature</td><td class="req-yes">Yes</td><td>Enter <code>MultiServiceFields</code></td><td>Identifies multi-site column config</td></tr>
+    <tr><td>Field Settings</td><td>Field Name</td><td class="req-yes">Yes</td><td>API name (e.g., <code>vlocity_cmt__City__c</code> or relationship notation)</td><td>Data bound to column</td></tr>
+    <tr><td>Field Settings</td><td>Inclusion</td><td class="req-yes">Yes</td><td>When checked, field appears as table column</td><td>Controls visible group page columns</td></tr>
+  </tbody>
+</table>
+
     </section>
 
     <section id="cpq-ref">
@@ -1476,8 +3462,20 @@
           <tr><td>cartId</td><td>Record Id of the cart object</td></tr>
           <tr><td>itemId</td><td>PricebookEntry Id (add) or OrderItem Id (update/delete)</td></tr>
           <tr><td>CpqAppHandler</td><td>Main Apex class for all Cart-Based APIs</td></tr>
+          <tr><td>HybridCPQ</td><td>Visualforce page hosting cards-based CPQ cart</td></tr>
           <tr><td>MACD</td><td>Move, Add, Change, Delete on existing assets</td></tr>
+          <tr><td>Change of Plans</td><td>Replace Offers — migrate customer from one plan to another</td></tr>
+          <tr><td>Multi-Site</td><td>Quote/order same config for many locations via groups</td></tr>
+          <tr><td>Flow / Pricing Rules Flow</td><td>Sequential rule execution at runtime</td></tr>
+          <tr><td>Order discount</td><td>One-time discount on current order</td></tr>
+          <tr><td>Account discount</td><td>Persistent discount on all future account orders</td></tr>
+          <tr><td>Contract discount</td><td>Discount tied to frame agreement / contract</td></tr>
+          <tr><td>Supplemental order</td><td>Amendment to an in-flight order</td></tr>
           <tr><td>PONR</td><td>Point of No Return — order cannot be changed after this</td></tr>
+          <tr><td>Odin</td><td>Order Management Integration Layer</td></tr>
+          <tr><td>PLE</td><td>Price List Entry — assigns price/cost to a product</td></tr>
+          <tr><td>OT_STD_CST</td><td>One-time standard cost pricing variable</td></tr>
+          <tr><td>Load Margin Ranges</td><td>Pricing plan step that validates margin bounds via calculation procedure</td></tr>
         </tbody>
       </table>
     </section>
