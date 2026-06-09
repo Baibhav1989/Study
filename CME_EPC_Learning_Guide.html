@@ -554,7 +554,11 @@
       text-decoration: none;
     }
     .fig-toc a:hover { text-decoration: underline; }
-    #cpq-figures h3 { margin-top: 2rem; scroll-margin-top: 80px; }
+    .main section .pdf-fig-grid { margin-top: 0.5rem; }
+    .main section h3 + .pdf-fig-grid,
+    .main section h4 + .pdf-fig-grid { margin-top: 0.75rem; }
+    .main section > h3:last-of-type,
+    .main section h3:has(+ .pdf-fig-grid) { margin-top: 2rem; scroll-margin-top: 80px; }
     .req-yes { color: #c23934; font-weight: 700; white-space: nowrap; }
     .req-no { color: var(--muted); }
     .field-ref-intro { margin: 1rem 0; padding: 0.75rem 1rem; background: #eef4ff; border-radius: 6px; border-left: 4px solid var(--primary); font-size: 0.92rem; }
@@ -1382,7 +1386,6 @@
     <a href="#cpq-flow">2. Order Capture Flow</a>
     <a href="#cpq-cart">3. Vlocity Cart</a>
     <a href="#cpq-cards">4. Vlocity Cards</a>
-    <a href="#cpq-figures">CPQ PDF Screens (94 Figs)</a>
     <a href="#cpq-macd">5. MACD &amp; Assets</a>
     <a href="#cpq-rules">6. Rules in CPQ</a>
     <a href="#cpq-pricing">7. CPQ Pricing &amp; PLE</a>
@@ -1398,7 +1401,6 @@
     <a href="#cpq-api-core">16. Core CPQ APIs</a>
     <a href="#cpq-api-examples">17. API Examples</a>
     <a href="#cpq-hooks">18. Hooks &amp; OM Integration</a>
-    <a href="#cpq-fields-ref">CPQ Required Fields</a>
     <a href="#cpq-ref">Quick Reference</a>
   </nav>
   <main class="main">
@@ -1422,6 +1424,7 @@
         <div class="workflow-step">Rules</div><span class="workflow-arrow">→</span>
         <div class="workflow-step">Priced Order</div>
       </div>
+
     </section>
 
     <section id="cpq-flow">
@@ -1441,6 +1444,19 @@
         <li><strong>Pricing</strong> — Calculate price via pricing plan steps</li>
         <li><strong>Taxes</strong> — Add taxes and save totals to the order</li>
       </ol>
+
+      <h3>PDF Screenshots — Order Capture &amp; Pricing Flow</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-001">
+                  <a href="assets/cpq/pdf-figures/page-0025.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0025.png" alt="Figure 1: Vlocity Order Pricing Flow"></a>
+                  <figcaption><strong>Figure 1.</strong> Vlocity Order Pricing Flow <span>(PDF page 25)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-002">
+                  <a href="assets/cpq/pdf-figures/page-0026.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0026.png" alt="Figure 2: Process Flow"></a>
+                  <figcaption><strong>Figure 2.</strong> Process Flow <span>(PDF page 26)</span></figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-cart">
@@ -1478,6 +1494,62 @@
         <li><strong>Cardinality</strong> — min/max quantity enforced per bundle child (e.g., max 2 TV products)</li>
       </ul>
       <div class="note"><strong>Promotions vs Products lists</strong> Above each list are <strong>Qualified</strong> and <strong>Disqualified</strong> tabs. Context rules decide what the customer can buy. A promotion must belong to the same price list as the order or it will not appear.</div>
+
+      <h3>PDF Screenshots — Vlocity Cart &amp; Cards</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-003">
+                  <a href="assets/cpq/pdf-figures/page-0057.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0057.png" alt="Figure 3: Vlocity Cart with Product List and Product Line Items"></a>
+                  <figcaption><strong>Figure 3.</strong> Vlocity Cart with Product List and Product Line Items <span>(PDF page 57)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-004">
+                  <a href="assets/cpq/pdf-figures/page-0058.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0058.png" alt="Figure 4: Vlocity Cart with Configuration Panel"></a>
+                  <figcaption><strong>Figure 4.</strong> Vlocity Cart with Configuration Panel <span>(PDF page 58)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-005">
+                  <a href="assets/cpq/pdf-figures/page-0059.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0059.png" alt="Figure 5: Vlocity Cart Basic View"></a>
+                  <figcaption><strong>Figure 5.</strong> Vlocity Cart Basic View <span>(PDF page 59)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-006">
+                  <a href="assets/cpq/pdf-figures/page-0060.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0060.png" alt="Figure 6: Vlocity Cart Promotion List and Tab"></a>
+                  <figcaption><strong>Figure 6.</strong> Vlocity Cart Promotion List and Tab <span>(PDF page 60)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-007">
+                  <a href="assets/cpq/pdf-figures/page-0061.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0061.png" alt="Figure 7: Product Details Dialog Box"></a>
+                  <figcaption><strong>Figure 7.</strong> Product Details Dialog Box <span>(PDF page 61)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-008">
+                  <a href="assets/cpq/pdf-figures/page-0062.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0062.png" alt="Figure 8: Line Item Details Dialog Box"></a>
+                  <figcaption><strong>Figure 8.</strong> Line Item Details Dialog Box <span>(PDF page 62)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-009">
+                  <a href="assets/cpq/pdf-figures/page-0063.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0063.png" alt="Figure 9: Cart Item Lookup Field Dialog Box"></a>
+                  <figcaption><strong>Figure 9.</strong> Cart Item Lookup Field Dialog Box <span>(PDF page 63)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-010">
+                  <a href="assets/cpq/pdf-figures/page-0064.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0064.png" alt="Figure 10: Vlocity Cart with Filterable Attributes List"></a>
+                  <figcaption><strong>Figure 10.</strong> Vlocity Cart with Filterable Attributes List <span>(PDF page 64)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-012">
+                  <a href="assets/cpq/pdf-figures/page-0151.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0151.png" alt="Figure 12: Payment Choice Dialog Box"></a>
+                  <figcaption><strong>Figure 12.</strong> Payment Choice Dialog Box <span>(PDF page 151)</span></figcaption>
+                </figure>
+      </div>
+      <h3>PDF Screenshots — Order/Quote Manager (Legacy)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-019">
+                  <a href="assets/cpq/pdf-figures/page-0259.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0259.png" alt="Figure 19: Example Summary Header"></a>
+                  <figcaption><strong>Figure 19.</strong> Example Summary Header <span>(PDF page 259)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-020">
+                  <a href="assets/cpq/pdf-figures/page-0268.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0268.png" alt="Figure 20: Configure Product, Simple Product"></a>
+                  <figcaption><strong>Figure 20.</strong> Configure Product, Simple Product <span>(PDF page 268)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-021">
+                  <a href="assets/cpq/pdf-figures/page-0269.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0269.png" alt="Figure 21: Configure Product, Product Bundle"></a>
+                  <figcaption><strong>Figure 21.</strong> Configure Product, Product Bundle <span>(PDF page 269)</span></figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-cards">
@@ -1560,753 +1632,15 @@
 
       <h3>Customizing Cards</h3>
       <p>Edit cards in the <strong>Vlocity Cards</strong> tab (Setup or App Launcher). Override JavaScript via <code>CPQOverrideService</code> and pre/post hooks on controllers like <code>CPQCartItemController</code> (<code>beforeAddToCartHook</code>, <code>afterDeleteItemFromCartHook</code>, etc.).</p>
-    </section>
 
-    <section id="cpq-figures">
-      <h2>CPQ UI Figures &amp; PDF Screenshots</h2>
-      <p>All <strong>94 numbered figures</strong> and additional procedure screens extracted from <strong>CME_CPQ_PDF-en.pdf</strong> (1,015 pages). Click any image to open full size.</p>
-      <ul>
-        <li><strong>Numbered figures</strong> — official diagrams and UI screenshots (Figure 1–94)</li>
-        <li><strong>Procedure screens</strong> — Product Console, cost/margin, promotions, discounts, flow, change of plans, multi-site, OM setup pages</li>
-        <li><strong>Field tables</strong> — see topic sections (Cost &amp; Margin, MACD, etc.) for field Description and Use columns</li>
-      </ul>
-      <div class="note">Images are in <code>assets/cpq/pdf-figures/</code> and <code>assets/cpq/pdf-screens/</code>. Open this HTML from the <code>Study</code> folder.</div>
-
-      <nav class="fig-toc" style="margin:1.25rem 0;padding:1rem;background:#f9f9f9;border-radius:8px;border:1px solid #dddbda;">
-        <strong>Jump to figure group:</strong>
-        <a href="#cpq-pdf-figures">All Figures</a> ·
-        <a href="#cpq-fig-order-capture-pricing-flow">Order Flow</a> ·
-        <a href="#cpq-fig-vlocity-cart-cards">Cart &amp; Cards</a> ·
-        <a href="#cpq-fig-asset-based-ordering-abo">ABO</a> ·
-        <a href="#cpq-fig-pricing-hooks-matrices">Pricing</a> ·
-        <a href="#cpq-fig-context-rules-framework">Context Rules</a> ·
-        <a href="#cpq-fig-advanced-rules-framework">Advanced Rules</a> ·
-        <a href="#cpq-fig-promotions-discounts">Promos</a> ·
-        <a href="#cpq-fig-change-of-plans-multiplay">Change Plans</a> ·
-        <a href="#cpq-pdf-screens">Extra Screens</a>
-      </nav>
-
-      <h3 id="cpq-pdf-figures">All CPQ PDF Figures (94 numbered figures)</h3>
-      <p>Extracted from <strong>CME_CPQ_PDF-en.pdf</strong> — each image is the PDF page containing that figure. PDF page number shown in caption.</p>
-      <h3 id="cpq-fig-order-capture-pricing-flow">Order Capture &amp; Pricing Flow</h3>
+      <h3>PDF Figures — Assets Cards Visualforce Page</h3>
       <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-001">
-          <a href="assets/cpq/pdf-figures/page-0025.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0025.png" alt="Figure 1: Vlocity Order Pricing Flow"></a>
-          <figcaption><strong>Figure 1.</strong> Vlocity Order Pricing Flow <span>(PDF page 25)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-002">
-          <a href="assets/cpq/pdf-figures/page-0026.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0026.png" alt="Figure 2: Process Flow"></a>
-          <figcaption><strong>Figure 2.</strong> Process Flow <span>(PDF page 26)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-vlocity-cart-cards">Vlocity Cart &amp; Cards</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-003">
-          <a href="assets/cpq/pdf-figures/page-0057.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0057.png" alt="Figure 3: Vlocity Cart with Product List and Product Line Items"></a>
-          <figcaption><strong>Figure 3.</strong> Vlocity Cart with Product List and Product Line Items <span>(PDF page 57)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-004">
-          <a href="assets/cpq/pdf-figures/page-0058.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0058.png" alt="Figure 4: Vlocity Cart with Configuration Panel"></a>
-          <figcaption><strong>Figure 4.</strong> Vlocity Cart with Configuration Panel <span>(PDF page 58)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-005">
-          <a href="assets/cpq/pdf-figures/page-0059.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0059.png" alt="Figure 5: Vlocity Cart Basic View"></a>
-          <figcaption><strong>Figure 5.</strong> Vlocity Cart Basic View <span>(PDF page 59)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-006">
-          <a href="assets/cpq/pdf-figures/page-0060.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0060.png" alt="Figure 6: Vlocity Cart Promotion List and Tab"></a>
-          <figcaption><strong>Figure 6.</strong> Vlocity Cart Promotion List and Tab <span>(PDF page 60)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-007">
-          <a href="assets/cpq/pdf-figures/page-0061.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0061.png" alt="Figure 7: Product Details Dialog Box"></a>
-          <figcaption><strong>Figure 7.</strong> Product Details Dialog Box <span>(PDF page 61)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-008">
-          <a href="assets/cpq/pdf-figures/page-0062.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0062.png" alt="Figure 8: Line Item Details Dialog Box"></a>
-          <figcaption><strong>Figure 8.</strong> Line Item Details Dialog Box <span>(PDF page 62)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-009">
-          <a href="assets/cpq/pdf-figures/page-0063.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0063.png" alt="Figure 9: Cart Item Lookup Field Dialog Box"></a>
-          <figcaption><strong>Figure 9.</strong> Cart Item Lookup Field Dialog Box <span>(PDF page 63)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-010">
-          <a href="assets/cpq/pdf-figures/page-0064.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0064.png" alt="Figure 10: Vlocity Cart with Filterable Attributes List"></a>
-          <figcaption><strong>Figure 10.</strong> Vlocity Cart with Filterable Attributes List <span>(PDF page 64)</span></figcaption>
-        </figure>
         <figure class="doc-screenshot" id="fig-011">
           <a href="assets/cpq/pdf-figures/page-0065.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0065.png" alt="Figure 11: Vlocity Assets Cards-Based Visualforce Page"></a>
           <figcaption><strong>Figure 11.</strong> Vlocity Assets Cards-Based Visualforce Page <span>(PDF page 65)</span></figcaption>
         </figure>
-        <figure class="doc-screenshot" id="fig-012">
-          <a href="assets/cpq/pdf-figures/page-0151.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0151.png" alt="Figure 12: Payment Choice Dialog Box"></a>
-          <figcaption><strong>Figure 12.</strong> Payment Choice Dialog Box <span>(PDF page 151)</span></figcaption>
-        </figure>
       </div>
-      <h3 id="cpq-fig-asset-based-ordering-abo">Asset-Based Ordering (ABO)</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-013">
-          <a href="assets/cpq/pdf-figures/page-0196.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0196.png" alt="Figure 13: Asset-Based Ordering Process with IDs"></a>
-          <figcaption><strong>Figure 13.</strong> Asset-Based Ordering Process with IDs <span>(PDF page 196)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-014">
-          <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 14: Service Assets Visualforce Page"></a>
-          <figcaption><strong>Figure 14.</strong> Service Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-015">
-          <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 15: Billing Assets Visualforce Page"></a>
-          <figcaption><strong>Figure 15.</strong> Billing Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-016">
-          <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 16: All Assets Visualforce Page"></a>
-          <figcaption><strong>Figure 16.</strong> All Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-017">
-          <a href="assets/cpq/pdf-figures/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0202.png" alt="Figure 17: All Assets Cards-Based Visualforce Page"></a>
-          <figcaption><strong>Figure 17.</strong> All Assets Cards-Based Visualforce Page <span>(PDF page 202)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-018">
-          <a href="assets/cpq/pdf-figures/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0202.png" alt="Figure 18: Review Order Cart (Read Only) Visualforce Page"></a>
-          <figcaption><strong>Figure 18.</strong> Review Order Cart (Read Only) Visualforce Page <span>(PDF page 202)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-order-quote-manager-legacy">Order/Quote Manager (Legacy)</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-019">
-          <a href="assets/cpq/pdf-figures/page-0259.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0259.png" alt="Figure 19: Example Summary Header"></a>
-          <figcaption><strong>Figure 19.</strong> Example Summary Header <span>(PDF page 259)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-020">
-          <a href="assets/cpq/pdf-figures/page-0268.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0268.png" alt="Figure 20: Configure Product, Simple Product"></a>
-          <figcaption><strong>Figure 20.</strong> Configure Product, Simple Product <span>(PDF page 268)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-021">
-          <a href="assets/cpq/pdf-figures/page-0269.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0269.png" alt="Figure 21: Configure Product, Product Bundle"></a>
-          <figcaption><strong>Figure 21.</strong> Configure Product, Product Bundle <span>(PDF page 269)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-pricing-hooks-matrices">Pricing, Hooks &amp; Matrices</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-022">
-          <a href="assets/cpq/pdf-figures/page-0328.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0328.png" alt="Figure 22: Price Details Popup"></a>
-          <figcaption><strong>Figure 22.</strong> Price Details Popup <span>(PDF page 328)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-023">
-          <a href="assets/cpq/pdf-figures/page-0333.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0333.png" alt="Figure 23: Interface Implementation"></a>
-          <figcaption><strong>Figure 23.</strong> Interface Implementation <span>(PDF page 333)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-024">
-          <a href="assets/cpq/pdf-figures/page-0334.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0334.png" alt="Figure 24: Price Details Popup"></a>
-          <figcaption><strong>Figure 24.</strong> Price Details Popup <span>(PDF page 334)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-025">
-          <a href="assets/cpq/pdf-figures/page-0335.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0335.png" alt="Figure 25: Custom Class Implementation"></a>
-          <figcaption><strong>Figure 25.</strong> Custom Class Implementation <span>(PDF page 335)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-026">
-          <a href="assets/cpq/pdf-figures/page-0336.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0336.png" alt="Figure 26: Custom Class Implementation"></a>
-          <figcaption><strong>Figure 26.</strong> Custom Class Implementation <span>(PDF page 336)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-027">
-          <a href="assets/cpq/pdf-figures/page-0340.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0340.png" alt="Figure 27: Pricing Products Without Attribute-Based Pricing"></a>
-          <figcaption><strong>Figure 27.</strong> Pricing Products Without Attribute-Based Pricing <span>(PDF page 340)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-028">
-          <a href="assets/cpq/pdf-figures/page-0341.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0341.png" alt="Figure 28: Pricing Products With Attribute-Based Pricing"></a>
-          <figcaption><strong>Figure 28.</strong> Pricing Products With Attribute-Based Pricing <span>(PDF page 341)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-029">
-          <a href="assets/cpq/pdf-figures/page-0349.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0349.png" alt="Figure 29: Types of Attribute-Based Pricing and Their Calculation Matrices"></a>
-          <figcaption><strong>Figure 29.</strong> Types of Attribute-Based Pricing and Their Calculation Matrices <span>(PDF page 349)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-030">
-          <a href="assets/cpq/pdf-figures/page-0352.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0352.png" alt="Figure 30: Entering new data for inputs to SourceTargetAttributePricingMatrix"></a>
-          <figcaption><strong>Figure 30.</strong> Entering new data for inputs to SourceTargetAttributePricingMatrix <span>(PDF page 352)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-031">
-          <a href="assets/cpq/pdf-figures/page-0354.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0354.png" alt="Figure 31: Entering input data to the Range AttributePricingMatrix"></a>
-          <figcaption><strong>Figure 31.</strong> Entering input data to the Range AttributePricingMatrix <span>(PDF page 354)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-032">
-          <a href="assets/cpq/pdf-figures/page-0358.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0358.png" alt="Figure 32: Target Product Name needs Include In Calculation Output flag checked"></a>
-          <figcaption><strong>Figure 32.</strong> Target Product Name needs Include In Calculation Output flag checked <span>(PDF page 358)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-033">
-          <a href="assets/cpq/pdf-figures/page-0365.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0365.png" alt="Figure 33: Price Details icon"></a>
-          <figcaption><strong>Figure 33.</strong> Price Details icon <span>(PDF page 365)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-034">
-          <a href="assets/cpq/pdf-figures/page-0366.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0366.png" alt="Figure 34: Pricing Details dialog box"></a>
-          <figcaption><strong>Figure 34.</strong> Pricing Details dialog box <span>(PDF page 366)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-035">
-          <a href="assets/cpq/pdf-figures/page-0391.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0391.png" alt="Figure 35: Vlocity Calculation Matrix for a Pricing Matrix"></a>
-          <figcaption><strong>Figure 35.</strong> Vlocity Calculation Matrix for a Pricing Matrix <span>(PDF page 391)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-036">
-          <a href="assets/cpq/pdf-figures/page-0398.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0398.png" alt="Figure 36: Life Insurance Matrix"></a>
-          <figcaption><strong>Figure 36.</strong> Life Insurance Matrix <span>(PDF page 398)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-context-rules-framework">Context Rules Framework</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-037">
-          <a href="assets/cpq/pdf-figures/page-0432.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0432.png" alt="Figure 37: Context Rules Framework Components"></a>
-          <figcaption><strong>Figure 37.</strong> Context Rules Framework Components <span>(PDF page 432)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-038">
-          <a href="assets/cpq/pdf-figures/page-0434.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0434.png" alt="Figure 38: Types of Context Rules"></a>
-          <figcaption><strong>Figure 38.</strong> Types of Context Rules <span>(PDF page 434)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-039">
-          <a href="assets/cpq/pdf-figures/page-0435.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0435.png" alt="Figure 39: Where Do Qualification Context Rules for Products Run?"></a>
-          <figcaption><strong>Figure 39.</strong> Where Do Qualification Context Rules for Products Run? <span>(PDF page 435)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-040">
-          <a href="assets/cpq/pdf-figures/page-0436.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0436.png" alt="Figure 40: Order of Operations"></a>
-          <figcaption><strong>Figure 40.</strong> Order of Operations <span>(PDF page 436)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-041">
-          <a href="assets/cpq/pdf-figures/page-0437.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0437.png" alt="Figure 41: Where Do Qualification Context Rules for Promotions Run?"></a>
-          <figcaption><strong>Figure 41.</strong> Where Do Qualification Context Rules for Promotions Run? <span>(PDF page 437)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-042">
-          <a href="assets/cpq/pdf-figures/page-0438.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0438.png" alt="Figure 42: Using Qualification Context Rules To Control Displaying the Price Lists"></a>
-          <figcaption><strong>Figure 42.</strong> Using Qualification Context Rules To Control Displaying the Price Lists <span>(PDF page 438)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-043">
-          <a href="assets/cpq/pdf-figures/page-0440.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0440.png" alt="Figure 43: Tightest Match User Experience"></a>
-          <figcaption><strong>Figure 43.</strong> Tightest Match User Experience <span>(PDF page 440)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-044">
-          <a href="assets/cpq/pdf-figures/page-0441.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0441.png" alt="Figure 44: Condition Weight Formula"></a>
-          <figcaption><strong>Figure 44.</strong> Condition Weight Formula <span>(PDF page 441)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-045">
-          <a href="assets/cpq/pdf-figures/page-0442.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0442.png" alt="Figure 45: Calculating Multiple Rule Condition Weights"></a>
-          <figcaption><strong>Figure 45.</strong> Calculating Multiple Rule Condition Weights <span>(PDF page 442)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-046">
-          <a href="assets/cpq/pdf-figures/page-0444.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0444.png" alt="Figure 46: Where Do Qualification Context Rules for Pricing Adjustments Run?"></a>
-          <figcaption><strong>Figure 46.</strong> Where Do Qualification Context Rules for Pricing Adjustments Run? <span>(PDF page 444)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-047">
-          <a href="assets/cpq/pdf-figures/page-0451.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0451.png" alt="Figure 47: Message to the User Regarding a Penalty"></a>
-          <figcaption><strong>Figure 47.</strong> Message to the User Regarding a Penalty <span>(PDF page 451)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-048">
-          <a href="assets/cpq/pdf-figures/page-0451.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0451.png" alt="Figure 48: Viewing a Canceled Promotion"></a>
-          <figcaption><strong>Figure 48.</strong> Viewing a Canceled Promotion <span>(PDF page 451)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-049">
-          <a href="assets/cpq/pdf-figures/page-0452.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0452.png" alt="Figure 49: Viewing a Penalty Applied by a Penalty Rule"></a>
-          <figcaption><strong>Figure 49.</strong> Viewing a Penalty Applied by a Penalty Rule <span>(PDF page 452)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-050">
-          <a href="assets/cpq/pdf-figures/page-0457.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0457.png" alt="Figure 50: Context Rule Components"></a>
-          <figcaption><strong>Figure 50.</strong> Context Rule Components <span>(PDF page 457)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-051">
-          <a href="assets/cpq/pdf-figures/page-0458.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0458.png" alt="Figure 51: Rule Sets"></a>
-          <figcaption><strong>Figure 51.</strong> Rule Sets <span>(PDF page 458)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-052">
-          <a href="assets/cpq/pdf-figures/page-0460.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0460.png" alt="Figure 52: Header Rule Processing Logic"></a>
-          <figcaption><strong>Figure 52.</strong> Header Rule Processing Logic <span>(PDF page 460)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-053">
-          <a href="assets/cpq/pdf-figures/page-0461.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0461.png" alt="Figure 53: Setting a Header Rule in the Rule Set General Properties Facet"></a>
-          <figcaption><strong>Figure 53.</strong> Setting a Header Rule in the Rule Set General Properties Facet <span>(PDF page 461)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-054">
-          <a href="assets/cpq/pdf-figures/page-0464.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0464.png" alt="Figure 54: Setting a Failure Message for a Rule Set"></a>
-          <figcaption><strong>Figure 54.</strong> Setting a Failure Message for a Rule Set <span>(PDF page 464)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-055">
-          <a href="assets/cpq/pdf-figures/page-0465.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0465.png" alt="Figure 55: Failure Message Appears in Vlocity Cart"></a>
-          <figcaption><strong>Figure 55.</strong> Failure Message Appears in Vlocity Cart <span>(PDF page 465)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-056">
-          <a href="assets/cpq/pdf-figures/page-0478.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0478.png" alt="Figure 56: No Pricing Adjustment Rule Set at Run Time"></a>
-          <figcaption><strong>Figure 56.</strong> No Pricing Adjustment Rule Set at Run Time <span>(PDF page 478)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-057">
-          <a href="assets/cpq/pdf-figures/page-0489.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0489.png" alt="Figure 57: Context Dimensions"></a>
-          <figcaption><strong>Figure 57.</strong> Context Dimensions <span>(PDF page 489)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-058">
-          <a href="assets/cpq/pdf-figures/page-0490.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0490.png" alt="Figure 58: Condition Weight Formula"></a>
-          <figcaption><strong>Figure 58.</strong> Condition Weight Formula <span>(PDF page 490)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-059">
-          <a href="assets/cpq/pdf-figures/page-0491.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0491.png" alt="Figure 59: Calculating Multiple Rule Condition Weights"></a>
-          <figcaption><strong>Figure 59.</strong> Calculating Multiple Rule Condition Weights <span>(PDF page 491)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-060">
-          <a href="assets/cpq/pdf-figures/page-0499.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0499.png" alt="Figure 60: Context Rule Components"></a>
-          <figcaption><strong>Figure 60.</strong> Context Rule Components <span>(PDF page 499)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-061">
-          <a href="assets/cpq/pdf-figures/page-0500.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0500.png" alt="Figure 61: Accessing Context Mappings From a Context Scope"></a>
-          <figcaption><strong>Figure 61.</strong> Accessing Context Mappings From a Context Scope <span>(PDF page 500)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-062">
-          <a href="assets/cpq/pdf-figures/page-0502.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0502.png" alt="Figure 62: Tracing the Object Hierarchy using Source Expressions"></a>
-          <figcaption><strong>Figure 62.</strong> Tracing the Object Hierarchy using Source Expressions <span>(PDF page 502)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-063">
-          <a href="assets/cpq/pdf-figures/page-0503.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0503.png" alt="Figure 63: Using Source Expressions for Virtual Objects"></a>
-          <figcaption><strong>Figure 63.</strong> Using Source Expressions for Virtual Objects <span>(PDF page 503)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-064">
-          <a href="assets/cpq/pdf-figures/page-0504.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0504.png" alt="Figure 64: Root and Second-Level Context Scopes"></a>
-          <figcaption><strong>Figure 64.</strong> Root and Second-Level Context Scopes <span>(PDF page 504)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-065">
-          <a href="assets/cpq/pdf-figures/page-0505.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0505.png" alt="Figure 65: Any and Second-Level Context Scopes"></a>
-          <figcaption><strong>Figure 65.</strong> Any and Second-Level Context Scopes <span>(PDF page 505)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-066">
-          <a href="assets/cpq/pdf-figures/page-0505.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0505.png" alt="Figure 66: Any.Account Context Scope"></a>
-          <figcaption><strong>Figure 66.</strong> Any.Account Context Scope <span>(PDF page 505)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-067">
-          <a href="assets/cpq/pdf-figures/page-0507.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0507.png" alt="Figure 67: Virtual Context Scopes"></a>
-          <figcaption><strong>Figure 67.</strong> Virtual Context Scopes <span>(PDF page 507)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-068">
-          <a href="assets/cpq/pdf-figures/page-0510.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0510.png" alt="Figure 68: Sample Response"></a>
-          <figcaption><strong>Figure 68.</strong> Sample Response <span>(PDF page 510)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-069">
-          <a href="assets/cpq/pdf-figures/page-0512.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0512.png" alt="Figure 69: Setting a Failure Message for a Rule Set"></a>
-          <figcaption><strong>Figure 69.</strong> Setting a Failure Message for a Rule Set <span>(PDF page 512)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-070">
-          <a href="assets/cpq/pdf-figures/page-0513.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0513.png" alt="Figure 70: Failure Message Appears in Vlocity Cart"></a>
-          <figcaption><strong>Figure 70.</strong> Failure Message Appears in Vlocity Cart <span>(PDF page 513)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-071">
-          <a href="assets/cpq/pdf-figures/page-0516.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0516.png" alt="Figure 71: Functions"></a>
-          <figcaption><strong>Figure 71.</strong> Functions <span>(PDF page 516)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-advanced-rules-framework">Advanced Rules Framework</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-072">
-          <a href="assets/cpq/pdf-figures/page-0527.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0527.png" alt="Figure 72: Rule Processing Diagram"></a>
-          <figcaption><strong>Figure 72.</strong> Rule Processing Diagram <span>(PDF page 527)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-073">
-          <a href="assets/cpq/pdf-figures/page-0528.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0528.png" alt="Figure 73: Availability and Eligibility Rule Process Diagram"></a>
-          <figcaption><strong>Figure 73.</strong> Availability and Eligibility Rule Process Diagram <span>(PDF page 528)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-074">
-          <a href="assets/cpq/pdf-figures/page-0531.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0531.png" alt="Figure 74: Compatibility Rule Process Diagram"></a>
-          <figcaption><strong>Figure 74.</strong> Compatibility Rule Process Diagram <span>(PDF page 531)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-075">
-          <a href="assets/cpq/pdf-figures/page-0533.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0533.png" alt="Figure 75: Rule Object Detail"></a>
-          <figcaption><strong>Figure 75.</strong> Rule Object Detail <span>(PDF page 533)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-076">
-          <a href="assets/cpq/pdf-figures/page-0533.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0533.png" alt="Figure 76: Rule Filter Object"></a>
-          <figcaption><strong>Figure 76.</strong> Rule Filter Object <span>(PDF page 533)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-077">
-          <a href="assets/cpq/pdf-figures/page-0534.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0534.png" alt="Figure 77: Figure: Rule Action Object"></a>
-          <figcaption><strong>Figure 77.</strong> Figure: Rule Action Object <span>(PDF page 534)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-078">
-          <a href="assets/cpq/pdf-figures/page-0534.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0534.png" alt="Figure 78: Rule Variable Object"></a>
-          <figcaption><strong>Figure 78.</strong> Rule Variable Object <span>(PDF page 534)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-079">
-          <a href="assets/cpq/pdf-figures/page-0539.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0539.png" alt="Figure 79: Sample Evaluation Entity Filter"></a>
-          <figcaption><strong>Figure 79.</strong> Sample Evaluation Entity Filter <span>(PDF page 539)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-080">
-          <a href="assets/cpq/pdf-figures/page-0540.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0540.png" alt="Figure 80: Sample Qualification Download Speed"></a>
-          <figcaption><strong>Figure 80.</strong> Sample Qualification Download Speed <span>(PDF page 540)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-081">
-          <a href="assets/cpq/pdf-figures/page-0542.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0542.png" alt="Figure 81: Entity Filter Object Detail Page"></a>
-          <figcaption><strong>Figure 81.</strong> Entity Filter Object Detail Page <span>(PDF page 542)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-082">
-          <a href="assets/cpq/pdf-figures/page-0548.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0548.png" alt="Figure 82: Vlocity Rule Builder"></a>
-          <figcaption><strong>Figure 82.</strong> Vlocity Rule Builder <span>(PDF page 548)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-083">
-          <a href="assets/cpq/pdf-figures/page-0552.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0552.png" alt="Figure 83: Entity Filter"></a>
-          <figcaption><strong>Figure 83.</strong> Entity Filter <span>(PDF page 552)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-084">
-          <a href="assets/cpq/pdf-figures/page-0554.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0554.png" alt="Figure 84: Products Not Available List"></a>
-          <figcaption><strong>Figure 84.</strong> Products Not Available List <span>(PDF page 554)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-085">
-          <a href="assets/cpq/pdf-figures/page-0555.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0555.png" alt="Figure 85: Products Not Eligible Related List"></a>
-          <figcaption><strong>Figure 85.</strong> Products Not Eligible Related List <span>(PDF page 555)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-086">
-          <a href="assets/cpq/pdf-figures/page-0558.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0558.png" alt="Figure 86: Rule Builder, Advanced Eligibility Rule"></a>
-          <figcaption><strong>Figure 86.</strong> Rule Builder, Advanced Eligibility Rule <span>(PDF page 558)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-087">
-          <a href="assets/cpq/pdf-figures/page-0561.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0561.png" alt="Figure 87: Rule Builder, Compatibility Rule"></a>
-          <figcaption><strong>Figure 87.</strong> Rule Builder, Compatibility Rule <span>(PDF page 561)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-promotions-discounts">Promotions &amp; Discounts</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-088">
-          <a href="assets/cpq/pdf-figures/page-0562.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0562.png" alt="Figure 88: Price Book Entry Edit Page"></a>
-          <figcaption><strong>Figure 88.</strong> Price Book Entry Edit Page <span>(PDF page 562)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-089">
-          <a href="assets/cpq/pdf-figures/page-0590.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0590.png" alt="Figure 89: Bundle Currently in the Cart"></a>
-          <figcaption><strong>Figure 89.</strong> Bundle Currently in the Cart <span>(PDF page 590)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-090">
-          <a href="assets/cpq/pdf-figures/page-0590.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0590.png" alt="Figure 90: Promotional Pricing Applied to Bundle"></a>
-          <figcaption><strong>Figure 90.</strong> Promotional Pricing Applied to Bundle <span>(PDF page 590)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-091">
-          <a href="assets/cpq/pdf-figures/page-0591.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0591.png" alt="Figure 91: iPhone X Intro Promo Discounts Two Products in iPhone X Intro Bundle"></a>
-          <figcaption><strong>Figure 91.</strong> iPhone X Intro Promo Discounts Two Products in iPhone X Intro Bundle <span>(PDF page 591)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-092">
-          <a href="assets/cpq/pdf-figures/page-0591.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0591.png" alt="Figure 92: Unlimited Talk + Text Promotion Discounts One Product in iPhone X"></a>
-          <figcaption><strong>Figure 92.</strong> Unlimited Talk + Text Promotion Discounts One Product in iPhone X <span>(PDF page 591)</span></figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="fig-093">
-          <a href="assets/cpq/pdf-figures/page-0594.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0594.png" alt="Figure 93: Cancel Promotion Dialog Box"></a>
-          <figcaption><strong>Figure 93.</strong> Cancel Promotion Dialog Box <span>(PDF page 594)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-fig-change-of-plans-multiplay">Change of Plans &amp; Multiplay</h3>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="fig-094">
-          <a href="assets/cpq/pdf-figures/page-0637.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0637.png" alt="Figure 94: Replace, Upgrade, or Downgrade Offers"></a>
-          <figcaption><strong>Figure 94.</strong> Replace, Upgrade, or Downgrade Offers <span>(PDF page 637)</span></figcaption>
-        </figure>
-      </div>
-      <h3 id="cpq-pdf-screens">Additional CPQ PDF Screens (procedures &amp; tables)</h3>
-      <p>Key setup pages from the PDF that contain UI walkthroughs, field tables, or configuration screens without a numbered Figure caption.</p>
-      <div class="pdf-fig-grid">
-        <figure class="doc-screenshot" id="screen-6">
-          <a href="assets/cpq/pdf-screens/screen-page-0006.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0006.png" alt="CPQ PDF page 6"></a>
-          <figcaption><strong>PDF page 6</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-7">
-          <a href="assets/cpq/pdf-screens/screen-page-0007.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0007.png" alt="CPQ PDF page 7"></a>
-          <figcaption><strong>PDF page 7</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-8">
-          <a href="assets/cpq/pdf-screens/screen-page-0008.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0008.png" alt="CPQ PDF page 8"></a>
-          <figcaption><strong>PDF page 8</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-9">
-          <a href="assets/cpq/pdf-screens/screen-page-0009.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0009.png" alt="CPQ PDF page 9"></a>
-          <figcaption><strong>PDF page 9</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-275">
-          <a href="assets/cpq/pdf-screens/screen-page-0275.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0275.png" alt="CPQ PDF page 275"></a>
-          <figcaption><strong>PDF page 275</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-276">
-          <a href="assets/cpq/pdf-screens/screen-page-0276.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0276.png" alt="CPQ PDF page 276"></a>
-          <figcaption><strong>PDF page 276</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-277">
-          <a href="assets/cpq/pdf-screens/screen-page-0277.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0277.png" alt="CPQ PDF page 277"></a>
-          <figcaption><strong>PDF page 277</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-278">
-          <a href="assets/cpq/pdf-screens/screen-page-0278.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0278.png" alt="CPQ PDF page 278"></a>
-          <figcaption><strong>PDF page 278</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-279">
-          <a href="assets/cpq/pdf-screens/screen-page-0279.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0279.png" alt="CPQ PDF page 279"></a>
-          <figcaption><strong>PDF page 279</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-280">
-          <a href="assets/cpq/pdf-screens/screen-page-0280.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0280.png" alt="CPQ PDF page 280"></a>
-          <figcaption><strong>PDF page 280</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-281">
-          <a href="assets/cpq/pdf-screens/screen-page-0281.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0281.png" alt="CPQ PDF page 281"></a>
-          <figcaption><strong>PDF page 281</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-282">
-          <a href="assets/cpq/pdf-screens/screen-page-0282.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0282.png" alt="CPQ PDF page 282"></a>
-          <figcaption><strong>PDF page 282</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-284">
-          <a href="assets/cpq/pdf-screens/screen-page-0284.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0284.png" alt="CPQ PDF page 284"></a>
-          <figcaption><strong>PDF page 284</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-287">
-          <a href="assets/cpq/pdf-screens/screen-page-0287.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0287.png" alt="CPQ PDF page 287"></a>
-          <figcaption><strong>PDF page 287</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-288">
-          <a href="assets/cpq/pdf-screens/screen-page-0288.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0288.png" alt="CPQ PDF page 288"></a>
-          <figcaption><strong>PDF page 288</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-292">
-          <a href="assets/cpq/pdf-screens/screen-page-0292.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0292.png" alt="CPQ PDF page 292"></a>
-          <figcaption><strong>PDF page 292</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-297">
-          <a href="assets/cpq/pdf-screens/screen-page-0297.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0297.png" alt="CPQ PDF page 297"></a>
-          <figcaption><strong>PDF page 297</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-386">
-          <a href="assets/cpq/pdf-screens/screen-page-0386.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0386.png" alt="CPQ PDF page 386"></a>
-          <figcaption><strong>PDF page 386</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-387">
-          <a href="assets/cpq/pdf-screens/screen-page-0387.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0387.png" alt="CPQ PDF page 387"></a>
-          <figcaption><strong>PDF page 387</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-389">
-          <a href="assets/cpq/pdf-screens/screen-page-0389.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0389.png" alt="CPQ PDF page 389"></a>
-          <figcaption><strong>PDF page 389</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-390">
-          <a href="assets/cpq/pdf-screens/screen-page-0390.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0390.png" alt="CPQ PDF page 390"></a>
-          <figcaption><strong>PDF page 390</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-392">
-          <a href="assets/cpq/pdf-screens/screen-page-0392.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0392.png" alt="CPQ PDF page 392"></a>
-          <figcaption><strong>PDF page 392</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-393">
-          <a href="assets/cpq/pdf-screens/screen-page-0393.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0393.png" alt="CPQ PDF page 393"></a>
-          <figcaption><strong>PDF page 393</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-394">
-          <a href="assets/cpq/pdf-screens/screen-page-0394.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0394.png" alt="CPQ PDF page 394"></a>
-          <figcaption><strong>PDF page 394</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-395">
-          <a href="assets/cpq/pdf-screens/screen-page-0395.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0395.png" alt="CPQ PDF page 395"></a>
-          <figcaption><strong>PDF page 395</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-396">
-          <a href="assets/cpq/pdf-screens/screen-page-0396.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0396.png" alt="CPQ PDF page 396"></a>
-          <figcaption><strong>PDF page 396</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-397">
-          <a href="assets/cpq/pdf-screens/screen-page-0397.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0397.png" alt="CPQ PDF page 397"></a>
-          <figcaption><strong>PDF page 397</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-399">
-          <a href="assets/cpq/pdf-screens/screen-page-0399.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0399.png" alt="CPQ PDF page 399"></a>
-          <figcaption><strong>PDF page 399</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-400">
-          <a href="assets/cpq/pdf-screens/screen-page-0400.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0400.png" alt="CPQ PDF page 400"></a>
-          <figcaption><strong>PDF page 400</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-559">
-          <a href="assets/cpq/pdf-screens/screen-page-0559.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0559.png" alt="CPQ PDF page 559"></a>
-          <figcaption><strong>PDF page 559</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-569">
-          <a href="assets/cpq/pdf-screens/screen-page-0569.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0569.png" alt="CPQ PDF page 569"></a>
-          <figcaption><strong>PDF page 569</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-570">
-          <a href="assets/cpq/pdf-screens/screen-page-0570.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0570.png" alt="CPQ PDF page 570"></a>
-          <figcaption><strong>PDF page 570</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-571">
-          <a href="assets/cpq/pdf-screens/screen-page-0571.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0571.png" alt="CPQ PDF page 571"></a>
-          <figcaption><strong>PDF page 571</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-572">
-          <a href="assets/cpq/pdf-screens/screen-page-0572.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0572.png" alt="CPQ PDF page 572"></a>
-          <figcaption><strong>PDF page 572</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-573">
-          <a href="assets/cpq/pdf-screens/screen-page-0573.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0573.png" alt="CPQ PDF page 573"></a>
-          <figcaption><strong>PDF page 573</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-575">
-          <a href="assets/cpq/pdf-screens/screen-page-0575.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0575.png" alt="CPQ PDF page 575"></a>
-          <figcaption><strong>PDF page 575</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-576">
-          <a href="assets/cpq/pdf-screens/screen-page-0576.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0576.png" alt="CPQ PDF page 576"></a>
-          <figcaption><strong>PDF page 576</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-578">
-          <a href="assets/cpq/pdf-screens/screen-page-0578.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0578.png" alt="CPQ PDF page 578"></a>
-          <figcaption><strong>PDF page 578</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-579">
-          <a href="assets/cpq/pdf-screens/screen-page-0579.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0579.png" alt="CPQ PDF page 579"></a>
-          <figcaption><strong>PDF page 579</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-581">
-          <a href="assets/cpq/pdf-screens/screen-page-0581.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0581.png" alt="CPQ PDF page 581"></a>
-          <figcaption><strong>PDF page 581</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-582">
-          <a href="assets/cpq/pdf-screens/screen-page-0582.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0582.png" alt="CPQ PDF page 582"></a>
-          <figcaption><strong>PDF page 582</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-583">
-          <a href="assets/cpq/pdf-screens/screen-page-0583.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0583.png" alt="CPQ PDF page 583"></a>
-          <figcaption><strong>PDF page 583</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-587">
-          <a href="assets/cpq/pdf-screens/screen-page-0587.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0587.png" alt="CPQ PDF page 587"></a>
-          <figcaption><strong>PDF page 587</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-588">
-          <a href="assets/cpq/pdf-screens/screen-page-0588.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0588.png" alt="CPQ PDF page 588"></a>
-          <figcaption><strong>PDF page 588</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-592">
-          <a href="assets/cpq/pdf-screens/screen-page-0592.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0592.png" alt="CPQ PDF page 592"></a>
-          <figcaption><strong>PDF page 592</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-597">
-          <a href="assets/cpq/pdf-screens/screen-page-0597.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0597.png" alt="CPQ PDF page 597"></a>
-          <figcaption><strong>PDF page 597</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-598">
-          <a href="assets/cpq/pdf-screens/screen-page-0598.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0598.png" alt="CPQ PDF page 598"></a>
-          <figcaption><strong>PDF page 598</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-599">
-          <a href="assets/cpq/pdf-screens/screen-page-0599.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0599.png" alt="CPQ PDF page 599"></a>
-          <figcaption><strong>PDF page 599</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-600">
-          <a href="assets/cpq/pdf-screens/screen-page-0600.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0600.png" alt="CPQ PDF page 600"></a>
-          <figcaption><strong>PDF page 600</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-601">
-          <a href="assets/cpq/pdf-screens/screen-page-0601.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0601.png" alt="CPQ PDF page 601"></a>
-          <figcaption><strong>PDF page 601</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-602">
-          <a href="assets/cpq/pdf-screens/screen-page-0602.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0602.png" alt="CPQ PDF page 602"></a>
-          <figcaption><strong>PDF page 602</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-603">
-          <a href="assets/cpq/pdf-screens/screen-page-0603.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0603.png" alt="CPQ PDF page 603"></a>
-          <figcaption><strong>PDF page 603</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-604">
-          <a href="assets/cpq/pdf-screens/screen-page-0604.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0604.png" alt="CPQ PDF page 604"></a>
-          <figcaption><strong>PDF page 604</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-605">
-          <a href="assets/cpq/pdf-screens/screen-page-0605.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0605.png" alt="CPQ PDF page 605"></a>
-          <figcaption><strong>PDF page 605</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-610">
-          <a href="assets/cpq/pdf-screens/screen-page-0610.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0610.png" alt="CPQ PDF page 610"></a>
-          <figcaption><strong>PDF page 610</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-611">
-          <a href="assets/cpq/pdf-screens/screen-page-0611.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0611.png" alt="CPQ PDF page 611"></a>
-          <figcaption><strong>PDF page 611</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-613">
-          <a href="assets/cpq/pdf-screens/screen-page-0613.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0613.png" alt="CPQ PDF page 613"></a>
-          <figcaption><strong>PDF page 613</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-615">
-          <a href="assets/cpq/pdf-screens/screen-page-0615.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0615.png" alt="CPQ PDF page 615"></a>
-          <figcaption><strong>PDF page 615</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-616">
-          <a href="assets/cpq/pdf-screens/screen-page-0616.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0616.png" alt="CPQ PDF page 616"></a>
-          <figcaption><strong>PDF page 616</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-617">
-          <a href="assets/cpq/pdf-screens/screen-page-0617.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0617.png" alt="CPQ PDF page 617"></a>
-          <figcaption><strong>PDF page 617</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-618">
-          <a href="assets/cpq/pdf-screens/screen-page-0618.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0618.png" alt="CPQ PDF page 618"></a>
-          <figcaption><strong>PDF page 618</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-619">
-          <a href="assets/cpq/pdf-screens/screen-page-0619.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0619.png" alt="CPQ PDF page 619"></a>
-          <figcaption><strong>PDF page 619</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-620">
-          <a href="assets/cpq/pdf-screens/screen-page-0620.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0620.png" alt="CPQ PDF page 620"></a>
-          <figcaption><strong>PDF page 620</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-628">
-          <a href="assets/cpq/pdf-screens/screen-page-0628.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0628.png" alt="CPQ PDF page 628"></a>
-          <figcaption><strong>PDF page 628</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-629">
-          <a href="assets/cpq/pdf-screens/screen-page-0629.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0629.png" alt="CPQ PDF page 629"></a>
-          <figcaption><strong>PDF page 629</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-632">
-          <a href="assets/cpq/pdf-screens/screen-page-0632.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0632.png" alt="CPQ PDF page 632"></a>
-          <figcaption><strong>PDF page 632</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-633">
-          <a href="assets/cpq/pdf-screens/screen-page-0633.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0633.png" alt="CPQ PDF page 633"></a>
-          <figcaption><strong>PDF page 633</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-638">
-          <a href="assets/cpq/pdf-screens/screen-page-0638.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0638.png" alt="CPQ PDF page 638"></a>
-          <figcaption><strong>PDF page 638</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-643">
-          <a href="assets/cpq/pdf-screens/screen-page-0643.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0643.png" alt="CPQ PDF page 643"></a>
-          <figcaption><strong>PDF page 643</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-644">
-          <a href="assets/cpq/pdf-screens/screen-page-0644.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0644.png" alt="CPQ PDF page 644"></a>
-          <figcaption><strong>PDF page 644</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-651">
-          <a href="assets/cpq/pdf-screens/screen-page-0651.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0651.png" alt="CPQ PDF page 651"></a>
-          <figcaption><strong>PDF page 651</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-652">
-          <a href="assets/cpq/pdf-screens/screen-page-0652.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0652.png" alt="CPQ PDF page 652"></a>
-          <figcaption><strong>PDF page 652</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-656">
-          <a href="assets/cpq/pdf-screens/screen-page-0656.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0656.png" alt="CPQ PDF page 656"></a>
-          <figcaption><strong>PDF page 656</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-657">
-          <a href="assets/cpq/pdf-screens/screen-page-0657.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0657.png" alt="CPQ PDF page 657"></a>
-          <figcaption><strong>PDF page 657</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-658">
-          <a href="assets/cpq/pdf-screens/screen-page-0658.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0658.png" alt="CPQ PDF page 658"></a>
-          <figcaption><strong>PDF page 658</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-663">
-          <a href="assets/cpq/pdf-screens/screen-page-0663.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0663.png" alt="CPQ PDF page 663"></a>
-          <figcaption><strong>PDF page 663</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-675">
-          <a href="assets/cpq/pdf-screens/screen-page-0675.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0675.png" alt="CPQ PDF page 675"></a>
-          <figcaption><strong>PDF page 675</strong> — setup / procedure screen</figcaption>
-        </figure>
-        <figure class="doc-screenshot" id="screen-689">
-          <a href="assets/cpq/pdf-screens/screen-page-0689.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0689.png" alt="CPQ PDF page 689"></a>
-          <figcaption><strong>PDF page 689</strong> — setup / procedure screen</figcaption>
-        </figure>
-      </div>
+
     </section>
 
     <section id="cpq-macd">
@@ -2365,6 +1699,35 @@
         </tbody>
       </table>
       <div class="tip">Buttons are enabled only when at least one asset is selected. Assets load on <code>comp-assets-*</code> cards pages or standard Account related lists.</div>
+
+      <h3>PDF Screenshots — Asset-Based Ordering (ABO)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-013">
+                  <a href="assets/cpq/pdf-figures/page-0196.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0196.png" alt="Figure 13: Asset-Based Ordering Process with IDs"></a>
+                  <figcaption><strong>Figure 13.</strong> Asset-Based Ordering Process with IDs <span>(PDF page 196)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-014">
+                  <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 14: Service Assets Visualforce Page"></a>
+                  <figcaption><strong>Figure 14.</strong> Service Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-015">
+                  <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 15: Billing Assets Visualforce Page"></a>
+                  <figcaption><strong>Figure 15.</strong> Billing Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-016">
+                  <a href="assets/cpq/pdf-figures/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0201.png" alt="Figure 16: All Assets Visualforce Page"></a>
+                  <figcaption><strong>Figure 16.</strong> All Assets Visualforce Page <span>(PDF page 201)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-017">
+                  <a href="assets/cpq/pdf-figures/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0202.png" alt="Figure 17: All Assets Cards-Based Visualforce Page"></a>
+                  <figcaption><strong>Figure 17.</strong> All Assets Cards-Based Visualforce Page <span>(PDF page 202)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-018">
+                  <a href="assets/cpq/pdf-figures/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0202.png" alt="Figure 18: Review Order Cart (Read Only) Visualforce Page"></a>
+                  <figcaption><strong>Figure 18.</strong> Review Order Cart (Read Only) Visualforce Page <span>(PDF page 202)</span></figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-rules">
@@ -2385,6 +1748,218 @@
         <li><strong>Penalty rules</strong> — e.g., fee when canceling a promotion early</li>
       </ul>
       <div class="tip">After editing rules, run <strong>Clear Managed Platform Cache</strong> → <strong>Refresh Platform Cache</strong> before testing.</div>
+
+      <h3>PDF Screenshots — Context Rules Framework</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-037">
+                  <a href="assets/cpq/pdf-figures/page-0432.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0432.png" alt="Figure 37: Context Rules Framework Components"></a>
+                  <figcaption><strong>Figure 37.</strong> Context Rules Framework Components <span>(PDF page 432)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-038">
+                  <a href="assets/cpq/pdf-figures/page-0434.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0434.png" alt="Figure 38: Types of Context Rules"></a>
+                  <figcaption><strong>Figure 38.</strong> Types of Context Rules <span>(PDF page 434)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-039">
+                  <a href="assets/cpq/pdf-figures/page-0435.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0435.png" alt="Figure 39: Where Do Qualification Context Rules for Products Run?"></a>
+                  <figcaption><strong>Figure 39.</strong> Where Do Qualification Context Rules for Products Run? <span>(PDF page 435)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-040">
+                  <a href="assets/cpq/pdf-figures/page-0436.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0436.png" alt="Figure 40: Order of Operations"></a>
+                  <figcaption><strong>Figure 40.</strong> Order of Operations <span>(PDF page 436)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-041">
+                  <a href="assets/cpq/pdf-figures/page-0437.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0437.png" alt="Figure 41: Where Do Qualification Context Rules for Promotions Run?"></a>
+                  <figcaption><strong>Figure 41.</strong> Where Do Qualification Context Rules for Promotions Run? <span>(PDF page 437)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-042">
+                  <a href="assets/cpq/pdf-figures/page-0438.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0438.png" alt="Figure 42: Using Qualification Context Rules To Control Displaying the Price Lists"></a>
+                  <figcaption><strong>Figure 42.</strong> Using Qualification Context Rules To Control Displaying the Price Lists <span>(PDF page 438)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-043">
+                  <a href="assets/cpq/pdf-figures/page-0440.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0440.png" alt="Figure 43: Tightest Match User Experience"></a>
+                  <figcaption><strong>Figure 43.</strong> Tightest Match User Experience <span>(PDF page 440)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-044">
+                  <a href="assets/cpq/pdf-figures/page-0441.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0441.png" alt="Figure 44: Condition Weight Formula"></a>
+                  <figcaption><strong>Figure 44.</strong> Condition Weight Formula <span>(PDF page 441)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-045">
+                  <a href="assets/cpq/pdf-figures/page-0442.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0442.png" alt="Figure 45: Calculating Multiple Rule Condition Weights"></a>
+                  <figcaption><strong>Figure 45.</strong> Calculating Multiple Rule Condition Weights <span>(PDF page 442)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-046">
+                  <a href="assets/cpq/pdf-figures/page-0444.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0444.png" alt="Figure 46: Where Do Qualification Context Rules for Pricing Adjustments Run?"></a>
+                  <figcaption><strong>Figure 46.</strong> Where Do Qualification Context Rules for Pricing Adjustments Run? <span>(PDF page 444)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-047">
+                  <a href="assets/cpq/pdf-figures/page-0451.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0451.png" alt="Figure 47: Message to the User Regarding a Penalty"></a>
+                  <figcaption><strong>Figure 47.</strong> Message to the User Regarding a Penalty <span>(PDF page 451)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-048">
+                  <a href="assets/cpq/pdf-figures/page-0451.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0451.png" alt="Figure 48: Viewing a Canceled Promotion"></a>
+                  <figcaption><strong>Figure 48.</strong> Viewing a Canceled Promotion <span>(PDF page 451)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-049">
+                  <a href="assets/cpq/pdf-figures/page-0452.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0452.png" alt="Figure 49: Viewing a Penalty Applied by a Penalty Rule"></a>
+                  <figcaption><strong>Figure 49.</strong> Viewing a Penalty Applied by a Penalty Rule <span>(PDF page 452)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-050">
+                  <a href="assets/cpq/pdf-figures/page-0457.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0457.png" alt="Figure 50: Context Rule Components"></a>
+                  <figcaption><strong>Figure 50.</strong> Context Rule Components <span>(PDF page 457)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-051">
+                  <a href="assets/cpq/pdf-figures/page-0458.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0458.png" alt="Figure 51: Rule Sets"></a>
+                  <figcaption><strong>Figure 51.</strong> Rule Sets <span>(PDF page 458)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-052">
+                  <a href="assets/cpq/pdf-figures/page-0460.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0460.png" alt="Figure 52: Header Rule Processing Logic"></a>
+                  <figcaption><strong>Figure 52.</strong> Header Rule Processing Logic <span>(PDF page 460)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-053">
+                  <a href="assets/cpq/pdf-figures/page-0461.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0461.png" alt="Figure 53: Setting a Header Rule in the Rule Set General Properties Facet"></a>
+                  <figcaption><strong>Figure 53.</strong> Setting a Header Rule in the Rule Set General Properties Facet <span>(PDF page 461)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-054">
+                  <a href="assets/cpq/pdf-figures/page-0464.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0464.png" alt="Figure 54: Setting a Failure Message for a Rule Set"></a>
+                  <figcaption><strong>Figure 54.</strong> Setting a Failure Message for a Rule Set <span>(PDF page 464)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-055">
+                  <a href="assets/cpq/pdf-figures/page-0465.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0465.png" alt="Figure 55: Failure Message Appears in Vlocity Cart"></a>
+                  <figcaption><strong>Figure 55.</strong> Failure Message Appears in Vlocity Cart <span>(PDF page 465)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-056">
+                  <a href="assets/cpq/pdf-figures/page-0478.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0478.png" alt="Figure 56: No Pricing Adjustment Rule Set at Run Time"></a>
+                  <figcaption><strong>Figure 56.</strong> No Pricing Adjustment Rule Set at Run Time <span>(PDF page 478)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-057">
+                  <a href="assets/cpq/pdf-figures/page-0489.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0489.png" alt="Figure 57: Context Dimensions"></a>
+                  <figcaption><strong>Figure 57.</strong> Context Dimensions <span>(PDF page 489)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-058">
+                  <a href="assets/cpq/pdf-figures/page-0490.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0490.png" alt="Figure 58: Condition Weight Formula"></a>
+                  <figcaption><strong>Figure 58.</strong> Condition Weight Formula <span>(PDF page 490)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-059">
+                  <a href="assets/cpq/pdf-figures/page-0491.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0491.png" alt="Figure 59: Calculating Multiple Rule Condition Weights"></a>
+                  <figcaption><strong>Figure 59.</strong> Calculating Multiple Rule Condition Weights <span>(PDF page 491)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-060">
+                  <a href="assets/cpq/pdf-figures/page-0499.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0499.png" alt="Figure 60: Context Rule Components"></a>
+                  <figcaption><strong>Figure 60.</strong> Context Rule Components <span>(PDF page 499)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-061">
+                  <a href="assets/cpq/pdf-figures/page-0500.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0500.png" alt="Figure 61: Accessing Context Mappings From a Context Scope"></a>
+                  <figcaption><strong>Figure 61.</strong> Accessing Context Mappings From a Context Scope <span>(PDF page 500)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-062">
+                  <a href="assets/cpq/pdf-figures/page-0502.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0502.png" alt="Figure 62: Tracing the Object Hierarchy using Source Expressions"></a>
+                  <figcaption><strong>Figure 62.</strong> Tracing the Object Hierarchy using Source Expressions <span>(PDF page 502)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-063">
+                  <a href="assets/cpq/pdf-figures/page-0503.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0503.png" alt="Figure 63: Using Source Expressions for Virtual Objects"></a>
+                  <figcaption><strong>Figure 63.</strong> Using Source Expressions for Virtual Objects <span>(PDF page 503)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-064">
+                  <a href="assets/cpq/pdf-figures/page-0504.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0504.png" alt="Figure 64: Root and Second-Level Context Scopes"></a>
+                  <figcaption><strong>Figure 64.</strong> Root and Second-Level Context Scopes <span>(PDF page 504)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-065">
+                  <a href="assets/cpq/pdf-figures/page-0505.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0505.png" alt="Figure 65: Any and Second-Level Context Scopes"></a>
+                  <figcaption><strong>Figure 65.</strong> Any and Second-Level Context Scopes <span>(PDF page 505)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-066">
+                  <a href="assets/cpq/pdf-figures/page-0505.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0505.png" alt="Figure 66: Any.Account Context Scope"></a>
+                  <figcaption><strong>Figure 66.</strong> Any.Account Context Scope <span>(PDF page 505)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-067">
+                  <a href="assets/cpq/pdf-figures/page-0507.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0507.png" alt="Figure 67: Virtual Context Scopes"></a>
+                  <figcaption><strong>Figure 67.</strong> Virtual Context Scopes <span>(PDF page 507)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-068">
+                  <a href="assets/cpq/pdf-figures/page-0510.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0510.png" alt="Figure 68: Sample Response"></a>
+                  <figcaption><strong>Figure 68.</strong> Sample Response <span>(PDF page 510)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-069">
+                  <a href="assets/cpq/pdf-figures/page-0512.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0512.png" alt="Figure 69: Setting a Failure Message for a Rule Set"></a>
+                  <figcaption><strong>Figure 69.</strong> Setting a Failure Message for a Rule Set <span>(PDF page 512)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-070">
+                  <a href="assets/cpq/pdf-figures/page-0513.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0513.png" alt="Figure 70: Failure Message Appears in Vlocity Cart"></a>
+                  <figcaption><strong>Figure 70.</strong> Failure Message Appears in Vlocity Cart <span>(PDF page 513)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-071">
+                  <a href="assets/cpq/pdf-figures/page-0516.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0516.png" alt="Figure 71: Functions"></a>
+                  <figcaption><strong>Figure 71.</strong> Functions <span>(PDF page 516)</span></figcaption>
+                </figure>
+      </div>
+      <h3>PDF Screenshots — Advanced Rules Framework</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-072">
+                  <a href="assets/cpq/pdf-figures/page-0527.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0527.png" alt="Figure 72: Rule Processing Diagram"></a>
+                  <figcaption><strong>Figure 72.</strong> Rule Processing Diagram <span>(PDF page 527)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-073">
+                  <a href="assets/cpq/pdf-figures/page-0528.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0528.png" alt="Figure 73: Availability and Eligibility Rule Process Diagram"></a>
+                  <figcaption><strong>Figure 73.</strong> Availability and Eligibility Rule Process Diagram <span>(PDF page 528)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-074">
+                  <a href="assets/cpq/pdf-figures/page-0531.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0531.png" alt="Figure 74: Compatibility Rule Process Diagram"></a>
+                  <figcaption><strong>Figure 74.</strong> Compatibility Rule Process Diagram <span>(PDF page 531)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-075">
+                  <a href="assets/cpq/pdf-figures/page-0533.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0533.png" alt="Figure 75: Rule Object Detail"></a>
+                  <figcaption><strong>Figure 75.</strong> Rule Object Detail <span>(PDF page 533)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-076">
+                  <a href="assets/cpq/pdf-figures/page-0533.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0533.png" alt="Figure 76: Rule Filter Object"></a>
+                  <figcaption><strong>Figure 76.</strong> Rule Filter Object <span>(PDF page 533)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-077">
+                  <a href="assets/cpq/pdf-figures/page-0534.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0534.png" alt="Figure 77: Figure: Rule Action Object"></a>
+                  <figcaption><strong>Figure 77.</strong> Figure: Rule Action Object <span>(PDF page 534)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-078">
+                  <a href="assets/cpq/pdf-figures/page-0534.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0534.png" alt="Figure 78: Rule Variable Object"></a>
+                  <figcaption><strong>Figure 78.</strong> Rule Variable Object <span>(PDF page 534)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-079">
+                  <a href="assets/cpq/pdf-figures/page-0539.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0539.png" alt="Figure 79: Sample Evaluation Entity Filter"></a>
+                  <figcaption><strong>Figure 79.</strong> Sample Evaluation Entity Filter <span>(PDF page 539)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-080">
+                  <a href="assets/cpq/pdf-figures/page-0540.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0540.png" alt="Figure 80: Sample Qualification Download Speed"></a>
+                  <figcaption><strong>Figure 80.</strong> Sample Qualification Download Speed <span>(PDF page 540)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-081">
+                  <a href="assets/cpq/pdf-figures/page-0542.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0542.png" alt="Figure 81: Entity Filter Object Detail Page"></a>
+                  <figcaption><strong>Figure 81.</strong> Entity Filter Object Detail Page <span>(PDF page 542)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-082">
+                  <a href="assets/cpq/pdf-figures/page-0548.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0548.png" alt="Figure 82: Vlocity Rule Builder"></a>
+                  <figcaption><strong>Figure 82.</strong> Vlocity Rule Builder <span>(PDF page 548)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-083">
+                  <a href="assets/cpq/pdf-figures/page-0552.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0552.png" alt="Figure 83: Entity Filter"></a>
+                  <figcaption><strong>Figure 83.</strong> Entity Filter <span>(PDF page 552)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-084">
+                  <a href="assets/cpq/pdf-figures/page-0554.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0554.png" alt="Figure 84: Products Not Available List"></a>
+                  <figcaption><strong>Figure 84.</strong> Products Not Available List <span>(PDF page 554)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-085">
+                  <a href="assets/cpq/pdf-figures/page-0555.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0555.png" alt="Figure 85: Products Not Eligible Related List"></a>
+                  <figcaption><strong>Figure 85.</strong> Products Not Eligible Related List <span>(PDF page 555)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-086">
+                  <a href="assets/cpq/pdf-figures/page-0558.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0558.png" alt="Figure 86: Rule Builder, Advanced Eligibility Rule"></a>
+                  <figcaption><strong>Figure 86.</strong> Rule Builder, Advanced Eligibility Rule <span>(PDF page 558)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-087">
+                  <a href="assets/cpq/pdf-figures/page-0561.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0561.png" alt="Figure 87: Rule Builder, Compatibility Rule"></a>
+                  <figcaption><strong>Figure 87.</strong> Rule Builder, Compatibility Rule <span>(PDF page 561)</span></figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-pricing">
@@ -2501,6 +2076,130 @@
         <li><strong>Manual in cart</strong> — agent edits via Apply Discount flyout (<code>applyAdjustment</code> API)</li>
       </ul>
       <p><strong>Pricing hooks:</strong> <code>CpqAppHandlerHook</code> and <code>PricingVariableCalculationHook</code> inject custom logic. Repricing APIs refresh prices when account context changes.</p>
+
+      <h3>PDF Screenshots — Pricing, Hooks &amp; Matrices</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-022">
+                  <a href="assets/cpq/pdf-figures/page-0328.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0328.png" alt="Figure 22: Price Details Popup"></a>
+                  <figcaption><strong>Figure 22.</strong> Price Details Popup <span>(PDF page 328)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-023">
+                  <a href="assets/cpq/pdf-figures/page-0333.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0333.png" alt="Figure 23: Interface Implementation"></a>
+                  <figcaption><strong>Figure 23.</strong> Interface Implementation <span>(PDF page 333)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-024">
+                  <a href="assets/cpq/pdf-figures/page-0334.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0334.png" alt="Figure 24: Price Details Popup"></a>
+                  <figcaption><strong>Figure 24.</strong> Price Details Popup <span>(PDF page 334)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-025">
+                  <a href="assets/cpq/pdf-figures/page-0335.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0335.png" alt="Figure 25: Custom Class Implementation"></a>
+                  <figcaption><strong>Figure 25.</strong> Custom Class Implementation <span>(PDF page 335)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-026">
+                  <a href="assets/cpq/pdf-figures/page-0336.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0336.png" alt="Figure 26: Custom Class Implementation"></a>
+                  <figcaption><strong>Figure 26.</strong> Custom Class Implementation <span>(PDF page 336)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-027">
+                  <a href="assets/cpq/pdf-figures/page-0340.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0340.png" alt="Figure 27: Pricing Products Without Attribute-Based Pricing"></a>
+                  <figcaption><strong>Figure 27.</strong> Pricing Products Without Attribute-Based Pricing <span>(PDF page 340)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-028">
+                  <a href="assets/cpq/pdf-figures/page-0341.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0341.png" alt="Figure 28: Pricing Products With Attribute-Based Pricing"></a>
+                  <figcaption><strong>Figure 28.</strong> Pricing Products With Attribute-Based Pricing <span>(PDF page 341)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-029">
+                  <a href="assets/cpq/pdf-figures/page-0349.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0349.png" alt="Figure 29: Types of Attribute-Based Pricing and Their Calculation Matrices"></a>
+                  <figcaption><strong>Figure 29.</strong> Types of Attribute-Based Pricing and Their Calculation Matrices <span>(PDF page 349)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-030">
+                  <a href="assets/cpq/pdf-figures/page-0352.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0352.png" alt="Figure 30: Entering new data for inputs to SourceTargetAttributePricingMatrix"></a>
+                  <figcaption><strong>Figure 30.</strong> Entering new data for inputs to SourceTargetAttributePricingMatrix <span>(PDF page 352)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-031">
+                  <a href="assets/cpq/pdf-figures/page-0354.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0354.png" alt="Figure 31: Entering input data to the Range AttributePricingMatrix"></a>
+                  <figcaption><strong>Figure 31.</strong> Entering input data to the Range AttributePricingMatrix <span>(PDF page 354)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-032">
+                  <a href="assets/cpq/pdf-figures/page-0358.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0358.png" alt="Figure 32: Target Product Name needs Include In Calculation Output flag checked"></a>
+                  <figcaption><strong>Figure 32.</strong> Target Product Name needs Include In Calculation Output flag checked <span>(PDF page 358)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-033">
+                  <a href="assets/cpq/pdf-figures/page-0365.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0365.png" alt="Figure 33: Price Details icon"></a>
+                  <figcaption><strong>Figure 33.</strong> Price Details icon <span>(PDF page 365)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-034">
+                  <a href="assets/cpq/pdf-figures/page-0366.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0366.png" alt="Figure 34: Pricing Details dialog box"></a>
+                  <figcaption><strong>Figure 34.</strong> Pricing Details dialog box <span>(PDF page 366)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-035">
+                  <a href="assets/cpq/pdf-figures/page-0391.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0391.png" alt="Figure 35: Vlocity Calculation Matrix for a Pricing Matrix"></a>
+                  <figcaption><strong>Figure 35.</strong> Vlocity Calculation Matrix for a Pricing Matrix <span>(PDF page 391)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-036">
+                  <a href="assets/cpq/pdf-figures/page-0398.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0398.png" alt="Figure 36: Life Insurance Matrix"></a>
+                  <figcaption><strong>Figure 36.</strong> Life Insurance Matrix <span>(PDF page 398)</span></figcaption>
+                </figure>
+      </div>
+      <h3>PDF Screenshots — Promotions &amp; Discounts</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-088">
+                  <a href="assets/cpq/pdf-figures/page-0562.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0562.png" alt="Figure 88: Price Book Entry Edit Page"></a>
+                  <figcaption><strong>Figure 88.</strong> Price Book Entry Edit Page <span>(PDF page 562)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-275">
+                  <a href="assets/cpq/pdf-screens/screen-page-0275.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0275.png" alt="CPQ PDF page 275"></a>
+                  <figcaption><strong>PDF page 275</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-276">
+                  <a href="assets/cpq/pdf-screens/screen-page-0276.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0276.png" alt="CPQ PDF page 276"></a>
+                  <figcaption><strong>PDF page 276</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-277">
+                  <a href="assets/cpq/pdf-screens/screen-page-0277.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0277.png" alt="CPQ PDF page 277"></a>
+                  <figcaption><strong>PDF page 277</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-278">
+                  <a href="assets/cpq/pdf-screens/screen-page-0278.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0278.png" alt="CPQ PDF page 278"></a>
+                  <figcaption><strong>PDF page 278</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-279">
+                  <a href="assets/cpq/pdf-screens/screen-page-0279.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0279.png" alt="CPQ PDF page 279"></a>
+                  <figcaption><strong>PDF page 279</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-280">
+                  <a href="assets/cpq/pdf-screens/screen-page-0280.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0280.png" alt="CPQ PDF page 280"></a>
+                  <figcaption><strong>PDF page 280</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-281">
+                  <a href="assets/cpq/pdf-screens/screen-page-0281.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0281.png" alt="CPQ PDF page 281"></a>
+                  <figcaption><strong>PDF page 281</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-282">
+                  <a href="assets/cpq/pdf-screens/screen-page-0282.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0282.png" alt="CPQ PDF page 282"></a>
+                  <figcaption><strong>PDF page 282</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-284">
+                  <a href="assets/cpq/pdf-screens/screen-page-0284.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0284.png" alt="CPQ PDF page 284"></a>
+                  <figcaption><strong>PDF page 284</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-287">
+                  <a href="assets/cpq/pdf-screens/screen-page-0287.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0287.png" alt="CPQ PDF page 287"></a>
+                  <figcaption><strong>PDF page 287</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-288">
+                  <a href="assets/cpq/pdf-screens/screen-page-0288.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0288.png" alt="CPQ PDF page 288"></a>
+                  <figcaption><strong>PDF page 288</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-292">
+                  <a href="assets/cpq/pdf-screens/screen-page-0292.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0292.png" alt="CPQ PDF page 292"></a>
+                  <figcaption><strong>PDF page 292</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-297">
+                  <a href="assets/cpq/pdf-screens/screen-page-0297.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0297.png" alt="CPQ PDF page 297"></a>
+                  <figcaption><strong>PDF page 297</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-cost-margin">
@@ -2721,6 +2420,59 @@
           <tr><td><code>cpq-total-bar</code></td><td><code>cpq-total-bar-card</code></td><td>Active Opportunity/Quote/Order</td><td>Recurring Margin Total, One Time Margin Total, Order Margin Total</td></tr>
         </tbody>
       </table>
+
+      <h3>PDF Screenshots</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="screen-386">
+                  <a href="assets/cpq/pdf-screens/screen-page-0386.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0386.png" alt="CPQ PDF page 386"></a>
+                  <figcaption><strong>PDF page 386</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-387">
+                  <a href="assets/cpq/pdf-screens/screen-page-0387.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0387.png" alt="CPQ PDF page 387"></a>
+                  <figcaption><strong>PDF page 387</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-389">
+                  <a href="assets/cpq/pdf-screens/screen-page-0389.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0389.png" alt="CPQ PDF page 389"></a>
+                  <figcaption><strong>PDF page 389</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-390">
+                  <a href="assets/cpq/pdf-screens/screen-page-0390.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0390.png" alt="CPQ PDF page 390"></a>
+                  <figcaption><strong>PDF page 390</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-392">
+                  <a href="assets/cpq/pdf-screens/screen-page-0392.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0392.png" alt="CPQ PDF page 392"></a>
+                  <figcaption><strong>PDF page 392</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-393">
+                  <a href="assets/cpq/pdf-screens/screen-page-0393.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0393.png" alt="CPQ PDF page 393"></a>
+                  <figcaption><strong>PDF page 393</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-394">
+                  <a href="assets/cpq/pdf-screens/screen-page-0394.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0394.png" alt="CPQ PDF page 394"></a>
+                  <figcaption><strong>PDF page 394</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-395">
+                  <a href="assets/cpq/pdf-screens/screen-page-0395.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0395.png" alt="CPQ PDF page 395"></a>
+                  <figcaption><strong>PDF page 395</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-396">
+                  <a href="assets/cpq/pdf-screens/screen-page-0396.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0396.png" alt="CPQ PDF page 396"></a>
+                  <figcaption><strong>PDF page 396</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-397">
+                  <a href="assets/cpq/pdf-screens/screen-page-0397.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0397.png" alt="CPQ PDF page 397"></a>
+                  <figcaption><strong>PDF page 397</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-399">
+                  <a href="assets/cpq/pdf-screens/screen-page-0399.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0399.png" alt="CPQ PDF page 399"></a>
+                  <figcaption><strong>PDF page 399</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-400">
+                  <a href="assets/cpq/pdf-screens/screen-page-0400.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0400.png" alt="CPQ PDF page 400"></a>
+                  <figcaption><strong>PDF page 400</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-promotions">
@@ -2804,6 +2556,79 @@
         </tbody>
       </table>
       <div class="tip"><strong>API:</strong> <code>addPromo</code> / POST <code>.../carts/{id}/promotions</code> adds a promotion programmatically.</div>
+
+      <h3>PDF Screenshots — Promotions &amp; Discounts</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-089">
+                  <a href="assets/cpq/pdf-figures/page-0590.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0590.png" alt="Figure 89: Bundle Currently in the Cart"></a>
+                  <figcaption><strong>Figure 89.</strong> Bundle Currently in the Cart <span>(PDF page 590)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-090">
+                  <a href="assets/cpq/pdf-figures/page-0590.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0590.png" alt="Figure 90: Promotional Pricing Applied to Bundle"></a>
+                  <figcaption><strong>Figure 90.</strong> Promotional Pricing Applied to Bundle <span>(PDF page 590)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-091">
+                  <a href="assets/cpq/pdf-figures/page-0591.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0591.png" alt="Figure 91: iPhone X Intro Promo Discounts Two Products in iPhone X Intro Bundle"></a>
+                  <figcaption><strong>Figure 91.</strong> iPhone X Intro Promo Discounts Two Products in iPhone X Intro Bundle <span>(PDF page 591)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-092">
+                  <a href="assets/cpq/pdf-figures/page-0591.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0591.png" alt="Figure 92: Unlimited Talk + Text Promotion Discounts One Product in iPhone X"></a>
+                  <figcaption><strong>Figure 92.</strong> Unlimited Talk + Text Promotion Discounts One Product in iPhone X <span>(PDF page 591)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="fig-093">
+                  <a href="assets/cpq/pdf-figures/page-0594.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0594.png" alt="Figure 93: Cancel Promotion Dialog Box"></a>
+                  <figcaption><strong>Figure 93.</strong> Cancel Promotion Dialog Box <span>(PDF page 594)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-559">
+                  <a href="assets/cpq/pdf-screens/screen-page-0559.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0559.png" alt="CPQ PDF page 559"></a>
+                  <figcaption><strong>PDF page 559</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-578">
+                  <a href="assets/cpq/pdf-screens/screen-page-0578.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0578.png" alt="CPQ PDF page 578"></a>
+                  <figcaption><strong>PDF page 578</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-579">
+                  <a href="assets/cpq/pdf-screens/screen-page-0579.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0579.png" alt="CPQ PDF page 579"></a>
+                  <figcaption><strong>PDF page 579</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-581">
+                  <a href="assets/cpq/pdf-screens/screen-page-0581.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0581.png" alt="CPQ PDF page 581"></a>
+                  <figcaption><strong>PDF page 581</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-582">
+                  <a href="assets/cpq/pdf-screens/screen-page-0582.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0582.png" alt="CPQ PDF page 582"></a>
+                  <figcaption><strong>PDF page 582</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-583">
+                  <a href="assets/cpq/pdf-screens/screen-page-0583.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0583.png" alt="CPQ PDF page 583"></a>
+                  <figcaption><strong>PDF page 583</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-587">
+                  <a href="assets/cpq/pdf-screens/screen-page-0587.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0587.png" alt="CPQ PDF page 587"></a>
+                  <figcaption><strong>PDF page 587</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-588">
+                  <a href="assets/cpq/pdf-screens/screen-page-0588.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0588.png" alt="CPQ PDF page 588"></a>
+                  <figcaption><strong>PDF page 588</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-592">
+                  <a href="assets/cpq/pdf-screens/screen-page-0592.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0592.png" alt="CPQ PDF page 592"></a>
+                  <figcaption><strong>PDF page 592</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-597">
+                  <a href="assets/cpq/pdf-screens/screen-page-0597.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0597.png" alt="CPQ PDF page 597"></a>
+                  <figcaption><strong>PDF page 597</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-598">
+                  <a href="assets/cpq/pdf-screens/screen-page-0598.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0598.png" alt="CPQ PDF page 598"></a>
+                  <figcaption><strong>PDF page 598</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-599">
+                  <a href="assets/cpq/pdf-screens/screen-page-0599.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0599.png" alt="CPQ PDF page 599"></a>
+                  <figcaption><strong>PDF page 599</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-discounts">
@@ -2904,6 +2729,71 @@
         </tbody>
       </table>
       <p>Agents can also create <strong>custom discounts</strong> directly in Vlocity Cart and edit discounts already in the cart.</p>
+
+      <h3>PDF Screenshots</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="screen-600">
+                  <a href="assets/cpq/pdf-screens/screen-page-0600.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0600.png" alt="CPQ PDF page 600"></a>
+                  <figcaption><strong>PDF page 600</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-601">
+                  <a href="assets/cpq/pdf-screens/screen-page-0601.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0601.png" alt="CPQ PDF page 601"></a>
+                  <figcaption><strong>PDF page 601</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-602">
+                  <a href="assets/cpq/pdf-screens/screen-page-0602.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0602.png" alt="CPQ PDF page 602"></a>
+                  <figcaption><strong>PDF page 602</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-603">
+                  <a href="assets/cpq/pdf-screens/screen-page-0603.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0603.png" alt="CPQ PDF page 603"></a>
+                  <figcaption><strong>PDF page 603</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-604">
+                  <a href="assets/cpq/pdf-screens/screen-page-0604.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0604.png" alt="CPQ PDF page 604"></a>
+                  <figcaption><strong>PDF page 604</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-605">
+                  <a href="assets/cpq/pdf-screens/screen-page-0605.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0605.png" alt="CPQ PDF page 605"></a>
+                  <figcaption><strong>PDF page 605</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-610">
+                  <a href="assets/cpq/pdf-screens/screen-page-0610.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0610.png" alt="CPQ PDF page 610"></a>
+                  <figcaption><strong>PDF page 610</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-611">
+                  <a href="assets/cpq/pdf-screens/screen-page-0611.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0611.png" alt="CPQ PDF page 611"></a>
+                  <figcaption><strong>PDF page 611</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-613">
+                  <a href="assets/cpq/pdf-screens/screen-page-0613.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0613.png" alt="CPQ PDF page 613"></a>
+                  <figcaption><strong>PDF page 613</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-615">
+                  <a href="assets/cpq/pdf-screens/screen-page-0615.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0615.png" alt="CPQ PDF page 615"></a>
+                  <figcaption><strong>PDF page 615</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-616">
+                  <a href="assets/cpq/pdf-screens/screen-page-0616.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0616.png" alt="CPQ PDF page 616"></a>
+                  <figcaption><strong>PDF page 616</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-617">
+                  <a href="assets/cpq/pdf-screens/screen-page-0617.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0617.png" alt="CPQ PDF page 617"></a>
+                  <figcaption><strong>PDF page 617</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-618">
+                  <a href="assets/cpq/pdf-screens/screen-page-0618.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0618.png" alt="CPQ PDF page 618"></a>
+                  <figcaption><strong>PDF page 618</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-619">
+                  <a href="assets/cpq/pdf-screens/screen-page-0619.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0619.png" alt="CPQ PDF page 619"></a>
+                  <figcaption><strong>PDF page 619</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-620">
+                  <a href="assets/cpq/pdf-screens/screen-page-0620.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0620.png" alt="CPQ PDF page 620"></a>
+                  <figcaption><strong>PDF page 620</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-flow-mgmt">
@@ -2926,6 +2816,39 @@
         <li>Save and activate</li>
       </ol>
       <p>Each rule action invokes one rule by name and type. The <code>doCommit</code> flag marks the final rule action in the sequence.</p>
+
+      <h3>PDF Screenshots</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="screen-569">
+                  <a href="assets/cpq/pdf-screens/screen-page-0569.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0569.png" alt="CPQ PDF page 569"></a>
+                  <figcaption><strong>PDF page 569</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-570">
+                  <a href="assets/cpq/pdf-screens/screen-page-0570.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0570.png" alt="CPQ PDF page 570"></a>
+                  <figcaption><strong>PDF page 570</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-571">
+                  <a href="assets/cpq/pdf-screens/screen-page-0571.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0571.png" alt="CPQ PDF page 571"></a>
+                  <figcaption><strong>PDF page 571</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-572">
+                  <a href="assets/cpq/pdf-screens/screen-page-0572.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0572.png" alt="CPQ PDF page 572"></a>
+                  <figcaption><strong>PDF page 572</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-573">
+                  <a href="assets/cpq/pdf-screens/screen-page-0573.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0573.png" alt="CPQ PDF page 573"></a>
+                  <figcaption><strong>PDF page 573</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-575">
+                  <a href="assets/cpq/pdf-screens/screen-page-0575.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0575.png" alt="CPQ PDF page 575"></a>
+                  <figcaption><strong>PDF page 575</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-576">
+                  <a href="assets/cpq/pdf-screens/screen-page-0576.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0576.png" alt="CPQ PDF page 576"></a>
+                  <figcaption><strong>PDF page 576</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-change-plans">
@@ -2986,6 +2909,43 @@
         <li>CPQ runs eligibility rules, filters price list, finds matching multiplay bundles</li>
       </ol>
       <div class="note"><strong>ReplaceOffer API</strong> supports custom field copy via Field Settings (<code>COPFieldsToCopyDuringReplace</code>, <code>COPFieldsToCopyDuringCreatingAsset</code>).</div>
+
+      <h3>PDF Screenshots — Change of Plans &amp; Multiplay</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="fig-094">
+                  <a href="assets/cpq/pdf-figures/page-0637.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-figures/page-0637.png" alt="Figure 94: Replace, Upgrade, or Downgrade Offers"></a>
+                  <figcaption><strong>Figure 94.</strong> Replace, Upgrade, or Downgrade Offers <span>(PDF page 637)</span></figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-628">
+                  <a href="assets/cpq/pdf-screens/screen-page-0628.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0628.png" alt="CPQ PDF page 628"></a>
+                  <figcaption><strong>PDF page 628</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-629">
+                  <a href="assets/cpq/pdf-screens/screen-page-0629.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0629.png" alt="CPQ PDF page 629"></a>
+                  <figcaption><strong>PDF page 629</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-632">
+                  <a href="assets/cpq/pdf-screens/screen-page-0632.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0632.png" alt="CPQ PDF page 632"></a>
+                  <figcaption><strong>PDF page 632</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-633">
+                  <a href="assets/cpq/pdf-screens/screen-page-0633.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0633.png" alt="CPQ PDF page 633"></a>
+                  <figcaption><strong>PDF page 633</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-638">
+                  <a href="assets/cpq/pdf-screens/screen-page-0638.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0638.png" alt="CPQ PDF page 638"></a>
+                  <figcaption><strong>PDF page 638</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-643">
+                  <a href="assets/cpq/pdf-screens/screen-page-0643.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0643.png" alt="CPQ PDF page 643"></a>
+                  <figcaption><strong>PDF page 643</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-644">
+                  <a href="assets/cpq/pdf-screens/screen-page-0644.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0644.png" alt="CPQ PDF page 644"></a>
+                  <figcaption><strong>PDF page 644</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-multisite">
@@ -3039,6 +2999,35 @@
 
 
             <p>View results on Account → Orders related list. Add <strong>Quote/Order Product Rollups</strong> to see total qty and price per product across groups.</p>
+
+      <h3>PDF Screenshots</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="screen-651">
+                  <a href="assets/cpq/pdf-screens/screen-page-0651.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0651.png" alt="CPQ PDF page 651"></a>
+                  <figcaption><strong>PDF page 651</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-652">
+                  <a href="assets/cpq/pdf-screens/screen-page-0652.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0652.png" alt="CPQ PDF page 652"></a>
+                  <figcaption><strong>PDF page 652</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-656">
+                  <a href="assets/cpq/pdf-screens/screen-page-0656.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0656.png" alt="CPQ PDF page 656"></a>
+                  <figcaption><strong>PDF page 656</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-657">
+                  <a href="assets/cpq/pdf-screens/screen-page-0657.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0657.png" alt="CPQ PDF page 657"></a>
+                  <figcaption><strong>PDF page 657</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-658">
+                  <a href="assets/cpq/pdf-screens/screen-page-0658.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0658.png" alt="CPQ PDF page 658"></a>
+                  <figcaption><strong>PDF page 658</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-663">
+                  <a href="assets/cpq/pdf-screens/screen-page-0663.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0663.png" alt="CPQ PDF page 663"></a>
+                  <figcaption><strong>PDF page 663</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
+
     </section>
 
     <section id="cpq-inflight">
@@ -3209,247 +3198,18 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
   }
 });</div>
       <p><strong>Odin hooks:</strong> Implement pre/post hooks on notification handlers (e.g., <code>OdinOIAssetizeHandlerHookImplementation</code>) for custom logic during assetization.</p>
-    </section>
 
-    <section id="cpq-fields-ref">
-      <h2>CPQ Required Fields — Master Reference</h2>
-      <p>Consolidated field tables from <strong>CME_CPQ_PDF-en.pdf</strong>. Each CPQ topic section also includes the relevant tables inline. Fields marked <span class="req-yes">Yes</span> are required (asterisk in Product Console).</p>
-      <nav class="fig-toc" style="margin:1rem 0;">
-        <a href="#cpq-pricing">Pricing &amp; PLE</a> ·
-        <a href="#cpq-cost-margin">Cost &amp; Margin</a> ·
-        <a href="#cpq-promotions">Promotions</a> ·
-        <a href="#cpq-discounts">Discounts</a> ·
-        <a href="#cpq-change-plans">Change of Plans</a> ·
-        <a href="#cpq-multisite">Multi-Site</a> ·
-        <a href="#cpq-macd">MACD / Assets</a>
-      </nav>
-<h4>Table 3 — Price List: General Properties</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td>Name</td><td class="req-yes">Yes</td><td>Price list name</td><td>Identifies the list in Product Console and cart header picklist</td></tr>
-    <tr><td>Code</td><td class="req-yes">Yes</td><td>Unique identifier — uppercase, no spaces (e.g., PL-B2B)</td><td>Referenced by integrations and pricing configuration</td></tr>
-    <tr><td>Description</td><td>No</td><td>Description of the price list (e.g., Commercial/Business)</td><td>Admin documentation only</td></tr>
-    <tr><td>Price Book</td><td class="req-yes">Yes</td><td>Salesforce price book linked to this price list</td><td>Multiple price lists can share one price book</td></tr>
-    <tr><td>Parent Price List</td><td>No</td><td>Parent list whose pricing this list inherits</td><td>Child lists inherit parent pricing; add exceptions in child</td></tr>
-    <tr><td>Sequence</td><td>No</td><td>Display order among price lists</td><td>Controls sort in picklists</td></tr>
-    <tr><td>Currency Code</td><td class="req-yes">Yes</td><td>Currency for all entries in this list</td><td>Must match pricing element currency</td></tr>
-    <tr><td>Loyalty Code</td><td>No</td><td>Loyalty indicator for points pricing (typically PTS)</td><td>Used with loyalty pricing variables</td></tr>
-  </tbody>
-</table>
-
-<h4>Table 4 — Price List: Effectivity</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td>Is Active</td><td class="req-yes">Yes</td><td>When selected, the price list can be used in carts</td><td>Inactive lists are hidden from cart price list picklist</td></tr>
-    <tr><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time the price list becomes available</td><td>Must be current or list cannot be selected</td></tr>
-    <tr><td>Effective Until</td><td>No</td><td>Date/time the price list expires</td><td>After this date the list is no longer usable</td></tr>
-  </tbody>
-</table>
-
-<h4>Table 5–7 — Pricing Element Charge: Required Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">Pricing Variable (search)</td></tr>
-    <tr><td>Pricing Variable</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Recurring or One-time charge type filter</td><td>Finds matching pricing variables</td></tr>
-    <tr><td>Pricing Variable</td><td>Frequency</td><td>Conditional</td><td>Daily, Weekly, Monthly, Yearly — shown for recurring</td><td>Matches recurring variable frequency</td></tr>
-    <tr><td>Pricing Variable</td><td>Type</td><td class="req-yes">Yes</td><td>Price (customer charge) or Cost (company cost)</td><td>Separates revenue vs cost elements</td></tr>
-    <tr><td class="section-header" colspan="5">General Properties</td></tr>
-    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Payment type, amount, recurrence (e.g., $9.99 Monthly)</td><td>Admin identification in Pricing Elements facet</td></tr>
-    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — uppercase, no spaces or special chars</td><td>System identifier for the element</td></tr>
-    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Currency/loyalty amount shown in cart (e.g., $10)</td><td>Customer-facing price label</td></tr>
-    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>Do <strong>not</strong> select when creating a pricing element charge</td><td>Base Price is set on PLE, not on element</td></tr>
-    <tr><td class="section-header" colspan="5">Currency Value</td></tr>
-    <tr><td>Currency Value</td><td>Charge</td><td class="req-yes">Yes</td><td>Charge amount</td><td>Actual price or cost value</td></tr>
-    <tr><td>Currency Value</td><td>Currency Code</td><td class="req-yes">Yes</td><td>Charge currency</td><td>Must align with price list currency</td></tr>
-    <tr><td class="section-header" colspan="5">Effectivity (Table 8)</td></tr>
-    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time element becomes available</td><td>Must be current to appear in PLE search</td></tr>
-    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time for element availability</td><td>Element ignored after this date</td></tr>
-    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Element status — must be selected</td><td>Inactive elements excluded from PLE creation</td></tr>
-  </tbody>
-</table>
-
-<h4>Table 21–23 — Price List Entry (PLE): Required &amp; Optional Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">General Properties</td></tr>
-    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes*</td><td>Price list storing this entry (*shown when creating from product)</td><td>Links product price to a specific list</td></tr>
-    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes*</td><td>Product being priced (*shown when creating from price list)</td><td>Which catalog item gets this price</td></tr>
-    <tr><td>General Properties</td><td>Display Text</td><td class="req-yes">Yes</td><td>Payment type and amount shown in Products list (e.g., $9.99 Monthly)</td><td>Customer sees this in cart product list</td></tr>
-    <tr><td>General Properties</td><td>Base Price</td><td>No</td><td>When checked, this is the default/list price</td><td>Default price before context rules and promos</td></tr>
-    <tr><td>General Properties</td><td>Virtual Price</td><td>No</td><td>Replaces parent bundle price with sum of child prices</td><td>Rare — used for virtual bundle pricing</td></tr>
-    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Element</td></tr>
-    <tr><td>Pricing Variable</td><td>Charge Type / Sub-Type</td><td class="req-yes">Yes</td><td>Search filters for one-time/recurring and standard/fee</td><td>Select variable then matching pricing element</td></tr>
-    <tr><td>Pricing Element</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>Element from same price list with charge amount</td><td>Combines with variable to form runtime price</td></tr>
-    <tr><td class="section-header" colspan="5">Time Plan/Policy (Table 22)</td></tr>
-    <tr><td>Time Plan/Policy</td><td>Time Plan</td><td>No</td><td>Duration of pricing (e.g., 24-month promo window)</td><td>Limits how long adjustment/price applies</td></tr>
-    <tr><td>Time Plan/Policy</td><td>Time Policy</td><td>No</td><td>When pricing starts/stops within the plan</td><td>Cycle start, end of month, purchase date, etc.</td></tr>
-    <tr><td class="section-header" colspan="5">Effectivity (Table 23)</td></tr>
-    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date/time price becomes available</td><td>Must be current or product won't show in cart</td></tr>
-    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time — PLE ignored after this</td><td>Enables scheduled price changes over time</td></tr>
-    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Price list entry status</td><td>Must be checked for price to appear in cart</td></tr>
-  </tbody>
-</table>
-<h4>Table 50 — Pricing Element for Costs: Required Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">General Properties</td></tr>
-    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Cost element name</td><td>Admin identification on Costs tab</td></tr>
-    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique cost code</td><td>System identifier</td></tr>
-    <tr><td>General Properties</td><td>Display Text</td><td>No</td><td>Brief cost description</td><td>Admin-facing label</td></tr>
-    <tr><td>General Properties</td><td>Help Text</td><td>No</td><td>Tooltip/help for admins</td><td>Optional guidance text</td></tr>
-    <tr><td class="section-header" colspan="5">Pricing Variable &amp; Currency Value</td></tr>
-    <tr><td>Pricing Variable</td><td>Pricing Variable</td><td class="req-yes">Yes</td><td>One-time or recurring cost variable (OT_STD_CST, REC_MNTH_STD_CST)</td><td>Search and select from results</td></tr>
-    <tr><td>Currency Value</td><td>Cost</td><td class="req-yes">Yes</td><td>Cost amount to apply</td><td>Company cost — not customer price</td></tr>
-    <tr><td>Currency Value</td><td>Currency Code</td><td>No</td><td>Default USD</td><td>Currency for cost value</td></tr>
-    <tr><td class="section-header" colspan="5">Effectivity</td></tr>
-    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Date cost becomes active</td><td>Cost ignored before this date</td></tr>
-    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>Optional end date</td><td>Cost not applied after this date</td></tr>
-    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Activate the cost element</td><td>Required for margin calculation</td></tr>
-  </tbody>
-</table>
-<h4>Table 63–66 — Promotion: Required &amp; Optional Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">General Properties (Table 63)</td></tr>
-    <tr><td>General Properties</td><td>Name</td><td class="req-yes">Yes</td><td>Promotion name</td><td>Shown in Promotions list in cart</td></tr>
-    <tr><td>General Properties</td><td>Code</td><td class="req-yes">Yes</td><td>Unique code — all caps, no spaces</td><td>System identifier; used in APIs</td></tr>
-    <tr><td>General Properties</td><td>Description</td><td>No</td><td>Details shown with promo name (e.g., "20% off data plan for 6 months")</td><td>Helps agents understand offer</td></tr>
-    <tr><td>General Properties</td><td>Redeemable Code</td><td>No</td><td>Customer code to become eligible</td><td>eCommerce / self-service redemption</td></tr>
-    <tr><td>General Properties</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list storing the promotion</td><td>Must match cart price list or promo won't appear</td></tr>
-    <tr><td class="section-header" colspan="5">Duration (Table 64)</td></tr>
-    <tr><td>Duration</td><td>Commitment Duration Time Plan</td><td>No</td><td>Time plan defining promo commitment duration</td><td>How long promo pricing applies</td></tr>
-    <tr><td>Duration</td><td>Commitment Duration Time Policy</td><td>No</td><td>When promo pricing starts and ends</td><td>Aligns with billing cycles</td></tr>
-    <tr><td class="section-header" colspan="5">Additional Properties (Table 65)</td></tr>
-    <tr><td>Additional Properties</td><td>Orderable</td><td class="req-yes">Yes*</td><td>Promotion appears in cart Promotions list</td><td>*Required to sell promo from cart sidebar</td></tr>
-    <tr><td>Additional Properties</td><td>Service Continuation</td><td>No</td><td>Not Applicable / Manual Opt-In / Manual Opt-Out after commitment ends</td><td>Controls post-promo subscription behavior</td></tr>
-    <tr><td>Additional Properties</td><td>Follow-on Promotion</td><td>No</td><td>Next promo starting when commitment ends</td><td>Requires <code>PromotionExpirationBatch</code></td></tr>
-    <tr><td class="section-header" colspan="5">Effectivity (Table 66)</td></tr>
-    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion available for use</td><td>Unchecked promos hidden from Qualified tab</td></tr>
-    <tr><td>Effectivity</td><td>Effective From</td><td class="req-yes">Yes</td><td>Start date/time — must be current</td><td>Promo not sellable before this date</td></tr>
-    <tr><td>Effectivity</td><td>Effective Until</td><td>No</td><td>End date/time</td><td>Promo expires after this date</td></tr>
-  </tbody>
-</table>
-
-<h4>Table 67–70 — Promotion Product: Required Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">General Properties (Table 67)</td></tr>
-    <tr><td>General Properties</td><td>Action Type</td><td class="req-yes">Yes</td><td>Add / Update / Add-Update — how promo affects cart or assets</td><td>Add=new cart; Update=change order assets</td></tr>
-    <tr><td>General Properties</td><td>Product</td><td class="req-yes">Yes</td><td>Product or bundle included in promotion</td><td>Must be from same price list as promo</td></tr>
-    <tr><td>General Properties</td><td>Update Scope</td><td class="req-yes">Yes</td><td>Update Item Only vs Update Item and Child Items</td><td>Controls whether bundle children get promo price</td></tr>
-    <tr><td class="section-header" colspan="5">Selection Criteria (Table 68)</td></tr>
-    <tr><td>Selection Criteria</td><td>Parent Offer Product</td><td>No</td><td>Action attempted inside this root offer</td><td>Scoped bundle promos</td></tr>
-    <tr><td>Selection Criteria</td><td>Selection Context Product</td><td>No</td><td>Action attempted inside this selection product</td><td>Nested bundle targeting</td></tr>
-    <tr><td>Selection Criteria</td><td>Selection Context Rule</td><td>No</td><td>Rule qualifying the selection product</td><td>Conditional promo application</td></tr>
-    <tr><td class="section-header" colspan="5">Cardinality (Table 69)</td></tr>
-    <tr><td>Cardinality</td><td>Minimum Quantity</td><td>No</td><td>Minimum units customer must purchase</td><td>Enforced when promo added to cart</td></tr>
-    <tr><td>Cardinality</td><td>Quantity</td><td>No</td><td>Default quantity added</td><td>Pre-filled qty when promo applied</td></tr>
-    <tr><td>Cardinality</td><td>Maximum Quantity</td><td>No</td><td>Maximum units — cannot exceed bundle max</td><td>Prevents over-selling promo products</td></tr>
-    <tr><td class="section-header" colspan="5">Effectivity (Table 70)</td></tr>
-    <tr><td>Effectivity</td><td>Active</td><td class="req-yes">Yes</td><td>Promotion product available</td><td>Inactive products skipped at runtime</td></tr>
-    <tr><td>Effectivity</td><td>Effective From / Until</td><td>No</td><td>Date range for this promo product</td><td>Can differ from parent promo dates</td></tr>
-  </tbody>
-</table>
-<h4>Table 78–79 — New Discount: Required &amp; Optional Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">Required Fields (Table 78)</td></tr>
-    <tr><td>Required</td><td>Name</td><td class="req-yes">Yes</td><td>Discount name</td><td>Shown in Product Console and cart</td></tr>
-    <tr><td>Required</td><td>Code</td><td class="req-yes">Yes</td><td>Unique discount code</td><td>Used by pricing plan step Apply Context Discounts</td></tr>
-    <tr><td>Required</td><td>Discount Type</td><td class="req-yes">Yes</td><td>Order / Account / Contract</td><td>Order=one cart; Account=all future orders; Contract=frame deal</td></tr>
-    <tr><td>Required</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list scope for discount items</td><td>Products must exist on this list</td></tr>
-    <tr><td class="section-header" colspan="5">Optional Fields (Table 79)</td></tr>
-    <tr><td>Optional</td><td>Description</td><td>No</td><td>Brief discount description</td><td>Admin documentation</td></tr>
-    <tr><td>Optional</td><td>Discount Duration</td><td>No</td><td>Months discount applies</td><td>Expires after duration unless end date set</td></tr>
-    <tr><td>Optional</td><td>Applies to All Items in Cart</td><td>No</td><td>Discount applies to entire cart — ignores discount items</td><td>Disables Discount Items facet when checked</td></tr>
-    <tr><td>Optional</td><td>Active</td><td class="req-yes">Yes*</td><td>Activate the discount</td><td>*Required for discount to take effect on submit</td></tr>
-    <tr><td>Optional</td><td>Effective From / Until</td><td>No</td><td>Effectivity window</td><td>Controls visibility in cart selectables list</td></tr>
-  </tbody>
-</table>
-
-<h4>Table 80–82 — Discount Items &amp; Pricing</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">Discount Items — General Properties (Table 80)</td></tr>
-    <tr><td>Discount Items</td><td>Types</td><td class="req-yes">Yes</td><td>Product or Catalog/Category to discount</td><td>Catalog = group of products</td></tr>
-    <tr><td>Discount Items</td><td>Product or Catalog/Category</td><td class="req-yes">Yes</td><td>Specific item receiving the discount</td><td>Product must be on price list first</td></tr>
-    <tr><td>Discount Items</td><td>Active</td><td class="req-yes">Yes</td><td>Discount item is active</td><td>Inactive items ignored at runtime</td></tr>
-    <tr><td>Discount Items</td><td>Effective From / Until</td><td>No</td><td>Item effectivity — end date overrides duration</td><td>Fine-grained discount scheduling</td></tr>
-    <tr><td class="section-header" colspan="5">Discount Pricing — Price List Entry (Table 81)</td></tr>
-    <tr><td>Discount Pricing</td><td>Price List</td><td class="req-yes">Yes</td><td>Price list for discount adjustment</td><td>Same list as discounted products</td></tr>
-    <tr><td>Discount Pricing</td><td>Display Text</td><td>No</td><td>Description of the discount adjustment</td><td>Shown in Price Details flyout</td></tr>
-    <tr><td>Discount Pricing</td><td>Charge Type</td><td class="req-yes">Yes</td><td>Select <strong>Adjustment</strong></td><td>Filters pricing variables</td></tr>
-    <tr><td>Discount Pricing</td><td>Sub-Type</td><td class="req-yes">Yes</td><td>Select <strong>Standard</strong></td><td>Standard adjustment (not penalty fee)</td></tr>
-    <tr><td>Discount Pricing</td><td>Pricing Element</td><td class="req-yes">Yes</td><td>One-time or recurring adjustment/percentage element</td><td>Adjustment Value must not be empty</td></tr>
-    <tr><td class="section-header" colspan="5">Effectivity (Table 82)</td></tr>
-    <tr><td>Effectivity</td><td>Effective From / Until / Active</td><td>Active=Yes</td><td>Start/end dates and active flag for discount pricing</td><td>Inactive pricing = discount not applied in cart</td></tr>
-  </tbody>
-</table>
-
-<h4>Table 83–84 — Custom Discount in Cart</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">Required (Table 83)</td></tr>
-    <tr><td>Definition</td><td>Name</td><td class="req-yes">Yes</td><td>Custom discount name</td><td>Created by agent in cart</td></tr>
-    <tr><td>Definition</td><td>Applicable Allocation</td><td class="req-yes">Yes</td><td>Order-based, Account-based, or Contract-based</td><td>Determines persistence after submit</td></tr>
-    <tr><td class="section-header" colspan="5">Optional (Table 84)</td></tr>
-    <tr><td>Definition</td><td>Description</td><td>No</td><td>Brief description</td><td>Agent notes</td></tr>
-    <tr><td>Discount Amount</td><td>One Time / Recurring Charges</td><td>No</td><td>Percentage or absolute discount amount</td><td>Applied via pricing at runtime</td></tr>
-    <tr><td>Applicable</td><td>Active Period</td><td>No</td><td>Duration in months only</td><td>How long account/contract discount lasts</td></tr>
-    <tr><td>Applicable</td><td>End Date</td><td>No</td><td>Custom discount end date</td><td>Overrides active period if set</td></tr>
-    <tr><td>Criteria</td><td>Matching criteria / All items in cart</td><td>No</td><td>Specific category+product or entire cart</td><td>Scope of custom discount</td></tr>
-  </tbody>
-</table>
-<h4>Table 91–93 — Offer Migration Plan: Required Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Section</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">Offer Migration Plan — Required (Table 91)</td></tr>
-    <tr><td>Plan</td><td>Name</td><td class="req-yes">Yes</td><td>Offer migration plan name</td><td>Admin identification</td></tr>
-    <tr><td>Plan</td><td>Code</td><td class="req-yes">Yes</td><td>Unique plan code</td><td>System reference</td></tr>
-    <tr><td>Plan</td><td>Account Scope</td><td class="req-yes">Yes</td><td>Account scope — currently Same Account only</td><td>Limits which accounts can use plan</td></tr>
-    <tr><td>Plan</td><td>Product Family</td><td class="req-yes">Yes</td><td>Product family (Internet, TV, Wireless, etc.)</td><td>Subset of Product2.ProductFamily</td></tr>
-    <tr><td>Plan</td><td>Migration Method</td><td class="req-yes">Yes</td><td>Any-to-Any or Specific Offers</td><td>Any=unrestricted; Specific=mapped pairs only</td></tr>
-    <tr><td class="section-header" colspan="5">Optional (Table 92)</td></tr>
-    <tr><td>Plan</td><td>Description / Business Reason</td><td>No</td><td>Plan description and business rationale</td><td>Documentation</td></tr>
-    <tr><td>Plan</td><td>Active / Effectivity Start / End</td><td>Active=Yes</td><td>Activate plan and set date range</td><td>Inactive plans block Replace in cart</td></tr>
-    <tr><td class="section-header" colspan="5">Component Mappings — Required (Table 93)</td></tr>
-    <tr><td>Mappings</td><td>Source Product</td><td class="req-yes">Yes</td><td>Original offer/plan being migrated from</td><td>Asset must match source for Replace</td></tr>
-    <tr><td>Mappings</td><td>Target Product</td><td class="req-yes">Yes</td><td>New offer/plan to migrate to</td><td>Shown in Replace picker when eligible</td></tr>
-    <tr><td>Mappings</td><td>Active</td><td class="req-yes">Yes</td><td>Mapping is active</td><td>Inactive mappings ignored at runtime</td></tr>
-  </tbody>
-</table>
-<h4>Table 95–97 — Multi-Site Setup: Required Fields</h4>
-<table class="data-table field-table-section">
-  <thead><tr><th>Object</th><th>Field</th><th>Required</th><th>Description</th><th>Use</th></tr></thead>
-  <tbody>
-    <tr><td class="section-header" colspan="5">Premises (Table 95)</td></tr>
-    <tr><td>Premises</td><td>Name</td><td class="req-yes">Yes</td><td>Service point / premises name</td><td>Identifies location in group page</td></tr>
-    <tr><td>Premises</td><td>Street Address</td><td class="req-yes">Yes</td><td>Street address</td><td>Location addressing</td></tr>
-    <tr><td>Premises</td><td>City / State / Postal Code</td><td class="req-yes">Yes</td><td>City, state, postal code</td><td>Full address for service delivery</td></tr>
-    <tr><td>Premises</td><td>Country / Premises Type / Status</td><td>No</td><td>Country, type (Duplex, Commercial), status (Connected, Vacant)</td><td>Extended location metadata</td></tr>
-    <tr><td class="section-header" colspan="5">Service Point (Table 96)</td></tr>
-    <tr><td>Service Point</td><td>Service Point Name</td><td class="req-yes">Yes</td><td>Name for the service point</td><td>Grouped on multi-site quote</td></tr>
-    <tr><td>Service Point</td><td>Premises</td><td class="req-yes">Yes</td><td>Premises this service applies to</td><td>Links service to physical location</td></tr>
-    <tr><td>Service Point</td><td>Service Type</td><td class="req-yes">Yes</td><td>Type of service (phone, internet, TV)</td><td>Filters eligible products per site</td></tr>
-    <tr><td>Service Point</td><td>Status / Activation Date</td><td>No</td><td>Connected/Vacant/Inactive; activation date</td><td>Lifecycle tracking</td></tr>
-    <tr><td class="section-header" colspan="5">Field Settings for Group Page (Table 97)</td></tr>
-    <tr><td>Field Settings</td><td>Name</td><td class="req-yes">Yes</td><td>Grouping object field display name</td><td>Column header on groups page</td></tr>
-    <tr><td>Field Settings</td><td>Feature</td><td class="req-yes">Yes</td><td>Enter <code>MultiServiceFields</code></td><td>Identifies multi-site column config</td></tr>
-    <tr><td>Field Settings</td><td>Field Name</td><td class="req-yes">Yes</td><td>API name (e.g., <code>vlocity_cmt__City__c</code> or relationship notation)</td><td>Data bound to column</td></tr>
-    <tr><td>Field Settings</td><td>Inclusion</td><td class="req-yes">Yes</td><td>When checked, field appears as table column</td><td>Controls visible group page columns</td></tr>
-  </tbody>
-</table>
+      <h3>PDF Screenshots</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="screen-675">
+                  <a href="assets/cpq/pdf-screens/screen-page-0675.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0675.png" alt="CPQ PDF page 675"></a>
+                  <figcaption><strong>PDF page 675</strong> — setup / procedure screen</figcaption>
+                </figure>
+        <figure class="doc-screenshot" id="screen-689">
+                  <a href="assets/cpq/pdf-screens/screen-page-0689.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/cpq/pdf-screens/screen-page-0689.png" alt="CPQ PDF page 689"></a>
+                  <figcaption><strong>PDF page 689</strong> — setup / procedure screen</figcaption>
+                </figure>
+      </div>
 
     </section>
 
