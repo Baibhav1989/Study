@@ -3780,183 +3780,2020 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
   <nav class="sidebar" data-panel="om">
     <h3>Order Management</h3>
     <a href="#om-overview">1. OM Overview</a>
-    <a href="#om-decomp-orch">2. Decomposition vs Orchestration</a>
-    <a href="#om-plan-def">3. Plan Definitions</a>
-    <a href="#om-item-types">4. Orchestration Item Types</a>
-    <a href="#om-scenarios">5. Scenarios &amp; Dependencies</a>
-    <a href="#om-manual">6. Manual Tasks &amp; Queues</a>
-    <a href="#om-auto">7. Auto Tasks &amp; Callouts</a>
-    <a href="#om-macd">8. MACD Orders</a>
-    <a href="#om-cancel">9. Cancellation &amp; Rollback</a>
+    <a href="#om-decomp">2. Order Decomposition</a>
+    <a href="#om-decomp-orch">3. Decomp vs Orchestration</a>
+    <a href="#om-plan-def">4. Swimlanes & Plans</a>
+    <a href="#om-generate">5. Generate Plans</a>
+    <a href="#om-item-types">6. Item Types</a>
+    <a href="#om-scenarios">7. Scenarios</a>
+    <a href="#om-dependencies">8. Dependencies</a>
+    <a href="#om-manual">9. Manual Tasks</a>
+    <a href="#om-auto">10. Auto Tasks</a>
+    <a href="#om-callouts">11. Callouts</a>
+    <a href="#om-fallout">12. Fallout Management</a>
+    <a href="#om-push">13. Push Events</a>
+    <a href="#om-macd-1to1">14. MACD 1:1</a>
+    <a href="#om-macd-disconnect">15. MACD Disconnect</a>
+    <a href="#om-macd-1tom">16. MACD 1:M</a>
+    <a href="#om-cancel">17. Cancellation</a>
+    <a href="#om-rollback">18. Rollback Groups</a>
+    <a href="#om-challenge">19. Advanced Challenge</a>
     <a href="#om-ref">Quick Reference</a>
   </nav>
   <main class="main">
 
     <section id="om-overview">
-      <h2>1. Industries Order Management Overview</h2>
-      <p><strong>Salesforce Industries Order Management (IOM)</strong> fulfills orders after CPQ captures them. It breaks commercial products into technical requests and coordinates fulfillment with external systems.</p>
-      <div class="tip"><strong>Simple analogy</strong> CPQ is placing your order at a restaurant. Order Management is the kitchen — it decomposes the order into cooking tasks, coordinates stations, and delivers the meal.</div>
-      <h3>Two Primary Areas</h3>
+<h2>1. Industries Order Management Overview</h2>
+      <p><strong>Salesforce Industries Order Management (IOM)</strong> is the fulfillment engine that runs after CPQ captures an order. While CPQ handles configure-price-quote, IOM answers: <em>what technical work must happen, in what order, through which systems, and when is the customer&apos;s service live?</em></p>
+
+      <div class="tip"><strong>Simple analogy</strong> CPQ is placing your order at a restaurant. <strong>Decomposition</strong> is the kitchen ticket that breaks &quot;burger meal&quot; into grill, fries, and drink prep lines. <strong>Orchestration</strong> is the head chef coordinating stations, waiters, suppliers, and quality checks until the meal is delivered.</div>
+
+      <h3>Two Primary Areas of IOM</h3>
       <table class="data-table">
-        <thead><tr><th>Area</th><th>What It Does</th></tr></thead>
+        <thead><tr><th>Area</th><th>When It Runs</th><th>What It Does</th><th>Key Output</th></tr></thead>
         <tbody>
-          <tr><td><strong>Order Decomposition</strong></td><td>Breaks commercial order lines into technical fulfillment requests (CFS, RFS, resources)</td></tr>
-          <tr><td><strong>Order Orchestration</strong></td><td>Sequences and monitors tasks to fulfill those requests via systems and people</td></tr>
+          <tr><td><strong>Order Decomposition</strong></td><td>After order is submitted; user clicks <strong>Decompose Order</strong></td><td>Maps commercial products to technical products (CFS, RFS, resources) using decomposition relationships in Product Console</td><td>Fulfillment Request Lines (FRLs) with Add, Modify, Disconnect, or NoChange actions</td></tr>
+          <tr><td><strong>Order Orchestration</strong></td><td>After successful decomposition</td><td>Dynamically generates orchestration plans, sequences tasks, calls external systems, routes manual work to queues</td><td>Completed order, assets/inventory, provisioned services</td></tr>
         </tbody>
       </table>
+
+      <h3>What You Will Learn (Exercise Guide)</h3>
+      <p>Based on Spring &apos;22 Industries CME Cloud, the orchestration module teaches you to:</p>
+      <ul>
+        <li>Define design-time <strong>orchestration plan definitions</strong> (swimlanes) and <strong>item definitions</strong> (tasks)</li>
+        <li>Generate runtime <strong>orchestration plans</strong> and <strong>orchestration items</strong> per order</li>
+        <li>Trigger processing via <strong>orchestration scenarios</strong> (product + action)</li>
+        <li>Sequence work with <strong>dependency definitions</strong> and <strong>scope</strong></li>
+        <li>Integrate people (<strong>manual tasks/queues</strong>) and systems (<strong>callouts</strong>, <strong>auto tasks</strong>)</li>
+        <li>Handle MACD change orders, cancellation, rollback, and fallout</li>
+      </ul>
+
+      <h3>Prerequisites</h3>
+      <p>Solid Salesforce fundamentals, basic order-management concepts, and familiarity with telecom/media/energy business flows. Decomposition exercises (multi-level product relationships) should be completed before orchestration labs.</p>
+
+      <h3>End-to-End Lifecycle</h3>
+      <div class="workflow">
+        <div class="workflow-step">CPQ Cart / Order</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Decompose Order</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">FRLs Created</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Scenarios Match</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Plans Generated</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Tasks Execute</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Assets &amp; Complete</div>
+      </div>
+
+      <h3>Exercise Map</h3>
+      <table class="data-table">
+        <thead><tr><th>Exercise</th><th>Topic</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td>6-1</td><td>E2E Master Plan, milestones, DSL scenario</td><td>15 min</td></tr>
+          <tr><td>6-2</td><td>Generate &amp; inspect first orchestration plan</td><td>15 min</td></tr>
+          <tr><td>6-3</td><td>Credit Check manual task + queue</td><td>30 min</td></tr>
+          <tr><td>6-4</td><td>Create Assets auto task (Assetizer)</td><td>15 min</td></tr>
+          <tr><td>6-5</td><td>Dependency definitions (sequencing)</td><td>15 min</td></tr>
+          <tr><td>6-6</td><td>Installation system callout</td><td>~45 min</td></tr>
+          <tr><td>6-7</td><td>Fallout management &amp; retry policies</td><td>~60 min</td></tr>
+          <tr><td>6-8</td><td>Push events (JSON &amp; Apex)</td><td>~30 min</td></tr>
+          <tr><td>6-9 – 6-11</td><td>MACD 1:1, Disconnect, 1:M (Spotify / Streaming TV)</td><td>60+ min each</td></tr>
+          <tr><td>6-12 – 6-14</td><td>Cancellation, rollback groups, advanced challenge</td><td>60+ min</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="om-decomp">
+<h2>2. Order Decomposition — Concepts &amp; Configuration</h2>
+      <p><strong>Decomposition</strong> is the bridge between what the customer ordered (commercial catalog) and what fulfillment systems must execute (technical catalog). Until decomposition succeeds, orchestration does not start.</p>
+
+      <h3>Core Concepts</h3>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Commercial product</strong></td><td>What sales/CPQ sells (e.g. Spotify Offer, DSL Service)</td></tr>
+          <tr><td><strong>Technical product</strong></td><td>CFS, RFS, or Resource that provisioning/billing systems understand</td></tr>
+          <tr><td><strong>FRL</strong></td><td>Fulfillment Request Line — one decomposed line with an action (Add/Modify/Disconnect/NoChange)</td></tr>
+          <tr><td><strong>Mappings Data</strong></td><td>Attribute mappings from commercial → technical in decomposition relationship</td></tr>
+          <tr><td><strong>Inventory Item JSON</strong></td><td>Technical inventory stored after assetization; used for MACD comparisons</td></tr>
+        </tbody>
+      </table>
+
+      <h3>What Happens When You Click Decompose Order</h3>
+      <ol>
+        <li>IOM reads decomposition relationships from Product Console for each order line</li>
+        <li>Commercial attributes map to technical attributes (often ad-verbatim or via rules)</li>
+        <li>FRLs are created on the decomposed order view — one row per technical product + action</li>
+        <li>For <strong>new orders</strong>, actions are typically <strong>Add</strong></li>
+        <li>For <strong>MACD</strong>, IOM compares existing inventory (&quot;as-is&quot;) vs requested state (&quot;as-requested&quot;) and may emit multiple FRLs (e.g. Disconnect + Add on upgrade)</li>
+        <li>Each FRL becomes input to orchestration scenarios (product on FRL + action)</li>
+      </ol>
+
+      <h3>Decomposition Models</h3>
+      <table class="data-table">
+        <thead><tr><th>Model</th><th>Structure</th><th>When to Use</th><th>Lab Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1:1</strong></td><td>One commercial → one technical</td><td>Simple single-service rollout</td><td>Spotify → Spotify RFS</td></tr>
+          <tr><td><strong>Many-to-one</strong></td><td>Multiple commercial offers → shared technical RFS</td><td>Future product tiers sharing one fulfillment path</td><td>Multiple music tiers → one RFS</td></tr>
+          <tr><td><strong>Multi-level (CFS/RFS)</strong></td><td>Commercial → CFS → RFS abstraction layers</td><td>TM Forum / SID style; catalog likely to expand</td><td>DSL Service → VDSL2 CFS → underlying RFS</td></tr>
+          <tr><td><strong>1:M</strong></td><td>One commercial → many technical FRLs</td><td>Shipping + activation, multiple resources per offer</td><td>Streaming TV → ship STB + activation RFS</td></tr>
+        </tbody>
+      </table>
+
+      <h3>How to Configure Decomposition (Step-by-Step)</h3>
+      <div class="example-box">
+        <strong>Exercise 6-9 — Spotify 1:1 Configuration</strong>
+        <ol>
+          <li><strong>Product Console</strong> → open commercial product <em>Spotify</em></li>
+          <li>Review <strong>General Properties</strong> and <strong>Attributes and Fields</strong>: Number of Accounts, Spotify Subscription Type, Install Account Name</li>
+          <li>Open technical product <em>Spotify RFS</em> — review matching technical attributes</li>
+          <li><strong>Products</strong> tab → open decomposition relationship Spotify → Spotify RFS</li>
+          <li>Configure <strong>Mappings Data</strong> — map commercial attributes through; condition rules optional in lab</li>
+          <li>Place order → cart → <strong>Decompose Order</strong></li>
+          <li>Verify FRL: Spotify (commercial) decomposed to Spotify RFS with <strong>Add</strong> action; attributes mapped ad-verbatim</li>
+          <li>After orchestration assetization completes, click FRL hyperlink to view <strong>technical inventory JSON</strong></li>
+        </ol>
+      </div>
+
+      <h3>MACD Decomposition Logic</h3>
+      <p>On change orders, IOM builds an in-memory decision tree:</p>
+      <ul>
+        <li>Loads <strong>as-is</strong> state from Inventory Item JSON on existing assets</li>
+        <li>Compares to <strong>as-requested</strong> decomposition from the change order</li>
+        <li>Generates FRLs: e.g. <strong>Disconnect</strong> Bronze TV + <strong>Add</strong> Silver TV when upgrading tier</li>
+        <li>Each FRL triggers its own orchestration scenarios and swimlanes</li>
+      </ul>
+
+      <div class="warning"><strong>Design tip (from PDF)</strong> MACD requires end-to-end thinking, but prioritize <em>downstream system capabilities</em> first and work backward — provisioning, billing, logistics, and assetization constraints drive both decomposition and orchestration design.</div>
+
+      <h3>Verifying Decomposition</h3>
+      <table class="data-table">
+        <thead><tr><th>Check</th><th>Where to Look</th></tr></thead>
+        <tbody>
+          <tr><td>Source commercial line</td><td>Link icon on decomposition page for OLI</td></tr>
+          <tr><td>Destination FRL</td><td>Link icon on technical fulfillment request</td></tr>
+          <tr><td>Action type</td><td>Add / Modify / Disconnect on each FRL row</td></tr>
+          <tr><td>Asset appeared</td><td>Refresh after assetization — inventory only exists after Create Assets completes</td></tr>
+        </tbody>
+      </table>
+      <h3>PDF Screenshots — Decomposition Models & Configuration</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0128">
+          <a href="assets/om/pdf-pages/page-0128.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0128.png" alt="Order Orchestration EG page 128"></a>
+          <figcaption><strong>PDF page 128.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0129">
+          <a href="assets/om/pdf-pages/page-0129.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0129.png" alt="Order Orchestration EG page 129"></a>
+          <figcaption><strong>PDF page 129.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0130">
+          <a href="assets/om/pdf-pages/page-0130.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0130.png" alt="Order Orchestration EG page 130"></a>
+          <figcaption><strong>PDF page 130.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0131">
+          <a href="assets/om/pdf-pages/page-0131.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0131.png" alt="Order Orchestration EG page 131"></a>
+          <figcaption><strong>PDF page 131.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0155">
+          <a href="assets/om/pdf-pages/page-0155.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0155.png" alt="Order Orchestration EG page 155"></a>
+          <figcaption><strong>PDF page 155.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0156">
+          <a href="assets/om/pdf-pages/page-0156.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0156.png" alt="Order Orchestration EG page 156"></a>
+          <figcaption><strong>PDF page 156.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0181">
+          <a href="assets/om/pdf-pages/page-0181.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0181.png" alt="Order Orchestration EG page 181"></a>
+          <figcaption><strong>PDF page 181.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0199">
+          <a href="assets/om/pdf-pages/page-0199.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0199.png" alt="Order Orchestration EG page 199"></a>
+          <figcaption><strong>PDF page 199.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-decomp-orch">
-      <h2>2. Decomposition vs Orchestration</h2>
+<h2>3. Decomposition vs Orchestration</h2>
+      <p>These are sequential phases — not alternatives. Decomposition answers <em>what</em> must be fulfilled; orchestration answers <em>how and in what order</em>.</p>
+
       <div class="workflow">
         <div class="workflow-step">CPQ Order Submitted</div><span class="workflow-arrow">→</span>
         <div class="workflow-step">Decompose Order</div><span class="workflow-arrow">→</span>
-        <div class="workflow-step">Fulfillment Requests</div><span class="workflow-arrow">→</span>
-        <div class="workflow-step">Orchestration Plan</div><span class="workflow-arrow">→</span>
-        <div class="workflow-step">External Systems</div>
+        <div class="workflow-step">FRLs on Decomposed Order</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">View Orchestration Plan</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Swimlanes Execute</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Order Complete</div>
       </div>
-      <p>After decomposition creates fulfillment requests, <strong>orchestration</strong> takes over — communicating with billing, provisioning, inventory, and other systems until the order is complete.</p>
+
+      <h3>Side-by-Side Comparison</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th>Decomposition</th><th>Orchestration</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Configured in</strong></td><td>Product Console (decomposition relationships)</td><td>Orchestration Plan Definitions, Items, Scenarios, Dependencies</td></tr>
+          <tr><td><strong>Runtime objects</strong></td><td>FRLs, decomposed order view</td><td>Orchestration plans, orchestration items, queues</td></tr>
+          <tr><td><strong>Triggered by</strong></td><td>Decompose Order button</td><td>Automatic after decomposition + scenario match</td></tr>
+          <tr><td><strong>Human interaction</strong></td><td>Usually none (batch transform)</td><td>Manual tasks, fallout repair, monitoring plan UI</td></tr>
+          <tr><td><strong>External systems</strong></td><td>No direct calls</td><td>Callouts, push events, auto tasks</td></tr>
+        </tbody>
+      </table>
+
+      <h3>The Orchestration Execution Engine</h3>
+      <p>Once decomposition completes, the engine:</p>
+      <ul>
+        <li>Evaluates each FRL against <strong>orchestration scenarios</strong> (product + action)</li>
+        <li>Instantiates matching <strong>orchestration plan definitions</strong> as runtime plans (swimlanes)</li>
+        <li>Creates <strong>orchestration items</strong> from item definitions</li>
+        <li>Resolves <strong>dependencies</strong> and <strong>conditions</strong> — items move Pending → Ready → Running → Completed</li>
+        <li>Coordinates parallel swimlanes while respecting cross-lane dependencies</li>
+      </ul>
+
+      <div class="note"><strong>Key insight</strong> One order typically generates <em>multiple</em> swimlanes in parallel (E2E, Provision, Billing, etc.). Dependencies tie them together — e.g. assetization waits for billing and provisioning.</div>
+      <h3>PDF Screenshots — Decomposition vs Orchestration</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0007">
+          <a href="assets/om/pdf-pages/page-0007.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0007.png" alt="Order Orchestration EG page 7"></a>
+          <figcaption><strong>PDF page 7.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0008">
+          <a href="assets/om/pdf-pages/page-0008.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0008.png" alt="Order Orchestration EG page 8"></a>
+          <figcaption><strong>PDF page 8.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-plan-def">
-      <h2>3. Orchestration Plan Definitions</h2>
-      <p>An <strong>orchestration plan definition</strong> groups order processing tasks into a swimlane. At runtime it becomes an <strong>orchestration plan</strong> instance.</p>
-      <div class="example-box">
-        <strong>Example: E2E Master Plan</strong>
-        <ul>
-          <li><strong>Name:</strong> E2E Master Plan</li>
-          <li><strong>Show Order:</strong> 1 (displays at top of orchestration diagram)</li>
-          <li><strong>Items:</strong> Start Order (milestone) → Complete Order (milestone)</li>
-          <li><strong>Scenario:</strong> Product = DSL Service, Action = Add</li>
-        </ul>
-      </div>
-      <h3>Best Practices</h3>
+<h2>4. Swimlanes &amp; Orchestration Plan Definitions</h2>
+      <p>An <strong>orchestration plan definition</strong> is the design-time template for a <strong>swimlane</strong> — a horizontal row on the Orchestration Plan page containing related tasks.</p>
+
+      <h3>Plan Definition Anatomy</h3>
+      <table class="data-table">
+        <thead><tr><th>Component</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Plan Definition</strong></td><td>Named container = one swimlane (e.g. E2E Master Plan, Spotify Billing)</td></tr>
+          <tr><td><strong>Item Definitions</strong></td><td>Tasks inside the plan (milestones, manual, callout, auto, push) — cannot be shared across plans</td></tr>
+          <tr><td><strong>Scenarios</strong></td><td>Rules: when this plan runs (Product + Action on FRL)</td></tr>
+          <tr><td><strong>Show Order</strong></td><td>Integer controlling vertical position on plan UI (1 = top)</td></tr>
+          <tr><td><strong>Scope</strong></td><td>Default dependency resolution boundary for items in this plan (usually Global)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Exercise 6-1 — Create E2E Master Plan</h3>
+      <table class="data-table">
+        <thead><tr><th>Step</th><th>Action</th><th>Values</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>App Launcher → <strong>Orchestration Plan Definitions</strong> → New</td><td>Name: <em>E2E Master Plan</em>, Show Order: <em>1</em></td></tr>
+          <tr><td>2</td><td>Item Definitions → New → Milestone</td><td><em>Start Order</em>, Scope: Global</td></tr>
+          <tr><td>3</td><td>Save &amp; New → Milestone</td><td><em>Complete Order</em>, Scope: Global</td></tr>
+          <tr><td>4</td><td>Scenarios → New</td><td>DSL Service Scenario, Product: DSL Service, Action: Add</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Understanding Swimlanes</h3>
+      <p>Think of each swimlane as a functional pipeline:</p>
       <ul>
-        <li>Create one main end-to-end plan for major milestones (start → complete)</li>
-        <li>Create separate plans per function: provisioning, billing, logistics, assetization</li>
-        <li>Keep plans simple — avoid loops unless required</li>
-        <li>Create assets as the last auto task before Complete Order milestone</li>
+        <li><strong>E2E swimlane</strong> — bookends the order (Start / Complete milestones) and cross-cutting tasks (Credit Check, Create Assets)</li>
+        <li><strong>Provisioning swimlane</strong> — callouts to network/OSS systems</li>
+        <li><strong>Billing swimlane</strong> — activate billing accounts/rates</li>
+        <li><strong>Assetization swimlane</strong> — create customer assets / inventory</li>
+        <li><strong>SMS / notification swimlanes</strong> — welcome or upgrade messages per MACD action</li>
       </ul>
+
+      <h3>Exercise 6-9 — Spotify MACD Swimlanes</h3>
+      <table class="data-table">
+        <thead><tr><th>Plan Definition</th><th>Show Order</th><th>Tasks (lab)</th><th>Scenario Product / Action</th></tr></thead>
+        <tbody>
+          <tr><td>Spotify E2E</td><td>1</td><td>Spotify Start, Spotify End milestones</td><td>Spotify RFS — Add, Modify</td></tr>
+          <tr><td>Spotify Provision</td><td>2</td><td>Spotify Provision milestone (callout in prod)</td><td>Spotify RFS — Add, Modify</td></tr>
+          <tr><td>Spotify Billing</td><td>3</td><td>Billing milestone</td><td>Spotify RFS — Add, Modify</td></tr>
+          <tr><td>Spotify Assetize</td><td>4</td><td>Auto task (Assetize)</td><td>Spotify RFS — Add, Modify</td></tr>
+          <tr><td>Spotify SMS Welcome</td><td>5</td><td>Welcome SMS milestone</td><td>Spotify RFS — Add only</td></tr>
+          <tr><td>Spotify SMS Upgrade</td><td>6</td><td>Upgrade SMS milestone</td><td>Spotify RFS — Modify only</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Industry Best Practices</h3>
+      <ul>
+        <li>One main E2E plan sequences major milestones for <em>all</em> orders (Start → Complete)</li>
+        <li>Separate plan per macro function: provisioning, logistics, inventory, billing</li>
+        <li>Keep plans simple — avoid loops unless absolutely required</li>
+        <li>Assetization auto task should be <strong>second-to-last</strong>, immediately before Complete Order</li>
+        <li>Plan definitions are <strong>reusable</strong> — associate multiple products via scenarios</li>
+        <li>Create all plan + item definitions first, <em>then</em> dependencies (recommended order)</li>
+      </ul>
+
+      <div class="tip"><strong>Prototyping tip</strong> Use Milestone tasks for everything except assetization during design/test — convert to callouts and manual tasks before production.</div>
+      <h3>PDF Screenshots — Plan Definitions & Swimlanes</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0009">
+          <a href="assets/om/pdf-pages/page-0009.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0009.png" alt="Order Orchestration EG page 9"></a>
+          <figcaption><strong>PDF page 9.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0010">
+          <a href="assets/om/pdf-pages/page-0010.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0010.png" alt="Order Orchestration EG page 10"></a>
+          <figcaption><strong>PDF page 10.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0011">
+          <a href="assets/om/pdf-pages/page-0011.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0011.png" alt="Order Orchestration EG page 11"></a>
+          <figcaption><strong>PDF page 11.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0014">
+          <a href="assets/om/pdf-pages/page-0014.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0014.png" alt="Order Orchestration EG page 14"></a>
+          <figcaption><strong>PDF page 14.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-generate">
+<h2>5. Generating Orchestration Plans (Exercise 6-2)</h2>
+      <p>Design-time configuration becomes a living workflow when you decompose an order and click <strong>View Orchestration Plan</strong>. The execution engine creates runtime records: orchestration plan instances, orchestration items, dependency links, and queue assignments.</p>
+
+      <h3>Full Test Procedure</h3>
+      <ol>
+        <li><strong>Orders</strong> → New → Name: <em>E2E Master Plan Test Order</em>, Account: White Noah, B2C Price List</li>
+        <li><strong>Configure Order</strong> (Power Launcher) → add <em>DSL Service</em> to cart</li>
+        <li>Configure Download Speed = 40 Mbps → Close cart</li>
+        <li>Click <strong>Decompose Order</strong> — verify multi-level decomposition (DSL Service → VDSL2 CFS → …)</li>
+        <li>Click <strong>View Orchestration Plan</strong> — orchestration begins</li>
+      </ol>
+
+      <h3>Reading the Orchestration Plan UI</h3>
+      <table class="data-table">
+        <thead><tr><th>UI Element</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>Process box</td><td>One orchestration item (runtime task instance)</td></tr>
+          <tr><td>Green box</td><td>Completed (milestones auto-complete when Ready)</td></tr>
+          <tr><td>Blue box</td><td>Ready — waiting for agent/system or about to run</td></tr>
+          <tr><td>Grey box</td><td>Pending — dependencies not yet satisfied</td></tr>
+          <tr><td>Vertical layout without connectors</td><td>Tasks running in parallel (no dependencies yet)</td></tr>
+          <tr><td>Connected segments</td><td>Dependency chain — sequential execution</td></tr>
+          <tr><td>Mouse scroll</td><td>Zoom plan display</td></tr>
+          <tr><td>Click + drag</td><td>Pan around large plans</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Debugging Runtime Items</h3>
+      <ol>
+        <li>Hover a process box → pop-up shows item details (Classic Cards layout)</li>
+        <li>Right-click → <strong>View Record</strong> → Orchestration Item page (plan instance, state, queue)</li>
+        <li>Order Item link → which product/scenario created this item</li>
+        <li>Order/Fulfilment Request link → source order or FRL being processed</li>
+      </ol>
+
+      <div class="note"><strong>Behind the scenes</strong> First plan generation creates a web of interconnected records. Understanding this complexity matters when changing definitions on in-flight orders.</div>
+      <h3>PDF Screenshots — Generating Orchestration Plans</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0017">
+          <a href="assets/om/pdf-pages/page-0017.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0017.png" alt="Order Orchestration EG page 17"></a>
+          <figcaption><strong>PDF page 17.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0018">
+          <a href="assets/om/pdf-pages/page-0018.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0018.png" alt="Order Orchestration EG page 18"></a>
+          <figcaption><strong>PDF page 18.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0019">
+          <a href="assets/om/pdf-pages/page-0019.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0019.png" alt="Order Orchestration EG page 19"></a>
+          <figcaption><strong>PDF page 19.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0020">
+          <a href="assets/om/pdf-pages/page-0020.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0020.png" alt="Order Orchestration EG page 20"></a>
+          <figcaption><strong>PDF page 20.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0021">
+          <a href="assets/om/pdf-pages/page-0021.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0021.png" alt="Order Orchestration EG page 21"></a>
+          <figcaption><strong>PDF page 21.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0022">
+          <a href="assets/om/pdf-pages/page-0022.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0022.png" alt="Order Orchestration EG page 22"></a>
+          <figcaption><strong>PDF page 22.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-item-types">
-      <h2>4. Orchestration Item Types</h2>
+<h2>6. Orchestration Item Types</h2>
+      <p>Each <strong>orchestration item definition</strong> has a record type that determines what happens when the item reaches <strong>Ready</strong> state. Items also support <strong>conditions</strong> (attribute/field rules) and <strong>dependencies</strong> (sequencing).</p>
+
       <table class="data-table">
-        <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+        <thead><tr><th>Type</th><th>What Happens at Ready</th><th>Fails?</th><th>Configuration Highlights</th><th>Lab Example</th></tr></thead>
         <tbody>
-          <tr><td><span class="tag tag-green">Milestone</span></td><td>Important stage marker — always completes</td><td>Start Order, Complete Order</td></tr>
-          <tr><td><span class="tag tag-blue">Manual Task</span></td><td>Requires human action</td><td>Credit Check approval</td></tr>
-          <tr><td><span class="tag tag-orange">Callout</span></td><td>Automated REST/web service to external system</td><td>Activate service in network OSS</td></tr>
-          <tr><td><span class="tag tag-purple">Auto Task</span></td><td>Runs Apex class automatically</td><td>Create Assets</td></tr>
-          <tr><td><span class="tag tag-blue">Push Event</span></td><td>Triggered by object state change</td><td>Notify when billing completes</td></tr>
+          <tr><td><span class="tag tag-green">Milestone</span></td><td>Marks stage; immediately completes</td><td>Never</td><td>Name, Scope; used for Start/Complete bookends</td><td>Start Order, Spotify Start</td></tr>
+          <tr><td><span class="tag tag-blue">Manual Task</span></td><td>Appears in manual queue; user completes via URL/OmniScript</td><td>Yes</td><td>Manual Queue, Custom Task Execution URL (/apex/…)</td><td>Credit Check</td></tr>
+          <tr><td><span class="tag tag-orange">Callout</span></td><td>REST/SOAP call via orchestration system interface</td><td>Yes</td><td>System, Interface, Path, retry/fallout settings</td><td>Schedule Installation</td></tr>
+          <tr><td><span class="tag tag-purple">Auto Task</span></td><td>Invokes Apex via Item Implementation</td><td>Yes</td><td>Item Implementation (e.g. Assetize → XOMAutoTaskAssetizer)</td><td>Create Assets</td></tr>
+          <tr><td><span class="tag tag-blue">Push Event</span></td><td>Waits for sObject state change (JSON or Apex trigger)</td><td>Yes</td><td>Object, field, expected value configuration</td><td>Exercise 6-8 tests</td></tr>
         </tbody>
       </table>
-      <h3>Item State Flow</h3>
+
+      <h3>Item State Machine</h3>
       <div class="state-flow">
         <span class="state-box">Pending</span><span class="state-arrow">→</span>
         <span class="state-box">Ready</span><span class="state-arrow">→</span>
         <span class="state-box">Running</span><span class="state-arrow">→</span>
         <span class="state-box">Completed</span>
       </div>
-      <p>Items can also reach <strong>Failed</strong> or <strong>Fatally Failed</strong> states (except milestones).</p>
+      <p>Failure paths: <strong>Failed</strong> (may retry/repair) or <strong>Fatally Failed</strong> (requires intervention). Milestones skip failure states entirely.</p>
+
+      <h3>When Is an Item Ready?</h3>
+      <p>An item becomes Ready only when <em>all</em> of the following are satisfied:</p>
+      <ul>
+        <li>All <strong>dependency definitions</strong> — predecessor items Completed</li>
+        <li>All <strong>conditions</strong> — product/order attribute rules pass (if configured)</li>
+        <li>Parent plan/scenario has been activated for this order</li>
+      </ul>
+
+      <h3>Advanced Item Fields (Later Labs)</h3>
+      <ul>
+        <li><strong>Point of No Return (PONR)</strong> — after completion, order cannot be cancelled</li>
+        <li><strong>Rollback Plan Definition</strong> — plan to run on in-flight cancel</li>
+        <li><strong>Rollback Group</strong> — groups items reversed together on cancel</li>
+      </ul>
+      <h3>PDF Screenshots — Item Types & State Flow</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0012">
+          <a href="assets/om/pdf-pages/page-0012.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0012.png" alt="Order Orchestration EG page 12"></a>
+          <figcaption><strong>PDF page 12.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0013">
+          <a href="assets/om/pdf-pages/page-0013.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0013.png" alt="Order Orchestration EG page 13"></a>
+          <figcaption><strong>PDF page 13.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-scenarios">
-      <h2>5. Scenarios &amp; Dependencies</h2>
-      <h3>Orchestration Scenarios</h3>
-      <p>Define <strong>when</strong> a plan runs — by linking a product + order action (Add, Modify, Disconnect, NoChange).</p>
-      <div class="ui-mock">
-        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>New Orchestration Scenario</div>
-        <div class="ui-mock-body">
-          <div class="form-row"><label>Scenario Name</label><input value="DSL Service Scenario" readonly></div>
-          <div class="form-row"><label>Product</label><input value="DSL Service" readonly></div>
-          <div class="form-row"><label>Order Action</label><select><option>Add</option></select></div>
-        </div>
+<h2>7. Orchestration Scenarios</h2>
+      <p><strong>Scenarios</strong> are the <em>trigger</em> that tells IOM: &quot;for this FRL (product + action), execute this plan definition.&quot; Without a matching scenario, a swimlane is not generated.</p>
+
+      <h3>Scenario Fields</h3>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Purpose</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Name</strong></td><td>Administrative label</td><td>DSL Service Scenario</td></tr>
+          <tr><td><strong>Product</strong></td><td>Technical product on the FRL (not always commercial)</td><td>DSL Service, Spotify RFS, Installation System Resource</td></tr>
+          <tr><td><strong>Action</strong></td><td>Add, Modify, Disconnect, NoChange (multi-select in MACD labs)</td><td>Add only for new install; Add+Modify for Spotify provision</td></tr>
+          <tr><td><strong>Conditions</strong> (optional)</td><td>Further filter by attributes</td><td>Ship STB Silver when tier=Silver AND region=SoCal</td></tr>
+        </tbody>
+      </table>
+
+      <h3>How Scenarios Drive Multi-Swimlane Plans</h3>
+      <p>One decomposed order with multiple FRLs can spawn many swimlanes simultaneously:</p>
+      <ul>
+        <li>FRL: DSL Service + Add → E2E Master Plan scenario fires</li>
+        <li>FRL: Installation System Resource + Add → Installation System swimlane fires</li>
+        <li>FRL: Spotify RFS + Modify → Provision, Billing, Assetize, SMS Upgrade lanes fire</li>
+      </ul>
+
+      <div class="example-box">
+        <strong>E2E vs functional scenarios</strong>
+        <ul>
+          <li><strong>Spotify E2E scenario</strong> — Product: Spotify RFS, Actions: Add + Modify — only milestones, frames the order</li>
+          <li><strong>Spotify SMS Welcome</strong> — same product, Action: <em>Add only</em> — welcome message on new subscription</li>
+          <li><strong>Spotify SMS Upgrade</strong> — Action: <em>Modify only</em> — different message on plan change</li>
+        </ul>
       </div>
-      <h3>Dependency Definitions</h3>
-      <p>Control task sequencing — Task B cannot start until Task A completes. Dependencies can cross swimlanes (between different plan definitions).</p>
-      <div class="example-box"><strong>Example flow</strong> Credit Check (manual) → Provision DSL (callout) → Create Assets (auto) → Complete Order (milestone)</div>
+
+      <div class="warning"><strong>Modify trap (Exercise 6-11)</strong> For Streaming TV, a Modify on service tier may <em>not</em> need a dedicated modify swimlane — decomposition emits Disconnect + Add FRLs instead, each triggering add/disconnect scenarios.</div>
+      <h3>PDF Screenshots — Orchestration Scenarios</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0015">
+          <a href="assets/om/pdf-pages/page-0015.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0015.png" alt="Order Orchestration EG page 15"></a>
+          <figcaption><strong>PDF page 15.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0016">
+          <a href="assets/om/pdf-pages/page-0016.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0016.png" alt="Order Orchestration EG page 16"></a>
+          <figcaption><strong>PDF page 16.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-dependencies">
+<h2>8. Orchestration Dependency Definitions (Exercise 6-5)</h2>
+      <p>Without dependencies, all items in a plan start in parallel — a critical bug in the E2E lab where <strong>Create Assets could run before Credit Check passes</strong>. Dependencies enforce business-logic sequencing within and across swimlanes.</p>
+
+      <h3>Dependency Concepts</h3>
+      <table class="data-table">
+        <thead><tr><th>Concept</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dependency Definition</strong></td><td>Link on item A: &quot;A depends on B completing first&quot;</td></tr>
+          <tr><td><strong>Dependency Item Definition</strong></td><td>The predecessor task that must reach Completed</td></tr>
+          <tr><td><strong>Depends On / Should Be Processed Before</strong></td><td>Same logic — forward vs backward naming only</td></tr>
+          <tr><td><strong>Scope</strong></td><td>Global, Swimlane, etc. — how engine resolves cross-plan dependencies</td></tr>
+        </tbody>
+      </table>
+
+      <h3>E2E Master Plan — Required Sequence</h3>
+      <div class="workflow">
+        <div class="workflow-step">Start Order</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Credit Check</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Create Assets</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Complete Order</div>
+      </div>
+
+      <h3>Configuration Steps</h3>
+      <table class="data-table">
+        <thead><tr><th>On Item</th><th>Depends On</th><th>Scope</th></tr></thead>
+        <tbody>
+          <tr><td>Credit Check</td><td>Start Order</td><td>Global</td></tr>
+          <tr><td>Create Assets</td><td>Credit Check</td><td>Global</td></tr>
+          <tr><td>Complete Order</td><td>Create Assets</td><td>Global</td></tr>
+        </tbody>
+      </table>
+      <ol>
+        <li>Open E2E Master Plan → click item (e.g. Credit Check) → <strong>Related</strong> tab</li>
+        <li>Orchestration Dependency Definitions → <strong>New</strong></li>
+        <li>Select Dependency Item Definition, set Scope, Save</li>
+        <li>Repeat for each dependent item</li>
+      </ol>
+
+      <h3>Cross-Swimlane Dependencies (MACD Labs)</h3>
+      <p>Dependencies commonly link E2E milestones to functional lanes:</p>
+      <ul>
+        <li>Spotify Provision depends on Spotify Start (E2E)</li>
+        <li>Spotify Assetize depends on Spotify Billing + Spotify Provision</li>
+        <li>Spotify End depends on all functional lanes completing</li>
+      </ul>
+
+      <h3>Testing Dependencies</h3>
+      <ol>
+        <li>Clone a prior test order → increment name → set Status Draft → Save</li>
+        <li>Configure cart → Decompose → View Orchestration Plan</li>
+        <li>Credit Check shows <strong>blue (Ready)</strong>; Create Assets and Complete Order <strong>grey (Pending)</strong></li>
+        <li>Complete Credit Check manually → Create Assets becomes Ready → then Complete Order</li>
+      </ol>
+
+      <div class="tip"><strong>Best practice</strong> Use the same Dependency Type throughout a plan — mixing types causes confusion even though functionally equivalent.</div>
+      <h3>PDF Screenshots — Dependency Definitions</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0049">
+          <a href="assets/om/pdf-pages/page-0049.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0049.png" alt="Order Orchestration EG page 49"></a>
+          <figcaption><strong>PDF page 49.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0050">
+          <a href="assets/om/pdf-pages/page-0050.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0050.png" alt="Order Orchestration EG page 50"></a>
+          <figcaption><strong>PDF page 50.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0051">
+          <a href="assets/om/pdf-pages/page-0051.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0051.png" alt="Order Orchestration EG page 51"></a>
+          <figcaption><strong>PDF page 51.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0052">
+          <a href="assets/om/pdf-pages/page-0052.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0052.png" alt="Order Orchestration EG page 52"></a>
+          <figcaption><strong>PDF page 52.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0053">
+          <a href="assets/om/pdf-pages/page-0053.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0053.png" alt="Order Orchestration EG page 53"></a>
+          <figcaption><strong>PDF page 53.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0054">
+          <a href="assets/om/pdf-pages/page-0054.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0054.png" alt="Order Orchestration EG page 54"></a>
+          <figcaption><strong>PDF page 54.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0055">
+          <a href="assets/om/pdf-pages/page-0055.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0055.png" alt="Order Orchestration EG page 55"></a>
+          <figcaption><strong>PDF page 55.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0056">
+          <a href="assets/om/pdf-pages/page-0056.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0056.png" alt="Order Orchestration EG page 56"></a>
+          <figcaption><strong>PDF page 56.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0057">
+          <a href="assets/om/pdf-pages/page-0057.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0057.png" alt="Order Orchestration EG page 57"></a>
+          <figcaption><strong>PDF page 57.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-manual">
-      <h2>6. Manual Tasks &amp; Manual Queues</h2>
-      <p><strong>Manual tasks</strong> pause orchestration until a user completes work (e.g., credit check, manager approval).</p>
-      <p><strong>Manual queues</strong> organize tasks for teams. Users pick tasks from their queue.</p>
-      <div class="example-box">
-        <strong>Example: Credit Check</strong>
-        <ol>
-          <li>Create Manual Queue: "Credit Check"</li>
-          <li>Create Manual Task item definition linked to Credit Check OmniScript</li>
-          <li>Assign queue to the task</li>
-          <li>At runtime: task appears in queue → agent runs OmniScript → marks complete → orchestration continues</li>
-        </ol>
+<h2>9. Manual Tasks &amp; Manual Queues (Exercise 6-3)</h2>
+      <p>Some fulfillment steps require human judgment — credit approval, engineering review, fraud checks. <strong>Manual tasks</strong> pause orchestration until an agent completes work in a <strong>manual queue</strong>.</p>
+
+      <h3>Manual Task vs Manual Queue</h3>
+      <table class="data-table">
+        <thead><tr><th>Object</th><th>Who Creates</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Manual Queue</strong></td><td>Administrator</td><td>Team inbox — agents pick tasks (e.g. Credit Check queue)</td></tr>
+          <tr><td><strong>Manual Task</strong></td><td>On plan definition</td><td>Orchestration item that routes work to a queue + launch URL</td></tr>
+          <tr><td><strong>Orchestration Queue</strong></td><td>Managed package</td><td>Internal engine queue — different from manual queue</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Credit Check — Full Configuration</h3>
+      <h4>Step 1: Create Manual Queue</h4>
+      <ol>
+        <li><strong>Manual Queues</strong> tab → New</li>
+        <li>Manual Queue: <em>Credit Check</em>, Queue Type: <em>None</em> → Save</li>
+      </ol>
+
+      <h4>Step 2: Get OmniScript Launch URL</h4>
+      <ol>
+        <li>Open prebuilt <em>VU/Credit Check</em> OmniScript → review Perform Credit Check steps</li>
+        <li>Click <strong>How to launch activated script</strong></li>
+        <li>Page type: Universal Page with Header/Sidebar</li>
+        <li>Copy relative URL starting with <code>/apex/...</code> (no domain)</li>
+      </ol>
+
+      <h4>Step 3: Create Manual Task Item</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Record Type</td><td>Manual Task</td></tr>
+          <tr><td>Name</td><td>Credit Check</td></tr>
+          <tr><td>Scope</td><td>Global</td></tr>
+          <tr><td>Manual Queue</td><td>Credit Check</td></tr>
+          <tr><td>Custom Task Execution URL</td><td>Pasted /apex/… URL</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Runtime Flow</h3>
+      <ol>
+        <li>Order decomposed → plan generated → Credit Check turns Ready (blue)</li>
+        <li>Agent opens Manual Queue → launches Credit Check OmniScript</li>
+        <li>Agent completes script → marks task complete</li>
+        <li>Engine advances — Create Assets becomes Ready</li>
+      </ol>
+
+      <h3>Auto-Assignment (Tasks 4–5)</h3>
+      <p>Configure rules to automatically assign Salesforce users to manual tasks based on skills, territories, or round-robin — reduces queue pickup latency in production contact centers.</p>
+
+      <div class="warning"><strong>URL alert</strong> Custom Task Execution URL must be relative (<code>/apex/...</code>). Absolute URLs break OmniScript launch from orchestration context.</div>
+      <h3>PDF Screenshots — Manual Tasks & Queues</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0023">
+          <a href="assets/om/pdf-pages/page-0023.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0023.png" alt="Order Orchestration EG page 23"></a>
+          <figcaption><strong>PDF page 23.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0024">
+          <a href="assets/om/pdf-pages/page-0024.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0024.png" alt="Order Orchestration EG page 24"></a>
+          <figcaption><strong>PDF page 24.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0025">
+          <a href="assets/om/pdf-pages/page-0025.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0025.png" alt="Order Orchestration EG page 25"></a>
+          <figcaption><strong>PDF page 25.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0026">
+          <a href="assets/om/pdf-pages/page-0026.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0026.png" alt="Order Orchestration EG page 26"></a>
+          <figcaption><strong>PDF page 26.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0027">
+          <a href="assets/om/pdf-pages/page-0027.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0027.png" alt="Order Orchestration EG page 27"></a>
+          <figcaption><strong>PDF page 27.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0028">
+          <a href="assets/om/pdf-pages/page-0028.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0028.png" alt="Order Orchestration EG page 28"></a>
+          <figcaption><strong>PDF page 28.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0029">
+          <a href="assets/om/pdf-pages/page-0029.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0029.png" alt="Order Orchestration EG page 29"></a>
+          <figcaption><strong>PDF page 29.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0030">
+          <a href="assets/om/pdf-pages/page-0030.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0030.png" alt="Order Orchestration EG page 30"></a>
+          <figcaption><strong>PDF page 30.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0031">
+          <a href="assets/om/pdf-pages/page-0031.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0031.png" alt="Order Orchestration EG page 31"></a>
+          <figcaption><strong>PDF page 31.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0032">
+          <a href="assets/om/pdf-pages/page-0032.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0032.png" alt="Order Orchestration EG page 32"></a>
+          <figcaption><strong>PDF page 32.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0033">
+          <a href="assets/om/pdf-pages/page-0033.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0033.png" alt="Order Orchestration EG page 33"></a>
+          <figcaption><strong>PDF page 33.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0034">
+          <a href="assets/om/pdf-pages/page-0034.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0034.png" alt="Order Orchestration EG page 34"></a>
+          <figcaption><strong>PDF page 34.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0035">
+          <a href="assets/om/pdf-pages/page-0035.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0035.png" alt="Order Orchestration EG page 35"></a>
+          <figcaption><strong>PDF page 35.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0036">
+          <a href="assets/om/pdf-pages/page-0036.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0036.png" alt="Order Orchestration EG page 36"></a>
+          <figcaption><strong>PDF page 36.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0037">
+          <a href="assets/om/pdf-pages/page-0037.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0037.png" alt="Order Orchestration EG page 37"></a>
+          <figcaption><strong>PDF page 37.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
       </div>
+
     </section>
 
     <section id="om-auto">
-      <h2>7. Auto Tasks, Systems &amp; Callouts</h2>
-      <h3>Auto Task — Create Assets</h3>
-      <p>Runs an Apex class (e.g., Assetizer) to convert fulfilled order lines into customer assets.</p>
-      <h3>Orchestration Systems &amp; Callouts</h3>
-      <p>An <strong>orchestration system</strong> represents an external system (billing, network, inventory). A <strong>callout</strong> item sends REST/API requests to that system.</p>
-      <div class="example-box">
-        <strong>Example: Installation System Callout</strong>
-        <ul>
-          <li>Create orchestration system: "Training Mocker"</li>
-          <li>Define system interface (URL, credentials)</li>
-          <li>Add Remote Site Settings for the endpoint</li>
-          <li>Create callout item in provisioning plan definition</li>
-          <li>Test with a DSL Service order → Decompose → View Orchestration Plan</li>
-        </ul>
-      </div>
-      <h3>Fallout Management</h3>
-      <p>When callouts fail, <strong>Integration Retry Policies</strong> and fallout queues handle retries and manual repair.</p>
-    </section>
+<h2>10. Auto Tasks — Create Assets (Exercise 6-4)</h2>
+      <p><strong>Auto tasks</strong> run Apex automatically when Ready — no human queue. The most common pattern is <strong>assetization</strong>: converting fulfilled order lines into durable customer assets and inventory records.</p>
 
-    <section id="om-macd">
-      <h2>8. MACD Orders in Orchestration</h2>
-      <p>Change orders use the same orchestration framework with different scenarios per action:</p>
+      <h3>Auto Task vs Manual Task</h3>
       <table class="data-table">
-        <thead><tr><th>Action</th><th>Orchestration Behavior</th><th>Example</th></tr></thead>
+        <thead><tr><th></th><th>Auto Task</th><th>Manual Task</th></tr></thead>
         <tbody>
-          <tr><td><strong>Add</strong></td><td>Run add swimlanes (provision, bill, assetize)</td><td>New customer adds Spotify add-on</td></tr>
-          <tr><td><strong>Modify</strong></td><td>Run modify swimlanes</td><td>Upgrade internet speed 40→100 Mbps</td></tr>
-          <tr><td><strong>Disconnect</strong></td><td>Run disconnect swimlanes (deprovision, stop billing)</td><td>Cancel Spotify subscription</td></tr>
+          <tr><td>Execution</td><td>Automatic via Item Implementation</td><td>Agent-driven via queue + URL</td></tr>
+          <tr><td>Apex</td><td>XOMAutoTaskAssetizer or custom class</td><td>Usually OmniScript UI</td></tr>
+          <tr><td>Typical position</td><td>Second-to-last before Complete Order</td><td>Mid-flow approvals</td></tr>
         </tbody>
       </table>
-      <p>Decomposition can be <strong>1:1</strong> (one commercial line → one technical request) or <strong>1:M</strong> (one line → many technical requests, e.g., shipping + activation).</p>
+
+      <h3>Assetizer Implementation</h3>
+      <ul>
+        <li>Search <strong>Item Implementations</strong> → <em>Assetize</em></li>
+        <li>Apex class: <code>XOMAutoTaskAssetizer</code> (managed package)</li>
+        <li>Creates assets from order — enables MACD, inventory comparisons, and customer service views</li>
+        <li>Customers can author custom item implementations for specialized Apex logic</li>
+      </ul>
+
+      <h3>Create Assets Configuration</h3>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Plan</td><td>E2E Master Plan</td></tr>
+          <tr><td>Record Type</td><td>Auto Task</td></tr>
+          <tr><td>Name</td><td>Create Assets</td></tr>
+          <tr><td>Scope</td><td>Global</td></tr>
+          <tr><td>Item Implementation</td><td>Assetize</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Testing</h3>
+      <ol>
+        <li>Clone test order #2 → increment number → Draft → Save</li>
+        <li>Configure DSL Service → Decompose → View Orchestration Plan</li>
+        <li>Credit Check blue (Ready) — complete it first if dependencies configured</li>
+        <li>Create Assets runs automatically → turns green (Completed)</li>
+        <li>Return to decomposed order — inventory/asset JSON now visible on FRL hyperlink</li>
+      </ol>
+
+      <div class="tip"><strong>Timing note</strong> Create Assets may briefly show blue before green — refresh if state seems stuck. Display order of parallel tasks may vary.</div>
+      <h3>PDF Screenshots — Auto Tasks</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0038">
+          <a href="assets/om/pdf-pages/page-0038.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0038.png" alt="Order Orchestration EG page 38"></a>
+          <figcaption><strong>PDF page 38.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0039">
+          <a href="assets/om/pdf-pages/page-0039.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0039.png" alt="Order Orchestration EG page 39"></a>
+          <figcaption><strong>PDF page 39.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0040">
+          <a href="assets/om/pdf-pages/page-0040.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0040.png" alt="Order Orchestration EG page 40"></a>
+          <figcaption><strong>PDF page 40.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0041">
+          <a href="assets/om/pdf-pages/page-0041.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0041.png" alt="Order Orchestration EG page 41"></a>
+          <figcaption><strong>PDF page 41.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0042">
+          <a href="assets/om/pdf-pages/page-0042.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0042.png" alt="Order Orchestration EG page 42"></a>
+          <figcaption><strong>PDF page 42.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0043">
+          <a href="assets/om/pdf-pages/page-0043.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0043.png" alt="Order Orchestration EG page 43"></a>
+          <figcaption><strong>PDF page 43.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0044">
+          <a href="assets/om/pdf-pages/page-0044.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0044.png" alt="Order Orchestration EG page 44"></a>
+          <figcaption><strong>PDF page 44.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0045">
+          <a href="assets/om/pdf-pages/page-0045.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0045.png" alt="Order Orchestration EG page 45"></a>
+          <figcaption><strong>PDF page 45.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0046">
+          <a href="assets/om/pdf-pages/page-0046.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0046.png" alt="Order Orchestration EG page 46"></a>
+          <figcaption><strong>PDF page 46.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0047">
+          <a href="assets/om/pdf-pages/page-0047.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0047.png" alt="Order Orchestration EG page 47"></a>
+          <figcaption><strong>PDF page 47.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0048">
+          <a href="assets/om/pdf-pages/page-0048.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0048.png" alt="Order Orchestration EG page 48"></a>
+          <figcaption><strong>PDF page 48.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-callouts">
+<h2>11. Orchestration Systems &amp; Callouts (Exercise 6-6)</h2>
+      <p><strong>Callouts</strong> automate integration with external fulfillment systems (OSS, billing, logistics, installation schedulers) via REST/SOAP through configured <strong>orchestration systems</strong> and <strong>system interfaces</strong>.</p>
+
+      <h3>Architecture</h3>
+      <table class="data-table">
+        <thead><tr><th>Layer</th><th>Object</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>System</td><td>Orchestration System</td><td>Logical external system (Training Mocker, Billing Gateway)</td></tr>
+          <tr><td>Interface</td><td>System Interface</td><td>Endpoint URL, credentials, paths, HTTP method</td></tr>
+          <tr><td>Task</td><td>Callout Item Definition</td><td>Which interface/path to invoke when Ready</td></tr>
+          <tr><td>Trigger</td><td>Scenario</td><td>Product + Action that activates the plan containing callout</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Installation System Lab — Full Steps</h3>
+      <ol>
+        <li>Review installation system orchestration diagram (logical view)</li>
+        <li>Create orchestration system: <strong>Training Mocker</strong></li>
+        <li>Create <strong>system interface</strong> with endpoint URL and path</li>
+        <li>Add <strong>Remote Site Settings</strong> for external URL in Salesforce Setup</li>
+        <li>Set technical product <em>Installation System Resource</em> scope to Default</li>
+        <li>Create <strong>Installation System</strong> plan definition + <em>Schedule Installation</em> callout item</li>
+        <li>Create scenario: Product = Installation System Resource, Action = Add</li>
+        <li>Test order: Back to School Student Offer + DSL 40 Mbps + Home Hub Modem Best grade</li>
+        <li>Decompose → verify OLI decomposes to Installation System Resource FRL with Add</li>
+        <li>View Orchestration Plan — E2E + Installation swimlanes; Schedule Installation in Installation lane</li>
+      </ol>
+
+      <h3>Attribute-Driven Behavior (Task 10)</h3>
+      <p>Changing product attributes (e.g. Download Speed on DSL) can change which callout paths or conditions fire — always regression-test attribute combinations after orchestration changes.</p>
+
+      <h3>Callout Failure</h3>
+      <p>Failed callouts move to Failed state — may trigger retry policies and fallout queues (Exercise 6-7). System interfaces can be taken offline to simulate outages.</p>
+      <h3>PDF Screenshots — Systems, Callouts & Installation Plan</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0058">
+          <a href="assets/om/pdf-pages/page-0058.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0058.png" alt="Order Orchestration EG page 58"></a>
+          <figcaption><strong>PDF page 58.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0059">
+          <a href="assets/om/pdf-pages/page-0059.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0059.png" alt="Order Orchestration EG page 59"></a>
+          <figcaption><strong>PDF page 59.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0060">
+          <a href="assets/om/pdf-pages/page-0060.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0060.png" alt="Order Orchestration EG page 60"></a>
+          <figcaption><strong>PDF page 60.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0061">
+          <a href="assets/om/pdf-pages/page-0061.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0061.png" alt="Order Orchestration EG page 61"></a>
+          <figcaption><strong>PDF page 61.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0062">
+          <a href="assets/om/pdf-pages/page-0062.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0062.png" alt="Order Orchestration EG page 62"></a>
+          <figcaption><strong>PDF page 62.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0063">
+          <a href="assets/om/pdf-pages/page-0063.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0063.png" alt="Order Orchestration EG page 63"></a>
+          <figcaption><strong>PDF page 63.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0064">
+          <a href="assets/om/pdf-pages/page-0064.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0064.png" alt="Order Orchestration EG page 64"></a>
+          <figcaption><strong>PDF page 64.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0065">
+          <a href="assets/om/pdf-pages/page-0065.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0065.png" alt="Order Orchestration EG page 65"></a>
+          <figcaption><strong>PDF page 65.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0066">
+          <a href="assets/om/pdf-pages/page-0066.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0066.png" alt="Order Orchestration EG page 66"></a>
+          <figcaption><strong>PDF page 66.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0067">
+          <a href="assets/om/pdf-pages/page-0067.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0067.png" alt="Order Orchestration EG page 67"></a>
+          <figcaption><strong>PDF page 67.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0068">
+          <a href="assets/om/pdf-pages/page-0068.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0068.png" alt="Order Orchestration EG page 68"></a>
+          <figcaption><strong>PDF page 68.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0069">
+          <a href="assets/om/pdf-pages/page-0069.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0069.png" alt="Order Orchestration EG page 69"></a>
+          <figcaption><strong>PDF page 69.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0070">
+          <a href="assets/om/pdf-pages/page-0070.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0070.png" alt="Order Orchestration EG page 70"></a>
+          <figcaption><strong>PDF page 70.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0071">
+          <a href="assets/om/pdf-pages/page-0071.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0071.png" alt="Order Orchestration EG page 71"></a>
+          <figcaption><strong>PDF page 71.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0072">
+          <a href="assets/om/pdf-pages/page-0072.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0072.png" alt="Order Orchestration EG page 72"></a>
+          <figcaption><strong>PDF page 72.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0073">
+          <a href="assets/om/pdf-pages/page-0073.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0073.png" alt="Order Orchestration EG page 73"></a>
+          <figcaption><strong>PDF page 73.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0074">
+          <a href="assets/om/pdf-pages/page-0074.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0074.png" alt="Order Orchestration EG page 74"></a>
+          <figcaption><strong>PDF page 74.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0075">
+          <a href="assets/om/pdf-pages/page-0075.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0075.png" alt="Order Orchestration EG page 75"></a>
+          <figcaption><strong>PDF page 75.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0076">
+          <a href="assets/om/pdf-pages/page-0076.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0076.png" alt="Order Orchestration EG page 76"></a>
+          <figcaption><strong>PDF page 76.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0077">
+          <a href="assets/om/pdf-pages/page-0077.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0077.png" alt="Order Orchestration EG page 77"></a>
+          <figcaption><strong>PDF page 77.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0078">
+          <a href="assets/om/pdf-pages/page-0078.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0078.png" alt="Order Orchestration EG page 78"></a>
+          <figcaption><strong>PDF page 78.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0079">
+          <a href="assets/om/pdf-pages/page-0079.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0079.png" alt="Order Orchestration EG page 79"></a>
+          <figcaption><strong>PDF page 79.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0080">
+          <a href="assets/om/pdf-pages/page-0080.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0080.png" alt="Order Orchestration EG page 80"></a>
+          <figcaption><strong>PDF page 80.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0081">
+          <a href="assets/om/pdf-pages/page-0081.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0081.png" alt="Order Orchestration EG page 81"></a>
+          <figcaption><strong>PDF page 81.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0082">
+          <a href="assets/om/pdf-pages/page-0082.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0082.png" alt="Order Orchestration EG page 82"></a>
+          <figcaption><strong>PDF page 82.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0083">
+          <a href="assets/om/pdf-pages/page-0083.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0083.png" alt="Order Orchestration EG page 83"></a>
+          <figcaption><strong>PDF page 83.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0084">
+          <a href="assets/om/pdf-pages/page-0084.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0084.png" alt="Order Orchestration EG page 84"></a>
+          <figcaption><strong>PDF page 84.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0085">
+          <a href="assets/om/pdf-pages/page-0085.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0085.png" alt="Order Orchestration EG page 85"></a>
+          <figcaption><strong>PDF page 85.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-fallout">
+<h2>12. Fallout Management &amp; Retry Policies (Exercise 6-7)</h2>
+      <p>Production integrations fail — networks timeout, endpoints return 500, DNS breaks. <strong>Integration Retry Policies</strong> and <strong>fallout management</strong> provide automated recovery and human repair paths.</p>
+
+      <h3>Key Concepts</h3>
+      <table class="data-table">
+        <thead><tr><th>Feature</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Integration Retry Policy</strong></td><td>Automatic retries with configurable intervals/counts</td></tr>
+          <tr><td><strong>Fallout Queue</strong></td><td>Manual queue for tasks that exhausted retries</td></tr>
+          <tr><td><strong>Repair</strong></td><td>Agent fixes root cause (config, data) and retries/resumes item</td></tr>
+          <tr><td><strong>System Interface offline</strong></td><td>Simulates hard outage — tests fallout routing</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Lab Progression</h3>
+      <ol>
+        <li><strong>Task 1–2:</strong> Confirm org supports retry policies; misconfigure Path → observe retry behavior</li>
+        <li><strong>Task 3:</strong> Misconfigure System URL → stronger failure signal</li>
+        <li><strong>Task 4:</strong> Additional fallout configuration (queues, notifications)</li>
+        <li><strong>Task 5:</strong> Test retry policies with fallout queues — failed callout lands in repair queue</li>
+        <li><strong>Task 6:</strong> Repair IOM config, fix DNS (MAC vs PC hosts file notes in PDF)</li>
+        <li><strong>Task 7:</strong> Take system interface offline — verify graceful degradation</li>
+      </ol>
+
+      <div class="note"><strong>Operations reality</strong> Fallout queues are your NOC/operations dashboard for stuck orders. Design clear ownership per queue aligned to integration domain (billing, network, logistics).</div>
+      <h3>PDF Screenshots — Fallout & Retry Policies</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0086">
+          <a href="assets/om/pdf-pages/page-0086.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0086.png" alt="Order Orchestration EG page 86"></a>
+          <figcaption><strong>PDF page 86.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0087">
+          <a href="assets/om/pdf-pages/page-0087.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0087.png" alt="Order Orchestration EG page 87"></a>
+          <figcaption><strong>PDF page 87.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0088">
+          <a href="assets/om/pdf-pages/page-0088.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0088.png" alt="Order Orchestration EG page 88"></a>
+          <figcaption><strong>PDF page 88.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0089">
+          <a href="assets/om/pdf-pages/page-0089.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0089.png" alt="Order Orchestration EG page 89"></a>
+          <figcaption><strong>PDF page 89.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0090">
+          <a href="assets/om/pdf-pages/page-0090.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0090.png" alt="Order Orchestration EG page 90"></a>
+          <figcaption><strong>PDF page 90.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0091">
+          <a href="assets/om/pdf-pages/page-0091.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0091.png" alt="Order Orchestration EG page 91"></a>
+          <figcaption><strong>PDF page 91.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0092">
+          <a href="assets/om/pdf-pages/page-0092.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0092.png" alt="Order Orchestration EG page 92"></a>
+          <figcaption><strong>PDF page 92.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0093">
+          <a href="assets/om/pdf-pages/page-0093.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0093.png" alt="Order Orchestration EG page 93"></a>
+          <figcaption><strong>PDF page 93.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0094">
+          <a href="assets/om/pdf-pages/page-0094.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0094.png" alt="Order Orchestration EG page 94"></a>
+          <figcaption><strong>PDF page 94.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0095">
+          <a href="assets/om/pdf-pages/page-0095.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0095.png" alt="Order Orchestration EG page 95"></a>
+          <figcaption><strong>PDF page 95.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0096">
+          <a href="assets/om/pdf-pages/page-0096.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0096.png" alt="Order Orchestration EG page 96"></a>
+          <figcaption><strong>PDF page 96.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0097">
+          <a href="assets/om/pdf-pages/page-0097.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0097.png" alt="Order Orchestration EG page 97"></a>
+          <figcaption><strong>PDF page 97.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0098">
+          <a href="assets/om/pdf-pages/page-0098.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0098.png" alt="Order Orchestration EG page 98"></a>
+          <figcaption><strong>PDF page 98.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0099">
+          <a href="assets/om/pdf-pages/page-0099.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0099.png" alt="Order Orchestration EG page 99"></a>
+          <figcaption><strong>PDF page 99.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0100">
+          <a href="assets/om/pdf-pages/page-0100.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0100.png" alt="Order Orchestration EG page 100"></a>
+          <figcaption><strong>PDF page 100.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0101">
+          <a href="assets/om/pdf-pages/page-0101.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0101.png" alt="Order Orchestration EG page 101"></a>
+          <figcaption><strong>PDF page 101.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0102">
+          <a href="assets/om/pdf-pages/page-0102.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0102.png" alt="Order Orchestration EG page 102"></a>
+          <figcaption><strong>PDF page 102.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0103">
+          <a href="assets/om/pdf-pages/page-0103.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0103.png" alt="Order Orchestration EG page 103"></a>
+          <figcaption><strong>PDF page 103.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0104">
+          <a href="assets/om/pdf-pages/page-0104.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0104.png" alt="Order Orchestration EG page 104"></a>
+          <figcaption><strong>PDF page 104.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0105">
+          <a href="assets/om/pdf-pages/page-0105.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0105.png" alt="Order Orchestration EG page 105"></a>
+          <figcaption><strong>PDF page 105.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0106">
+          <a href="assets/om/pdf-pages/page-0106.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0106.png" alt="Order Orchestration EG page 106"></a>
+          <figcaption><strong>PDF page 106.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0107">
+          <a href="assets/om/pdf-pages/page-0107.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0107.png" alt="Order Orchestration EG page 107"></a>
+          <figcaption><strong>PDF page 107.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0108">
+          <a href="assets/om/pdf-pages/page-0108.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0108.png" alt="Order Orchestration EG page 108"></a>
+          <figcaption><strong>PDF page 108.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0109">
+          <a href="assets/om/pdf-pages/page-0109.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0109.png" alt="Order Orchestration EG page 109"></a>
+          <figcaption><strong>PDF page 109.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-push">
+<h2>13. Push Events (Exercise 6-8)</h2>
+      <p>Not all fulfillment is request/response. <strong>Push events</strong> let orchestration items wait for asynchronous signals — an external system or Salesforce object state change confirms work is done.</p>
+
+      <h3>When to Use Push Events</h3>
+      <ul>
+        <li>External system completes work asynchronously and updates a Salesforce field</li>
+        <li>Downstream team marks a custom object stage complete</li>
+        <li>Event-driven architecture where polling callouts are undesirable</li>
+      </ul>
+
+      <h3>Lab Structure</h3>
+      <ol>
+        <li>Create orchestration plan definition with push event item definitions</li>
+        <li>Place test order → decompose → observe item waiting in Running/Ready for push</li>
+        <li><strong>Task 4 — JSON push:</strong> Configure JSON-based push event; simulate object update</li>
+        <li><strong>Task 5 — Apex push:</strong> Apex trigger/class fires push to advance orchestration</li>
+      </ol>
+
+      <h3>Push vs Callout</h3>
+      <table class="data-table">
+        <thead><tr><th></th><th>Callout</th><th>Push Event</th></tr></thead>
+        <tbody>
+          <tr><td>Pattern</td><td>Active request → immediate response expected</td><td>Fire-and-forget → wait for signal</td></tr>
+          <tr><td>Completion</td><td>HTTP response success</td><td>Object state matches configured criteria</td></tr>
+          <tr><td>Timeout handling</td><td>Retry/fallout on HTTP failure</td><td>May need timeout items or monitoring</td></tr>
+        </tbody>
+      </table>
+      <h3>PDF Screenshots — Push Events</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0110">
+          <a href="assets/om/pdf-pages/page-0110.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0110.png" alt="Order Orchestration EG page 110"></a>
+          <figcaption><strong>PDF page 110.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0111">
+          <a href="assets/om/pdf-pages/page-0111.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0111.png" alt="Order Orchestration EG page 111"></a>
+          <figcaption><strong>PDF page 111.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0112">
+          <a href="assets/om/pdf-pages/page-0112.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0112.png" alt="Order Orchestration EG page 112"></a>
+          <figcaption><strong>PDF page 112.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0113">
+          <a href="assets/om/pdf-pages/page-0113.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0113.png" alt="Order Orchestration EG page 113"></a>
+          <figcaption><strong>PDF page 113.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0114">
+          <a href="assets/om/pdf-pages/page-0114.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0114.png" alt="Order Orchestration EG page 114"></a>
+          <figcaption><strong>PDF page 114.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0115">
+          <a href="assets/om/pdf-pages/page-0115.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0115.png" alt="Order Orchestration EG page 115"></a>
+          <figcaption><strong>PDF page 115.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0116">
+          <a href="assets/om/pdf-pages/page-0116.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0116.png" alt="Order Orchestration EG page 116"></a>
+          <figcaption><strong>PDF page 116.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0117">
+          <a href="assets/om/pdf-pages/page-0117.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0117.png" alt="Order Orchestration EG page 117"></a>
+          <figcaption><strong>PDF page 117.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0118">
+          <a href="assets/om/pdf-pages/page-0118.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0118.png" alt="Order Orchestration EG page 118"></a>
+          <figcaption><strong>PDF page 118.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0119">
+          <a href="assets/om/pdf-pages/page-0119.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0119.png" alt="Order Orchestration EG page 119"></a>
+          <figcaption><strong>PDF page 119.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0120">
+          <a href="assets/om/pdf-pages/page-0120.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0120.png" alt="Order Orchestration EG page 120"></a>
+          <figcaption><strong>PDF page 120.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0121">
+          <a href="assets/om/pdf-pages/page-0121.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0121.png" alt="Order Orchestration EG page 121"></a>
+          <figcaption><strong>PDF page 121.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0122">
+          <a href="assets/om/pdf-pages/page-0122.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0122.png" alt="Order Orchestration EG page 122"></a>
+          <figcaption><strong>PDF page 122.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0123">
+          <a href="assets/om/pdf-pages/page-0123.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0123.png" alt="Order Orchestration EG page 123"></a>
+          <figcaption><strong>PDF page 123.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0124">
+          <a href="assets/om/pdf-pages/page-0124.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0124.png" alt="Order Orchestration EG page 124"></a>
+          <figcaption><strong>PDF page 124.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-macd-1to1">
+<h2>14. MACD with 1:1 Decomposition (Exercise 6-9)</h2>
+      <p><strong>MACD</strong> = Move, Add, Change (Modify), Disconnect — the four order actions on existing customer services. With <strong>1:1 decomposition</strong>, one commercial product maps to one technical RFS, simplifying orchestration for Spotify&apos;s initial launch.</p>
+
+      <h3>Logical Orchestration View (Add &amp; Modify)</h3>
+      <p>The PDF diagrams show parallel functional swimlanes triggered by scenarios:</p>
+      <ul>
+        <li><strong>Add:</strong> E2E Start → Provision → Billing → Assetize → SMS Welcome → E2E End</li>
+        <li><strong>Modify:</strong> Same core lanes but SMS Upgrade replaces Welcome; provision/billing may re-execute</li>
+      </ul>
+
+      <h3>Configuration Checklist (Tasks 3–10)</h3>
+      <table class="data-table">
+        <thead><tr><th>Task</th><th>Work</th></tr></thead>
+        <tbody>
+          <tr><td>3</td><td>Create 6 plan definitions (Spotify E2E, Provision, Billing, Assetize, SMS Welcome, SMS Upgrade) — Show Order 1–6, Scope Global</td></tr>
+          <tr><td>4</td><td>E2E lane: Spotify Start + Spotify End milestones; scenarios for Add + Modify</td></tr>
+          <tr><td>5</td><td>Provision lane: milestone + scenario (Spotify RFS, Add+Modify)</td></tr>
+          <tr><td>6</td><td>Billing lane: milestone + scenario</td></tr>
+          <tr><td>7</td><td>Assetize lane: Auto Task (Assetize) + scenario</td></tr>
+          <tr><td>8</td><td>SMS Welcome: Add action only</td></tr>
+          <tr><td>9</td><td>SMS Upgrade: Modify action only</td></tr>
+          <tr><td>10</td><td>Cross-swimlane dependency definitions linking Start → functions → End</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Testing Add Order (Task 11)</h3>
+      <ol>
+        <li>Create new account + order with Spotify commercial product</li>
+        <li>Configure attributes (Subscription Type, Number of Accounts)</li>
+        <li>Decompose — verify Spotify → Spotify RFS Add FRL</li>
+        <li><strong>View Orchestration Plan</strong> — all six swimlanes visible with tasks sequencing via dependencies</li>
+        <li>Wait for assetization — refresh decomposition page — inventory JSON on FRL link</li>
+      </ol>
+
+      <h3>Testing Change Order (Task 12)</h3>
+      <ol>
+        <li>Submit MACD change on existing Spotify subscription (e.g. change subscription type)</li>
+        <li>Decompose — Modify action on Spotify RFS</li>
+        <li>Orchestration runs modify scenarios — SMS Upgrade lane fires instead of Welcome</li>
+      </ol>
+
+      <div class="tip"><strong>Naming convention</strong> Use noun+verb task names (Create Account, Activate Billing) rather than system names — simplifies migrations when backend systems change.</div>
+      <h3>PDF Screenshots — MACD 1:1 (Exercise 6-9)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0125">
+          <a href="assets/om/pdf-pages/page-0125.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0125.png" alt="Order Orchestration EG page 125"></a>
+          <figcaption><strong>PDF page 125.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0126">
+          <a href="assets/om/pdf-pages/page-0126.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0126.png" alt="Order Orchestration EG page 126"></a>
+          <figcaption><strong>PDF page 126.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0127">
+          <a href="assets/om/pdf-pages/page-0127.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0127.png" alt="Order Orchestration EG page 127"></a>
+          <figcaption><strong>PDF page 127.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0132">
+          <a href="assets/om/pdf-pages/page-0132.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0132.png" alt="Order Orchestration EG page 132"></a>
+          <figcaption><strong>PDF page 132.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0133">
+          <a href="assets/om/pdf-pages/page-0133.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0133.png" alt="Order Orchestration EG page 133"></a>
+          <figcaption><strong>PDF page 133.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0134">
+          <a href="assets/om/pdf-pages/page-0134.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0134.png" alt="Order Orchestration EG page 134"></a>
+          <figcaption><strong>PDF page 134.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0135">
+          <a href="assets/om/pdf-pages/page-0135.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0135.png" alt="Order Orchestration EG page 135"></a>
+          <figcaption><strong>PDF page 135.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0136">
+          <a href="assets/om/pdf-pages/page-0136.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0136.png" alt="Order Orchestration EG page 136"></a>
+          <figcaption><strong>PDF page 136.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0137">
+          <a href="assets/om/pdf-pages/page-0137.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0137.png" alt="Order Orchestration EG page 137"></a>
+          <figcaption><strong>PDF page 137.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0138">
+          <a href="assets/om/pdf-pages/page-0138.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0138.png" alt="Order Orchestration EG page 138"></a>
+          <figcaption><strong>PDF page 138.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0139">
+          <a href="assets/om/pdf-pages/page-0139.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0139.png" alt="Order Orchestration EG page 139"></a>
+          <figcaption><strong>PDF page 139.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0140">
+          <a href="assets/om/pdf-pages/page-0140.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0140.png" alt="Order Orchestration EG page 140"></a>
+          <figcaption><strong>PDF page 140.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0141">
+          <a href="assets/om/pdf-pages/page-0141.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0141.png" alt="Order Orchestration EG page 141"></a>
+          <figcaption><strong>PDF page 141.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0142">
+          <a href="assets/om/pdf-pages/page-0142.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0142.png" alt="Order Orchestration EG page 142"></a>
+          <figcaption><strong>PDF page 142.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0143">
+          <a href="assets/om/pdf-pages/page-0143.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0143.png" alt="Order Orchestration EG page 143"></a>
+          <figcaption><strong>PDF page 143.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0144">
+          <a href="assets/om/pdf-pages/page-0144.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0144.png" alt="Order Orchestration EG page 144"></a>
+          <figcaption><strong>PDF page 144.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0145">
+          <a href="assets/om/pdf-pages/page-0145.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0145.png" alt="Order Orchestration EG page 145"></a>
+          <figcaption><strong>PDF page 145.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0146">
+          <a href="assets/om/pdf-pages/page-0146.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0146.png" alt="Order Orchestration EG page 146"></a>
+          <figcaption><strong>PDF page 146.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0147">
+          <a href="assets/om/pdf-pages/page-0147.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0147.png" alt="Order Orchestration EG page 147"></a>
+          <figcaption><strong>PDF page 147.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0148">
+          <a href="assets/om/pdf-pages/page-0148.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0148.png" alt="Order Orchestration EG page 148"></a>
+          <figcaption><strong>PDF page 148.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0149">
+          <a href="assets/om/pdf-pages/page-0149.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0149.png" alt="Order Orchestration EG page 149"></a>
+          <figcaption><strong>PDF page 149.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0150">
+          <a href="assets/om/pdf-pages/page-0150.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0150.png" alt="Order Orchestration EG page 150"></a>
+          <figcaption><strong>PDF page 150.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0151">
+          <a href="assets/om/pdf-pages/page-0151.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0151.png" alt="Order Orchestration EG page 151"></a>
+          <figcaption><strong>PDF page 151.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0152">
+          <a href="assets/om/pdf-pages/page-0152.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0152.png" alt="Order Orchestration EG page 152"></a>
+          <figcaption><strong>PDF page 152.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0153">
+          <a href="assets/om/pdf-pages/page-0153.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0153.png" alt="Order Orchestration EG page 153"></a>
+          <figcaption><strong>PDF page 153.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0154">
+          <a href="assets/om/pdf-pages/page-0154.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0154.png" alt="Order Orchestration EG page 154"></a>
+          <figcaption><strong>PDF page 154.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0157">
+          <a href="assets/om/pdf-pages/page-0157.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0157.png" alt="Order Orchestration EG page 157"></a>
+          <figcaption><strong>PDF page 157.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0158">
+          <a href="assets/om/pdf-pages/page-0158.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0158.png" alt="Order Orchestration EG page 158"></a>
+          <figcaption><strong>PDF page 158.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0159">
+          <a href="assets/om/pdf-pages/page-0159.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0159.png" alt="Order Orchestration EG page 159"></a>
+          <figcaption><strong>PDF page 159.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0160">
+          <a href="assets/om/pdf-pages/page-0160.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0160.png" alt="Order Orchestration EG page 160"></a>
+          <figcaption><strong>PDF page 160.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0161">
+          <a href="assets/om/pdf-pages/page-0161.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0161.png" alt="Order Orchestration EG page 161"></a>
+          <figcaption><strong>PDF page 161.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0162">
+          <a href="assets/om/pdf-pages/page-0162.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0162.png" alt="Order Orchestration EG page 162"></a>
+          <figcaption><strong>PDF page 162.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-macd-disconnect">
+<h2>15. MACD Disconnect (Exercise 6-10)</h2>
+      <p><strong>Disconnect</strong> removes a service — deprovision network, stop billing, notify customer, retire assets. The logical flow often differs from Add/Modify: assetization may depend on billing only (not provision) after SMS confirmation.</p>
+
+      <h3>Disconnect Logical Flow</h3>
+      <div class="workflow">
+        <div class="workflow-step">SMS Cancel Confirm</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Billing Disconnect</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Provision Deactivate</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">SMS Cancel Sent</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Assetize Disconnect</div>
+      </div>
+
+      <h3>Configuration Tasks</h3>
+      <ol>
+        <li>Review MACD-1:1 disconnect diagram (subset of full logical view)</li>
+        <li>Add <strong>Disconnect</strong> action to scenarios on: E2E, Provision, Billing, Assetize, SMS lanes</li>
+        <li>Create Spotify disconnect-specific SMS swimlane if split from modify welcome</li>
+        <li>Configure dependencies: assetization waits for billing on disconnect path</li>
+        <li>Test: disconnect active Spotify subscription on account</li>
+      </ol>
+
+      <div class="note"><strong>Key difference from Add</strong> Disconnect scenarios use Action = Disconnect on Spotify RFS. Dependency graph may invert — billing before assetization without waiting for provision.</div>
+      <h3>PDF Screenshots — MACD Disconnect (Exercise 6-10)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0163">
+          <a href="assets/om/pdf-pages/page-0163.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0163.png" alt="Order Orchestration EG page 163"></a>
+          <figcaption><strong>PDF page 163.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0164">
+          <a href="assets/om/pdf-pages/page-0164.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0164.png" alt="Order Orchestration EG page 164"></a>
+          <figcaption><strong>PDF page 164.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0165">
+          <a href="assets/om/pdf-pages/page-0165.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0165.png" alt="Order Orchestration EG page 165"></a>
+          <figcaption><strong>PDF page 165.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0166">
+          <a href="assets/om/pdf-pages/page-0166.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0166.png" alt="Order Orchestration EG page 166"></a>
+          <figcaption><strong>PDF page 166.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0167">
+          <a href="assets/om/pdf-pages/page-0167.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0167.png" alt="Order Orchestration EG page 167"></a>
+          <figcaption><strong>PDF page 167.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0168">
+          <a href="assets/om/pdf-pages/page-0168.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0168.png" alt="Order Orchestration EG page 168"></a>
+          <figcaption><strong>PDF page 168.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0169">
+          <a href="assets/om/pdf-pages/page-0169.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0169.png" alt="Order Orchestration EG page 169"></a>
+          <figcaption><strong>PDF page 169.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0170">
+          <a href="assets/om/pdf-pages/page-0170.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0170.png" alt="Order Orchestration EG page 170"></a>
+          <figcaption><strong>PDF page 170.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0171">
+          <a href="assets/om/pdf-pages/page-0171.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0171.png" alt="Order Orchestration EG page 171"></a>
+          <figcaption><strong>PDF page 171.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0172">
+          <a href="assets/om/pdf-pages/page-0172.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0172.png" alt="Order Orchestration EG page 172"></a>
+          <figcaption><strong>PDF page 172.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0173">
+          <a href="assets/om/pdf-pages/page-0173.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0173.png" alt="Order Orchestration EG page 173"></a>
+          <figcaption><strong>PDF page 173.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0174">
+          <a href="assets/om/pdf-pages/page-0174.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0174.png" alt="Order Orchestration EG page 174"></a>
+          <figcaption><strong>PDF page 174.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0175">
+          <a href="assets/om/pdf-pages/page-0175.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0175.png" alt="Order Orchestration EG page 175"></a>
+          <figcaption><strong>PDF page 175.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0176">
+          <a href="assets/om/pdf-pages/page-0176.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0176.png" alt="Order Orchestration EG page 176"></a>
+          <figcaption><strong>PDF page 176.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0177">
+          <a href="assets/om/pdf-pages/page-0177.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0177.png" alt="Order Orchestration EG page 177"></a>
+          <figcaption><strong>PDF page 177.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-macd-1tom">
+<h2>16. MACD with 1:M Decomposition (Exercise 6-11)</h2>
+      <p><strong>Streaming TV</strong> demonstrates <strong>one-to-many</strong> decomposition: one commercial offer generates multiple FRLs — service activation plus STB shipment from region-specific warehouses (Gold/Silver/Bronze tiers → different STB products and warehouses).</p>
+
+      <h3>Why 1:M Matters</h3>
+      <ul>
+        <li>Single customer order spawns parallel fulfillment in different domains (shipping vs activation)</li>
+        <li>Each FRL has its own scenarios and swimlanes</li>
+        <li>Change orders may produce multiple FRLs from one MACD line (Disconnect old + Add new)</li>
+      </ul>
+
+      <h3>Shipping Swimlane Conditions (Task 5)</h3>
+      <p>Ship tasks use <strong>conditions</strong> on order attributes — e.g. Ship STB Silver (SoCal) fires only when:</p>
+      <ul>
+        <li>Subscription/tier attribute = Silver</li>
+        <li>Region/warehouse attribute = SoCal</li>
+      </ul>
+      <p>Similar conditional tasks for Gold/NorCal, Bronze/East, etc.</p>
+
+      <h3>The Modify &quot;Trick Question&quot;</h3>
+      <p>When upgrading Bronze → Silver TV, Greg discovers <strong>no dedicated Modify swimlane is needed</strong>. IOM decomposition compares inventory vs request and emits:</p>
+      <ul>
+        <li>FRL 1: <strong>Disconnect</strong> Bronze TV service</li>
+        <li>FRL 2: <strong>Add</strong> Silver TV service</li>
+      </ul>
+      <p>Orchestration then runs disconnect shipping (return label + box) and add shipping (new Silver STB) in parallel with activation changes.</p>
+
+      <h3>Dependency Layers (Tasks 7–9)</h3>
+      <ul>
+        <li>E2E task dependencies (Start/End framing)</li>
+        <li>Shipping-specific dependencies per warehouse/tier</li>
+        <li>Disconnect-specific dependencies (reverse logistics before account cleanup)</li>
+      </ul>
+
+      <h3>Test Scenarios</h3>
+      <table class="data-table">
+        <thead><tr><th>Task</th><th>Action</th><th>Expected</th></tr></thead>
+        <tbody>
+          <tr><td>10 — Add</td><td>New Streaming TV order</td><td>Activation + ship STB swimlanes fire</td></tr>
+          <tr><td>11 — Change</td><td>Bronze → Silver upgrade</td><td>Disconnect Bronze + Add Silver FRLs; return label + new STB shipments</td></tr>
+          <tr><td>12 — Disconnect</td><td>Cancel service</td><td>Deprovision + return shipment + billing stop</td></tr>
+        </tbody>
+      </table>
+      <h3>PDF Screenshots — MACD 1:M & Streaming TV (Exercise 6-11)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0178">
+          <a href="assets/om/pdf-pages/page-0178.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0178.png" alt="Order Orchestration EG page 178"></a>
+          <figcaption><strong>PDF page 178.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0179">
+          <a href="assets/om/pdf-pages/page-0179.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0179.png" alt="Order Orchestration EG page 179"></a>
+          <figcaption><strong>PDF page 179.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0180">
+          <a href="assets/om/pdf-pages/page-0180.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0180.png" alt="Order Orchestration EG page 180"></a>
+          <figcaption><strong>PDF page 180.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0182">
+          <a href="assets/om/pdf-pages/page-0182.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0182.png" alt="Order Orchestration EG page 182"></a>
+          <figcaption><strong>PDF page 182.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0183">
+          <a href="assets/om/pdf-pages/page-0183.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0183.png" alt="Order Orchestration EG page 183"></a>
+          <figcaption><strong>PDF page 183.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0184">
+          <a href="assets/om/pdf-pages/page-0184.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0184.png" alt="Order Orchestration EG page 184"></a>
+          <figcaption><strong>PDF page 184.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0185">
+          <a href="assets/om/pdf-pages/page-0185.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0185.png" alt="Order Orchestration EG page 185"></a>
+          <figcaption><strong>PDF page 185.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0186">
+          <a href="assets/om/pdf-pages/page-0186.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0186.png" alt="Order Orchestration EG page 186"></a>
+          <figcaption><strong>PDF page 186.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0187">
+          <a href="assets/om/pdf-pages/page-0187.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0187.png" alt="Order Orchestration EG page 187"></a>
+          <figcaption><strong>PDF page 187.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0188">
+          <a href="assets/om/pdf-pages/page-0188.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0188.png" alt="Order Orchestration EG page 188"></a>
+          <figcaption><strong>PDF page 188.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0189">
+          <a href="assets/om/pdf-pages/page-0189.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0189.png" alt="Order Orchestration EG page 189"></a>
+          <figcaption><strong>PDF page 189.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0190">
+          <a href="assets/om/pdf-pages/page-0190.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0190.png" alt="Order Orchestration EG page 190"></a>
+          <figcaption><strong>PDF page 190.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0191">
+          <a href="assets/om/pdf-pages/page-0191.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0191.png" alt="Order Orchestration EG page 191"></a>
+          <figcaption><strong>PDF page 191.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0192">
+          <a href="assets/om/pdf-pages/page-0192.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0192.png" alt="Order Orchestration EG page 192"></a>
+          <figcaption><strong>PDF page 192.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0193">
+          <a href="assets/om/pdf-pages/page-0193.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0193.png" alt="Order Orchestration EG page 193"></a>
+          <figcaption><strong>PDF page 193.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0194">
+          <a href="assets/om/pdf-pages/page-0194.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0194.png" alt="Order Orchestration EG page 194"></a>
+          <figcaption><strong>PDF page 194.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0195">
+          <a href="assets/om/pdf-pages/page-0195.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0195.png" alt="Order Orchestration EG page 195"></a>
+          <figcaption><strong>PDF page 195.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0196">
+          <a href="assets/om/pdf-pages/page-0196.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0196.png" alt="Order Orchestration EG page 196"></a>
+          <figcaption><strong>PDF page 196.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0197">
+          <a href="assets/om/pdf-pages/page-0197.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0197.png" alt="Order Orchestration EG page 197"></a>
+          <figcaption><strong>PDF page 197.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0198">
+          <a href="assets/om/pdf-pages/page-0198.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0198.png" alt="Order Orchestration EG page 198"></a>
+          <figcaption><strong>PDF page 198.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0200">
+          <a href="assets/om/pdf-pages/page-0200.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0200.png" alt="Order Orchestration EG page 200"></a>
+          <figcaption><strong>PDF page 200.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0201">
+          <a href="assets/om/pdf-pages/page-0201.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0201.png" alt="Order Orchestration EG page 201"></a>
+          <figcaption><strong>PDF page 201.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0202">
+          <a href="assets/om/pdf-pages/page-0202.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0202.png" alt="Order Orchestration EG page 202"></a>
+          <figcaption><strong>PDF page 202.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0203">
+          <a href="assets/om/pdf-pages/page-0203.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0203.png" alt="Order Orchestration EG page 203"></a>
+          <figcaption><strong>PDF page 203.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-cancel">
-      <h2>9. In-Flight Cancellation &amp; Rollback</h2>
-      <p><strong>In-flight cancellation</strong> stops an order mid-fulfillment. <strong>PONR (Point of No Return)</strong> marks when cancellation is no longer allowed.</p>
+<h2>17. In-Flight Order Cancellation (Exercise 6-12)</h2>
+      <p>Customers cancel mid-install. <strong>In-flight cancellation</strong> stops active orchestration and optionally runs rollback plans to undo completed work — unless a task hit <strong>PONR (Point of No Return)</strong>.</p>
+
+      <h3>OC Provision Mobile — Lab Model</h3>
+      <table class="data-table">
+        <thead><tr><th>Element</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Commercial product</td><td>Mobile Data Plan Offer</td></tr>
+          <tr><td>Technical product</td><td>OC Activation RFS</td></tr>
+          <tr><td>Main swimlane</td><td>OC Provision Mobile (Show Order 1)</td></tr>
+          <tr><td>Manual pause task</td><td>OC Pause Provision Mobile → Technical Order Reviews queue</td></tr>
+          <tr><td>Rollback swimlane</td><td>OC Rollback Provision Mobile — triggered by Rollback Plan Definition, <em>not</em> scenario</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Rollback Plan vs Scenario</h3>
+      <p>Normal forward flow uses <strong>scenarios</strong> (product + action). <strong>Cancellation rollback</strong> uses <strong>Rollback Plan Definition</strong> field on item definitions — when cancel fires, engine executes the named rollback plan instead of forward scenarios.</p>
+
+      <h3>Configuration (Task 2)</h3>
+      <ol>
+        <li>Create OC Provision Mobile plan with Start milestone, Pause manual task, provision callouts</li>
+        <li>Set Rollback Plan Definition on appropriate items → OC Rollback Provision Mobile plan</li>
+        <li>Configure cancel on order record</li>
+      </ol>
+
+      <h3>Testing Cancel (Task 3) &amp; PONR (Task 4)</h3>
       <ul>
-        <li><strong>Rollback Groups</strong> — define which completed tasks must be reversed on cancel</li>
-        <li><strong>Smart Freeze</strong> — pause running tasks during cancellation processing</li>
-        <li><strong>Staggered Retry Policies</strong> — retry failed integrations with increasing delays</li>
+        <li><strong>Task 3:</strong> Cancel while Pause task is active — rollback plan executes, forward tasks freeze/cancel</li>
+        <li><strong>Task 4:</strong> Let order pass PONR milestone — cancel button disabled or cancel rejected — order must complete or manual intervention required</li>
       </ul>
-      <div class="warning"><strong>PONR</strong> Once an orchestration item reaches PONR, the order cannot be cancelled through standard flows — the task must complete or be manually handled.</div>
+
+      <div class="warning"><strong>PONR</strong> Mark irreversible steps (number port completed, billing activated) with PONR on item definition to protect business integrity.</div>
+      <h3>PDF Screenshots — In-Flight Cancellation (Exercise 6-12)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0204">
+          <a href="assets/om/pdf-pages/page-0204.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0204.png" alt="Order Orchestration EG page 204"></a>
+          <figcaption><strong>PDF page 204.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0205">
+          <a href="assets/om/pdf-pages/page-0205.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0205.png" alt="Order Orchestration EG page 205"></a>
+          <figcaption><strong>PDF page 205.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0206">
+          <a href="assets/om/pdf-pages/page-0206.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0206.png" alt="Order Orchestration EG page 206"></a>
+          <figcaption><strong>PDF page 206.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0207">
+          <a href="assets/om/pdf-pages/page-0207.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0207.png" alt="Order Orchestration EG page 207"></a>
+          <figcaption><strong>PDF page 207.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0208">
+          <a href="assets/om/pdf-pages/page-0208.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0208.png" alt="Order Orchestration EG page 208"></a>
+          <figcaption><strong>PDF page 208.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0209">
+          <a href="assets/om/pdf-pages/page-0209.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0209.png" alt="Order Orchestration EG page 209"></a>
+          <figcaption><strong>PDF page 209.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0210">
+          <a href="assets/om/pdf-pages/page-0210.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0210.png" alt="Order Orchestration EG page 210"></a>
+          <figcaption><strong>PDF page 210.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0211">
+          <a href="assets/om/pdf-pages/page-0211.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0211.png" alt="Order Orchestration EG page 211"></a>
+          <figcaption><strong>PDF page 211.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0212">
+          <a href="assets/om/pdf-pages/page-0212.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0212.png" alt="Order Orchestration EG page 212"></a>
+          <figcaption><strong>PDF page 212.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0213">
+          <a href="assets/om/pdf-pages/page-0213.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0213.png" alt="Order Orchestration EG page 213"></a>
+          <figcaption><strong>PDF page 213.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0214">
+          <a href="assets/om/pdf-pages/page-0214.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0214.png" alt="Order Orchestration EG page 214"></a>
+          <figcaption><strong>PDF page 214.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0215">
+          <a href="assets/om/pdf-pages/page-0215.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0215.png" alt="Order Orchestration EG page 215"></a>
+          <figcaption><strong>PDF page 215.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0216">
+          <a href="assets/om/pdf-pages/page-0216.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0216.png" alt="Order Orchestration EG page 216"></a>
+          <figcaption><strong>PDF page 216.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0217">
+          <a href="assets/om/pdf-pages/page-0217.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0217.png" alt="Order Orchestration EG page 217"></a>
+          <figcaption><strong>PDF page 217.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0218">
+          <a href="assets/om/pdf-pages/page-0218.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0218.png" alt="Order Orchestration EG page 218"></a>
+          <figcaption><strong>PDF page 218.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0219">
+          <a href="assets/om/pdf-pages/page-0219.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0219.png" alt="Order Orchestration EG page 219"></a>
+          <figcaption><strong>PDF page 219.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-rollback">
+<h2>18. Rollback Groups &amp; Smart Freeze (Exercise 6-13)</h2>
+      <p>Complex cancellations require coordinated undo across many completed tasks. <strong>Rollback groups</strong> batch reverse operations; <strong>Smart Freeze</strong> pauses in-flight work while cancel processes.</p>
+
+      <h3>Exercise Scenario</h3>
+      <p>Uses pre-built product and orchestration models with richer cancel configuration than Exercise 6-12. Tests cancel at different fulfillment stages:</p>
+      <ul>
+        <li><strong>Mid-way cancel (Task 3):</strong> Some tasks completed, others pending — partial rollback</li>
+        <li><strong>Nearly fulfilled (Task 4):</strong> Most tasks green — extensive rollback required</li>
+      </ul>
+
+      <h3>Rollback Groups (Tasks 5–6)</h3>
+      <table class="data-table">
+        <thead><tr><th>Concept</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rollback Group</strong></td><td>Named group on item definitions — items in same group undo together</td></tr>
+          <tr><td><strong>Rollback Plan Definition</strong></td><td>Plan with reverse callouts (deprovision, refund, inventory return)</td></tr>
+          <tr><td><strong>Order Cancel Configuration</strong></td><td>Org-level settings governing cancel behavior (Task 2 review)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Smart Freeze (Task 7 — Optional)</h3>
+      <p>When cancel initiated while a callout is <strong>Running</strong>, Smart Freeze pauses the task instead of allowing inconsistent state — resumes or rolls back after cancel decision finalized.</p>
+
+      <h3>Design Guidance</h3>
+      <ul>
+        <li>Define rollback plans mirroring forward plans (provision → deprovision, bill → unbill)</li>
+        <li>Group related reverse steps to avoid partial inconsistent customer state</li>
+        <li>Test cancel at every major milestone during design — not just at end</li>
+      </ul>
+      <h3>PDF Screenshots — Rollback Groups & Smart Freeze (Exercise 6-13)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0220">
+          <a href="assets/om/pdf-pages/page-0220.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0220.png" alt="Order Orchestration EG page 220"></a>
+          <figcaption><strong>PDF page 220.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0221">
+          <a href="assets/om/pdf-pages/page-0221.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0221.png" alt="Order Orchestration EG page 221"></a>
+          <figcaption><strong>PDF page 221.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0222">
+          <a href="assets/om/pdf-pages/page-0222.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0222.png" alt="Order Orchestration EG page 222"></a>
+          <figcaption><strong>PDF page 222.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0223">
+          <a href="assets/om/pdf-pages/page-0223.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0223.png" alt="Order Orchestration EG page 223"></a>
+          <figcaption><strong>PDF page 223.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0224">
+          <a href="assets/om/pdf-pages/page-0224.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0224.png" alt="Order Orchestration EG page 224"></a>
+          <figcaption><strong>PDF page 224.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0225">
+          <a href="assets/om/pdf-pages/page-0225.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0225.png" alt="Order Orchestration EG page 225"></a>
+          <figcaption><strong>PDF page 225.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0226">
+          <a href="assets/om/pdf-pages/page-0226.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0226.png" alt="Order Orchestration EG page 226"></a>
+          <figcaption><strong>PDF page 226.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0227">
+          <a href="assets/om/pdf-pages/page-0227.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0227.png" alt="Order Orchestration EG page 227"></a>
+          <figcaption><strong>PDF page 227.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0228">
+          <a href="assets/om/pdf-pages/page-0228.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0228.png" alt="Order Orchestration EG page 228"></a>
+          <figcaption><strong>PDF page 228.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0229">
+          <a href="assets/om/pdf-pages/page-0229.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0229.png" alt="Order Orchestration EG page 229"></a>
+          <figcaption><strong>PDF page 229.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0230">
+          <a href="assets/om/pdf-pages/page-0230.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0230.png" alt="Order Orchestration EG page 230"></a>
+          <figcaption><strong>PDF page 230.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0231">
+          <a href="assets/om/pdf-pages/page-0231.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0231.png" alt="Order Orchestration EG page 231"></a>
+          <figcaption><strong>PDF page 231.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0232">
+          <a href="assets/om/pdf-pages/page-0232.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0232.png" alt="Order Orchestration EG page 232"></a>
+          <figcaption><strong>PDF page 232.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0233">
+          <a href="assets/om/pdf-pages/page-0233.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0233.png" alt="Order Orchestration EG page 233"></a>
+          <figcaption><strong>PDF page 233.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0234">
+          <a href="assets/om/pdf-pages/page-0234.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0234.png" alt="Order Orchestration EG page 234"></a>
+          <figcaption><strong>PDF page 234.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0235">
+          <a href="assets/om/pdf-pages/page-0235.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0235.png" alt="Order Orchestration EG page 235"></a>
+          <figcaption><strong>PDF page 235.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0236">
+          <a href="assets/om/pdf-pages/page-0236.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0236.png" alt="Order Orchestration EG page 236"></a>
+          <figcaption><strong>PDF page 236.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0237">
+          <a href="assets/om/pdf-pages/page-0237.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0237.png" alt="Order Orchestration EG page 237"></a>
+          <figcaption><strong>PDF page 237.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0238">
+          <a href="assets/om/pdf-pages/page-0238.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0238.png" alt="Order Orchestration EG page 238"></a>
+          <figcaption><strong>PDF page 238.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0239">
+          <a href="assets/om/pdf-pages/page-0239.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0239.png" alt="Order Orchestration EG page 239"></a>
+          <figcaption><strong>PDF page 239.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0240">
+          <a href="assets/om/pdf-pages/page-0240.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0240.png" alt="Order Orchestration EG page 240"></a>
+          <figcaption><strong>PDF page 240.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0241">
+          <a href="assets/om/pdf-pages/page-0241.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0241.png" alt="Order Orchestration EG page 241"></a>
+          <figcaption><strong>PDF page 241.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0242">
+          <a href="assets/om/pdf-pages/page-0242.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0242.png" alt="Order Orchestration EG page 242"></a>
+          <figcaption><strong>PDF page 242.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0243">
+          <a href="assets/om/pdf-pages/page-0243.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0243.png" alt="Order Orchestration EG page 243"></a>
+          <figcaption><strong>PDF page 243.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0244">
+          <a href="assets/om/pdf-pages/page-0244.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0244.png" alt="Order Orchestration EG page 244"></a>
+          <figcaption><strong>PDF page 244.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0245">
+          <a href="assets/om/pdf-pages/page-0245.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0245.png" alt="Order Orchestration EG page 245"></a>
+          <figcaption><strong>PDF page 245.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0246">
+          <a href="assets/om/pdf-pages/page-0246.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0246.png" alt="Order Orchestration EG page 246"></a>
+          <figcaption><strong>PDF page 246.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0247">
+          <a href="assets/om/pdf-pages/page-0247.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0247.png" alt="Order Orchestration EG page 247"></a>
+          <figcaption><strong>PDF page 247.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0248">
+          <a href="assets/om/pdf-pages/page-0248.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0248.png" alt="Order Orchestration EG page 248"></a>
+          <figcaption><strong>PDF page 248.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0249">
+          <a href="assets/om/pdf-pages/page-0249.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0249.png" alt="Order Orchestration EG page 249"></a>
+          <figcaption><strong>PDF page 249.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0250">
+          <a href="assets/om/pdf-pages/page-0250.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0250.png" alt="Order Orchestration EG page 250"></a>
+          <figcaption><strong>PDF page 250.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0251">
+          <a href="assets/om/pdf-pages/page-0251.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0251.png" alt="Order Orchestration EG page 251"></a>
+          <figcaption><strong>PDF page 251.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0252">
+          <a href="assets/om/pdf-pages/page-0252.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0252.png" alt="Order Orchestration EG page 252"></a>
+          <figcaption><strong>PDF page 252.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0253">
+          <a href="assets/om/pdf-pages/page-0253.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0253.png" alt="Order Orchestration EG page 253"></a>
+          <figcaption><strong>PDF page 253.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0254">
+          <a href="assets/om/pdf-pages/page-0254.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0254.png" alt="Order Orchestration EG page 254"></a>
+          <figcaption><strong>PDF page 254.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0255">
+          <a href="assets/om/pdf-pages/page-0255.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0255.png" alt="Order Orchestration EG page 255"></a>
+          <figcaption><strong>PDF page 255.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0256">
+          <a href="assets/om/pdf-pages/page-0256.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0256.png" alt="Order Orchestration EG page 256"></a>
+          <figcaption><strong>PDF page 256.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0257">
+          <a href="assets/om/pdf-pages/page-0257.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0257.png" alt="Order Orchestration EG page 257"></a>
+          <figcaption><strong>PDF page 257.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
+    </section>
+
+    <section id="om-challenge">
+<h2>19. Advanced Orchestration Challenge (Exercise 6-14)</h2>
+      <p>Capstone lab integrating all concepts: multi-swimlane plan with manual tasks, callouts, dependencies, fallout, and <strong>staggered integration retry policies</strong>.</p>
+
+      <h3>Tasks Overview</h3>
+      <table class="data-table">
+        <thead><tr><th>Task</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td>1 (optional)</td><td>Refresh orchestration concepts</td></tr>
+          <tr><td>2</td><td>Review finished orchestration plan diagram — target architecture</td></tr>
+          <tr><td>3</td><td>Build out plan definitions, items, scenarios, dependencies</td></tr>
+          <tr><td>4</td><td>End-to-end test order through all swimlanes</td></tr>
+          <tr><td>5</td><td>Configure staggered retry policy — increasing delays between retries</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Staggered Retry Policy</h3>
+      <p>Instead of immediate repeated callouts (which can overwhelm a failing endpoint), staggered policies wait progressively longer between attempts — e.g. 30s, 2m, 10m — improving recovery odds for transient outages while routing to fallout after max attempts.</p>
+
+      <div class="tip"><strong>Certification mindset</strong> This exercise mirrors real project delivery: diagram first, prototype with milestones, add integrations, wire dependencies, test MACD + cancel paths, harden with retry/fallout.</div>
+      <h3>PDF Screenshots — Advanced Challenge (Exercise 6-14)</h3>
+      <div class="pdf-fig-grid">
+        <figure class="doc-screenshot" id="om-page-0258">
+          <a href="assets/om/pdf-pages/page-0258.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0258.png" alt="Order Orchestration EG page 258"></a>
+          <figcaption><strong>PDF page 258.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0259">
+          <a href="assets/om/pdf-pages/page-0259.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0259.png" alt="Order Orchestration EG page 259"></a>
+          <figcaption><strong>PDF page 259.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0260">
+          <a href="assets/om/pdf-pages/page-0260.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0260.png" alt="Order Orchestration EG page 260"></a>
+          <figcaption><strong>PDF page 260.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0261">
+          <a href="assets/om/pdf-pages/page-0261.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0261.png" alt="Order Orchestration EG page 261"></a>
+          <figcaption><strong>PDF page 261.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0262">
+          <a href="assets/om/pdf-pages/page-0262.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0262.png" alt="Order Orchestration EG page 262"></a>
+          <figcaption><strong>PDF page 262.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0263">
+          <a href="assets/om/pdf-pages/page-0263.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0263.png" alt="Order Orchestration EG page 263"></a>
+          <figcaption><strong>PDF page 263.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0264">
+          <a href="assets/om/pdf-pages/page-0264.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0264.png" alt="Order Orchestration EG page 264"></a>
+          <figcaption><strong>PDF page 264.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0265">
+          <a href="assets/om/pdf-pages/page-0265.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0265.png" alt="Order Orchestration EG page 265"></a>
+          <figcaption><strong>PDF page 265.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0266">
+          <a href="assets/om/pdf-pages/page-0266.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0266.png" alt="Order Orchestration EG page 266"></a>
+          <figcaption><strong>PDF page 266.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0267">
+          <a href="assets/om/pdf-pages/page-0267.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0267.png" alt="Order Orchestration EG page 267"></a>
+          <figcaption><strong>PDF page 267.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0268">
+          <a href="assets/om/pdf-pages/page-0268.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0268.png" alt="Order Orchestration EG page 268"></a>
+          <figcaption><strong>PDF page 268.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0269">
+          <a href="assets/om/pdf-pages/page-0269.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0269.png" alt="Order Orchestration EG page 269"></a>
+          <figcaption><strong>PDF page 269.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+        <figure class="doc-screenshot" id="om-page-0270">
+          <a href="assets/om/pdf-pages/page-0270.png" target="_blank" rel="noopener"><img loading="lazy" src="assets/om/pdf-pages/page-0270.png" alt="Order Orchestration EG page 270"></a>
+          <figcaption><strong>PDF page 270.</strong> Order Orchestration Exercise Guide</figcaption>
+        </figure>
+      </div>
+
     </section>
 
     <section id="om-ref">
-      <h2>Order Management Quick Reference</h2>
+<h2>Order Management Quick Reference</h2>
+
+      <h3>Design-Time vs Runtime</h3>
+      <table class="data-table">
+        <thead><tr><th>Design-Time</th><th>Runtime</th></tr></thead>
+        <tbody>
+          <tr><td>Orchestration Plan Definition</td><td>Orchestration Plan (swimlane instance)</td></tr>
+          <tr><td>Orchestration Item Definition</td><td>Orchestration Item (task box on plan UI)</td></tr>
+          <tr><td>Decomposition Relationship</td><td>Fulfillment Request Line (FRL)</td></tr>
+          <tr><td>Scenario (product + action)</td><td>Activated plan for matching FRL</td></tr>
+          <tr><td>Dependency Definition</td><td>Resolved wait between item states</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Glossary</h3>
       <table class="data-table">
         <thead><tr><th>Term</th><th>Definition</th></tr></thead>
         <tbody>
-          <tr><td>Plan Definition</td><td>Design-time template for a swimlane of tasks</td></tr>
-          <tr><td>Orchestration Plan</td><td>Runtime instance generated for a specific order</td></tr>
-          <tr><td>Orchestration Item</td><td>Runtime instance of a single task</td></tr>
-          <tr><td>Scenario</td><td>Trigger: product + order action → which plan to run</td></tr>
-          <tr><td>Dependency</td><td>Rule that Task B waits for Task A</td></tr>
-          <tr><td>Scope</td><td>Controls how dependencies resolve across items</td></tr>
-          <tr><td>Fallout Queue</td><td>Queue for failed tasks needing manual fix</td></tr>
+          <tr><td>Decomposition</td><td>Commercial order line → FRLs on technical products</td></tr>
+          <tr><td>FRL</td><td>Fulfillment Request Line — orchestration input after decompose</td></tr>
+          <tr><td>Swimlane</td><td>One orchestration plan row = one plan definition</td></tr>
+          <tr><td>Show Order</td><td>Vertical sort of swimlanes (1 = top)</td></tr>
+          <tr><td>Scope</td><td>Global / Swimlane — dependency resolution boundary</td></tr>
+          <tr><td>Scenario</td><td>Product + Action → triggers plan definition</td></tr>
+          <tr><td>MACD</td><td>Move, Add, Change (Modify), Disconnect actions</td></tr>
+          <tr><td>1:1 / 1:M</td><td>One commercial line → one vs many FRLs</td></tr>
+          <tr><td>PONR</td><td>Point of No Return — blocks in-flight cancel</td></tr>
+          <tr><td>Rollback Plan Definition</td><td>Plan executed on cancel (not scenario-based)</td></tr>
+          <tr><td>Rollback Group</td><td>Items reversed together during cancel</td></tr>
+          <tr><td>Smart Freeze</td><td>Pause running tasks during cancel processing</td></tr>
+          <tr><td>Fallout Queue</td><td>Manual repair queue for failed integrations</td></tr>
+          <tr><td>Item Implementation</td><td>Links Auto Task to Apex (e.g. Assetize)</td></tr>
         </tbody>
       </table>
+
+      <h3>Item State Colors (Plan UI)</h3>
+      <table class="data-table">
+        <thead><tr><th>Color</th><th>State</th></tr></thead>
+        <tbody>
+          <tr><td>Grey</td><td>Pending — waiting on dependencies</td></tr>
+          <tr><td>Blue</td><td>Ready — can be picked up / about to execute</td></tr>
+          <tr><td>Green</td><td>Completed</td></tr>
+          <tr><td>Red / alert colors</td><td>Failed / Fatally Failed (see org theme)</td></tr>
+        </tbody>
+      </table>
+
+      <p class="note"><strong>Source:</strong> Order Orchestration EG v1.0 (3).pdf — Salesforce Industries Order Management Orchestration Exercise Guide (Spring &apos;22 / 2022).</p>
     </section>
 
   </main>
 </div>
 </div><!-- end panel-om -->
+
+
+
+
+
+
 
 <!-- ===================== ADVANCED RULES PANEL ===================== -->
 <div id="panel-rules" class="module-panel">
