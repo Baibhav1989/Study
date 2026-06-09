@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vlocity CME EPC — Easy Learning Guide</title>
+  <title>Vlocity CME Learning Hub — EPC · CPQ · OM · Rules · Pricing</title>
   <style>
     :root {
       --primary: #0176d3;
@@ -360,6 +360,69 @@
       justify-content: space-between;
     }
 
+    /* Module tabs */
+    .module-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      background: #032d60;
+      padding: 0 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .module-tab {
+      padding: 0.85rem 1.25rem;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .module-tab:hover { color: white; background: rgba(255,255,255,0.08); }
+    .module-tab.active { color: white; border-bottom-color: #1b96ff; background: rgba(255,255,255,0.1); }
+    .module-panel { display: none; }
+    .module-panel.active { display: block; }
+
+    /* Code blocks */
+    .code-block {
+      font-family: "Consolas", "Courier New", monospace;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+    }
+    .code-block .key { color: #9cdcfe; }
+    .code-block .str { color: #ce9178; }
+    .code-block .cmt { color: #6a9955; }
+
+    .state-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+      margin: 1rem 0;
+    }
+    .state-box {
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #eef4ff;
+      color: var(--primary-dark);
+    }
+    .state-arrow { color: var(--muted); }
+
     /* Footer */
     footer {
       text-align: center;
@@ -386,13 +449,22 @@
 <body>
 
 <header class="hero">
-  <h1>Vlocity CME Enterprise Product Catalog (EPC)</h1>
-  <p>A simple, visual guide to understand how Vlocity EPC works — based on the official Vlocity documentation.</p>
-  <span class="badge">Communications, Media &amp; Energy · Salesforce</span>
+  <h1>Vlocity CME Learning Hub</h1>
+  <p>Simple, visual guides for EPC, CPQ, Order Management, Advanced Rules, and Advanced Pricing — based on official Salesforce Industries documentation.</p>
+  <span class="badge">Communications, Media &amp; Energy · Salesforce Industries</span>
 </header>
 
+<nav class="module-tabs" role="tablist">
+  <button class="module-tab active" data-panel="epc" role="tab">📦 EPC</button>
+  <button class="module-tab" data-panel="cpq" role="tab">🛒 CPQ &amp; APIs</button>
+  <button class="module-tab" data-panel="om" role="tab">⚙️ Order Management</button>
+  <button class="module-tab" data-panel="rules" role="tab">📐 Advanced Rules</button>
+  <button class="module-tab" data-panel="pricing" role="tab">💰 Advanced Pricing</button>
+</nav>
+
+<div id="panel-epc" class="module-panel active">
 <div class="layout">
-  <nav class="sidebar" id="sidebar">
+  <nav class="sidebar" data-panel="epc">
     <h3>Topics</h3>
     <a href="#overview">1. What is EPC?</a>
     <a href="#benefits">2. Business Benefits</a>
@@ -1162,21 +1234,859 @@
 
   </main>
 </div>
+</div><!-- end panel-epc -->
+
+<!-- ===================== CPQ PANEL ===================== -->
+<div id="panel-cpq" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="cpq">
+    <h3>CPQ Topics</h3>
+    <a href="#cpq-overview">1. What is CPQ?</a>
+    <a href="#cpq-flow">2. Order Capture Flow</a>
+    <a href="#cpq-cart">3. Vlocity Cart</a>
+    <a href="#cpq-macd">4. MACD &amp; Assets</a>
+    <a href="#cpq-rules">5. Rules in CPQ</a>
+    <a href="#cpq-pricing">6. CPQ Pricing</a>
+    <a href="#cpq-api-intro">7. Cart-Based APIs</a>
+    <a href="#cpq-api-core">8. Core CPQ APIs</a>
+    <a href="#cpq-api-examples">9. API Examples</a>
+    <a href="#cpq-hooks">10. Hooks &amp; Integration</a>
+    <a href="#cpq-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <section id="cpq-overview">
+      <h2>1. What is Vlocity CPQ?</h2>
+      <p><strong>Configure, Price, Quote (CPQ)</strong> extends Salesforce to help sales teams build the right order — with correct products, prices, and rules — before it goes to fulfillment.</p>
+      <div class="tip"><strong>Simple analogy</strong> CPQ is like a smart checkout system. It checks stock (availability), your membership (eligibility), whether items work together (compatibility), and calculates the final price — all before you pay.</div>
+      <h3>What CPQ Does</h3>
+      <ul>
+        <li>Configure products using attributes in the cart</li>
+        <li>Price orders using price lists, promotions, and pricing plans</li>
+        <li>Apply rules so only valid combinations are sold</li>
+        <li>Convert Opportunity → Quote → Order → Asset</li>
+        <li>Support change orders (MACD) on existing customer assets</li>
+      </ul>
+      <div class="workflow">
+        <div class="workflow-step">Trigger Event</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Interface</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Flow</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Rules</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Priced Order</div>
+      </div>
+    </section>
+
+    <section id="cpq-flow">
+      <h2>2. Order Capture Flow</h2>
+      <table class="data-table">
+        <thead><tr><th>Flow</th><th>Path</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>B2B</strong></td><td>Account → Opportunity → Quote → Order → Asset</td><td>Business buys 50 phone lines with a contract</td></tr>
+          <tr><td><strong>B2C</strong></td><td>Account → Order → Asset</td><td>Consumer buys a mobile plan online</td></tr>
+        </tbody>
+      </table>
+      <h3>CPQ Pricing Flow (Runtime)</h3>
+      <ol>
+        <li><strong>Availability</strong> — Is the product sold in this location? (e.g., fiber not available in rural area)</li>
+        <li><strong>Eligibility</strong> — Can this customer buy it? (e.g., new-customer-only promo)</li>
+        <li><strong>Compatibility</strong> — Do products work together? (rules + product relationships)</li>
+        <li><strong>Pricing</strong> — Calculate price via pricing plan steps</li>
+        <li><strong>Taxes</strong> — Add taxes and save totals to the order</li>
+      </ol>
+    </section>
+
+    <section id="cpq-cart">
+      <h2>3. Vlocity Cart</h2>
+      <p>The <strong>Vlocity Cart</strong> is the shopping-cart UI built with Vlocity Cards. Left side = product/promotion list. Right side = cart line items.</p>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Vlocity Cart Layout</div>
+        <div class="ui-mock-body cart-mock">
+          <div class="cart-panel"><h5>Products List</h5>
+            <div class="form-row"><label>Search</label><input value="iPhone" readonly></div>
+            <div class="cart-item"><span>📱 iPhone 11 Offer</span><button style="padding:0.2rem 0.5rem;font-size:0.75rem;">Add to Cart</button></div>
+            <div class="cart-item"><span>📶 4G LTE Plan</span><button style="padding:0.2rem 0.5rem;font-size:0.75rem;">Add to Cart</button></div>
+          </div>
+          <div class="cart-panel"><h5>Cart Line Items</h5>
+            <div class="cart-item"><span>iPhone 11 — 128GB</span><strong>$699</strong></div>
+            <div class="cart-item"><span>4G LTE Data Plan</span><strong>$45/mo</strong></div>
+            <div class="cart-item" style="border:none;font-weight:700;"><span>Total</span><span>$699 + $45/mo</span></div>
+          </div>
+        </div>
+      </div>
+      <h3>Steps to Create an Order</h3>
+      <ol>
+        <li>Orders tab → New → set Account, Order Start Date, Status</li>
+        <li>Click <strong>Configure Order</strong> (opens Cart)</li>
+        <li>Select Price List → Add products → Configure attributes</li>
+        <li>Click <strong>Submit Order</strong> when done</li>
+      </ol>
+      <div class="warning"><strong>Important</strong> Do not clone Vlocity orders using Salesforce Clone — it can cause serious errors.</div>
+    </section>
+
+    <section id="cpq-macd">
+      <h2>4. MACD &amp; Asset-Based Ordering</h2>
+      <p><strong>MACD</strong> = Move, Add, Change, Delete. Used when customers already have active services (assets) and want to modify them.</p>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Meaning</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Move</strong></td><td>Transfer service to new location/account</td><td>Move internet to new address</td></tr>
+          <tr><td><strong>Add</strong></td><td>Add new product to existing account</td><td>Add Netflix to existing TV plan</td></tr>
+          <tr><td><strong>Change</strong></td><td>Modify existing asset</td><td>Upgrade 50 Mbps → 100 Mbps</td></tr>
+          <tr><td><strong>Delete</strong></td><td>Disconnect/remove service</td><td>Cancel home phone line</td></tr>
+        </tbody>
+      </table>
+      <p>Assets can be converted back to Quote or Order for changes. Each asset has an <strong>Asset Reference ID</strong> used across CPQ and Order Management.</p>
+    </section>
+
+    <section id="cpq-rules">
+      <h2>5. Rules in CPQ</h2>
+      <table class="data-table">
+        <thead><tr><th>Framework</th><th>Purpose</th><th>When to Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Context Rules</strong></td><td>Eligibility — who sees/buys products</td><td>Location, account type, segment checks</td></tr>
+          <tr><td><strong>Advanced Rules</strong></td><td>Compatibility, pricing, attribute logic</td><td>Product combinations, auto-add, attribute changes</td></tr>
+          <tr><td><strong>Attribute Rules</strong></td><td>Configure options on one product</td><td>Hide color when size = 44mm</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="cpq-pricing">
+      <h2>6. CPQ Pricing Overview</h2>
+      <ul>
+        <li><strong>Price Lists &amp; PLEs</strong> — base prices for products</li>
+        <li><strong>Adjustments</strong> — % or amount off base price</li>
+        <li><strong>Overrides</strong> — replace base price entirely</li>
+        <li><strong>Promotions</strong> — time-limited discounts</li>
+        <li><strong>Pricing Plans</strong> — sequence of pricing steps at runtime</li>
+        <li><strong>Usage Pricing</strong> — charge based on consumption</li>
+        <li><strong>Loyalty Pricing</strong> — pay with loyalty points instead of currency</li>
+      </ul>
+    </section>
+
+    <section id="cpq-api-intro">
+      <h2>7. Cart-Based APIs</h2>
+      <p>CPQ exposes <strong>Cart-Based APIs</strong> through the <code>CpqAppHandler</code> Apex class. Use them from OmniScripts, Lightning, mobile apps, or custom integrations.</p>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Apex Remote Class</td><td><code>vlocity_cmt.CpqAppHandler</code></td></tr>
+          <tr><td>REST Base URI</td><td><code>/services/apexrest/{namespace}/v2/cpq/carts/{cartId}/...</code></td></tr>
+          <tr><td>Response Format</td><td>JSON with records, messages, and actions</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Two ways to call APIs</strong><br><strong>Remote (Apex):</strong> OmniScript Remote Action → CpqAppHandler → methodName<br><strong>REST:</strong> HTTP POST/GET/PUT/DELETE to apexrest endpoints</div>
+    </section>
+
+    <section id="cpq-api-core">
+      <h2>8. Core CPQ APIs &amp; Functions</h2>
+      <table class="data-table">
+        <thead><tr><th>Remote Method</th><th>REST Endpoint</th><th>What It Does</th></tr></thead>
+        <tbody>
+          <tr><td><code>createCart</code></td><td>POST /v2/carts</td><td>Create Opportunity, Quote, or Order (cart)</td></tr>
+          <tr><td><code>getCarts</code></td><td>GET /v2/cpq/carts/{id}</td><td>Get cart summary (header totals)</td></tr>
+          <tr><td><code>getCartsItems</code></td><td>GET .../carts/{id}/items</td><td>Get all line items in cart</td></tr>
+          <tr><td><code>postCartsItems</code> / addToCart</td><td>POST .../carts/{id}/items</td><td>Add product to cart</td></tr>
+          <tr><td><code>putCartsItems</code></td><td>PUT .../carts/{id}/items</td><td>Update line items (qty, attributes)</td></tr>
+          <tr><td><code>deleteCartsItems</code></td><td>DELETE .../items/{itemId}</td><td>Remove line item</td></tr>
+          <tr><td><code>getCartsProducts</code></td><td>GET .../carts/{id}/products</td><td>Search/list products for cart</td></tr>
+          <tr><td><code>runCartValidation</code></td><td>POST .../validate</td><td>Validate cart rules</td></tr>
+          <tr><td><code>priceCart</code> / getCartLineItemPrices</td><td>GET .../price</td><td>Run pricing on cart</td></tr>
+          <tr><td><code>applyAdjustment</code></td><td>POST .../items/{id}/pricing</td><td>Apply manual discount/override</td></tr>
+          <tr><td><code>checkout</code></td><td>POST .../items/checkout</td><td>Submit order (create assets)</td></tr>
+          <tr><td><code>cloneItems</code></td><td>POST .../items/clone</td><td>Clone a line item</td></tr>
+          <tr><td><code>addPromo</code></td><td>POST .../promotions</td><td>Add promotion to cart</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="cpq-api-examples">
+      <h2>9. CPQ API Examples</h2>
+
+      <h3>Example 1: createCart — Create an Order</h3>
+      <p>OmniScript Remote Action: Remote Class = <code>vlocity_cmt.CpqAppHandler</code>, Remote Method = <code>createCart</code></p>
+      <div class="code-block">{
+  <span class="key">"methodName"</span>: <span class="str">"createCart"</span>,
+  <span class="key">"objectType"</span>: <span class="str">"Order"</span>,
+  <span class="key">"inputFields"</span>: [
+    { <span class="key">"effectivedate"</span>: <span class="str">"2026-06-09"</span> },
+    { <span class="key">"status"</span>: <span class="str">"Draft"</span> },
+    { <span class="key">"AccountId"</span>: <span class="str">"001XXXXXXXXXXXX"</span> },
+    { <span class="key">"vlocity_cmt__PriceListId__c"</span>: <span class="str">"a3OXXXXXXXXXXXX"</span> }
+  ],
+  <span class="key">"subaction"</span>: <span class="str">"createOrder"</span>
+}</div>
+      <p><strong>Response:</strong> Returns Order Id — use this as <code>cartId</code> for all other API calls.</p>
+
+      <h3>Example 2: postCartsItems — Add Product to Cart</h3>
+      <div class="code-block"><span class="cmt">// REST: POST /services/apexrest/vlocity_cmt/v2/cpq/carts/{cartId}/items</span>
+{
+  <span class="key">"methodName"</span>: <span class="str">"postCartsItems"</span>,
+  <span class="key">"cartId"</span>: <span class="str">"801XXXXXXXXXXXX"</span>,
+  <span class="key">"items"</span>: [{
+    <span class="key">"itemId"</span>: <span class="str">"01uXXXXXXXXXXXX"</span>,  <span class="cmt">// PricebookEntry Id</span>
+    <span class="key">"quantity"</span>: 1,
+    <span class="key">"parentId"</span>: <span class="str">"802XXXXXXXXXXXX"</span>   <span class="cmt">// optional — for bundle child</span>
+  }],
+  <span class="key">"price"</span>: true,
+  <span class="key">"validate"</span>: true
+}</div>
+
+      <h3>Example 3: getCartsProducts — Search Products</h3>
+      <div class="code-block">{
+  <span class="key">"methodName"</span>: <span class="str">"getCartsProducts"</span>,
+  <span class="key">"cartId"</span>: <span class="str">"801XXXXXXXXXXXX"</span>,
+  <span class="key">"query"</span>: <span class="str">"iPhone"</span>,
+  <span class="key">"pagesize"</span>: 10,
+  <span class="key">"attributes"</span>: <span class="str">"ATT_COLOR:Black_White"</span>  <span class="cmt">// filter by attribute</span>
+}</div>
+
+      <h3>Example 4: checkout — Submit Order</h3>
+      <div class="code-block"><span class="cmt">// REST: POST /v2/cpq/carts/{cartId}/items/checkout</span>
+{
+  <span class="key">"methodName"</span>: <span class="str">"checkout"</span>,
+  <span class="key">"cartId"</span>: <span class="str">"801XXXXXXXXXXXX"</span>,
+  <span class="key">"ContextId"</span>: <span class="str">"801XXXXXXXXXXXX"</span>
+}
+<span class="cmt">// Success code: SUBMIT-1008 = order assetized and activated</span></div>
+
+      <h3>Guided Selling API Sequence (OmniScript)</h3>
+      <div class="workflow">
+        <div class="workflow-step">createCart</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">getCarts</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">getCartsItems</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">getCartsProducts</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">postCartsItems</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">checkout</div>
+      </div>
+    </section>
+
+    <section id="cpq-hooks">
+      <h2>10. Hooks &amp; Order Management Integration</h2>
+      <p><strong>CpqAppHandlerHook</strong> — run custom Apex logic before/after CPQ API calls (e.g., custom pricing by zip code).</p>
+      <p><strong>Order Management Integration</strong> — CPQ sends Submit Order, Freeze, and Unfreeze requests to OM when orders are submitted.</p>
+      <div class="tip"><strong>After catalog/rule changes</strong> Run Clear Managed Platform Cache → Refresh Platform Cache so CPQ picks up changes.</div>
+    </section>
+
+    <section id="cpq-ref">
+      <h2>CPQ Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>Cart</td><td>Opportunity, Quote, or Order used for order capture</td></tr>
+          <tr><td>cartId</td><td>Record Id of the cart object</td></tr>
+          <tr><td>itemId</td><td>PricebookEntry Id (add) or OrderItem Id (update/delete)</td></tr>
+          <tr><td>CpqAppHandler</td><td>Main Apex class for all Cart-Based APIs</td></tr>
+          <tr><td>MACD</td><td>Move, Add, Change, Delete on existing assets</td></tr>
+          <tr><td>PONR</td><td>Point of No Return — order cannot be changed after this</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-cpq -->
+
+<!-- ===================== ORDER MANAGEMENT PANEL ===================== -->
+<div id="panel-om" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="om">
+    <h3>Order Management</h3>
+    <a href="#om-overview">1. OM Overview</a>
+    <a href="#om-decomp-orch">2. Decomposition vs Orchestration</a>
+    <a href="#om-plan-def">3. Plan Definitions</a>
+    <a href="#om-item-types">4. Orchestration Item Types</a>
+    <a href="#om-scenarios">5. Scenarios &amp; Dependencies</a>
+    <a href="#om-manual">6. Manual Tasks &amp; Queues</a>
+    <a href="#om-auto">7. Auto Tasks &amp; Callouts</a>
+    <a href="#om-macd">8. MACD Orders</a>
+    <a href="#om-cancel">9. Cancellation &amp; Rollback</a>
+    <a href="#om-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <section id="om-overview">
+      <h2>1. Industries Order Management Overview</h2>
+      <p><strong>Salesforce Industries Order Management (IOM)</strong> fulfills orders after CPQ captures them. It breaks commercial products into technical requests and coordinates fulfillment with external systems.</p>
+      <div class="tip"><strong>Simple analogy</strong> CPQ is placing your order at a restaurant. Order Management is the kitchen — it decomposes the order into cooking tasks, coordinates stations, and delivers the meal.</div>
+      <h3>Two Primary Areas</h3>
+      <table class="data-table">
+        <thead><tr><th>Area</th><th>What It Does</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Order Decomposition</strong></td><td>Breaks commercial order lines into technical fulfillment requests (CFS, RFS, resources)</td></tr>
+          <tr><td><strong>Order Orchestration</strong></td><td>Sequences and monitors tasks to fulfill those requests via systems and people</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="om-decomp-orch">
+      <h2>2. Decomposition vs Orchestration</h2>
+      <div class="workflow">
+        <div class="workflow-step">CPQ Order Submitted</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Decompose Order</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Fulfillment Requests</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Orchestration Plan</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">External Systems</div>
+      </div>
+      <p>After decomposition creates fulfillment requests, <strong>orchestration</strong> takes over — communicating with billing, provisioning, inventory, and other systems until the order is complete.</p>
+    </section>
+
+    <section id="om-plan-def">
+      <h2>3. Orchestration Plan Definitions</h2>
+      <p>An <strong>orchestration plan definition</strong> groups order processing tasks into a swimlane. At runtime it becomes an <strong>orchestration plan</strong> instance.</p>
+      <div class="example-box">
+        <strong>Example: E2E Master Plan</strong>
+        <ul>
+          <li><strong>Name:</strong> E2E Master Plan</li>
+          <li><strong>Show Order:</strong> 1 (displays at top of orchestration diagram)</li>
+          <li><strong>Items:</strong> Start Order (milestone) → Complete Order (milestone)</li>
+          <li><strong>Scenario:</strong> Product = DSL Service, Action = Add</li>
+        </ul>
+      </div>
+      <h3>Best Practices</h3>
+      <ul>
+        <li>Create one main end-to-end plan for major milestones (start → complete)</li>
+        <li>Create separate plans per function: provisioning, billing, logistics, assetization</li>
+        <li>Keep plans simple — avoid loops unless required</li>
+        <li>Create assets as the last auto task before Complete Order milestone</li>
+      </ul>
+    </section>
+
+    <section id="om-item-types">
+      <h2>4. Orchestration Item Types</h2>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-green">Milestone</span></td><td>Important stage marker — always completes</td><td>Start Order, Complete Order</td></tr>
+          <tr><td><span class="tag tag-blue">Manual Task</span></td><td>Requires human action</td><td>Credit Check approval</td></tr>
+          <tr><td><span class="tag tag-orange">Callout</span></td><td>Automated REST/web service to external system</td><td>Activate service in network OSS</td></tr>
+          <tr><td><span class="tag tag-purple">Auto Task</span></td><td>Runs Apex class automatically</td><td>Create Assets</td></tr>
+          <tr><td><span class="tag tag-blue">Push Event</span></td><td>Triggered by object state change</td><td>Notify when billing completes</td></tr>
+        </tbody>
+      </table>
+      <h3>Item State Flow</h3>
+      <div class="state-flow">
+        <span class="state-box">Pending</span><span class="state-arrow">→</span>
+        <span class="state-box">Ready</span><span class="state-arrow">→</span>
+        <span class="state-box">Running</span><span class="state-arrow">→</span>
+        <span class="state-box">Completed</span>
+      </div>
+      <p>Items can also reach <strong>Failed</strong> or <strong>Fatally Failed</strong> states (except milestones).</p>
+    </section>
+
+    <section id="om-scenarios">
+      <h2>5. Scenarios &amp; Dependencies</h2>
+      <h3>Orchestration Scenarios</h3>
+      <p>Define <strong>when</strong> a plan runs — by linking a product + order action (Add, Modify, Disconnect, NoChange).</p>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>New Orchestration Scenario</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Scenario Name</label><input value="DSL Service Scenario" readonly></div>
+          <div class="form-row"><label>Product</label><input value="DSL Service" readonly></div>
+          <div class="form-row"><label>Order Action</label><select><option>Add</option></select></div>
+        </div>
+      </div>
+      <h3>Dependency Definitions</h3>
+      <p>Control task sequencing — Task B cannot start until Task A completes. Dependencies can cross swimlanes (between different plan definitions).</p>
+      <div class="example-box"><strong>Example flow</strong> Credit Check (manual) → Provision DSL (callout) → Create Assets (auto) → Complete Order (milestone)</div>
+    </section>
+
+    <section id="om-manual">
+      <h2>6. Manual Tasks &amp; Manual Queues</h2>
+      <p><strong>Manual tasks</strong> pause orchestration until a user completes work (e.g., credit check, manager approval).</p>
+      <p><strong>Manual queues</strong> organize tasks for teams. Users pick tasks from their queue.</p>
+      <div class="example-box">
+        <strong>Example: Credit Check</strong>
+        <ol>
+          <li>Create Manual Queue: "Credit Check"</li>
+          <li>Create Manual Task item definition linked to Credit Check OmniScript</li>
+          <li>Assign queue to the task</li>
+          <li>At runtime: task appears in queue → agent runs OmniScript → marks complete → orchestration continues</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="om-auto">
+      <h2>7. Auto Tasks, Systems &amp; Callouts</h2>
+      <h3>Auto Task — Create Assets</h3>
+      <p>Runs an Apex class (e.g., Assetizer) to convert fulfilled order lines into customer assets.</p>
+      <h3>Orchestration Systems &amp; Callouts</h3>
+      <p>An <strong>orchestration system</strong> represents an external system (billing, network, inventory). A <strong>callout</strong> item sends REST/API requests to that system.</p>
+      <div class="example-box">
+        <strong>Example: Installation System Callout</strong>
+        <ul>
+          <li>Create orchestration system: "Training Mocker"</li>
+          <li>Define system interface (URL, credentials)</li>
+          <li>Add Remote Site Settings for the endpoint</li>
+          <li>Create callout item in provisioning plan definition</li>
+          <li>Test with a DSL Service order → Decompose → View Orchestration Plan</li>
+        </ul>
+      </div>
+      <h3>Fallout Management</h3>
+      <p>When callouts fail, <strong>Integration Retry Policies</strong> and fallout queues handle retries and manual repair.</p>
+    </section>
+
+    <section id="om-macd">
+      <h2>8. MACD Orders in Orchestration</h2>
+      <p>Change orders use the same orchestration framework with different scenarios per action:</p>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Orchestration Behavior</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Add</strong></td><td>Run add swimlanes (provision, bill, assetize)</td><td>New customer adds Spotify add-on</td></tr>
+          <tr><td><strong>Modify</strong></td><td>Run modify swimlanes</td><td>Upgrade internet speed 40→100 Mbps</td></tr>
+          <tr><td><strong>Disconnect</strong></td><td>Run disconnect swimlanes (deprovision, stop billing)</td><td>Cancel Spotify subscription</td></tr>
+        </tbody>
+      </table>
+      <p>Decomposition can be <strong>1:1</strong> (one commercial line → one technical request) or <strong>1:M</strong> (one line → many technical requests, e.g., shipping + activation).</p>
+    </section>
+
+    <section id="om-cancel">
+      <h2>9. In-Flight Cancellation &amp; Rollback</h2>
+      <p><strong>In-flight cancellation</strong> stops an order mid-fulfillment. <strong>PONR (Point of No Return)</strong> marks when cancellation is no longer allowed.</p>
+      <ul>
+        <li><strong>Rollback Groups</strong> — define which completed tasks must be reversed on cancel</li>
+        <li><strong>Smart Freeze</strong> — pause running tasks during cancellation processing</li>
+        <li><strong>Staggered Retry Policies</strong> — retry failed integrations with increasing delays</li>
+      </ul>
+      <div class="warning"><strong>PONR</strong> Once an orchestration item reaches PONR, the order cannot be cancelled through standard flows — the task must complete or be manually handled.</div>
+    </section>
+
+    <section id="om-ref">
+      <h2>Order Management Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>Plan Definition</td><td>Design-time template for a swimlane of tasks</td></tr>
+          <tr><td>Orchestration Plan</td><td>Runtime instance generated for a specific order</td></tr>
+          <tr><td>Orchestration Item</td><td>Runtime instance of a single task</td></tr>
+          <tr><td>Scenario</td><td>Trigger: product + order action → which plan to run</td></tr>
+          <tr><td>Dependency</td><td>Rule that Task B waits for Task A</td></tr>
+          <tr><td>Scope</td><td>Controls how dependencies resolve across items</td></tr>
+          <tr><td>Fallout Queue</td><td>Queue for failed tasks needing manual fix</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-om -->
+
+<!-- ===================== ADVANCED RULES PANEL ===================== -->
+<div id="panel-rules" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="rules">
+    <h3>Advanced Rules</h3>
+    <a href="#rules-overview">1. Framework Overview</a>
+    <a href="#rules-relationships">2. Product Relationships</a>
+    <a href="#rules-compat">3. Compatibility Rules</a>
+    <a href="#rules-entity-filters">4. Entity Filters</a>
+    <a href="#rules-modify-attr">5. Modify Attributes</a>
+    <a href="#rules-reverse">6. Reverse Modifications</a>
+    <a href="#rules-autoadd">7. Auto-Add Rules</a>
+    <a href="#rules-builder">8. Rule Builder</a>
+    <a href="#rules-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <section id="rules-overview">
+      <h2>1. Advanced Rules Framework</h2>
+      <p>The <strong>Advanced Rules Framework</strong> ensures the right products appear at the right price in the right configuration — using natural-language criteria, entity filters, and product relationships.</p>
+      <table class="data-table">
+        <thead><tr><th>Rule Type</th><th>Purpose</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Configuration / Validation</strong></td><td>Product compatibility in cart</td><td>Primary — use this</td></tr>
+          <tr><td><strong>Availability &amp; Eligibility</strong></td><td>Show/hide products in list</td><td>Legacy — use Context Rules instead</td></tr>
+          <tr><td><strong>Pricing Rules</strong></td><td>Change standard pricing</td><td>Legacy — use Pricing Plans instead</td></tr>
+        </tbody>
+      </table>
+      <div class="workflow">
+        <div class="workflow-step">Cart Change</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">ProductValidationInterface</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Advanced Rule</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Product Relationship Action</div>
+      </div>
+      <div class="note"><strong>Active implementation required:</strong> <code>ValidationRulesImplementation</code> on ProductValidationInterface (Interface Implementations tab).</div>
+    </section>
+
+    <section id="rules-relationships">
+      <h2>2. Product Relationships</h2>
+      <p>Product relationships define actions when products appear together in the cart. They are triggered by Advanced Compatibility Rules.</p>
+      <table class="data-table">
+        <thead><tr><th>Relationship Type</th><th>Behavior</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Requires</strong></td><td>Must add related product</td><td>Office Internet → requires Office Hub Modem</td></tr>
+          <tr><td><strong>Excludes</strong></td><td>Cannot have both products</td><td>Office Internet → excludes Home Hub Modem</td></tr>
+          <tr><td><strong>Recommends</strong></td><td>Suggest upsell (soft)</td><td>Office Internet → recommends Cloud Backup</td></tr>
+          <tr><td><strong>Auto-Add</strong></td><td>Automatically adds product</td><td>iPhone X → auto-adds free case</td></tr>
+          <tr><td><strong>Auto-Remove</strong></td><td>Automatically removes product</td><td>Remove bundle → removes child items</td></tr>
+          <tr><td><strong>Modify Attributes</strong></td><td>Change attribute picklist options</td><td>Business Video → limits Download Speed choices</td></tr>
+        </tbody>
+      </table>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>New Product Relationship — Requires</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Name</label><input value="OIS Requires Office Hub Modem" readonly></div>
+          <div class="form-row"><label>Product</label><input value="Office Internet Solution" readonly></div>
+          <div class="form-row"><label>Relationship Type</label><select><option>Requires</option></select></div>
+          <div class="form-row"><label>Related Product</label><input value="Office Hub Modem" readonly></div>
+          <div class="form-row"><label>Min / Max Qty</label><input value="1 / 1" readonly></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules-compat">
+      <h2>3. Compatibility Rules — Full Example</h2>
+      <div class="example-box">
+        <strong>Scenario: Office Internet Solution (OIS)</strong>
+        <ol>
+          <li>Create 3 product relationships: Requires modem, Excludes home modem, Recommends cloud backup</li>
+          <li>Create Advanced Rule: "OIS Requires, Excludes &amp; Recommends Rule"</li>
+          <li>Rule Type: Configuration · Applies to: OrderItem · Active</li>
+          <li>Add all 3 relationships as Rule Actions (no filters needed)</li>
+          <li>Test in Cart: Add OIS → modem required message, home modem excluded, cloud backup recommended</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="rules-entity-filters">
+      <h2>4. Entity Filters</h2>
+      <p><strong>Entity filters</strong> define conditions that must be true before a rule fires. Two types:</p>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Purpose</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Qualification</strong></td><td>Filter which line items qualify</td><td>Account in California AND High Priority</td></tr>
+          <tr><td><strong>Evaluation</strong></td><td>Check if ALL/ANY/NONE of items match</td><td>NONE of line items = Business Video Service</td></tr>
+        </tbody>
+      </table>
+      <div class="example-box">
+        <strong>Example: Exclude Business Video when Download Speed &lt; 100 Mbps</strong>
+        <ol>
+          <li>Product Relationship: Business Video Service <strong>Excludes</strong> Broadband Cable Service</li>
+          <li>Entity Filter on Download Speed attribute = 25 Mbps; 50 Mbps; 75 Mbps</li>
+          <li>Advanced Rule combines filter + relationship action</li>
+          <li>Result: Business Video blocked when speed is below 100 Mbps</li>
+        </ol>
+      </div>
+      <h3>Custom Configuration Messages</h3>
+      <p>Add a <strong>Message</strong> field on product relationships to show friendly text in the cart when a rule fires.</p>
+    </section>
+
+    <section id="rules-modify-attr">
+      <h2>5. Modify Attributes Rules</h2>
+      <p>Change which attribute values customers can pick — based on other products in the cart.</p>
+      <div class="example-box">
+        <strong>Example: Business Video limits Download Speed</strong>
+        <ol>
+          <li>Use Product Configuration Procedures JSON Generator to build action parameters</li>
+          <li>CONSTRAIN + Exclude: 10 Mbps, 55 Mbps, 100 Mbps from Download Speed</li>
+          <li>Product Relationship: Business Video → Modify Attributes → Broadband Cable Service</li>
+          <li>Paste JSON into Action Parameters field</li>
+          <li>Advanced Rule triggers the relationship</li>
+          <li>Cart result: only 25 Mbps shown when both products are in cart</li>
+        </ol>
+      </div>
+      <div class="code-block"><span class="cmt">// Action Parameters JSON (simplified)</span>
+{
+  <span class="key">"ATT_RT_DS"</span>: {
+    <span class="key">"actionsList"</span>: [
+      { <span class="key">"action"</span>: <span class="str">"CONSTRAIN"</span>, <span class="key">"value"</span>: <span class="str">"10 Mbps"</span>, <span class="key">"actionType"</span>: <span class="str">"exclude"</span> },
+      { <span class="key">"action"</span>: <span class="str">"CONSTRAIN"</span>, <span class="key">"value"</span>: <span class="str">"55 Mbps"</span>, <span class="key">"actionType"</span>: <span class="str">"exclude"</span> },
+      { <span class="key">"action"</span>: <span class="str">"CONSTRAIN"</span>, <span class="key">"value"</span>: <span class="str">"100 Mbps"</span>, <span class="key">"actionType"</span>: <span class="str">"exclude"</span> }
+    ]
+  }
+}</div>
+    </section>
+
+    <section id="rules-reverse">
+      <h2>6. Reverse Attribute Modifications</h2>
+      <p>When the triggering product is removed, modified attributes don't auto-restore. You need a <strong>reverse rule</strong>.</p>
+      <div class="example-box">
+        <strong>Solution pattern</strong>
+        <ol>
+          <li>Clone the modify relationship → change exclude to <strong>include</strong></li>
+          <li>Product = Broadband Cable Service (no related product)</li>
+          <li>Create Evaluation filter: NONE of line items = Business Video Service</li>
+          <li>Chain evaluation filter inside a Qualification filter</li>
+          <li>Advanced Rule: when Business Video is gone → restore all Download Speed options</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="rules-autoadd">
+      <h2>7. Auto-Add Rules</h2>
+      <div class="example-box">
+        <strong>Example: Free phone case for VIP California customers</strong>
+        <ol>
+          <li>Product Relationship: iPhone X → Auto-Add → Incipio Case (Min/Max = 1)</li>
+          <li>Entity Filter: OrderItem where Account Priority = High AND Shipping State = CA</li>
+          <li>Advanced Rule: Configuration rule with filter + auto-add action</li>
+          <li>Cart: adding iPhone X for a High-priority CA account automatically adds the case</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="rules-builder">
+      <h2>8. Vlocity Rule Builder</h2>
+      <p>The <strong>Rule Builder</strong> is a drag-and-drop tool to combine filters and actions into rules.</p>
+      <ol>
+        <li>Vlocity Rules tab → New</li>
+        <li>Set Rule Name, Type (Configuration), Object (OrderItem), Active</li>
+        <li>Click <strong>Filters</strong> → Add entity filters to conditions</li>
+        <li>Click <strong>Actions</strong> → Add product relationships as actions</li>
+        <li>Save → Clear &amp; Refresh CPQ cache before testing</li>
+      </ol>
+      <div class="compare-grid">
+        <div class="compare-card"><h4>Context Rules</h4><p>Eligibility — who can see/buy products and promotions. Use for qualification in cart tabs.</p></div>
+        <div class="compare-card"><h4>Advanced Rules</h4><p>Compatibility — product combinations, auto-add, attribute changes. Use for cart validation.</p></div>
+      </div>
+    </section>
+
+    <section id="rules-ref">
+      <h2>Advanced Rules Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>Product Relationship</td><td>Action definition (requires, excludes, auto-add, etc.)</td></tr>
+          <tr><td>Entity Filter</td><td>Conditions to qualify line items for a rule</td></tr>
+          <tr><td>Evaluation Filter</td><td>ALL/ANY/NONE check across a set of items</td></tr>
+          <tr><td>Rule Builder</td><td>UI to combine filters + actions into a rule</td></tr>
+          <tr><td>ValidationRulesImplementation</td><td>Required active implementation for rules to run</td></tr>
+          <tr><td>Action Parameters</td><td>JSON defining attribute constrain/include/exclude actions</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-rules -->
+
+<!-- ===================== ADVANCED PRICING PANEL ===================== -->
+<div id="panel-pricing" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="pricing">
+    <h3>Advanced Pricing</h3>
+    <a href="#ap-overview">1. Overview</a>
+    <a href="#ap-attr-pricing">2. Attribute-Based Pricing</a>
+    <a href="#ap-matrices">3. Matrices &amp; Expression Sets</a>
+    <a href="#ap-pricing-plan">4. Pricing Plan Steps</a>
+    <a href="#ap-loyalty">5. Loyalty Pricing</a>
+    <a href="#ap-repricing">6. Repricing</a>
+    <a href="#ap-hooks">7. Pricing Hooks</a>
+    <a href="#ap-usage">8. Usage Pricing</a>
+    <a href="#ap-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <section id="ap-overview">
+      <h2>1. Advanced Pricing Overview</h2>
+      <p>Advanced pricing goes beyond simple price lists — using attributes, matrices, loyalty points, usage, and custom hooks.</p>
+      <table class="data-table">
+        <thead><tr><th>Capability</th><th>What It Does</th></tr></thead>
+        <tbody>
+          <tr><td>Attribute-Based Pricing</td><td>Price by attribute combinations via lookup matrices</td></tr>
+          <tr><td>Loyalty Pricing</td><td>Customers pay with loyalty points instead of money</td></tr>
+          <tr><td>Repricing</td><td>Update prices on draft orders/assets when prices change</td></tr>
+          <tr><td>Event Hooks</td><td>Custom Apex logic injected into pricing flow</td></tr>
+          <tr><td>Usage Pricing</td><td>Charge based on estimated or actual consumption</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>Interface pattern</strong> PricingInterface asks "How should I price this?" → PricingPlanService implementation runs pricing plan steps → returns calculated price.</div>
+    </section>
+
+    <section id="ap-attr-pricing">
+      <h2>2. Attribute-Based Pricing</h2>
+      <p>Instead of creating separate products for every combination, use <strong>one product + attributes + a pricing matrix</strong>.</p>
+      <div class="compare-grid">
+        <div class="compare-card"><h4>❌ Without ABP</h4><p>Smartwatch 38mm GPS = $399<br>Smartwatch 38mm Cellular = $499<br>Smartwatch 42mm GPS = $429<br>Smartwatch 42mm Cellular = $529<br><em>4 separate products to maintain</em></p></div>
+        <div class="compare-card"><h4>✅ With ABP</h4><p>1 Smartwatch product<br>Attributes: Size, Connectivity<br>Matrix returns price per combination<br><em>1 product, easy to maintain</em></p></div>
+      </div>
+      <h3>Three Types of Attribute-Based Pricing</h3>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>How It Works</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Standard</strong></td><td>Price product using its own attributes</td><td>DSL price by Download + Upload speed</td></tr>
+          <tr><td><strong>Source/Target</strong></td><td>Price target product based on another product's attributes</td><td>Backpack = $0 when in student bundle</td></tr>
+          <tr><td><strong>Range</strong></td><td>Price when quantity falls in a range</td><td>Modem: qty 1-4 = $65, qty 5-9 = $50</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ap-matrices">
+      <h2>3. Lookup Matrices &amp; Expression Sets</h2>
+      <p>Attribute pricing uses the <strong>Business Rules Engine</strong>: Decision Matrices (lookup tables) + Expression Sets (calculation procedures).</p>
+      <table class="data-table">
+        <thead><tr><th>Matrix</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>AttributePricingMatrix</td><td>Standard attribute → MRC/NRC lookup</td></tr>
+          <tr><td>SourceTargetAttributePricingMatrix</td><td>Source product attrs → target product price</td></tr>
+          <tr><td>RangeAttributePricingMatrix</td><td>Quantity range → price</td></tr>
+        </tbody>
+      </table>
+      <h3>Key Matrix Columns (do not rename)</h3>
+      <table class="data-table">
+        <thead><tr><th>Column</th><th>Type</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>SourceProductCode</td><td>Input</td><td>C-DSL-001</td></tr>
+          <tr><td>CharacteristicName</td><td>Input</td><td>ATT_DOWNLOAD_SPEED</td></tr>
+          <tr><td>CharacteristicValue</td><td>Input</td><td>40 Mbps</td></tr>
+          <tr><td>MRC</td><td>Output (Currency)</td><td>44.99</td></tr>
+          <tr><td>NRC</td><td>Output (Currency)</td><td>99.00</td></tr>
+          <tr><td>Target Product Code</td><td>Output</td><td>For Source/Target pricing only</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ap-pricing-plan">
+      <h2>4. Pricing Plan Steps</h2>
+      <p>Add custom steps to the <strong>Default Pricing Plan</strong> in Product Console. All attribute pricing steps must run <strong>before</strong> sequence 10 (Initialize Pricing Context).</p>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Pricing Plan Step — Attribute Based Pricing</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Name</label><input value="Calculate Attribute Based Pricing" readonly></div>
+          <div class="form-row"><label>Implementation</label><input value="CustomPricingPlanStepImpl" readonly></div>
+          <div class="form-row"><label>Method</label><input value="GetMatrixPrice" readonly></div>
+          <div class="form-row"><label>Sequence</label><input value="5" readonly></div>
+          <div class="form-row"><label>ProcedureName</label><input value="AttributePricingProcedure" readonly></div>
+          <div class="form-row"><label>MatrixName</label><input value="AttributePricingMatrix" readonly></div>
+        </div>
+      </div>
+      <div class="example-box">
+        <strong>Cart test result</strong>
+        DSL Service with Download=40 Mbps, Upload=2 Mbps → matrix returns $44.99/mo recurring charge.
+        Change speeds in cart → price updates automatically from matrix.
+      </div>
+      <div class="warning"><strong>After changes:</strong> Run Clear Managed Platform Cache → Refresh Platform Cache before testing in cart.</div>
+    </section>
+
+    <section id="ap-loyalty">
+      <h2>5. Loyalty Pricing</h2>
+      <p>Let customers pay with <strong>loyalty points</strong> instead of currency.</p>
+      <ol>
+        <li>Enable Loyalty in CME Admin → Enable Features</li>
+        <li>Create pricing element: Charge Type = One-time, Variable = One Time Loyalty, Amount = 500 PTS</li>
+        <li>Assign loyalty price to product in Product Console Pricing facet</li>
+        <li>Refresh platform cache</li>
+        <li>In Cart: switch Payment Choice header to "Loyalty" → price shows in points</li>
+      </ol>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Cart — Loyalty Payment</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Product</label><input value="Samsung Wireless Charger" readonly></div>
+          <div class="form-row"><label>Payment Choice</label><select><option>Loyalty</option><option>Currency</option></select></div>
+          <div class="cart-item"><span>One Time Loyalty Price</span><strong>500 PTS</strong></div>
+          <div class="cart-item"><span>One Time Charge (if Currency)</span><strong>$49.99</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ap-repricing">
+      <h2>6. Repricing</h2>
+      <p><strong>Repricing</strong> updates prices on existing draft orders, quotes, and assets when price list entries change.</p>
+      <div class="note"><strong>Important:</strong> Repricing uses RepricingElementServiceImplementation — it does NOT support attribute-based pricing. Use for standard PLE-based prices only.</div>
+      <div class="example-box">
+        <strong>Example: Price drop on 4G LTE Data Plan</strong>
+        <ul>
+          <li>Old PLE: $34.99/mo (effective until yesterday)</li>
+          <li>New PLE: $24.99/mo (effective from today)</li>
+          <li>Existing draft order still shows $34.99</li>
+          <li>Run repricing via VOIInvoker → price updates to $24.99</li>
+        </ul>
+      </div>
+      <div class="code-block"><span class="cmt">// Repricing Apex (Developer Console)</span>
+List&lt;Order&gt; orders = [SELECT Id FROM Order WHERE Id = '<span class="str">YOUR_ORDER_ID</span>'];
+Map&lt;String,Object&gt; input = new Map&lt;String,Object&gt;{ 'objectList' =&gt; orders };
+Map&lt;String,Object&gt; output = new Map&lt;String,Object&gt;();
+Map&lt;String,Object&gt; options = new Map&lt;String,Object&gt;();
+vlocity_cmt.VOIInvoker.getInstance()
+  .invoke('Repricing', 'repriceLineItems', input, output, options);</div>
+    </section>
+
+    <section id="ap-hooks">
+      <h2>7. Pricing Event Hooks (CpqAppHandlerHook)</h2>
+      <p><strong>Event hooks</strong> let you inject custom Apex logic into the CPQ pricing process — e.g., adjust price by billing zip code.</p>
+      <ol>
+        <li>Create attribute pricing matrix for zip code → price mapping</li>
+        <li>Create expression set (AttributePricingProcedure for zip)</li>
+        <li>Add custom pricing plan step calling GetMatrixPrice</li>
+        <li>Write Apex hook class implementing hook interface</li>
+        <li>Register CpqAppHandlerHookImplementation</li>
+        <li>Add custom column to Cart UI for zip code field</li>
+      </ol>
+      <div class="tip"><strong>When hooks run:</strong> CpqAppHandlerHook is invoked during CPQ API calls — before or after standard pricing logic depending on hook type.</div>
+    </section>
+
+    <section id="ap-usage">
+      <h2>8. Usage Pricing</h2>
+      <p><strong>Usage pricing</strong> charges customers based on consumption (e.g., electricity kWh, data GB, gas therms).</p>
+      <ol>
+        <li>Enable usage pricing in CME Admin</li>
+        <li>Create charge measurements and assign to products</li>
+        <li>Configure attribute binding for estimated usage quantity</li>
+        <li>Test in cart — price reflects estimated usage</li>
+        <li>Combine with attribute-based pricing for tiered usage rates</li>
+      </ol>
+      <div class="example-box">
+        <strong>Example: Energy product</strong>
+        Product: Home Electricity Plan · Attribute: Estimated Monthly kWh = 500 · Usage rate: $0.12/kWh → Estimated charge = $60/mo
+      </div>
+      <h3>Key Concepts</h3>
+      <ul>
+        <li><strong>Attribute Binding</strong> — links a product attribute to a usage measurement</li>
+        <li><strong>Charge Measurement</strong> — unit of measure for usage (kWh, GB, minutes)</li>
+        <li><strong>Vlocity Object</strong> — metadata object for usage configuration</li>
+      </ul>
+    </section>
+
+    <section id="ap-ref">
+      <h2>Advanced Pricing Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>AttributePricingMatrix</td><td>Lookup table: attributes → MRC/NRC</td></tr>
+          <tr><td>Expression Set</td><td>Calculation procedure using matrix lookups</td></tr>
+          <tr><td>Pricing Plan Step</td><td>Single step in Default Pricing Plan sequence</td></tr>
+          <tr><td>CustomPricingPlanStepImpl</td><td>Apex class that runs GetMatrixPrice</td></tr>
+          <tr><td>PricingPlanService</td><td>Active implementation on PricingInterface</td></tr>
+          <tr><td>RepricingElementServiceImplementation</td><td>Active implementation on RepricingInterface</td></tr>
+          <tr><td>CpqAppHandlerHook</td><td>Custom logic injection point for CPQ APIs</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-pricing -->
 
 <footer>
-  Based on Vlocity CME Enterprise Product Catalog (EPC) Documentation · © 2021 Vlocity LLC, a Salesforce company<br>
-  Created as an easy-learning guide — open this file in any web browser.
+  Based on Vlocity CME / Salesforce Industries documentation (EPC, CPQ, Order Orchestration, Advanced Rules &amp; Pricing Exercise Guides)<br>
+  © 2021–2022 Vlocity LLC / Salesforce, inc. · Created as an easy-learning guide — open in any web browser.
 </footer>
 
 <script>
-  // Highlight active sidebar link on scroll
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.sidebar a');
+  // Module tab switching
+  const moduleTabs = document.querySelectorAll('.module-tab');
+  const modulePanels = document.querySelectorAll('.module-panel');
 
+  moduleTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const panelId = tab.dataset.panel;
+      moduleTabs.forEach(t => t.classList.remove('active'));
+      modulePanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + panelId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateActiveLink();
+    });
+  });
+
+  // Highlight active sidebar link on scroll (per active panel)
   function updateActiveLink() {
+    const activePanel = document.querySelector('.module-panel.active');
+    if (!activePanel) return;
+    const sections = activePanel.querySelectorAll('section[id]');
+    const navLinks = activePanel.querySelectorAll('.sidebar a');
     let current = '';
     sections.forEach(section => {
-      const top = section.offsetTop - 120;
+      const top = section.offsetTop - 160;
       if (window.scrollY >= top) current = section.getAttribute('id');
     });
     navLinks.forEach(link => {
