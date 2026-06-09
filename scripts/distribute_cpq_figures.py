@@ -2,7 +2,7 @@
 import re
 from pathlib import Path
 
-HTML = Path(r'e:\Study\CME_EPC_Learning_Guide.html')
+HTML = Path(r'e:\Study\index.html')
 
 FIG_GROUP_TO_SECTION = {
     'cpq-fig-order-capture-pricing-flow': 'cpq-flow',
