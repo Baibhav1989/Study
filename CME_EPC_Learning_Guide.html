@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vlocity CME Learning Hub — EPC · CPQ · OM · Rules · Pricing</title>
+  <title>Vlocity CME Learning Hub — EPC · CPQ · OmniStudio · OM · Rules · Pricing</title>
   <style>
     :root {
       --primary: #0176d3;
@@ -591,13 +591,14 @@
 
 <header class="hero">
   <h1>Vlocity CME Learning Hub</h1>
-  <p>Simple, visual guides for EPC, CPQ, Order Management, Advanced Rules, and Advanced Pricing — based on official Salesforce Industries documentation.</p>
+  <p>Simple, visual guides for EPC, CPQ, OmniStudio (OmniScripts, DataRaptors, FlexCards), Order Management, Advanced Rules, and Advanced Pricing — based on official Salesforce Industries documentation.</p>
   <span class="badge">Communications, Media &amp; Energy · Salesforce Industries</span>
 </header>
 
 <nav class="module-tabs" role="tablist">
   <button class="module-tab active" data-panel="epc" role="tab">📦 EPC</button>
   <button class="module-tab" data-panel="cpq" role="tab">🛒 CPQ &amp; APIs</button>
+  <button class="module-tab" data-panel="omnistudio" role="tab">⚡ OmniStudio</button>
   <button class="module-tab" data-panel="om" role="tab">⚙️ Order Management</button>
   <button class="module-tab" data-panel="rules" role="tab">📐 Advanced Rules</button>
   <button class="module-tab" data-panel="pricing" role="tab">💰 Advanced Pricing</button>
@@ -3244,6 +3245,535 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
 </div>
 </div><!-- end panel-cpq -->
 
+<!-- ===================== OMNI STUDIO PANEL ===================== -->
+<div id="panel-omnistudio" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="omnistudio">
+    <h3>OmniStudio Topics</h3>
+    <a href="#os-overview">1. Platform Overview</a>
+    <a href="#os-basics">2. OmniScript Basics</a>
+    <a href="#os-data">3. Data JSON &amp; Merge Fields</a>
+    <a href="#os-dr-overview">4. DataRaptor Types</a>
+    <a href="#os-dr-formulas">5. DR Formulas</a>
+    <a href="#os-formulas">6. OS Formulas &amp; Functions</a>
+    <a href="#os-ip">7. Integration Procedures</a>
+    <a href="#os-call-dr">8. Call DR from OmniScript</a>
+    <a href="#os-call-ip">9. Call IP from OmniScript</a>
+    <a href="#os-flexcards">10. FlexCards</a>
+    <a href="#os-os-to-fc">11. OS → FlexCard Data</a>
+    <a href="#os-fc-to-os">12. FlexCard → OS Data</a>
+    <a href="#os-integration">13. Integration Cookbook</a>
+    <a href="#os-dr-vs-ip">14. DR vs IP?</a>
+    <a href="#os-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <section id="os-overview">
+      <h2>1. OmniStudio Platform Overview</h2>
+      <p><strong>OmniStudio</strong> (formerly Vlocity Digital Interaction Platform) combines declarative tools to build customer-centric UIs, guided workflows, and data integration on Salesforce — without heavy custom code.</p>
+      <div class="tip"><strong>Three apps working together</strong> Cards (FlexCards) show context and actions; OmniScripts guide users through processes; DataRaptors read, transform, and write data. Integration Procedures orchestrate multi-step logic including external calls.</div>
+      <h3>Typical Flow</h3>
+      <div class="workflow">
+        <div class="workflow-step">FlexCard (context)</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Launch OmniScript</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">DR Extract (prefill)</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">User input</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">DR Load / IP</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Return to Card</div>
+      </div>
+      <p>Example: an agent views an Orders card, clicks <em>New Order</em>, an OmniScript launches, a DataRaptor Extract loads products, the agent selects items, and on completion the script returns to the card view.</p>
+      <table class="data-table">
+        <thead><tr><th>Tool</th><th>Purpose</th><th>Designer</th></tr></thead>
+        <tbody>
+          <tr><td><strong>OmniScript</strong></td><td>Guided, multi-step processes with validation and branching</td><td>OmniScript Designer (Classic or LWC)</td></tr>
+          <tr><td><strong>FlexCards</strong></td><td>Context-rich UI blocks with data sources and click actions</td><td>FlexCard Designer</td></tr>
+          <tr><td><strong>DataRaptor</strong></td><td>Extract, Transform, Load — map JSON ↔ Salesforce</td><td>DataRaptor Designer</td></tr>
+          <tr><td><strong>Integration Procedure</strong></td><td>Headless multi-step orchestration (DR, HTTP, Apex, email, loops)</td><td>Integration Procedure Designer</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>Source:</strong> Vlocity OmniStudio Documentation — Basics (pp. 27–33), Using The Applications Together.</p>
+    </section>
+
+    <section id="os-basics">
+      <h2>2. OmniScript Basics</h2>
+      <p>An <strong>OmniScript</strong> guides users through complex processes with fast, consistent responses — e.g. add a customer, update a policy, or complete self-service troubleshooting.</p>
+      <h3>Element Categories</h3>
+      <table class="data-table">
+        <thead><tr><th>Category</th><th>Examples</th><th>Use For</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Actions</strong></td><td>DataRaptor Extract/Post, Integration Procedure, HTTP, Remote, Set Values, PDF</td><td>Load, transform, post data; call external systems</td></tr>
+          <tr><td><strong>Groups</strong></td><td>Step, Block, Edit Block, Repeat Block</td><td>Organize UI; repeatable sections</td></tr>
+          <tr><td><strong>Inputs</strong></td><td>Text, Number, Select, Lookup, File, Date</td><td>Capture user data into Data JSON</td></tr>
+          <tr><td><strong>Functions</strong></td><td>Formula, Aggregate</td><td>Calculated values, sums, averages</td></tr>
+          <tr><td><strong>Display</strong></td><td>Text Block, Line Break, Custom LWC</td><td>Labels, embed FlexCards or custom components</td></tr>
+        </tbody>
+      </table>
+      <h3>Launch Points</h3>
+      <ul>
+        <li>Action button on a record page</li>
+        <li>Action link on a FlexCard or Classic Card</li>
+        <li>URL with parameters (<code>c__ContextId</code>, prefill JSON)</li>
+        <li>FlexCard Navigate / Vlocity Action</li>
+        <li>Embedded in another OmniScript via Custom LWC</li>
+      </ul>
+      <h3>Templates</h3>
+      <p>Control layout (horizontal/vertical), branding, and styling via <strong>Lightning</strong> (SLDS) or <strong>Newport</strong> design system templates.</p>
+    </section>
+
+    <section id="os-data">
+      <h2>3. OmniScript Data JSON &amp; Merge Fields</h2>
+      <p>All runtime data lives in an intermediate structure called <strong>Data JSON</strong> — visible to developers in Preview/Debug, not to end users.</p>
+      <div class="example-box">
+        <strong>Merge field syntax</strong>
+        Access nodes with <code>%NodeName%</code>. Nested: <code>%Parent:Child%</code>. Use in Set Values, action properties, Default Values (LWC), and formulas.
+      </div>
+      <h3>Set Values Action</h3>
+      <p>Use Set Values to rename nodes, populate future elements, concatenate strings, and evaluate formulas:</p>
+      <table class="data-table">
+        <thead><tr><th>Task</th><th>Element Name</th><th>Value (fx)</th></tr></thead>
+        <tbody>
+          <tr><td>Rename node</td><td><code>NewName</code></td><td><code>%OldName%</code></td></tr>
+          <tr><td>Concatenate</td><td><code>FullName</code></td><td><code>%FirstName% + " " + %LastName%</code></td></tr>
+          <tr><td>Formula</td><td><code>NetIncome</code></td><td><code>%GrossIncome% - 5000</code></td></tr>
+        </tbody>
+      </table>
+      <div class="warning"><strong>Data types must match</strong> when populating elements — you cannot Set Values a Text element from a Number element.</div>
+      <h3>Send / Response Transformations</h3>
+      <p>Actions and Integration Procedures trim or reparent JSON before/after execution:</p>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>Purpose</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Send JSON Path</td><td>Drill into input node</td><td><code>ContactDetails</code></td></tr>
+          <tr><td>Send JSON Node</td><td>Reparent input under new name</td><td><code>Input</code> or <code>node1:node2</code></td></tr>
+          <tr><td>Response JSON Path</td><td>Trim output to path</td><td><code>Account</code></td></tr>
+          <tr><td>Response JSON Node</td><td>Reparent output; use for prefill</td><td>Match OmniScript element name</td></tr>
+          <tr><td><code>VlocityNoRootNode</code></td><td>Remove parent wrapper (OS only)</td><td>Flatten <code>{path:{a:b}}</code> → <code>{a:b}</code></td></tr>
+          <tr><td>List index</td><td>Response JSON Node</td><td><code>ListNode|%item%</code> — pipe + merge field for list item</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="os-dr-overview">
+      <h2>4. DataRaptor Types</h2>
+      <p>A <strong>DataRaptor</strong> maps data between JSON/XML and Salesforce — no Apex required for standard CRUD and transforms.</p>
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Reads SF?</th><th>Writes SF?</th><th>Formulas?</th><th>Best For</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-blue">Turbo Extract</span></td><td>Yes (single object)</td><td>No</td><td>No</td><td>Fast single-object reads; related fields only</td></tr>
+          <tr><td><span class="tag tag-green">Extract</span></td><td>Yes</td><td>No</td><td>Yes</td><td>Multi-object reads, complex mappings, prefill</td></tr>
+          <tr><td><span class="tag tag-orange">Transform</span></td><td>No</td><td>No</td><td>Yes</td><td>Restructure/rename JSON, PDF/DocuSign prep</td></tr>
+          <tr><td><span class="tag tag-purple">Load</span></td><td>No</td><td>Yes</td><td>Yes</td><td>Create/update sObjects from OmniScript output</td></tr>
+        </tbody>
+      </table>
+      <h3>Typical Data Flow</h3>
+      <ol>
+        <li>OmniScript calls <strong>Extract</strong> to read Salesforce data</li>
+        <li>User edits data in the script</li>
+        <li>OmniScript calls <strong>Load</strong> (Post Action) to write back</li>
+      </ol>
+      <h3>DataRaptor Designer Tabs</h3>
+      <table class="data-table">
+        <thead><tr><th>Tab</th><th>Extract</th><th>Transform</th><th>Load</th></tr></thead>
+        <tbody>
+          <tr><td>Extract / Transforms</td><td>SOQL steps, filters</td><td>Input → output mappings</td><td>—</td></tr>
+          <tr><td>Formulas</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Output / Fields</td><td>Map to output JSON</td><td>Map to output</td><td>Map JSON → sObject fields</td></tr>
+          <tr><td>Objects</td><td>—</td><td>—</td><td>Creation sequence, upsert keys</td></tr>
+          <tr><td>Preview</td><td>Test with input params</td><td>Test transform</td><td>Execute load (persists data)</td></tr>
+        </tbody>
+      </table>
+      <h3>Turbo Extract Response in OmniScript</h3>
+      <p>Turbo returns nested arrays. Use <strong>Response JSON Path</strong> like <code>Account|1</code> and optionally <strong>Response JSON Node</strong> = <code>VlocityNoRootNode</code> to prefill elements.</p>
+    </section>
+
+    <section id="os-dr-formulas">
+      <h2>5. DataRaptor Formulas</h2>
+      <p>All DataRaptor types support formulas on the <strong>Formulas</strong> tab. Map formula results to output JSON (Extract/Transform) or sObject fields (Load).</p>
+      <h3>Create a Formula — Steps</h3>
+      <ol>
+        <li>Open DataRaptor → <strong>Formulas</strong> tab → <strong>Add Formula</strong></li>
+        <li>Enter logic, e.g. <code>SUM(Products:Price)</code></li>
+        <li>Set <strong>Formula Result Path</strong> (intermediate node)</li>
+        <li>Map result on Output / Transforms / Fields tab to final destination</li>
+      </ol>
+      <h3>Syntax Rules</h3>
+      <ul>
+        <li>Reference attributes with <code>@Code</code> — e.g. <code>Account:@GoldStarAccount == "On"</code></li>
+        <li>Paths use colons: <code>Contact:LastName</code></li>
+        <li>Variables with spaces: <code>var:"Primary Guardian"</code></li>
+        <li>List index in mappings: <code>Nephews|1</code>, <code>Nephews|2</code></li>
+      </ul>
+      <h3>Common DR Functions</h3>
+      <table class="data-table">
+        <thead><tr><th>Function</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td>SUM, AVG, MIN, MAX</td><td>Aggregations on lists</td></tr>
+          <tr><td>IF</td><td>Conditional field values (e.g. age &gt; 18 → Authorized = true)</td></tr>
+          <tr><td>LIST, LISTMERGE, LISTSIZE, SORTBY, FILTER</td><td>List transforms</td></tr>
+          <tr><td>QUERY, COUNTQUERY</td><td>Dynamic queries in formulas</td></tr>
+        </tbody>
+      </table>
+      <div class="example-box">
+        <strong>Load example</strong> Input <code>ContactDetails.Birthdate</code> → formula checks if over 18 → maps <code>@IsAdult</code> to custom <code>Authorized__c</code> checkbox on Contact.
+      </div>
+    </section>
+
+    <section id="os-formulas">
+      <h2>6. OmniScript Formulas &amp; Functions</h2>
+      <p>Use <strong>Formula</strong> or <strong>Aggregate</strong> elements, or the <strong>fx</strong> button in Set Values, to calculate values at runtime.</p>
+      <h3>Supported Formula Operators</h3>
+      <table class="data-table">
+        <thead><tr><th>Operator</th><th>Meaning</th><th>Operator</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>+ - * / ^</code></td><td>Arithmetic</td><td><code>&& ||</code></td><td>And / Or</td></tr>
+          <tr><td><code>= &lt;&gt;</code></td><td>Equals / Not equals</td><td><code>&gt; &lt; &gt;= &lt;=</code></td><td>Comparisons</td></tr>
+          <tr><td><code>( )</code></td><td>Grouping</td><td colspan="2"><em>Spaces required on both sides of operators</em></td></tr>
+        </tbody>
+      </table>
+      <h3>Formula Element — Supported Types</h3>
+      <ul>
+        <li>Merge fields: <code>%Element1%</code>, <code>%JSONnode1%</code></li>
+        <li>Numbers, quoted strings, booleans, arrays, null</li>
+      </ul>
+      <h3>Key OmniScript Functions (by category)</h3>
+      <table class="data-table">
+        <thead><tr><th>Category</th><th>Functions</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Conversion</td><td>ABS, INTEGER, NUMBER, STRING, ROUND, CURRENCY, BOOLEAN</td><td><code>INTEGER(%Friends%) == 6</code></td></tr>
+          <tr><td>Conditional</td><td>IF, AND, OR, EQUALS, SUMIF, COUNTIF</td><td><code>IF(%reset%="Yes", "Closed", "Escalated")</code></td></tr>
+          <tr><td>Text</td><td>CONCATENATE, CONTAINS, SUBSTRING, SPLIT, CASE</td><td><code>CONCATENATE(%FirstName%, " ", %LastName%)</code></td></tr>
+          <tr><td>Date</td><td>TODAY, NOW, AGE, DATEDIFF, MOMENT, YEAR, MONTH</td><td><code>DATEDIFF(%DOB%, %TODAY%)</code></td></tr>
+          <tr><td>Aggregate</td><td>SUM, AVERAGE, MIN, MAX, ARRAY, EXISTS</td><td><code>SUM(%AGE%)</code> on repeating block</td></tr>
+        </tbody>
+      </table>
+      <h3>Add a Formula Element — Steps</h3>
+      <ol>
+        <li>Drag <strong>Formula</strong> or <strong>Aggregate</strong> into structure</li>
+        <li>Click function names to insert into Expression; wrap elements in <code>%</code></li>
+        <li>Optional: set <strong>Conditional View</strong> on dependent steps</li>
+        <li>Click <strong>Hide</strong> if the element should not appear on UI</li>
+        <li>Preview to validate</li>
+      </ol>
+    </section>
+
+    <section id="os-ip">
+      <h2>7. Integration Procedures (IP)</h2>
+      <p>An <strong>Integration Procedure</strong> is a headless, sequential pipeline of actions — ideal when you need multiple steps, external APIs, error handling, or both read and write operations.</p>
+      <h3>Common IP Actions</h3>
+      <table class="data-table">
+        <thead><tr><th>Action</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Set Values</td><td>Set or compute JSON values</td></tr>
+          <tr><td>DataRaptor Extract / Post / Transform / Turbo</td><td>Same as OmniScript DR actions</td></tr>
+          <tr><td>HTTP Action</td><td>REST/SOAP callouts (Named Credential, Apex REST, Web)</td></tr>
+          <tr><td>Remote Action</td><td>Invoke Apex class method</td></tr>
+          <tr><td>Integration Procedure Action</td><td>Call child IP (sync, future, chainable)</td></tr>
+          <tr><td>Response Action</td><td>Return data to caller</td></tr>
+          <tr><td>Email, Delete, Matrix, List Merge, Intelligence</td><td>Specialized operations</td></tr>
+        </tbody>
+      </table>
+      <h3>IP Blocks</h3>
+      <ul>
+        <li><strong>Conditional Block</strong> — run steps when formula is true</li>
+        <li><strong>Loop Block</strong> — iterate arrays</li>
+        <li><strong>Try-Catch Block</strong> — error handling; returns <code>{ "success": false }</code> on failure</li>
+        <li><strong>Cache Block</strong> — cache subset of steps for performance</li>
+      </ul>
+      <h3>Common IP Action Properties</h3>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Send JSON Path / Node</td><td>Trim/reparent input before action runs</td></tr>
+          <tr><td>Response JSON Path / Node</td><td>Trim/reparent output after action</td></tr>
+          <tr><td>Additional Input</td><td>Extra key/value pairs (merge fields, formulas)</td></tr>
+          <tr><td>Send Only Additional Input</td><td>Ignore full Data JSON; send only Additional Input</td></tr>
+          <tr><td>Fail on Step Error</td><td>Stops IP if action fails</td></tr>
+        </tbody>
+      </table>
+      <p>DR Post in IP returns nodes like <code>Contact_1</code> with <code>UpsertSuccess</code>. Reference IDs with merge fields: <code>%CreateContact:Contact_1:Id%</code>.</p>
+    </section>
+
+    <section id="os-call-dr">
+      <h2>8. Call DataRaptor from OmniScript</h2>
+      <p>OmniScripts integrate with Salesforce through <strong>DataRaptor Action</strong> elements. Create the DataRaptor first (non-LWC), or use <strong>Create New DataRaptor</strong> inline in LWC Designer.</p>
+
+      <h3>DataRaptor Extract Action — Prefill / Read</h3>
+      <ol>
+        <li>Build Extract: add extract steps, filters (e.g. <code>Id = %ContextId%</code>), Output mappings — output node names <strong>must match OmniScript element names</strong></li>
+        <li>Drag <strong>DataRaptor Extract Action</strong> into structure (typically before or in first Step)</li>
+        <li>Set <strong>DataRaptor Interface</strong> to your Extract name</li>
+        <li>Map <strong>Data Source</strong> → DR input parameter; <strong>Filter Value</strong> → merge field value</li>
+        <li>Use Response Transformations to trim/rename if needed</li>
+        <li>Preview — elements prefilled from response</li>
+      </ol>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>DataRaptor Interface</td><td>Name of Extract</td></tr>
+          <tr><td>Data Source</td><td>JSON node supplying filter input</td></tr>
+          <tr><td>Filter Value</td><td>Value matched against sObject field</td></tr>
+          <tr><td>Response JSON Path / Node</td><td>Target prefill structure</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>Prefill tip</strong> Copy OmniScript Data JSON into DataRaptor <strong>Expected JSON Output</strong> pane to auto-populate valid output fields. For hidden conditional elements, set <code>"accessibleInFutureSteps": true</code> or check <strong>Available for Prefill When Hidden</strong>.</div>
+
+      <h3>DataRaptor Post Action — Write to Salesforce</h3>
+      <ol>
+        <li>Build Load: map OmniScript output JSON nodes → sObject fields; set upsert keys</li>
+        <li>Preview OmniScript → copy Data JSON → paste into DR Input JSON for mapping</li>
+        <li>Drag <strong>DataRaptor Post Action</strong> (usually near end of script)</li>
+        <li>Select Load in <strong>DataRaptor Interface</strong></li>
+        <li>Use <strong>Send Transformations</strong> so input matches Load structure</li>
+      </ol>
+
+      <h3>DataRaptor Transform Action</h3>
+      <p>Restructure data mid-script without SF I/O — e.g. prepare DocuSign/PDF payload. Select Transform interface; trim input/output with Send/Response properties.</p>
+
+      <h3>DataRaptor Turbo Action</h3>
+      <p>Single-object fast read. Set Response JSON Path <code>ObjectName|1</code>; optional Response JSON Node = <code>VlocityNoRootNode</code>.</p>
+
+      <h3>Prefill Repeatable Blocks</h3>
+      <p>Return array whose root name matches block name:</p>
+      <pre style="background:#f4f4f4;padding:1rem;border-radius:8px;overflow:auto;font-size:0.85rem;">"EditBlock1": [
+  { "FirstName": "John", "LastName": "Smith" },
+  { "FirstName": "Jane", "LastName": "Smith" }
+]</pre>
+    </section>
+
+    <section id="os-call-ip">
+      <h2>9. Call Integration Procedure from OmniScript</h2>
+      <p>Use when one DR is not enough — multiple reads/writes, HTTP callouts, loops, or error handling.</p>
+      <h3>Steps</h3>
+      <ol>
+        <li>Create and activate Integration Procedure (<code>Type_Subtype</code>)</li>
+        <li>Drag <strong>Integration Procedure Action</strong> into OmniScript</li>
+        <li>Select procedure in <strong>Integration Procedure</strong> field</li>
+        <li>Configure Send/Response transformations:
+          <ul>
+            <li><strong>Send JSON Path</strong> — node sent as IP input</li>
+            <li><strong>Send JSON Node</strong> — rename input parameter</li>
+            <li><strong>Response JSON Path</strong> — trim IP output</li>
+            <li><strong>Response JSON Node</strong> — name for subsequent elements</li>
+          </ul>
+        </li>
+        <li><strong>Extra Payload</strong> — additional key/value input (merge fields)</li>
+        <li>Set async options if needed (see table below)</li>
+      </ol>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>When to Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Invoke Mode: Default</strong></td><td>Blocks UI with spinner; waits for response</td></tr>
+          <tr><td><strong>Non-Blocking</strong></td><td>Runs async; applies response when complete; continues user interaction</td></tr>
+          <tr><td><strong>Fire and Forget</strong></td><td>Async, no UI callback (debug console only)</td></tr>
+          <tr><td><strong>Use Future</strong></td><td>IP runs as Salesforce future method; no data returned</td></tr>
+          <tr><td><strong>Is Chainable</strong></td><td>Enable child IP chainable settings</td></tr>
+          <tr><td><strong>Use Continuation</strong></td><td>Long-running callouts via Apex continuations</td></tr>
+          <tr><td><strong>Send Only Extra Payload</strong></td><td>Send only Extra Payload, not full Data JSON</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Multiple posts?</strong> Host several DataRaptor Post actions inside one Integration Procedure instead of chaining many Post actions directly in the OmniScript.</div>
+    </section>
+
+    <section id="os-flexcards">
+      <h2>10. FlexCards</h2>
+      <p><strong>FlexCards</strong> are declarative LWC UI components showing customer-context data with embedded actions — built in the FlexCard Designer (states, elements, data sources).</p>
+      <h3>FlexCard vs Classic Cards</h3>
+      <table class="data-table">
+        <thead><tr><th>Feature</th><th>FlexCards</th><th>Classic Cards</th></tr></thead>
+        <tbody>
+          <tr><td>Designer</td><td>FlexCard Designer (WYSIWYG states)</td><td>Template + Card Designer (Angular/LWC)</td></tr>
+          <tr><td>Actions</td><td>OmniScript, Navigate, Flyout, PubSub, Update OS, Card reload</td><td>Launch OmniScript, external links</td></tr>
+          <tr><td>Styling</td><td>Per-element Style panel, responsive</td><td>Template HTML/CSS/JS</td></tr>
+        </tbody>
+      </table>
+      <h3>Data Sources</h3>
+      <p>Configure on Setup panel — Integration Procedures, DataRaptors, Custom, REST, etc. Context variables like <code>{recordId}</code>, <code>{records}</code> available in queries and actions.</p>
+      <h3>FlexCard Action Types</h3>
+      <table class="data-table">
+        <thead><tr><th>Action Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>OmniScript</strong></td><td>Launch guided script</td></tr>
+          <tr><td><strong>Navigate</strong></td><td>Go to Salesforce page, record, or community URL</td></tr>
+          <tr><td><strong>Flyout</strong></td><td>Show child FlexCard or OmniScript in modal/popover</td></tr>
+          <tr><td><strong>Card</strong></td><td>Reload, Remove, Set Values, Update Data Source</td></tr>
+          <tr><td><strong>Custom Event</strong></td><td>DOM custom event (parent/child FlexCards)</td></tr>
+          <tr><td><strong>PubSub Event</strong></td><td>Cross-component messaging on same page</td></tr>
+          <tr><td><strong>Update OmniScript</strong></td><td>Push data to embedded OmniScript (requires OmniScript Support)</td></tr>
+          <tr><td><strong>Vlocity Action</strong></td><td>Reusable launch actions (OS, pages, apps)</td></tr>
+        </tbody>
+      </table>
+      <h3>Enable OmniScript Support on FlexCard</h3>
+      <ol>
+        <li>FlexCard Designer → <strong>Setup</strong> panel</li>
+        <li>Check <strong>OmniScript Support</strong></li>
+        <li>Required for Update OmniScript actions and embedded-in-OS scenarios</li>
+      </ol>
+    </section>
+
+    <section id="os-os-to-fc">
+      <h2>11. Pass Data: OmniScript → FlexCard</h2>
+      <p>Embed a FlexCard inside an LWC OmniScript using the <strong>Custom LWC</strong> element.</p>
+      <h3>Prerequisites</h3>
+      <ul>
+        <li>FlexCard has <strong>OmniScript Support</strong> enabled</li>
+        <li>OmniScript is LWC-enabled and <strong>Activated</strong> (required for Custom LWC preview)</li>
+      </ul>
+      <h3>Embed Steps</h3>
+      <ol>
+        <li>Drag <strong>Custom LWC</strong> into a Step</li>
+        <li><strong>Lightning Web Component Name</strong> = <code>cf</code> + FlexCard name (e.g. FlexCard <em>AccountCard</em> → <code>cfAccountCard</code>)</li>
+        <li>Add properties as HTML attributes (kebab-case) with merge-field sources</li>
+      </ol>
+      <table class="data-table">
+        <thead><tr><th>Property Name</th><th>Purpose</th><th>Property Source Example</th></tr></thead>
+        <tbody>
+          <tr><td><code>record-id</code></td><td>Pass Id for FlexCard queries</td><td><code>%ContextId%</code></td></tr>
+          <tr><td><code>parent-attribute</code></td><td>Pass parent object for merge fields in FC</td><td>JSON node with object, e.g. <code>%Account%</code></td></tr>
+          <tr><td><code>parent-data</code> + <code>records</code></td><td>Skip query; map data directly to FC fields</td><td>parent-data = <code>true</code>; records = array/object from OS JSON</td></tr>
+        </tbody>
+      </table>
+      <h3>parent-data + records Pattern</h3>
+      <ol>
+        <li>Custom LWC property <code>parent-data</code> → Source: <code>true</code></li>
+        <li>Custom LWC property <code>records</code> → Source: merge field pointing to array in Data JSON</li>
+        <li>FlexCard parses records and maps nodes to field elements without running a query</li>
+      </ol>
+      <div class="tip"><strong>Standalone Mode</strong> To refresh FlexCard state each time user enters the Step: disable OmniScript Support on FlexCard, then check <strong>Standalone Mode</strong> on the Custom LWC element.</div>
+    </section>
+
+    <section id="os-fc-to-os">
+      <h2>12. Pass Data: FlexCard → OmniScript</h2>
+      <h3>Update OmniScript Action</h3>
+      <p>When a FlexCard is embedded in an OmniScript via Custom LWC, an action on the card can update the parent script's Data JSON.</p>
+      <ol>
+        <li>FlexCard Designer → drag <strong>Action</strong> element</li>
+        <li><strong>Action Type</strong> = <strong>Update OmniScript</strong></li>
+        <li>Optional <strong>Parent Node</strong> — target node in OS JSON (e.g. <code>data</code>)</li>
+        <li><strong>Input Parameters</strong> — Key = field/node to update; Value = FlexCard context variable (e.g. <code>{records}</code>)</li>
+        <li>Enable <strong>OmniScript Support</strong> on FlexCard Setup</li>
+        <li>Embed FlexCard in OS with Custom LWC (<code>cf</code> prefix)</li>
+      </ol>
+      <div class="example-box">
+        <strong>Example</strong> User selects assets on embedded FlexCard → Update OmniScript action passes <code>{records}</code> as Key <code>records</code> → OmniScript Step 2 elements prefill from updated JSON.
+      </div>
+
+      <h3>Launch OmniScript from FlexCard</h3>
+      <ol>
+        <li>Action Type = <strong>OmniScript</strong> (or Vlocity Action)</li>
+        <li>Set Type, SubType, Language; pass ContextId via Input Parameters / Attributes</li>
+      </ol>
+
+      <h3>PubSub Between FlexCards</h3>
+      <ol>
+        <li>Filter FlexCard: Toggle → Set Values → PubSub Action (Apply button)</li>
+        <li>Event Type = PubSub; set Channel and Event Name (avoid reserved: <code>reload</code>, <code>updatedatasource</code>, <code>remove</code>)</li>
+        <li>Product List FlexCard listens on same channel and reloads data</li>
+      </ol>
+
+      <h3>Flyout to Child FlexCard / OmniScript</h3>
+      <p>Flyout Action → set Flyout Type, component, <strong>Attributes</strong> (e.g. ContextId = <code>{recordId}</code>), optional <strong>Data Node</strong> for parent data.</p>
+    </section>
+
+    <section id="os-integration">
+      <h2>13. Integration Cookbook</h2>
+      <p>End-to-end patterns combining OmniScript, DataRaptor, Integration Procedure, and FlexCards.</p>
+
+      <h3>Pattern A — Prefill from Record Page</h3>
+      <div class="workflow">
+        <div class="workflow-step">Launch OS (ContextId)</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">DR Extract Action</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Prefilled Steps</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">DR Post Action</div>
+      </div>
+
+      <h3>Pattern B — Complex Save via IP</h3>
+      <div class="workflow">
+        <div class="workflow-step">OmniScript collects data</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">IP Action</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">IP: DR Extract + HTTP + DR Load</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Response → OS elements</div>
+      </div>
+
+      <h3>Pattern C — FlexCard Dashboard + Guided Flow</h3>
+      <div class="workflow">
+        <div class="workflow-step">FlexCard (DR/IP data source)</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Launch OS action</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">OS completes</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Card Reload action</div>
+      </div>
+
+      <h3>Pattern D — Embedded FlexCard in Multi-Step OS</h3>
+      <div class="workflow">
+        <div class="workflow-step">Step 1: DR Extract</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Step 2: Custom LWC (cfCard) + records</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Update OS action on FC</div><span class="workflow-arrow">→</span>
+        <div class="workflow-step">Step 3: DR Post</div>
+      </div>
+
+      <h3>Testing Checklist</h3>
+      <ul>
+        <li>Preview OmniScript → inspect Data JSON after each action</li>
+        <li>DataRaptor Preview → paste OS JSON as input; verify mappings</li>
+        <li>IP Preview → use Options <code>ignoreCache</code> / <code>resetCache</code> when testing cache</li>
+        <li>Activate OS before testing embedded FlexCards</li>
+        <li>Match output JSON node names to element names exactly</li>
+      </ul>
+    </section>
+
+    <section id="os-dr-vs-ip">
+      <h2>14. DataRaptor or Integration Procedure?</h2>
+      <table class="data-table">
+        <thead><tr><th>Use a single DataRaptor when…</th><th>Use an Integration Procedure when…</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              <ul style="margin:0">
+                <li>Read <em>or</em> write SObjects — not both in one flow</li>
+                <li>Related SObjects (Account ↔ Contact)</li>
+                <li>JSON/XML transform only (no SObjects)</li>
+                <li>Filtering/calc via formulas + mappings is enough</li>
+              </ul>
+            </td>
+            <td>
+              <ul style="margin:0">
+                <li>Both read and write (≥2 DataRaptors)</li>
+                <li>Unrelated SObjects</li>
+                <li>Conditional multi-step transforms</li>
+                <li>Non-straightforward JSON restructuring</li>
+                <li>Multiple source types (SF, CSV, external, Apex)</li>
+                <li>REST, email, list merge, Try-Catch, loops</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>Rule of thumb</strong> Start with DataRaptor. Move to Integration Procedure when you need orchestration, external calls, or error handling beyond a single mapping step.</div>
+    </section>
+
+    <section id="os-ref">
+      <h2>OmniStudio Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>Data JSON</td><td>OmniScript runtime data store; merge fields use <code>%Node%</code></td></tr>
+          <tr><td>ContextId</td><td>Record Id passed when OS launches from detail page</td></tr>
+          <tr><td>cf prefix</td><td>Required when embedding FlexCard as Custom LWC (cf + FlexCard name)</td></tr>
+          <tr><td>Type_Subtype</td><td>Integration Procedure key format</td></tr>
+          <tr><td>VlocityNoRootNode</td><td>Response/Send JSON Node value to flatten wrapper</td></tr>
+          <tr><td>Response JSON Path |N</td><td>Select nested array item (Turbo Extract, lists)</td></tr>
+          <tr><td>OmniScript Support</td><td>FlexCard setting required for Update OS + embed patterns</td></tr>
+          <tr><td>Send/Response Transform</td><td>Trim, reparent, rename JSON on actions</td></tr>
+          <tr><td>Extra Payload</td><td>Additional input to IP/HTTP actions from OS</td></tr>
+          <tr><td>@AttributeCode</td><td>DataRaptor formula reference to profile attribute</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>Documentation source:</strong> <code>vlocity-omnistudio-documentation.pdf</code> — OmniScript Data &amp; External Integrations, DataRaptor guides, FlexCards Actions, Integration Procedure Actions, Formulas (pp. 27–40, 439–440, 1038–1175, 1294–1304, 1804–1848, 1902–1922, 2015–2016).</p>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-omnistudio -->
+
 <!-- ===================== ORDER MANAGEMENT PANEL ===================== -->
 <div id="panel-om" class="module-panel">
 <div class="layout">
@@ -3815,7 +4345,7 @@ vlocity_cmt.VOIInvoker.getInstance()
 </div><!-- end panel-pricing -->
 
 <footer>
-  Based on Vlocity CME / Salesforce Industries documentation (EPC, CPQ, Order Orchestration, Advanced Rules &amp; Pricing Exercise Guides)<br>
+  Based on Vlocity CME / Salesforce Industries documentation (EPC, CPQ, OmniStudio, Order Orchestration, Advanced Rules &amp; Pricing Exercise Guides)<br>
   © 2021–2022 Vlocity LLC / Salesforce, inc. · Created as an easy-learning guide — open in any web browser.
 </footer>
 
