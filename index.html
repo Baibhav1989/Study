@@ -1386,6 +1386,384 @@
 </div>
 </div><!-- end panel-epc -->
 
+<!-- ===================== ENTERPRISE SALES MANAGEMENT (ESM) PANEL ===================== -->
+<div id="panel-esm" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="esm">
+    <h3>Enterprise Sales Mgmt</h3>
+    <a href="#esm-overview">1. What is ESM?</a>
+    <a href="#esm-architecture">2. Architecture &amp; Licensing</a>
+    <a href="#esm-challenges">3. Business Challenges</a>
+    <a href="#esm-components">4. Components &amp; Capabilities</a>
+    <a href="#esm-product-models">5. Product Models</a>
+    <a href="#esm-quote-lifecycle">6. Quote Lifecycle</a>
+    <a href="#esm-members">7. Quote Members &amp; Groups</a>
+    <a href="#esm-bulk">8. Bulk Operations</a>
+    <a href="#esm-guided">9. Guided Journeys</a>
+    <a href="#esm-orders">10. Orders &amp; Fulfillment</a>
+    <a href="#esm-enrichment">11. Enrichment</a>
+    <a href="#esm-cpq-vs-esm">12. CPQ vs ESM Multisite</a>
+    <a href="#esm-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <!-- 1. OVERVIEW -->
+    <section id="esm-overview">
+      <h2>1. What is Enterprise Sales Management?</h2>
+      <p><strong>Enterprise Sales Management (ESM)</strong> is a Salesforce Communications Cloud solution designed to streamline B2B sales processes for communications service providers (CSPs) selling to large, multisite enterprise and government customers.</p>
+
+      <div class="tip">
+        <strong>Simple analogy</strong>
+        Standard CPQ is like ordering a single pizza with custom toppings. <strong>ESM</strong> is like catering 500 offices across the country — same menu, but you need bulk ordering, location tracking, group pricing, and coordinated delivery for each site.
+      </div>
+
+      <p>ESM extends Industries CPQ with prebuilt data models, guided workflows, product models, and templates that handle thousands of line items across multiple locations and subscribers in a single quote.</p>
+
+      <h3>What ESM Gives You</h3>
+      <ul>
+        <li><strong>Configurable UI</strong> for creating and amending quotes in a centralized location</li>
+        <li><strong>Unified transaction support</strong> for large multisite, multi-subscriber quotes</li>
+        <li><strong>Bulk uploads</strong> — import locations and subscribers via CSV/XLS</li>
+        <li><strong>Shared catalog</strong> with predefined product models (Enterprise Mobile, Business Internet, VPN)</li>
+        <li><strong>Guided flows</strong> for browsing products, configuring offers, and viewing quotes</li>
+        <li><strong>Prebuilt templates</strong> for auto-generating proposals and contracts (integrates with CLM)</li>
+        <li><strong>Order automation</strong> — submit all sub-orders at once or individually over time</li>
+      </ul>
+    </section>
+
+    <!-- 2. ARCHITECTURE & LICENSING -->
+    <section id="esm-architecture">
+      <h2>2. ESM Architecture &amp; Licensing</h2>
+      <p>ESM sits on top of Communications Cloud and integrates with multiple Salesforce Industries products.</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          ESM — Architecture Stack
+        </div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1">Enterprise Sales Management (ESM) <span>→ B2B quoting &amp; ordering layer</span></div>
+            <div class="layer layer-2">Industries CPQ + Enterprise Product Catalog (EPC) <span>→ catalog, pricing, rules</span></div>
+            <div class="layer layer-3">OmniStudio (OmniScripts, DataRaptors, IPs, FlexCards) <span>→ guided flows &amp; data</span></div>
+            <div class="layer layer-4">Communications Cloud Data Model + Sales/Service Cloud <span>→ foundation</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Licensing Tiers</h3>
+      <table class="data-table">
+        <thead><tr><th>License</th><th>Includes ESM?</th><th>Key Products</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Comms Cloud Growth</strong></td><td>No</td><td>Sales/Service Cloud, Comms Data Model, OmniStudio</td></tr>
+          <tr><td><strong>Comms Cloud Advanced</strong></td><td>Yes</td><td>Growth + CPQ, Doc Gen, ESM, MSM</td></tr>
+          <tr><td><strong>B2B BSS Suite</strong></td><td>Add-on</td><td>Order Management (B2B) + EPC</td></tr>
+          <tr><td><strong>B2C BSS Suite</strong></td><td>Add-on</td><td>Order Management (B2C) + EPC</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Key:</strong> Industries CPQ is <strong>included</strong> with the ESM license. EPC, Order Management, and CLM are separate add-ons depending on your suite.</div>
+
+      <h3>ESM Integrates With</h3>
+      <table class="data-table">
+        <thead><tr><th>Product</th><th>Integration Role</th></tr></thead>
+        <tbody>
+          <tr><td>Industries CPQ</td><td>Product configuration, pricing, cart, rules</td></tr>
+          <tr><td>Enterprise Product Catalog (EPC)</td><td>Product lifecycle, versioning, catalog management</td></tr>
+          <tr><td>Contract Lifecycle Management (CLM)</td><td>Contract generation, templates, renewal revenue</td></tr>
+          <tr><td>Industries Order Management</td><td>Decomposition, orchestration, fulfillment</td></tr>
+          <tr><td>OmniStudio</td><td>Guided journeys (OmniScripts), DataRaptors, Integration Procedures</td></tr>
+          <tr><td>Google Maps API</td><td>Address validation, location visualization on map</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. BUSINESS CHALLENGES -->
+    <section id="esm-challenges">
+      <h2>3. Business Challenges ESM Solves</h2>
+      <p>Sales teams creating quotes for large enterprises face unique challenges that standard CPQ cannot handle alone:</p>
+      <table class="data-table">
+        <thead><tr><th>Challenge</th><th>Without ESM</th><th>With ESM</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Product complexity</strong></td><td>Thousands of line items managed manually</td><td>Predefined product models, bulk edit, group configuration</td></tr>
+          <tr><td><strong>Multiple geographies</strong></td><td>Separate quotes per location, no unified view</td><td>Single quote with 60,000+ line items across locations</td></tr>
+          <tr><td><strong>Extended negotiations</strong></td><td>Slow quote amendments, lost revision history</td><td>In-line price adjustments, quote cloning, dynamic updates</td></tr>
+          <tr><td><strong>Manual data entry</strong></td><td>Typing hundreds of locations one by one</td><td>Bulk CSV/XLS upload in seconds</td></tr>
+          <tr><td><strong>Proposal generation</strong></td><td>Manual document creation, formatting errors</td><td>Prebuilt templates with auto-generation (CLM integration)</td></tr>
+          <tr><td><strong>Order splitting</strong></td><td>All-or-nothing order submission</td><td>Submit all sub-orders at once or individually over time</td></tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <strong>Real-world scenario:</strong> Infiwave (a CSP) needs to quote 500 office locations for Global Media Corp — each needing Business Internet + VPN + Mobile devices. Without ESM, this means 500 separate quotes. With ESM, it's <strong>one enterprise quote</strong> with bulk-uploaded locations, grouped by region, with shared product configuration.
+      </div>
+    </section>
+
+    <!-- 4. COMPONENTS & CAPABILITIES -->
+    <section id="esm-components">
+      <h2>4. ESM Components &amp; Capabilities</h2>
+      <p>ESM delivers four categories of industry-specific solutions:</p>
+
+      <h3>A. Business Processes</h3>
+      <table class="data-table">
+        <thead><tr><th>Process</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Quote &amp; Order Enrichment</strong></td><td>Add essential info (connection date, billing account, phone numbers) after quote creation but before fulfillment</td></tr>
+          <tr><td><strong>Service Account &amp; Sub-Order Creation</strong></td><td>Converting a quote creates a primary order + sub-orders per location/subscriber. ESM auto-creates service accounts if missing.</td></tr>
+          <tr><td><strong>Address Validation</strong></td><td>Google Maps API integration for address lookup and serviceability checks</td></tr>
+          <tr><td><strong>Location &amp; Subscriber Data Handling</strong></td><td>Bulk CSV/XLS upload, predictive address fetch, query service accounts from business account</td></tr>
+        </tbody>
+      </table>
+
+      <h3>B. Core Workflow Capabilities</h3>
+      <table class="data-table">
+        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Group &amp; Member Quoting</strong></td><td>Group customers/locations to streamline complex deals and handle bulk product requests</td></tr>
+          <tr><td><strong>Member Bulk Upload</strong></td><td>Upload hundreds of locations or subscribers from CSV/XLS in seconds</td></tr>
+          <tr><td><strong>Product Bulk Edit</strong></td><td>Modify multiple line items featuring the same product — bulk add, disconnect, change</td></tr>
+          <tr><td><strong>Quote Cloning</strong></td><td>Duplicate an existing enterprise quote and adjust for specific needs</td></tr>
+          <tr><td><strong>Map Visualization</strong></td><td>View customer locations on a Google Maps integration for geographic planning</td></tr>
+          <tr><td><strong>In-Line Price Adjustments</strong></td><td>Adjust prices directly in the cart during product configuration</td></tr>
+          <tr><td><strong>Linear Relationships</strong></td><td>Products operate independently without complex hierarchical dependencies</td></tr>
+          <tr><td><strong>Quote Summary Page</strong></td><td>Comprehensive overview — offers, discounts, linear relationships, totals</td></tr>
+        </tbody>
+      </table>
+
+      <h3>C. Product Models</h3>
+      <p>ESM provides predefined, configurable product models that CSPs can fine-tune:</p>
+      <ul>
+        <li><strong>Enterprise Mobile</strong> — device + plan bundles for enterprise employees</li>
+        <li><strong>Business Internet</strong> — broadband/fiber for office locations</li>
+        <li><strong>VPN (Virtual Private Network)</strong> — secure connectivity between sites</li>
+        <li><strong>SD-WAN, MPLS, Dedicated Internet</strong> — advanced enterprise connectivity</li>
+      </ul>
+
+      <h3>D. Templates &amp; Core Components</h3>
+      <ul>
+        <li><strong>Proposal templates</strong> — location-based and subscriber-based proposals</li>
+        <li><strong>Contract templates</strong> — prebuilt CLM integration for auto-generation</li>
+        <li><strong>Order orchestration plans</strong> — sample plans for internet and mobile fulfillment</li>
+        <li><strong>Reusable OmniStudio components</strong> — DataRaptors, Integration Procedures, Apex Classes, OmniScripts</li>
+      </ul>
+    </section>
+
+    <!-- 5. PRODUCT MODELS -->
+    <section id="esm-product-models">
+      <h2>5. Predefined Product Models</h2>
+      <p>ESM includes out-of-the-box product models in the shared catalog. These are starting points you customize for your business.</p>
+      <table class="data-table">
+        <thead><tr><th>Product Model</th><th>Typical Offers</th><th>Configuration Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Enterprise Mobile</strong></td><td>Device + Voice + Data plan</td><td>iPhone 15 Pro + Unlimited Talk &amp; Text + 50GB Data</td></tr>
+          <tr><td><strong>Business Internet</strong></td><td>Broadband / Fiber / Dedicated</td><td>1Gbps Fiber + Static IP + SLA 99.9%</td></tr>
+          <tr><td><strong>VPN</strong></td><td>Site-to-site, Remote Access</td><td>MPLS VPN connecting 200 offices with QoS</td></tr>
+          <tr><td><strong>SD-WAN</strong></td><td>Software-defined WAN overlay</td><td>Managed SD-WAN with dual ISP failover</td></tr>
+          <tr><td><strong>Unified Communications</strong></td><td>Voice + Video + Messaging</td><td>UCaaS platform with 500 seats</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>Customization:</strong> These models define the product hierarchy, attributes, and pricing structure. You extend them in EPC Product Console — adding your own attributes, rules, and pricing.</div>
+    </section>
+
+    <!-- 6. QUOTE LIFECYCLE -->
+    <section id="esm-quote-lifecycle">
+      <h2>6. ESM Quote Lifecycle</h2>
+      <p>The ESM quote-to-order lifecycle follows these stages:</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          ESM — Quote-to-Order Lifecycle
+        </div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1">1. Opportunity <span>→ Identify enterprise customer need</span></div>
+            <div class="layer layer-2">2. Create Enterprise Quote <span>→ from Account page, with or without guided journey</span></div>
+            <div class="layer layer-3">3. Add Members (Locations / Subscribers) <span>→ manual or CSV/XLS bulk upload</span></div>
+            <div class="layer layer-2">4. Group Members <span>→ organize by region, department, or custom grouping</span></div>
+            <div class="layer layer-3">5. Add &amp; Configure Products <span>→ per member, per group, or standalone</span></div>
+            <div class="layer layer-2">6. Negotiate &amp; Amend <span>→ in-line price adjustments, bulk edit, discounts</span></div>
+            <div class="layer layer-1">7. Enrich Quote <span>→ add phone numbers, connection dates, billing accounts</span></div>
+            <div class="layer layer-4">8. Create Enterprise Order <span>→ primary order + sub-orders per member</span></div>
+            <div class="layer layer-3">9. Submit Orders <span>→ all at once or partial (individual sub-orders)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. QUOTE MEMBERS & GROUPS -->
+    <section id="esm-members">
+      <h2>7. Quote Members &amp; Groups</h2>
+      <p>In ESM, both <strong>locations</strong> and <strong>subscribers</strong> are called <strong>quote members</strong>. Members are organized into <strong>quote groups</strong> for efficient product allocation.</p>
+
+      <h3>Three Ways to Add Products</h3>
+      <table class="data-table">
+        <thead><tr><th>Approach</th><th>When to Use</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Product without member/group</strong></td><td>Customer wants to order but locations/subscribers aren't defined yet</td><td>Add a new mobile phone model for centralized purchasing — no location assigned</td></tr>
+          <tr><td><strong>Product per member</strong></td><td>Each member needs different products or configurations</td><td>Different mobile models per office location, each with unique config</td></tr>
+          <tr><td><strong>Product per group</strong></td><td>Same product + config for all members in the group</td><td>Standardized mobile phone for all sales department offices worldwide</td></tr>
+        </tbody>
+      </table>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>ESM — Quote Members &amp; Groups Structure</div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1"><strong>Enterprise Quote</strong> — "Global Media Q-2025-001" <span>→ Parent container</span></div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: APAC Offices</strong> — 120 locations <span>→ Same Business Internet config</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Member: Tokyo HQ · Member: Singapore · Member: Sydney ...</div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: EMEA Offices</strong> — 200 locations <span>→ Same VPN + Internet config</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Member: London · Member: Berlin · Member: Paris ...</div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: Mobile Subscribers</strong> — 3,000 employees <span>→ Same Enterprise Mobile plan</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Subscriber: J. Smith · Subscriber: A. Chen ...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. BULK OPERATIONS -->
+    <section id="esm-bulk">
+      <h2>8. Bulk Operations</h2>
+      <p>ESM's bulk features handle the scale of enterprise deals efficiently.</p>
+
+      <h3>Bulk Upload (CSV/XLS)</h3>
+      <ol>
+        <li>Open the Enterprise Quote record</li>
+        <li>Click <strong>+ Add Locations</strong> or <strong>+ Add Subscribers</strong></li>
+        <li>Select <strong>Upload</strong> and choose a CSV or XLS file</li>
+        <li>Locations/subscribers appear on the quote automatically</li>
+      </ol>
+      <div class="warning"><strong>Avoid duplicates:</strong> Do not edit and re-upload the same file. The system does not deduplicate on re-upload.</div>
+
+      <h3>Bulk Edit</h3>
+      <p>Modify multiple line items simultaneously using the <strong>Bulk Edit</strong> feature:</p>
+      <ul>
+        <li><strong>Bulk Add</strong> — add the same product to multiple members at once</li>
+        <li><strong>Bulk Disconnect</strong> — remove a product from multiple members</li>
+        <li><strong>Bulk Change</strong> — modify attributes or configuration across line items</li>
+      </ul>
+
+      <h3>Quote Cloning</h3>
+      <p>Duplicate an existing enterprise quote to quickly create a similar proposal — adjust members, products, or pricing on the clone without affecting the original.</p>
+    </section>
+
+    <!-- 9. GUIDED JOURNEYS -->
+    <section id="esm-guided">
+      <h2>9. Guided Journeys (OmniScript Flows)</h2>
+      <p>ESM provides configurable <strong>guided journeys</strong> built with OmniScripts that walk sales reps through the quoting process step by step.</p>
+
+      <h3>Six-Step Guided Journey</h3>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>ESM — Guided Journey Steps</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Step 1</label><input value="Add Locations / Subscribers" readonly></div>
+          <div class="form-row"><label>Step 2</label><input value="Group Members" readonly></div>
+          <div class="form-row"><label>Step 3</label><input value="Browse & Select Products" readonly></div>
+          <div class="form-row"><label>Step 4</label><input value="Configure Products & Pricing" readonly></div>
+          <div class="form-row"><label>Step 5</label><input value="Apply Discounts & Adjustments" readonly></div>
+          <div class="form-row"><label>Step 6</label><input value="Review Quote Summary" readonly></div>
+        </div>
+      </div>
+      <p>When creating an enterprise quote, a dialog asks <em>"Do you want to use the guided journey?"</em> — selecting <strong>Yes</strong> launches the OmniScript flow.</p>
+      <div class="tip"><strong>Customization:</strong> Guided journeys are OmniScripts — you can modify steps, add validations, inject Integration Procedure calls, or build entirely new flows.</div>
+    </section>
+
+    <!-- 10. ORDERS & FULFILLMENT -->
+    <section id="esm-orders">
+      <h2>10. Orders &amp; Fulfillment</h2>
+      <p>Converting an enterprise quote to an order creates a <strong>primary order</strong> with <strong>sub-orders</strong> for each quote member.</p>
+
+      <h3>Order Creation Flow</h3>
+      <ol>
+        <li>Open the Enterprise Quote → click <strong>Create Enterprise Order</strong></li>
+        <li>ESM creates service accounts (if they don't exist) for each member</li>
+        <li>A <strong>primary order</strong> is created with linked <strong>sub-orders</strong> per member</li>
+        <li>Click <strong>Create Final Orders</strong> to finalize</li>
+      </ol>
+
+      <h3>Order Submission Options</h3>
+      <table class="data-table">
+        <thead><tr><th>Option</th><th>How</th><th>When to Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Complete submission</strong></td><td>Click <strong>Submit Orders</strong> on the primary order</td><td>Customer is ready for all sub-orders to be processed at once</td></tr>
+          <tr><td><strong>Partial submission</strong></td><td>Click <strong>Submit</strong> on individual sub-orders</td><td>Customer wants to roll out in phases — submit select sub-orders first</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Behind the scenes:</strong> Submitted orders flow into Industries Order Management for decomposition and orchestration — same engine as the Order Management tab in this guide.</div>
+    </section>
+
+    <!-- 11. ENRICHMENT -->
+    <section id="esm-enrichment">
+      <h2>11. Quote &amp; Order Enrichment</h2>
+      <p><strong>Enrichment</strong> is adding essential details after the quote/order is created but before fulfillment. These details may not affect pricing but are required for provisioning.</p>
+      <table class="data-table">
+        <thead><tr><th>Enrichment Data</th><th>Level</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Connection date</td><td>Group / Order</td><td>Set go-live date for all offices in a region</td></tr>
+          <tr><td>Billing account</td><td>Group / Order</td><td>Assign billing entity for the entire group</td></tr>
+          <tr><td>Phone number</td><td>Member / Order Product</td><td>Allocate specific phone numbers per subscriber</td></tr>
+          <tr><td>SIM / IMEI</td><td>Member / Order Product</td><td>Assign device identifiers before shipping</td></tr>
+          <tr><td>Service address details</td><td>Member</td><td>Floor, suite, building info for installation</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 12. CPQ vs ESM MULTISITE -->
+    <section id="esm-cpq-vs-esm">
+      <h2>12. Industries CPQ vs ESM — Multisite Comparison</h2>
+      <table class="data-table">
+        <thead><tr><th>Feature</th><th>Industries CPQ Multisite</th><th>ESM Multisite</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Quote structure</strong></td><td>Parent + child quotes (one child per location)</td><td>Single quote with quote members &amp; groups (up to 60,000 line items)</td></tr>
+          <tr><td><strong>Contract structure</strong></td><td>Contract hierarchy with child contracts</td><td>One quote, one contract for all locations/subscribers</td></tr>
+          <tr><td><strong>Grouping by</strong></td><td>Service points, premises, service accounts, custom objects</td><td>Subscribers or locations organized into quote groups</td></tr>
+          <tr><td><strong>Bulk upload</strong></td><td>Not built-in (custom implementation)</td><td>Built-in CSV/XLS upload with guided process</td></tr>
+          <tr><td><strong>Industry focus</strong></td><td>Broad — Comms, Media, Energy &amp; Utilities</td><td>Specifically B2B communications / CSPs</td></tr>
+          <tr><td><strong>Scale</strong></td><td>Moderate — parent/child architecture</td><td>High — optimized for 1,000+ line items per quote</td></tr>
+          <tr><td><strong>Product models</strong></td><td>Build from scratch in EPC</td><td>Predefined models (Mobile, Internet, VPN) + customize</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>When to choose:</strong> Use <strong>Industries CPQ Multisite</strong> for cross-industry solutions with diverse site types. Use <strong>ESM</strong> when selling telco/comms products at enterprise scale with B2B-specific workflows.</div>
+    </section>
+
+    <!-- QUICK REFERENCE -->
+    <section id="esm-ref">
+      <h2>ESM Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>ESM</td><td>Enterprise Sales Management — B2B quoting &amp; ordering for CSPs</td></tr>
+          <tr><td>Quote Member</td><td>A location or subscriber added to an enterprise quote</td></tr>
+          <tr><td>Quote Group</td><td>A set of quote members grouped for shared product configuration</td></tr>
+          <tr><td>Enterprise Quote</td><td>A single quote containing all members, groups, and products for a deal</td></tr>
+          <tr><td>Primary Order</td><td>Parent order created from an enterprise quote</td></tr>
+          <tr><td>Sub-Order</td><td>Child order per quote member, linked to the primary order</td></tr>
+          <tr><td>Service Account</td><td>Account associated with each sub-order (auto-created by ESM if missing)</td></tr>
+          <tr><td>Enrichment</td><td>Adding provisioning details (phone numbers, dates) after quote creation</td></tr>
+          <tr><td>Guided Journey</td><td>OmniScript-based step-by-step flow for the quoting process</td></tr>
+          <tr><td>Bulk Upload</td><td>Import locations/subscribers via CSV or XLS file</td></tr>
+          <tr><td>Bulk Edit</td><td>Modify multiple line items simultaneously (add, disconnect, change)</td></tr>
+          <tr><td>Linear Relationship</td><td>Products operate independently without hierarchical dependencies</td></tr>
+          <tr><td>Quote Cloning</td><td>Duplicate an existing enterprise quote for reuse</td></tr>
+          <tr><td>Product Model</td><td>Predefined catalog template (Enterprise Mobile, Business Internet, VPN)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>Trailhead Modules:</strong><br>
+        <a href="https://trailhead.salesforce.com/content/learn/modules/enterprise-sales-management-foundations" target="_blank" rel="noopener">ESM Foundations</a> ·
+        <a href="https://trailhead.salesforce.com/content/learn/modules/quotes-and-orders-with-enterprise-sales-management" target="_blank" rel="noopener">Quotes &amp; Orders with ESM</a> ·
+        <a href="https://trailhead.salesforce.com/content/learn/modules/industries-cpq-foundations" target="_blank" rel="noopener">Industries CPQ Foundations</a> ·
+        <a href="https://trailhead.salesforce.com/content/learn/modules/industries-cpq-multisite-quotes-and-orders" target="_blank" rel="noopener">CPQ Multisite Quotes &amp; Orders</a><br><br>
+        <strong>Salesforce Help:</strong><br>
+        <a href="https://help.salesforce.com/s/articleView?id=ind.comms_t_enterprise_sales_management_overview_55069.htm&type=5" target="_blank" rel="noopener">Enterprise Sales Management Overview</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-esm -->
+
 <!-- ===================== CPQ PANEL ===================== -->
 <div id="panel-cpq" class="module-panel">
 <div class="layout">
@@ -7242,384 +7620,6 @@ vlocity_cmt.VlocityBatchFramework.startScheduledJobs(
   </main>
 </div>
 </div><!-- end panel-async -->
-
-<!-- ===================== ENTERPRISE SALES MANAGEMENT (ESM) PANEL ===================== -->
-<div id="panel-esm" class="module-panel">
-<div class="layout">
-  <nav class="sidebar" data-panel="esm">
-    <h3>Enterprise Sales Mgmt</h3>
-    <a href="#esm-overview">1. What is ESM?</a>
-    <a href="#esm-architecture">2. Architecture &amp; Licensing</a>
-    <a href="#esm-challenges">3. Business Challenges</a>
-    <a href="#esm-components">4. Components &amp; Capabilities</a>
-    <a href="#esm-product-models">5. Product Models</a>
-    <a href="#esm-quote-lifecycle">6. Quote Lifecycle</a>
-    <a href="#esm-members">7. Quote Members &amp; Groups</a>
-    <a href="#esm-bulk">8. Bulk Operations</a>
-    <a href="#esm-guided">9. Guided Journeys</a>
-    <a href="#esm-orders">10. Orders &amp; Fulfillment</a>
-    <a href="#esm-enrichment">11. Enrichment</a>
-    <a href="#esm-cpq-vs-esm">12. CPQ vs ESM Multisite</a>
-    <a href="#esm-ref">Quick Reference</a>
-  </nav>
-  <main class="main">
-
-    <!-- 1. OVERVIEW -->
-    <section id="esm-overview">
-      <h2>1. What is Enterprise Sales Management?</h2>
-      <p><strong>Enterprise Sales Management (ESM)</strong> is a Salesforce Communications Cloud solution designed to streamline B2B sales processes for communications service providers (CSPs) selling to large, multisite enterprise and government customers.</p>
-
-      <div class="tip">
-        <strong>Simple analogy</strong>
-        Standard CPQ is like ordering a single pizza with custom toppings. <strong>ESM</strong> is like catering 500 offices across the country — same menu, but you need bulk ordering, location tracking, group pricing, and coordinated delivery for each site.
-      </div>
-
-      <p>ESM extends Industries CPQ with prebuilt data models, guided workflows, product models, and templates that handle thousands of line items across multiple locations and subscribers in a single quote.</p>
-
-      <h3>What ESM Gives You</h3>
-      <ul>
-        <li><strong>Configurable UI</strong> for creating and amending quotes in a centralized location</li>
-        <li><strong>Unified transaction support</strong> for large multisite, multi-subscriber quotes</li>
-        <li><strong>Bulk uploads</strong> — import locations and subscribers via CSV/XLS</li>
-        <li><strong>Shared catalog</strong> with predefined product models (Enterprise Mobile, Business Internet, VPN)</li>
-        <li><strong>Guided flows</strong> for browsing products, configuring offers, and viewing quotes</li>
-        <li><strong>Prebuilt templates</strong> for auto-generating proposals and contracts (integrates with CLM)</li>
-        <li><strong>Order automation</strong> — submit all sub-orders at once or individually over time</li>
-      </ul>
-    </section>
-
-    <!-- 2. ARCHITECTURE & LICENSING -->
-    <section id="esm-architecture">
-      <h2>2. ESM Architecture &amp; Licensing</h2>
-      <p>ESM sits on top of Communications Cloud and integrates with multiple Salesforce Industries products.</p>
-
-      <div class="ui-mock">
-        <div class="ui-mock-header">
-          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
-          ESM — Architecture Stack
-        </div>
-        <div class="ui-mock-body">
-          <div class="layers">
-            <div class="layer layer-1">Enterprise Sales Management (ESM) <span>→ B2B quoting &amp; ordering layer</span></div>
-            <div class="layer layer-2">Industries CPQ + Enterprise Product Catalog (EPC) <span>→ catalog, pricing, rules</span></div>
-            <div class="layer layer-3">OmniStudio (OmniScripts, DataRaptors, IPs, FlexCards) <span>→ guided flows &amp; data</span></div>
-            <div class="layer layer-4">Communications Cloud Data Model + Sales/Service Cloud <span>→ foundation</span></div>
-          </div>
-        </div>
-      </div>
-
-      <h3>Licensing Tiers</h3>
-      <table class="data-table">
-        <thead><tr><th>License</th><th>Includes ESM?</th><th>Key Products</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Comms Cloud Growth</strong></td><td>No</td><td>Sales/Service Cloud, Comms Data Model, OmniStudio</td></tr>
-          <tr><td><strong>Comms Cloud Advanced</strong></td><td>Yes</td><td>Growth + CPQ, Doc Gen, ESM, MSM</td></tr>
-          <tr><td><strong>B2B BSS Suite</strong></td><td>Add-on</td><td>Order Management (B2B) + EPC</td></tr>
-          <tr><td><strong>B2C BSS Suite</strong></td><td>Add-on</td><td>Order Management (B2C) + EPC</td></tr>
-        </tbody>
-      </table>
-      <div class="note"><strong>Key:</strong> Industries CPQ is <strong>included</strong> with the ESM license. EPC, Order Management, and CLM are separate add-ons depending on your suite.</div>
-
-      <h3>ESM Integrates With</h3>
-      <table class="data-table">
-        <thead><tr><th>Product</th><th>Integration Role</th></tr></thead>
-        <tbody>
-          <tr><td>Industries CPQ</td><td>Product configuration, pricing, cart, rules</td></tr>
-          <tr><td>Enterprise Product Catalog (EPC)</td><td>Product lifecycle, versioning, catalog management</td></tr>
-          <tr><td>Contract Lifecycle Management (CLM)</td><td>Contract generation, templates, renewal revenue</td></tr>
-          <tr><td>Industries Order Management</td><td>Decomposition, orchestration, fulfillment</td></tr>
-          <tr><td>OmniStudio</td><td>Guided journeys (OmniScripts), DataRaptors, Integration Procedures</td></tr>
-          <tr><td>Google Maps API</td><td>Address validation, location visualization on map</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 3. BUSINESS CHALLENGES -->
-    <section id="esm-challenges">
-      <h2>3. Business Challenges ESM Solves</h2>
-      <p>Sales teams creating quotes for large enterprises face unique challenges that standard CPQ cannot handle alone:</p>
-      <table class="data-table">
-        <thead><tr><th>Challenge</th><th>Without ESM</th><th>With ESM</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Product complexity</strong></td><td>Thousands of line items managed manually</td><td>Predefined product models, bulk edit, group configuration</td></tr>
-          <tr><td><strong>Multiple geographies</strong></td><td>Separate quotes per location, no unified view</td><td>Single quote with 60,000+ line items across locations</td></tr>
-          <tr><td><strong>Extended negotiations</strong></td><td>Slow quote amendments, lost revision history</td><td>In-line price adjustments, quote cloning, dynamic updates</td></tr>
-          <tr><td><strong>Manual data entry</strong></td><td>Typing hundreds of locations one by one</td><td>Bulk CSV/XLS upload in seconds</td></tr>
-          <tr><td><strong>Proposal generation</strong></td><td>Manual document creation, formatting errors</td><td>Prebuilt templates with auto-generation (CLM integration)</td></tr>
-          <tr><td><strong>Order splitting</strong></td><td>All-or-nothing order submission</td><td>Submit all sub-orders at once or individually over time</td></tr>
-        </tbody>
-      </table>
-
-      <div class="example-box">
-        <strong>Real-world scenario:</strong> Infiwave (a CSP) needs to quote 500 office locations for Global Media Corp — each needing Business Internet + VPN + Mobile devices. Without ESM, this means 500 separate quotes. With ESM, it's <strong>one enterprise quote</strong> with bulk-uploaded locations, grouped by region, with shared product configuration.
-      </div>
-    </section>
-
-    <!-- 4. COMPONENTS & CAPABILITIES -->
-    <section id="esm-components">
-      <h2>4. ESM Components &amp; Capabilities</h2>
-      <p>ESM delivers four categories of industry-specific solutions:</p>
-
-      <h3>A. Business Processes</h3>
-      <table class="data-table">
-        <thead><tr><th>Process</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Quote &amp; Order Enrichment</strong></td><td>Add essential info (connection date, billing account, phone numbers) after quote creation but before fulfillment</td></tr>
-          <tr><td><strong>Service Account &amp; Sub-Order Creation</strong></td><td>Converting a quote creates a primary order + sub-orders per location/subscriber. ESM auto-creates service accounts if missing.</td></tr>
-          <tr><td><strong>Address Validation</strong></td><td>Google Maps API integration for address lookup and serviceability checks</td></tr>
-          <tr><td><strong>Location &amp; Subscriber Data Handling</strong></td><td>Bulk CSV/XLS upload, predictive address fetch, query service accounts from business account</td></tr>
-        </tbody>
-      </table>
-
-      <h3>B. Core Workflow Capabilities</h3>
-      <table class="data-table">
-        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Group &amp; Member Quoting</strong></td><td>Group customers/locations to streamline complex deals and handle bulk product requests</td></tr>
-          <tr><td><strong>Member Bulk Upload</strong></td><td>Upload hundreds of locations or subscribers from CSV/XLS in seconds</td></tr>
-          <tr><td><strong>Product Bulk Edit</strong></td><td>Modify multiple line items featuring the same product — bulk add, disconnect, change</td></tr>
-          <tr><td><strong>Quote Cloning</strong></td><td>Duplicate an existing enterprise quote and adjust for specific needs</td></tr>
-          <tr><td><strong>Map Visualization</strong></td><td>View customer locations on a Google Maps integration for geographic planning</td></tr>
-          <tr><td><strong>In-Line Price Adjustments</strong></td><td>Adjust prices directly in the cart during product configuration</td></tr>
-          <tr><td><strong>Linear Relationships</strong></td><td>Products operate independently without complex hierarchical dependencies</td></tr>
-          <tr><td><strong>Quote Summary Page</strong></td><td>Comprehensive overview — offers, discounts, linear relationships, totals</td></tr>
-        </tbody>
-      </table>
-
-      <h3>C. Product Models</h3>
-      <p>ESM provides predefined, configurable product models that CSPs can fine-tune:</p>
-      <ul>
-        <li><strong>Enterprise Mobile</strong> — device + plan bundles for enterprise employees</li>
-        <li><strong>Business Internet</strong> — broadband/fiber for office locations</li>
-        <li><strong>VPN (Virtual Private Network)</strong> — secure connectivity between sites</li>
-        <li><strong>SD-WAN, MPLS, Dedicated Internet</strong> — advanced enterprise connectivity</li>
-      </ul>
-
-      <h3>D. Templates &amp; Core Components</h3>
-      <ul>
-        <li><strong>Proposal templates</strong> — location-based and subscriber-based proposals</li>
-        <li><strong>Contract templates</strong> — prebuilt CLM integration for auto-generation</li>
-        <li><strong>Order orchestration plans</strong> — sample plans for internet and mobile fulfillment</li>
-        <li><strong>Reusable OmniStudio components</strong> — DataRaptors, Integration Procedures, Apex Classes, OmniScripts</li>
-      </ul>
-    </section>
-
-    <!-- 5. PRODUCT MODELS -->
-    <section id="esm-product-models">
-      <h2>5. Predefined Product Models</h2>
-      <p>ESM includes out-of-the-box product models in the shared catalog. These are starting points you customize for your business.</p>
-      <table class="data-table">
-        <thead><tr><th>Product Model</th><th>Typical Offers</th><th>Configuration Examples</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Enterprise Mobile</strong></td><td>Device + Voice + Data plan</td><td>iPhone 15 Pro + Unlimited Talk &amp; Text + 50GB Data</td></tr>
-          <tr><td><strong>Business Internet</strong></td><td>Broadband / Fiber / Dedicated</td><td>1Gbps Fiber + Static IP + SLA 99.9%</td></tr>
-          <tr><td><strong>VPN</strong></td><td>Site-to-site, Remote Access</td><td>MPLS VPN connecting 200 offices with QoS</td></tr>
-          <tr><td><strong>SD-WAN</strong></td><td>Software-defined WAN overlay</td><td>Managed SD-WAN with dual ISP failover</td></tr>
-          <tr><td><strong>Unified Communications</strong></td><td>Voice + Video + Messaging</td><td>UCaaS platform with 500 seats</td></tr>
-        </tbody>
-      </table>
-      <div class="tip"><strong>Customization:</strong> These models define the product hierarchy, attributes, and pricing structure. You extend them in EPC Product Console — adding your own attributes, rules, and pricing.</div>
-    </section>
-
-    <!-- 6. QUOTE LIFECYCLE -->
-    <section id="esm-quote-lifecycle">
-      <h2>6. ESM Quote Lifecycle</h2>
-      <p>The ESM quote-to-order lifecycle follows these stages:</p>
-
-      <div class="ui-mock">
-        <div class="ui-mock-header">
-          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
-          ESM — Quote-to-Order Lifecycle
-        </div>
-        <div class="ui-mock-body">
-          <div class="layers">
-            <div class="layer layer-1">1. Opportunity <span>→ Identify enterprise customer need</span></div>
-            <div class="layer layer-2">2. Create Enterprise Quote <span>→ from Account page, with or without guided journey</span></div>
-            <div class="layer layer-3">3. Add Members (Locations / Subscribers) <span>→ manual or CSV/XLS bulk upload</span></div>
-            <div class="layer layer-2">4. Group Members <span>→ organize by region, department, or custom grouping</span></div>
-            <div class="layer layer-3">5. Add &amp; Configure Products <span>→ per member, per group, or standalone</span></div>
-            <div class="layer layer-2">6. Negotiate &amp; Amend <span>→ in-line price adjustments, bulk edit, discounts</span></div>
-            <div class="layer layer-1">7. Enrich Quote <span>→ add phone numbers, connection dates, billing accounts</span></div>
-            <div class="layer layer-4">8. Create Enterprise Order <span>→ primary order + sub-orders per member</span></div>
-            <div class="layer layer-3">9. Submit Orders <span>→ all at once or partial (individual sub-orders)</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. QUOTE MEMBERS & GROUPS -->
-    <section id="esm-members">
-      <h2>7. Quote Members &amp; Groups</h2>
-      <p>In ESM, both <strong>locations</strong> and <strong>subscribers</strong> are called <strong>quote members</strong>. Members are organized into <strong>quote groups</strong> for efficient product allocation.</p>
-
-      <h3>Three Ways to Add Products</h3>
-      <table class="data-table">
-        <thead><tr><th>Approach</th><th>When to Use</th><th>Example</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Product without member/group</strong></td><td>Customer wants to order but locations/subscribers aren't defined yet</td><td>Add a new mobile phone model for centralized purchasing — no location assigned</td></tr>
-          <tr><td><strong>Product per member</strong></td><td>Each member needs different products or configurations</td><td>Different mobile models per office location, each with unique config</td></tr>
-          <tr><td><strong>Product per group</strong></td><td>Same product + config for all members in the group</td><td>Standardized mobile phone for all sales department offices worldwide</td></tr>
-        </tbody>
-      </table>
-
-      <div class="ui-mock">
-        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>ESM — Quote Members &amp; Groups Structure</div>
-        <div class="ui-mock-body">
-          <div class="layers">
-            <div class="layer layer-1"><strong>Enterprise Quote</strong> — "Global Media Q-2025-001" <span>→ Parent container</span></div>
-            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: APAC Offices</strong> — 120 locations <span>→ Same Business Internet config</span></div>
-            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Member: Tokyo HQ · Member: Singapore · Member: Sydney ...</div>
-            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: EMEA Offices</strong> — 200 locations <span>→ Same VPN + Internet config</span></div>
-            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Member: London · Member: Berlin · Member: Paris ...</div>
-            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: Mobile Subscribers</strong> — 3,000 employees <span>→ Same Enterprise Mobile plan</span></div>
-            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Subscriber: J. Smith · Subscriber: A. Chen ...</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. BULK OPERATIONS -->
-    <section id="esm-bulk">
-      <h2>8. Bulk Operations</h2>
-      <p>ESM's bulk features handle the scale of enterprise deals efficiently.</p>
-
-      <h3>Bulk Upload (CSV/XLS)</h3>
-      <ol>
-        <li>Open the Enterprise Quote record</li>
-        <li>Click <strong>+ Add Locations</strong> or <strong>+ Add Subscribers</strong></li>
-        <li>Select <strong>Upload</strong> and choose a CSV or XLS file</li>
-        <li>Locations/subscribers appear on the quote automatically</li>
-      </ol>
-      <div class="warning"><strong>Avoid duplicates:</strong> Do not edit and re-upload the same file. The system does not deduplicate on re-upload.</div>
-
-      <h3>Bulk Edit</h3>
-      <p>Modify multiple line items simultaneously using the <strong>Bulk Edit</strong> feature:</p>
-      <ul>
-        <li><strong>Bulk Add</strong> — add the same product to multiple members at once</li>
-        <li><strong>Bulk Disconnect</strong> — remove a product from multiple members</li>
-        <li><strong>Bulk Change</strong> — modify attributes or configuration across line items</li>
-      </ul>
-
-      <h3>Quote Cloning</h3>
-      <p>Duplicate an existing enterprise quote to quickly create a similar proposal — adjust members, products, or pricing on the clone without affecting the original.</p>
-    </section>
-
-    <!-- 9. GUIDED JOURNEYS -->
-    <section id="esm-guided">
-      <h2>9. Guided Journeys (OmniScript Flows)</h2>
-      <p>ESM provides configurable <strong>guided journeys</strong> built with OmniScripts that walk sales reps through the quoting process step by step.</p>
-
-      <h3>Six-Step Guided Journey</h3>
-      <div class="ui-mock">
-        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>ESM — Guided Journey Steps</div>
-        <div class="ui-mock-body">
-          <div class="form-row"><label>Step 1</label><input value="Add Locations / Subscribers" readonly></div>
-          <div class="form-row"><label>Step 2</label><input value="Group Members" readonly></div>
-          <div class="form-row"><label>Step 3</label><input value="Browse & Select Products" readonly></div>
-          <div class="form-row"><label>Step 4</label><input value="Configure Products & Pricing" readonly></div>
-          <div class="form-row"><label>Step 5</label><input value="Apply Discounts & Adjustments" readonly></div>
-          <div class="form-row"><label>Step 6</label><input value="Review Quote Summary" readonly></div>
-        </div>
-      </div>
-      <p>When creating an enterprise quote, a dialog asks <em>"Do you want to use the guided journey?"</em> — selecting <strong>Yes</strong> launches the OmniScript flow.</p>
-      <div class="tip"><strong>Customization:</strong> Guided journeys are OmniScripts — you can modify steps, add validations, inject Integration Procedure calls, or build entirely new flows.</div>
-    </section>
-
-    <!-- 10. ORDERS & FULFILLMENT -->
-    <section id="esm-orders">
-      <h2>10. Orders &amp; Fulfillment</h2>
-      <p>Converting an enterprise quote to an order creates a <strong>primary order</strong> with <strong>sub-orders</strong> for each quote member.</p>
-
-      <h3>Order Creation Flow</h3>
-      <ol>
-        <li>Open the Enterprise Quote → click <strong>Create Enterprise Order</strong></li>
-        <li>ESM creates service accounts (if they don't exist) for each member</li>
-        <li>A <strong>primary order</strong> is created with linked <strong>sub-orders</strong> per member</li>
-        <li>Click <strong>Create Final Orders</strong> to finalize</li>
-      </ol>
-
-      <h3>Order Submission Options</h3>
-      <table class="data-table">
-        <thead><tr><th>Option</th><th>How</th><th>When to Use</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Complete submission</strong></td><td>Click <strong>Submit Orders</strong> on the primary order</td><td>Customer is ready for all sub-orders to be processed at once</td></tr>
-          <tr><td><strong>Partial submission</strong></td><td>Click <strong>Submit</strong> on individual sub-orders</td><td>Customer wants to roll out in phases — submit select sub-orders first</td></tr>
-        </tbody>
-      </table>
-      <div class="note"><strong>Behind the scenes:</strong> Submitted orders flow into Industries Order Management for decomposition and orchestration — same engine as the Order Management tab in this guide.</div>
-    </section>
-
-    <!-- 11. ENRICHMENT -->
-    <section id="esm-enrichment">
-      <h2>11. Quote &amp; Order Enrichment</h2>
-      <p><strong>Enrichment</strong> is adding essential details after the quote/order is created but before fulfillment. These details may not affect pricing but are required for provisioning.</p>
-      <table class="data-table">
-        <thead><tr><th>Enrichment Data</th><th>Level</th><th>Example</th></tr></thead>
-        <tbody>
-          <tr><td>Connection date</td><td>Group / Order</td><td>Set go-live date for all offices in a region</td></tr>
-          <tr><td>Billing account</td><td>Group / Order</td><td>Assign billing entity for the entire group</td></tr>
-          <tr><td>Phone number</td><td>Member / Order Product</td><td>Allocate specific phone numbers per subscriber</td></tr>
-          <tr><td>SIM / IMEI</td><td>Member / Order Product</td><td>Assign device identifiers before shipping</td></tr>
-          <tr><td>Service address details</td><td>Member</td><td>Floor, suite, building info for installation</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- 12. CPQ vs ESM MULTISITE -->
-    <section id="esm-cpq-vs-esm">
-      <h2>12. Industries CPQ vs ESM — Multisite Comparison</h2>
-      <table class="data-table">
-        <thead><tr><th>Feature</th><th>Industries CPQ Multisite</th><th>ESM Multisite</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Quote structure</strong></td><td>Parent + child quotes (one child per location)</td><td>Single quote with quote members &amp; groups (up to 60,000 line items)</td></tr>
-          <tr><td><strong>Contract structure</strong></td><td>Contract hierarchy with child contracts</td><td>One quote, one contract for all locations/subscribers</td></tr>
-          <tr><td><strong>Grouping by</strong></td><td>Service points, premises, service accounts, custom objects</td><td>Subscribers or locations organized into quote groups</td></tr>
-          <tr><td><strong>Bulk upload</strong></td><td>Not built-in (custom implementation)</td><td>Built-in CSV/XLS upload with guided process</td></tr>
-          <tr><td><strong>Industry focus</strong></td><td>Broad — Comms, Media, Energy &amp; Utilities</td><td>Specifically B2B communications / CSPs</td></tr>
-          <tr><td><strong>Scale</strong></td><td>Moderate — parent/child architecture</td><td>High — optimized for 1,000+ line items per quote</td></tr>
-          <tr><td><strong>Product models</strong></td><td>Build from scratch in EPC</td><td>Predefined models (Mobile, Internet, VPN) + customize</td></tr>
-        </tbody>
-      </table>
-      <div class="tip"><strong>When to choose:</strong> Use <strong>Industries CPQ Multisite</strong> for cross-industry solutions with diverse site types. Use <strong>ESM</strong> when selling telco/comms products at enterprise scale with B2B-specific workflows.</div>
-    </section>
-
-    <!-- QUICK REFERENCE -->
-    <section id="esm-ref">
-      <h2>ESM Quick Reference</h2>
-      <table class="data-table">
-        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
-        <tbody>
-          <tr><td>ESM</td><td>Enterprise Sales Management — B2B quoting &amp; ordering for CSPs</td></tr>
-          <tr><td>Quote Member</td><td>A location or subscriber added to an enterprise quote</td></tr>
-          <tr><td>Quote Group</td><td>A set of quote members grouped for shared product configuration</td></tr>
-          <tr><td>Enterprise Quote</td><td>A single quote containing all members, groups, and products for a deal</td></tr>
-          <tr><td>Primary Order</td><td>Parent order created from an enterprise quote</td></tr>
-          <tr><td>Sub-Order</td><td>Child order per quote member, linked to the primary order</td></tr>
-          <tr><td>Service Account</td><td>Account associated with each sub-order (auto-created by ESM if missing)</td></tr>
-          <tr><td>Enrichment</td><td>Adding provisioning details (phone numbers, dates) after quote creation</td></tr>
-          <tr><td>Guided Journey</td><td>OmniScript-based step-by-step flow for the quoting process</td></tr>
-          <tr><td>Bulk Upload</td><td>Import locations/subscribers via CSV or XLS file</td></tr>
-          <tr><td>Bulk Edit</td><td>Modify multiple line items simultaneously (add, disconnect, change)</td></tr>
-          <tr><td>Linear Relationship</td><td>Products operate independently without hierarchical dependencies</td></tr>
-          <tr><td>Quote Cloning</td><td>Duplicate an existing enterprise quote for reuse</td></tr>
-          <tr><td>Product Model</td><td>Predefined catalog template (Enterprise Mobile, Business Internet, VPN)</td></tr>
-        </tbody>
-      </table>
-
-      <div class="note">
-        <strong>Trailhead Modules:</strong><br>
-        <a href="https://trailhead.salesforce.com/content/learn/modules/enterprise-sales-management-foundations" target="_blank" rel="noopener">ESM Foundations</a> ·
-        <a href="https://trailhead.salesforce.com/content/learn/modules/quotes-and-orders-with-enterprise-sales-management" target="_blank" rel="noopener">Quotes &amp; Orders with ESM</a> ·
-        <a href="https://trailhead.salesforce.com/content/learn/modules/industries-cpq-foundations" target="_blank" rel="noopener">Industries CPQ Foundations</a> ·
-        <a href="https://trailhead.salesforce.com/content/learn/modules/industries-cpq-multisite-quotes-and-orders" target="_blank" rel="noopener">CPQ Multisite Quotes &amp; Orders</a><br><br>
-        <strong>Salesforce Help:</strong><br>
-        <a href="https://help.salesforce.com/s/articleView?id=ind.comms_t_enterprise_sales_management_overview_55069.htm&type=5" target="_blank" rel="noopener">Enterprise Sales Management Overview</a>
-      </div>
-    </section>
-
-  </main>
-</div>
-</div><!-- end panel-esm -->
 
 <footer>
   Based on Vlocity CME / Salesforce Industries documentation (EPC, CPQ, OmniStudio, Order Orchestration, Advanced Rules &amp; Pricing Exercise Guides)<br>
