@@ -593,15 +593,18 @@
   <h1>Vlocity CME Learning Hub</h1>
   <p>Simple, visual guides for EPC, CPQ, OmniStudio (OmniScripts, DataRaptors, FlexCards), Order Management, Advanced Rules, and Advanced Pricing — based on official Salesforce Industries documentation.</p>
   <span class="badge">Communications, Media &amp; Energy · Salesforce Industries</span>
+  <a href="https://developer.salesforce.com/free-trials/comparison/communications-cloud?utm_source=chatgpt.com" target="_blank" rel="noopener" style="display:inline-block;margin-top:1rem;padding:0.6rem 1.5rem;background:#fff;color:var(--primary-dark);font-weight:700;border-radius:8px;text-decoration:none;font-size:0.95rem;transition:background 0.2s,transform 0.2s;" onmouseover="this.style.background='#e0f0ff';this.style.transform='scale(1.03)'" onmouseout="this.style.background='#fff';this.style.transform='scale(1)'">Create Communications Cloud Demo Org</a>
 </header>
 
 <nav class="module-tabs" role="tablist">
   <button class="module-tab active" data-panel="epc" role="tab">📦 EPC</button>
+  <button class="module-tab" data-panel="esm" role="tab">🏢 ESM</button>
   <button class="module-tab" data-panel="cpq" role="tab">🛒 CPQ &amp; APIs</button>
   <button class="module-tab" data-panel="omnistudio" role="tab">⚡ OmniStudio</button>
   <button class="module-tab" data-panel="om" role="tab">⚙️ Order Management</button>
   <button class="module-tab" data-panel="rules" role="tab">📐 Advanced Rules</button>
   <button class="module-tab" data-panel="pricing" role="tab">💰 Advanced Pricing</button>
+  <button class="module-tab" data-panel="async" role="tab">🔄 Async Processes</button>
 </nav>
 
 <div id="panel-epc" class="module-panel active">
@@ -1372,6 +1375,11 @@
           <tr><td>Attribute Rule</td><td>Configuration rule — what options appear</td></tr>
         </tbody>
       </table>
+      <div class="note">
+        <strong>Source PDF (click to open):</strong><br>
+        <a href="CME_EPC_PDF-en(Vlocity).pdf" target="_blank" rel="noopener">CME_EPC_PDF-en(Vlocity).pdf</a> ·
+        <a href="Guided Selling Exercise Guide.pdf" target="_blank" rel="noopener">Guided Selling Exercise Guide.pdf</a>
+      </div>
     </section>
 
   </main>
@@ -3239,6 +3247,11 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
           <tr><td>Load Margin Ranges</td><td>Pricing plan step that validates margin bounds via calculation procedure</td></tr>
         </tbody>
       </table>
+      <div class="note">
+        <strong>Source PDF (click to open):</strong><br>
+        <a href="CME_CPQ_PDF-en.pdf" target="_blank" rel="noopener">CME_CPQ_PDF-en.pdf</a> ·
+        <a href="Pricing Exercise Guide.pdf" target="_blank" rel="noopener">Pricing Exercise Guide.pdf</a>
+      </div>
     </section>
 
   </main>
@@ -3767,7 +3780,11 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
           <tr><td>@AttributeCode</td><td>DataRaptor formula reference to profile attribute</td></tr>
         </tbody>
       </table>
-      <p class="note"><strong>Documentation source:</strong> <code>vlocity-omnistudio-documentation.pdf</code> — OmniScript Data &amp; External Integrations, DataRaptor guides, FlexCards Actions, Integration Procedure Actions, Formulas (pp. 27–40, 439–440, 1038–1175, 1294–1304, 1804–1848, 1902–1922, 2015–2016).</p>
+      <div class="note">
+        <strong>Source PDF (click to open):</strong><br>
+        <a href="vlocity-omnistudio-documentation.pdf" target="_blank" rel="noopener">vlocity-omnistudio-documentation.pdf</a>
+        <br><em>Pages: 27–40, 439–440, 1038–1175, 1294–1304, 1804–1848, 1902–1922, 2015–2016</em>
+      </div>
     </section>
 
   </main>
@@ -5782,7 +5799,11 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
         </tbody>
       </table>
 
-      <p class="note"><strong>Source:</strong> Order Orchestration EG v1.0 (3).pdf — Salesforce Industries Order Management Orchestration Exercise Guide (Spring &apos;22 / 2022).</p>
+      <div class="note">
+        <strong>Source PDF (click to open):</strong><br>
+        <a href="Order Orchestration EG v1.0 (3).pdf" target="_blank" rel="noopener">Order Orchestration EG v1.0 (3).pdf</a>
+        <br><em>Salesforce Industries Order Management Orchestration Exercise Guide (Spring '22 / 2022)</em>
+      </div>
     </section>
 
   </main>
@@ -5978,6 +5999,10 @@ vlocity_cmt.OdinService.notify(new List&lt;Object&gt; {
           <tr><td>Action Parameters</td><td>JSON defining attribute constrain/include/exclude actions</td></tr>
         </tbody>
       </table>
+      <div class="note">
+        <strong>Source PDF (click to open):</strong><br>
+        <a href="Advanced Rules Exercise Guide.pdf" target="_blank" rel="noopener">Advanced Rules Exercise Guide.pdf</a>
+      </div>
     </section>
 
   </main>
@@ -6175,11 +6200,1426 @@ vlocity_cmt.VOIInvoker.getInstance()
           <tr><td>CpqAppHandlerHook</td><td>Custom logic injection point for CPQ APIs</td></tr>
         </tbody>
       </table>
+      <div class="note">
+        <strong>Source PDF (click to open):</strong><br>
+        <a href="Advanced Pricing Exercise Guide.pdf" target="_blank" rel="noopener">Advanced Pricing Exercise Guide.pdf</a> ·
+        <a href="Pricing Exercise Guide.pdf" target="_blank" rel="noopener">Pricing Exercise Guide.pdf</a>
+      </div>
     </section>
 
   </main>
 </div>
 </div><!-- end panel-pricing -->
+
+<!-- ===================== ASYNC PROCESSES PANEL ===================== -->
+<div id="panel-async" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="async">
+    <h3>Async Processes</h3>
+    <a href="#async-overview">1. Overview</a>
+    <a href="#async-create">2. Create Processes</a>
+    <a href="#async-get-status">3. Get Status</a>
+    <a href="#async-delete">4. Delete Processes</a>
+    <a href="#async-ip-status">5. IP Custom Status &amp; Failures</a>
+    <a href="#async-batch-framework">6. Batch Framework</a>
+    <a href="#async-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <!-- 1. ASYNC OVERVIEW -->
+    <section id="async-overview">
+      <h2>1. Vlocity Async Engine Overview</h2>
+      <p>The <strong>Vlocity Async Engine</strong> enables long-running processes to execute in the background without hitting Salesforce governor limits. Instead of processing everything in a single synchronous transaction, the engine queues work and processes it asynchronously — ideal for bulk operations, complex Integration Procedures, and multi-step order fulfillment.</p>
+
+      <div class="tip">
+        <strong>Simple analogy</strong>
+        Synchronous = ordering at a counter and waiting while they make your food. <strong>Async</strong> = placing your order via an app, getting a ticket number, and checking back when it's ready (or getting notified).
+      </div>
+
+      <h3>When to Use Async Processing</h3>
+      <table class="data-table">
+        <thead><tr><th>Scenario</th><th>Why Async?</th></tr></thead>
+        <tbody>
+          <tr><td>Bulk record processing (hundreds/thousands)</td><td>Avoids CPU &amp; SOQL governor limits</td></tr>
+          <tr><td>Long-running Integration Procedures</td><td>Prevents timeout errors on complex logic</td></tr>
+          <tr><td>Chained IP calls (IP calling another IP per record)</td><td>Each iteration gets its own transaction context</td></tr>
+          <tr><td>EPC maintenance jobs (Compile, Cache)</td><td>Large catalogs require hours of processing</td></tr>
+          <tr><td>Order decomposition / orchestration callouts</td><td>External system responses may be slow</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Async Architecture</h3>
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Vlocity Async Engine — High-Level Flow
+        </div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1">1. Caller (OmniScript / Apex / REST) <span>→ triggers async process</span></div>
+            <div class="layer layer-2">2. Async Engine creates Async Process record <span>→ returns Process ID</span></div>
+            <div class="layer layer-3">3. Background execution (Queueable / Batch) <span>→ processes work items</span></div>
+            <div class="layer layer-4">4. Status tracking via Async Process &amp; Jobs <span>→ Completed / Failed / In Progress</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Key Objects</h3>
+      <table class="data-table">
+        <thead><tr><th>Object</th><th>API Name</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Async Process</strong></td><td><code>vlocity_cmt__AsyncProcess__c</code></td><td>Parent record — tracks the overall process (status, type, start/end time)</td></tr>
+          <tr><td><strong>Async Process Step</strong></td><td><code>vlocity_cmt__AsyncProcessStep__c</code></td><td>Child of Async Process — one logical step (e.g., "Compile Product Hierarchy")</td></tr>
+          <tr><td><strong>Async Process Job</strong></td><td><code>vlocity_cmt__AsyncProcessJob__c</code></td><td>Child of Step — individual batch/unit of work with its own status &amp; error message</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>Documentation:</strong>
+        <a href="https://help.salesforce.com/s/articleView?id=ind.v_dev_async_engine_create_processes.htm&type=5" target="_blank" rel="noopener">Create Processes</a> ·
+        <a href="https://help.salesforce.com/s/articleView?id=ind.v_dev_async_engine_get_status_processes.htm&type=5" target="_blank" rel="noopener">Get Status</a> ·
+        <a href="https://help.salesforce.com/s/articleView?id=ind.v_dev_async_engine_delete_processes.htm&type=5" target="_blank" rel="noopener">Delete Processes</a>
+      </div>
+    </section>
+
+    <!-- 2. CREATE ASYNC PROCESSES -->
+    <section id="async-create">
+      <h2>2. Create Async Processes</h2>
+      <p>The <strong>Create Async Process</strong> API starts a new background process. You can invoke it from an Integration Procedure using the <code>VOIAsyncProcess</code> remote class, from Apex, or via the REST API.</p>
+
+      <h3>Method A — From an Integration Procedure (Remote Action)</h3>
+      <table class="data-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Remote Class</td><td><code>VOIAsyncProcess</code></td></tr>
+          <tr><td>Remote Method</td><td><code>startAsyncProcess</code></td></tr>
+        </tbody>
+      </table>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Integration Procedure — Remote Action Step</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Element Type</label><input value="Remote Action" readonly></div>
+          <div class="form-row"><label>Remote Class</label><input value="VOIAsyncProcess" readonly></div>
+          <div class="form-row"><label>Remote Method</label><input value="startAsyncProcess" readonly></div>
+          <div class="form-row"><label>Input Map</label><input value="{ processName, processType, inputList, batchSize... }" readonly></div>
+        </div>
+      </div>
+
+      <h3>Request Parameters (Full Reference)</h3>
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th><th>Example Value</th></tr></thead>
+        <tbody>
+          <tr><td><code>processName</code></td><td>String</td><td>Yes</td><td>The IP key (<code>Type_SubType</code>) or the Apex class + method (<code>ClassName.methodName</code>) to execute asynchronously</td><td><code>"OrderProvisioning_ProcessOrder"</code></td></tr>
+          <tr><td><code>processType</code></td><td>String</td><td>Yes</td><td>Determines which engine runs the work. Must be one of: <code>IntegrationProcedure</code>, <code>OpenInterface</code></td><td><code>"IntegrationProcedure"</code></td></tr>
+          <tr><td><code>inputList</code></td><td>List&lt;Object&gt;</td><td>Yes</td><td>Array of JSON objects — each object is passed as input to one IP/OI invocation. If you have 50 items and <code>batchSize=10</code>, the engine creates 5 batches of 10 items each.</td><td>See examples below</td></tr>
+          <tr><td><code>batchSize</code></td><td>Integer</td><td>No</td><td>Number of items from <code>inputList</code> to process per batch execution. Lower = safer for governor limits; higher = fewer Apex jobs.</td><td><code>10</code></td></tr>
+          <tr><td><code>isInputAsList</code></td><td>Boolean</td><td>No</td><td>When <code>true</code>, the entire batch chunk is passed as one list to a single IP call. When <code>false</code> (default), each item in the chunk triggers its own IP call.</td><td><code>true</code></td></tr>
+          <tr><td><code>chainable</code></td><td>Boolean</td><td>No</td><td>When <code>true</code>, batches run sequentially (batch 2 starts only after batch 1 finishes). When <code>false</code> (default), batches may run in parallel.</td><td><code>true</code></td></tr>
+          <tr><td><code>contextId</code></td><td>String</td><td>No</td><td>Optional Salesforce record Id to associate the async process with (e.g., an Order Id). Stored on the Async Process record for tracking.</td><td><code>"8014J000000PC2n"</code></td></tr>
+          <tr><td><code>processLabel</code></td><td>String</td><td>No</td><td>A human-readable label for this async process (appears on the Async Process record name)</td><td><code>"Bulk Order Provisioning"</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Official Request Payload — Create Async Process</h3>
+      <p>Below is the <strong>standard pattern</strong> for the Create Async Process request. This structure supports multi-step processing with different execution types per step.</p>
+
+      <div class="code-block"><span class="cmt">// CREATE ASYNC PROCESS — Standard Request Payload</span>
+{
+    "<span class="str">referenceId</span>": "12324",
+    "<span class="str">asyncProcessName</span>": "Bulk CPQ",
+    "<span class="str">itemsToProcessList</span>": [
+        "Id",
+        "Value",
+        { "key": "value" },
+        "AnyItem"
+    ],
+    "<span class="str">additionalData</span>": {
+        "key1": "Value1",
+        "key2": ["Value2", "Value3"],
+        "AnyData": { "key4": "Value4" }
+    },
+    "<span class="str">asyncProcessSteps</span>": [
+        {
+            "<span class="str">stepName</span>": "Validate",
+            "<span class="str">asyncJobDetails</span>": {
+                "<span class="str">startProcess</span>": {
+                    "type": "Integration Procedure",
+                    "name": "Get_OrderDetails",
+                    "asyncJobNumberOfRetriesOnFail": 1
+                },
+                "<span class="str">executeProcess</span>": {
+                    "type": "Callable",
+                    "name": "ApexClassName",
+                    "action": "actionName",
+                    "itemsToProcessPerAsyncJob": 2,
+                    "executeAsyncJobsInSequence": false,
+                    "asyncJobNumberOfRetriesOnFail": 3
+                },
+                "<span class="str">finishProcess</span>": {
+                    "type": "VIP",
+                    "name": "Update_OrderDetail",
+                    "asyncJobNumberOfRetriesOnFail": 0
+                }
+            }
+        },
+        {
+            "<span class="str">stepName</span>": "Price",
+            "<span class="str">asyncJobDetails</span>": {
+                "<span class="str">executeProcess</span>": {
+                    "type": "Vlocity Open Interface",
+                    "name": "CpqApp",
+                    "action": "price",
+                    "itemsToProcessPerAsyncJob": 3,
+                    "executeAsyncJobsInSequence": true
+                },
+                "<span class="str">finishProcess</span>": {
+                    "type": "Integration Procedure",
+                    "name": "Update_OrderDetail"
+                }
+            }
+        }
+    ]
+}</div>
+
+      <h4>Payload Breakdown — Top-Level Fields</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>referenceId</code></td><td>String</td><td>Yes</td><td>Your unique external identifier for this process. Used to query status later. Can be any string meaningful to the caller (e.g., Order Id, batch run Id).</td></tr>
+          <tr><td><code>asyncProcessName</code></td><td>String</td><td>Yes</td><td>Human-readable label for the process. Stored on the Async Process record for easy identification in list views (e.g., <code>"Bulk CPQ"</code>, <code>"Monthly Billing Run"</code>).</td></tr>
+          <tr><td><code>itemsToProcessList</code></td><td>List&lt;Any&gt;</td><td>Yes</td><td>The actual items to process. Each entry is distributed across the async jobs within each step. Items can be simple strings, Ids, or complex JSON objects — the engine passes them as-is to your IP/Apex.</td></tr>
+          <tr><td><code>additionalData</code></td><td>Object</td><td>No</td><td>Arbitrary key-value data that is passed to every step and every job. Use it for shared context like configuration flags, timestamps, or environment info that all steps need.</td></tr>
+          <tr><td><code>asyncProcessSteps</code></td><td>List&lt;Step&gt;</td><td>Yes</td><td>Ordered array of processing steps. Steps execute sequentially (Step 0 completes before Step 1 begins). Each step can have its own start/execute/finish lifecycle.</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Payload Breakdown — <code>asyncProcessSteps[n]</code></h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>stepName</code></td><td>String</td><td>Yes</td><td>Name of this step (e.g., <code>"Validate"</code>, <code>"Price"</code>, <code>"Submit"</code>). Appears on the Async Process Step record.</td></tr>
+          <tr><td><code>asyncJobDetails</code></td><td>Object</td><td>Yes</td><td>Defines the three lifecycle phases of this step: <code>startProcess</code>, <code>executeProcess</code>, and <code>finishProcess</code>.</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Payload Breakdown — <code>asyncJobDetails</code> Lifecycle Phases</h4>
+      <p>Each step has up to <strong>three phases</strong> that mirror the Apex <code>Database.Batchable</code> pattern:</p>
+      <table class="data-table">
+        <thead><tr><th>Phase</th><th>Required</th><th>When It Runs</th><th>Use For</th></tr></thead>
+        <tbody>
+          <tr><td><code>startProcess</code></td><td>No</td><td>Once, before any items are processed</td><td>Setup/initialization — e.g., fetch order details, lock records, validate prerequisites</td></tr>
+          <tr><td><code>executeProcess</code></td><td>Yes</td><td>Once per batch of items (split by <code>itemsToProcessPerAsyncJob</code>)</td><td>The main work — e.g., validate, price, provision each batch of items</td></tr>
+          <tr><td><code>finishProcess</code></td><td>No</td><td>Once, after all items are processed</td><td>Cleanup/finalization — e.g., update order status, send notifications, aggregate results</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Payload Breakdown — Process Definition Fields</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>type</code></td><td>String</td><td>Yes</td><td>Execution engine to use. Values: <code>"Integration Procedure"</code>, <code>"VIP"</code> (same as IP), <code>"Callable"</code> (Apex Callable interface), <code>"Vlocity Open Interface"</code></td></tr>
+          <tr><td><code>name</code></td><td>String</td><td>Yes</td><td>The target to invoke. For IPs: <code>"Type_SubType"</code>. For Callable/OI: Apex class name (e.g., <code>"CpqApp"</code>)</td></tr>
+          <tr><td><code>action</code></td><td>String</td><td>No*</td><td>The specific method/action to call on the class. Required for Callable and Vlocity Open Interface types (e.g., <code>"price"</code>, <code>"actionName"</code>). Not needed for IP/VIP types.</td></tr>
+          <tr><td><code>itemsToProcessPerAsyncJob</code></td><td>Integer</td><td>No</td><td>Batch size — how many items from <code>itemsToProcessList</code> to pass to each job execution. If you have 6 items and set this to 2, the engine creates 3 jobs.</td></tr>
+          <tr><td><code>executeAsyncJobsInSequence</code></td><td>Boolean</td><td>No</td><td><code>true</code> = jobs within this step run one after another. <code>false</code> = jobs may run in parallel. Use sequential when jobs have dependencies on each other.</td></tr>
+          <tr><td><code>asyncJobNumberOfRetriesOnFail</code></td><td>Integer</td><td>No</td><td>How many times to retry a failed job before marking it as permanently failed. <code>0</code> = no retries, <code>3</code> = retry up to 3 times.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <strong>Walk-through of the example payload above:</strong>
+        <ol>
+          <li><strong>Step "Validate"</strong>: First runs <code>Get_OrderDetails</code> IP once (startProcess, 1 retry). Then runs the <code>ApexClassName.actionName</code> Callable for batches of 2 items in parallel (executeProcess, 3 retries). Finally runs <code>Update_OrderDetail</code> VIP once (finishProcess, 0 retries).</li>
+          <li><strong>Step "Price"</strong>: No startProcess. Runs <code>CpqApp.price</code> Open Interface for batches of 3 items sequentially (executeProcess). Then runs <code>Update_OrderDetail</code> IP once (finishProcess).</li>
+        </ol>
+      </div>
+
+      <h3>Official Response — Create Async Process</h3>
+      <div class="code-block"><span class="cmt">// CREATE ASYNC PROCESS — Response (HTTP 202 Accepted)</span>
+{
+    "<span class="str">code</span>": 202,
+    "<span class="str">statusMessage</span>": "Job accepted",
+    "<span class="str">technicalMessage</span>": null,
+    "<span class="str">referenceId</span>": "12324",
+    "<span class="str">asyncProcessName</span>": "Bulk CPQ",
+    "<span class="str">asyncProcessId</span>": "9876543"
+}</div>
+
+      <h4>Response Field Breakdown</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>code</code></td><td>Integer</td><td>HTTP-style status code. <code>202</code> = Accepted (process is queued). Other codes indicate errors at submission time.</td></tr>
+          <tr><td><code>statusMessage</code></td><td>String</td><td>Human-readable confirmation: <code>"Job accepted"</code>, or an error description if submission failed.</td></tr>
+          <tr><td><code>technicalMessage</code></td><td>String / null</td><td><code>null</code> on success. Contains a technical error detail (stack trace, validation message) if the process could not be created.</td></tr>
+          <tr><td><code>referenceId</code></td><td>String</td><td>Echoed back from your request — your external tracking identifier.</td></tr>
+          <tr><td><code>asyncProcessName</code></td><td>String</td><td>Echoed back — the process name you supplied.</td></tr>
+          <tr><td><code>asyncProcessId</code></td><td>String</td><td>The engine-generated unique Id for this async process. <strong>Save this</strong> — you need it (or the <code>referenceId</code>) to poll status later.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>Key point:</strong> <code>202</code> means the job is <strong>accepted and queued</strong>, not completed. You must call the Get Status API to track progress.</div>
+
+      <hr style="margin:2.5rem 0; border:none; border-top:2px dashed var(--border);">
+      <h3>Additional Examples — Simpler Patterns</h3>
+
+      <h3>Example 1 — IP Remote Action: Bulk Process Orders</h3>
+      <p>An IP calls another IP asynchronously for each order in a list:</p>
+      <div class="code-block"><span class="cmt">// Input JSON passed to the Remote Action step (VOIAsyncProcess.startAsyncProcess)</span>
+{
+    "<span class="str">processName</span>": "OrderProvisioning_ProcessOrder",
+    "<span class="str">processType</span>": "IntegrationProcedure",
+    "<span class="str">batchSize</span>": 10,
+    "<span class="str">isInputAsList</span>": true,
+    "<span class="str">chainable</span>": false,
+    "<span class="str">contextId</span>": "8014J000000PC2nEAG",
+    "<span class="str">processLabel</span>": "Bulk Order Provisioning - June 2025",
+    "<span class="str">inputList</span>": [
+        {
+            "orderId": "8014J000000PC2nEAG",
+            "accountId": "0011U00000W6H9pEAF",
+            "action": "Activate",
+            "serviceType": "Broadband"
+        },
+        {
+            "orderId": "8014J000000QD3mEAG",
+            "accountId": "0011U00000X7K2qEAF",
+            "action": "Activate",
+            "serviceType": "Mobile"
+        },
+        {
+            "orderId": "8014J000000RE4nEAG",
+            "accountId": "0011U00000Y8L3rEAF",
+            "action": "Modify",
+            "serviceType": "IPTV"
+        }
+    ]
+}</div>
+
+      <h3>Example 2 — IP Remote Action: Generate Invoices per Account</h3>
+      <div class="code-block"><span class="cmt">// Each item in inputList = one account to invoice</span>
+{
+    "<span class="str">processName</span>": "Billing_GenerateInvoice",
+    "<span class="str">processType</span>": "IntegrationProcedure",
+    "<span class="str">batchSize</span>": 5,
+    "<span class="str">isInputAsList</span>": false,
+    "<span class="str">chainable</span>": true,
+    "<span class="str">processLabel</span>": "Monthly Invoice Run - June 2025",
+    "<span class="str">inputList</span>": [
+        { "accountId": "0011U00000W6H9p", "billingCycle": "2025-06", "currency": "USD" },
+        { "accountId": "0011U00000X7K2q", "billingCycle": "2025-06", "currency": "USD" },
+        { "accountId": "0011U00000Y8L3r", "billingCycle": "2025-06", "currency": "EUR" },
+        { "accountId": "0011U00000Z9M4s", "billingCycle": "2025-06", "currency": "GBP" }
+    ]
+}</div>
+
+      <h3>Example 3 — Open Interface: Run Custom Apex Class</h3>
+      <div class="code-block"><span class="cmt">// processType = "OpenInterface" runs a VlocityOpenInterface Apex class</span>
+{
+    "<span class="str">processName</span>": "CustomOrderValidator.validateOrders",
+    "<span class="str">processType</span>": "OpenInterface",
+    "<span class="str">batchSize</span>": 20,
+    "<span class="str">isInputAsList</span>": true,
+    "<span class="str">chainable</span>": false,
+    "<span class="str">inputList</span>": [
+        { "orderId": "8014J000000PC2n", "validationType": "Full" },
+        { "orderId": "8014J000000QD3m", "validationType": "Full" }
+    ]
+}</div>
+
+      <h3>Response — What You Get Back</h3>
+      <table class="data-table">
+        <thead><tr><th>Response Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>asyncProcessId</code></td><td>String</td><td>The Id of the created <code>AsyncProcess__c</code> record — use this to poll status</td></tr>
+          <tr><td><code>jobId</code></td><td>String</td><td>The Salesforce <code>AsyncApexJob</code> Id of the batch job</td></tr>
+          <tr><td><code>status</code></td><td>String</td><td>Initial status, typically <code>"Queued"</code></td></tr>
+        </tbody>
+      </table>
+      <div class="code-block"><span class="cmt">// Example success response</span>
+{
+    "<span class="str">asyncProcessId</span>": "a1Q5g000000TmnaEAC",
+    "<span class="str">jobId</span>": "7075g000009PkDzAAK",
+    "<span class="str">status</span>": "Queued",
+    "<span class="str">message</span>": "Async process created successfully. 3 items queued in 1 batch."
+}</div>
+
+      <h3>Method B — From Apex (Full Example)</h3>
+      <div class="code-block"><span class="cmt">// Bulk validate accounts using an IP batch job</span>
+List&lt;Object&gt; inputRecords = new List&lt;Object&gt;();
+
+<span class="cmt">// Build the input list — one map per account to validate</span>
+for (Account acc : [SELECT Id, BillingStreet FROM Account WHERE BillingStreet = null LIMIT 200]) {
+    inputRecords.add(new Map&lt;String,Object&gt;{
+        'accountId' =&gt; acc.Id,
+        'validationType' =&gt; 'BillingAddress'
+    });
+}
+
+Map&lt;String,Object&gt; options = new Map&lt;String,Object&gt;{
+    'isInputAsList' =&gt; true,
+    'batchSize' =&gt; 20
+};
+
+vlocity_cmt.VlocityBatchFramework.startIntegrationProcedureBatch(
+    '<span class="str">AccountValidation_ValidateBillingAddress</span>',
+    inputRecords,
+    options
+);</div>
+
+      <h3>Method C — Via REST API (Full Example)</h3>
+      <div class="code-block"><span class="cmt">// POST — Submit an order asynchronously via REST</span>
+POST /services/apexrest/vlocity_cmt/v1/integrationprocedure/<span class="str">OrderSubmit_AsyncSubmitOrder</span>/
+
+Authorization: Bearer {access_token}
+Content-Type: application/json
+
+{
+    "orderId": "8014J000000PC2n",
+    "mode": "Async",
+    "options": {
+        "queueableChainable": true
+    }
+}</div>
+
+      <div class="code-block"><span class="cmt">// Example success response from REST</span>
+{
+    "<span class="str">IPResult</span>": {
+        "asyncProcessId": "a1Q5g000000TmnaEAC",
+        "jobId": "7075g000009PkDzAAK",
+        "statusCode": 305,
+        "statusMessage": "Submission process for order 8014J000000PC2n is scheduled. Follow progress in Job Id 7075g000009PkDzAAK"
+    }
+}</div>
+      <div class="tip"><strong>Namespace note:</strong> Replace <code>vlocity_cmt</code> with your org's namespace — <code>vlocity_ins</code> (Insurance), <code>omnistudio</code> (unlocked package), etc.</div>
+    </section>
+
+    <!-- 3. GET STATUS OF ASYNC PROCESSES -->
+    <section id="async-get-status">
+      <h2>3. Get Status of Async Processes</h2>
+      <p>After creating an async process, you need to track whether it completed, failed, or is still running. The Async Engine records status on three levels: <strong>Process → Step → Job</strong>. You can poll status via SOQL, Apex, REST, or the Salesforce UI.</p>
+
+      <h3>Status Hierarchy</h3>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Async Process — Status Drill-Down</div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1"><strong>Async Process</strong> — Overall Status: Completed / Failed / In Progress <span>→ Parent Record</span></div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Async Process Step</strong> — Step Status: Completed / Failed <span>→ e.g., "Compile Hierarchy"</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ <strong>Async Process Job</strong> — Job Status + Technical Message <span>→ Individual batch result</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Status Values</h3>
+      <table class="data-table">
+        <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>Queued</code></td><td>Process is waiting to be picked up</td></tr>
+          <tr><td><code>In Progress</code></td><td>Currently executing</td></tr>
+          <tr><td><code>Completed</code></td><td>All steps/jobs finished successfully</td></tr>
+          <tr><td><code>Failed</code></td><td>One or more jobs encountered errors</td></tr>
+          <tr><td><code>Aborted</code></td><td>Process was manually cancelled</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Request Parameters for Status Queries</h3>
+      <p>Regardless of which method you use, you need at least one of these identifiers:</p>
+      <table class="data-table">
+        <thead><tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th><th>Where to Get It</th></tr></thead>
+        <tbody>
+          <tr><td><code>asyncProcessId</code></td><td>String (Id)</td><td>Yes*</td><td>The <code>AsyncProcess__c</code> record Id returned when the process was created</td><td>Response from <code>startAsyncProcess</code></td></tr>
+          <tr><td><code>jobId</code></td><td>String (Id)</td><td>Yes*</td><td>The <code>AsyncApexJob</code> Id — the Salesforce platform-level batch job Id</td><td>Response from <code>startAsyncProcess</code> or <code>startIntegrationProcedureBatch</code></td></tr>
+          <tr><td><code>methodName</code></td><td>String</td><td>Yes (Apex)</td><td>For the TelcoAdminConsoleController approach: always <code>"refreshBatchJobLists"</code></td><td>Fixed value</td></tr>
+        </tbody>
+      </table>
+      <p><em>* You need at least one of <code>asyncProcessId</code> or <code>jobId</code> to query status.</em></p>
+
+      <h3>AsyncProcess__c Fields Returned</h3>
+      <table class="data-table">
+        <thead><tr><th>Field API Name</th><th>Label</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>vlocity_cmt__Status__c</code></td><td>Status</td><td>Picklist</td><td>Queued / In Progress / Completed / Failed / Aborted</td></tr>
+          <tr><td><code>vlocity_cmt__StatusCode__c</code></td><td>Status Code</td><td>Number</td><td>Numeric status code (200 = success, 400/500 = error)</td></tr>
+          <tr><td><code>vlocity_cmt__StatusMessage__c</code></td><td>Status Message</td><td>Text</td><td>Human-readable description of the outcome</td></tr>
+          <tr><td><code>vlocity_cmt__ProcessType__c</code></td><td>Process Type</td><td>Text</td><td>IntegrationProcedure / OpenInterface</td></tr>
+          <tr><td><code>vlocity_cmt__ProcessName__c</code></td><td>Process Name</td><td>Text</td><td>The IP key or class.method that was executed</td></tr>
+          <tr><td><code>vlocity_cmt__StartDateTime__c</code></td><td>Start Date/Time</td><td>DateTime</td><td>When the process started executing</td></tr>
+          <tr><td><code>vlocity_cmt__EndDateTime__c</code></td><td>End Date/Time</td><td>DateTime</td><td>When the process finished (null if still running)</td></tr>
+          <tr><td><code>vlocity_cmt__TotalItems__c</code></td><td>Total Items</td><td>Number</td><td>Total items in <code>inputList</code></td></tr>
+          <tr><td><code>vlocity_cmt__CompletedItems__c</code></td><td>Completed Items</td><td>Number</td><td>Items successfully processed so far</td></tr>
+          <tr><td><code>vlocity_cmt__FailedItems__c</code></td><td>Failed Items</td><td>Number</td><td>Items that encountered errors</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Method A — SOQL Query (with Example Results)</h3>
+      <div class="code-block"><span class="cmt">// Query Async Process — get overall status</span>
+SELECT Id, Name,
+       vlocity_cmt__Status__c,
+       vlocity_cmt__StatusCode__c,
+       vlocity_cmt__StatusMessage__c,
+       vlocity_cmt__ProcessType__c,
+       vlocity_cmt__ProcessName__c,
+       vlocity_cmt__StartDateTime__c,
+       vlocity_cmt__EndDateTime__c,
+       vlocity_cmt__TotalItems__c,
+       vlocity_cmt__CompletedItems__c,
+       vlocity_cmt__FailedItems__c
+FROM vlocity_cmt__AsyncProcess__c
+WHERE Id = '<span class="str">a1Q5g000000TmnaEAC</span>'</div>
+
+      <div class="code-block"><span class="cmt">// Example SOQL result — Completed successfully</span>
+{
+    "Id": "a1Q5g000000TmnaEAC",
+    "Name": "AP-00125",
+    "<span class="str">vlocity_cmt__Status__c</span>": "<span class="str">Completed</span>",
+    "<span class="str">vlocity_cmt__StatusCode__c</span>": 200,
+    "<span class="str">vlocity_cmt__StatusMessage__c</span>": "All 3 items processed successfully",
+    "vlocity_cmt__ProcessType__c": "IntegrationProcedure",
+    "vlocity_cmt__ProcessName__c": "OrderProvisioning_ProcessOrder",
+    "vlocity_cmt__StartDateTime__c": "2025-06-10T14:22:33.000Z",
+    "vlocity_cmt__EndDateTime__c": "2025-06-10T14:25:18.000Z",
+    "vlocity_cmt__TotalItems__c": 3,
+    "vlocity_cmt__CompletedItems__c": 3,
+    "vlocity_cmt__FailedItems__c": 0
+}</div>
+
+      <div class="code-block"><span class="cmt">// Example SOQL result — Partially failed</span>
+{
+    "Id": "a1Q5g000000UnnbEAC",
+    "Name": "AP-00126",
+    "<span class="str">vlocity_cmt__Status__c</span>": "<span class="str">Failed</span>",
+    "<span class="str">vlocity_cmt__StatusCode__c</span>": 400,
+    "<span class="str">vlocity_cmt__StatusMessage__c</span>": "2 of 4 items failed — see Async Process Jobs for details",
+    "vlocity_cmt__ProcessType__c": "IntegrationProcedure",
+    "vlocity_cmt__ProcessName__c": "Billing_GenerateInvoice",
+    "vlocity_cmt__StartDateTime__c": "2025-06-10T15:00:00.000Z",
+    "vlocity_cmt__EndDateTime__c": "2025-06-10T15:03:42.000Z",
+    "vlocity_cmt__TotalItems__c": 4,
+    "vlocity_cmt__CompletedItems__c": 2,
+    "<span class="str">vlocity_cmt__FailedItems__c</span>": 2
+}</div>
+
+      <h3>Drill Down — Query Failed Jobs</h3>
+      <div class="code-block"><span class="cmt">// Query individual job-level errors for a specific async process</span>
+SELECT Id, Name,
+       vlocity_cmt__Status__c,
+       vlocity_cmt__StatusCode__c,
+       vlocity_cmt__StatusMessage__c,
+       vlocity_cmt__TechnicalMessage__c,
+       vlocity_cmt__AsyncProcessStep__r.Name
+FROM vlocity_cmt__AsyncProcessJob__c
+WHERE vlocity_cmt__AsyncProcessStep__r.vlocity_cmt__AsyncProcess__c
+    = '<span class="str">a1Q5g000000UnnbEAC</span>'
+AND vlocity_cmt__Status__c = 'Failed'</div>
+
+      <div class="code-block"><span class="cmt">// Example result — two failed jobs with error details</span>
+{
+    "records": [
+        {
+            "Id": "a1R5g000000VppAEAS",
+            "Name": "APJ-00042",
+            "<span class="str">vlocity_cmt__Status__c</span>": "Failed",
+            "<span class="str">vlocity_cmt__StatusCode__c</span>": 400,
+            "<span class="str">vlocity_cmt__StatusMessage__c</span>": "FIELD_CUSTOM_VALIDATION_EXCEPTION: AccountId cannot be null",
+            "<span class="str">vlocity_cmt__TechnicalMessage__c</span>": "Class.vlocity_cmt.DRProcessorService.processDataRaptor line 142",
+            "vlocity_cmt__AsyncProcessStep__r": { "Name": "Process Invoice Records" }
+        },
+        {
+            "Id": "a1R5g000000VppBEAS",
+            "Name": "APJ-00043",
+            "<span class="str">vlocity_cmt__Status__c</span>": "Failed",
+            "<span class="str">vlocity_cmt__StatusCode__c</span>": 503,
+            "<span class="str">vlocity_cmt__StatusMessage__c</span>": "External billing system timeout after 120s",
+            "<span class="str">vlocity_cmt__TechnicalMessage__c</span>": "System.CalloutException: Read timed out\nClass.vlocity_cmt.HttpService.makeCallout line 89",
+            "vlocity_cmt__AsyncProcessStep__r": { "Name": "Process Invoice Records" }
+        }
+    ]
+}</div>
+
+      <h3>Query AsyncApexJob (Salesforce Platform Level)</h3>
+      <div class="code-block"><span class="cmt">// If you only have the jobId (not the asyncProcessId), query the platform job</span>
+SELECT Id, Status, NumberOfErrors, JobItemsProcessed, TotalJobItems,
+       CreatedDate, CompletedDate, ExtendedStatus, ApexClass.Name
+FROM AsyncApexJob
+WHERE Id = '<span class="str">7075g000009PkDzAAK</span>'</div>
+
+      <div class="code-block"><span class="cmt">// Example result</span>
+{
+    "Id": "7075g000009PkDzAAK",
+    "<span class="str">Status</span>": "Completed",
+    "<span class="str">NumberOfErrors</span>": 2,
+    "JobItemsProcessed": 4,
+    "TotalJobItems": 4,
+    "CreatedDate": "2025-06-10T15:00:00.000Z",
+    "CompletedDate": "2025-06-10T15:03:42.000Z",
+    "ExtendedStatus": "Batch processing completed with errors",
+    "ApexClass": { "Name": "VlocityBatchFramework" }
+}</div>
+
+      <h3>Method B — Check via Apex (TelcoAdminConsoleController)</h3>
+      <div class="code-block"><span class="cmt">// Refresh batch job list — returns all active and recent jobs</span>
+Map&lt;String, Object&gt; input = new Map&lt;String, Object&gt;{
+    'methodName' =&gt; 'refreshBatchJobLists'
+};
+vlocity_cmt.TelcoAdminConsoleController ctrl =
+    new vlocity_cmt.TelcoAdminConsoleController();
+ctrl.setParameters(JSON.serialize(input));
+ctrl.invokeMethod();
+
+<span class="cmt">// The response is written to the controller's output — access via ctrl.getOutput()</span></div>
+
+      <h3>Method C — Via REST API (Poll Status)</h3>
+      <div class="code-block"><span class="cmt">// Call a dedicated status-check IP via REST</span>
+POST /services/apexrest/vlocity_cmt/v1/integrationprocedure/<span class="str">AsyncStatus_GetProcessStatus</span>/
+
+Authorization: Bearer {access_token}
+Content-Type: application/json
+
+{
+    "<span class="str">asyncProcessId</span>": "a1Q5g000000TmnaEAC"
+}</div>
+
+      <div class="code-block"><span class="cmt">// Example response from status-check IP</span>
+{
+    "<span class="str">IPResult</span>": {
+        "asyncProcessId": "a1Q5g000000TmnaEAC",
+        "processName": "OrderProvisioning_ProcessOrder",
+        "status": "Completed",
+        "statusCode": 200,
+        "statusMessage": "All 3 items processed successfully",
+        "startTime": "2025-06-10T14:22:33.000Z",
+        "endTime": "2025-06-10T14:25:18.000Z",
+        "totalItems": 3,
+        "completedItems": 3,
+        "failedItems": 0,
+        "steps": [
+            {
+                "stepName": "Process Order Records",
+                "status": "Completed",
+                "jobs": [
+                    { "jobName": "APJ-00040", "status": "Completed", "statusCode": 200 },
+                    { "jobName": "APJ-00041", "status": "Completed", "statusCode": 200 },
+                    { "jobName": "APJ-00042", "status": "Completed", "statusCode": 200 }
+                ]
+            }
+        ]
+    }
+}</div>
+
+      <h3>Method D — Via Salesforce UI</h3>
+      <ol>
+        <li>Navigate to the <strong>Async Process</strong> record (from App Launcher or via URL: <code>/lightning/o/vlocity_cmt__AsyncProcess__c/list</code>)</li>
+        <li>Open the process record → check the <strong>Status</strong>, <strong>Status Code</strong>, and <strong>Status Message</strong> fields</li>
+        <li>Click the <strong>Related</strong> tab → open <strong>Async Process Steps</strong> related list</li>
+        <li>Drill into a Step → open <strong>Async Process Jobs</strong> related list</li>
+        <li>On a failed Job, the <strong>Technical Message</strong> field shows the full error / stack trace</li>
+      </ol>
+
+      <hr style="margin:2.5rem 0; border:none; border-top:2px dashed var(--border);">
+
+      <h3>Official Response — Get Status of Async Processes</h3>
+      <p>Below is the <strong>standard response structure</strong> returned by the Get Status API. When querying by <code>referenceId</code>, the <code>AsyncProcessStatus</code> array may contain multiple records (same referenceId can have multiple runs). When querying by <code>asyncProcessId</code>, only one record is returned.</p>
+
+      <div class="code-block"><span class="cmt">// GET STATUS — Full Response (two processes sharing the same referenceId)</span>
+{
+    "<span class="str">code</span>": 200,
+    "<span class="str">statusMessage</span>": "Success",
+    "<span class="str">technicalMessage</span>": null,
+    "<span class="str">AsyncProcessStatus</span>": [
+        {
+            "<span class="str">referenceId</span>": "12324",
+            "<span class="str">asyncProcessName</span>": "Bulk CPQ",
+            "<span class="str">asyncProcessId</span>": "9876543",
+            "<span class="str">status</span>": "InProgress",
+            "<span class="str">message</span>": "Step 1 had errors",
+            "<span class="str">stepName</span>": "Price",
+            "<span class="str">currentStepNumber</span>": 1,
+            "<span class="str">totalNumberOfSteps</span>": 2,
+            "<span class="str">itemsProcessed</span>": [
+                {
+                    "stepNumber": 0,
+                    "stepName": "Validate",
+                    "<span class="str">status</span>": "<span class="str">Failed</span>",
+                    "currentNumberOfItemsProccessed": 6,
+                    "totalNumberOfItemsToBeProccessed": 6,
+                    "message": "Completed with errors",
+                    "<span class="str">successfully</span>": ["Id", "Value"],
+                    "<span class="str">failed</span>": [
+                        {
+                            "items": [{ "key": "value" }, "AnyItem"],
+                            "code": 5001,
+                            "statusMessage": "Invalid status"
+                        },
+                        {
+                            "items": ["NewValueAdded", { "AnotherValueAdded": "AnotherValue" }],
+                            "statusCode": 5004,
+                            "statusMessage": "Missing data"
+                        }
+                    ]
+                },
+                {
+                    "stepNumber": 1,
+                    "stepName": "Price",
+                    "<span class="str">status</span>": "<span class="str">InProgress</span>",
+                    "currentNumberOfItemsProccessed": 3,
+                    "totalNumberOfItemsToBeProccessed": 6,
+                    "message": "In progress",
+                    "successfully": ["Id", "Value", { "key": "value" }],
+                    "failed": []
+                }
+            ],
+            "<span class="str">additionalData</span>": {
+                "NewKey2": ["NewValue2", "NewValue3"],
+                "NewData": { "NewKey4": "NewValue4" },
+                "anotherNewInfo": "newInfo"
+            }
+        },
+        {
+            "referenceId": "12324",
+            "asyncProcessName": "Bulk CPQ",
+            "asyncProcessId": "64221481",
+            "<span class="str">status</span>": "<span class="str">Success</span>",
+            "message": "Completed",
+            "stepName": "Price",
+            "currentStepNumber": 1,
+            "totalNumberOfSteps": 2,
+            "itemsProcessed": [
+                {
+                    "stepNumber": 0,
+                    "stepName": "Validate",
+                    "status": "Success",
+                    "currentNumberOfItemsProccessed": 6,
+                    "totalNumberOfItemsToBeProccessed": 6,
+                    "message": "Completed",
+                    "successfully": ["Id", "Value", { "key": "value" }, "AnyItem",
+                                     "NewValueAdded", { "AnotherValueAdded": "AnotherValue" }],
+                    "failed": []
+                },
+                {
+                    "stepNumber": 1,
+                    "stepName": "Price",
+                    "status": "Success",
+                    "currentNumberOfItemsProccessed": 6,
+                    "totalNumberOfItemsToBeProccessed": 6,
+                    "message": "Completed",
+                    "successfully": ["Id", "Value", { "key": "value" }, "AnyItem",
+                                     "NewValueAdded", { "AnotherValueAdded": "AnotherValue" }],
+                    "failed": []
+                }
+            ],
+            "additionalData": {
+                "NewKey2": ["NewValue2", "NewValue3"],
+                "NewData": { "NewKey4": "NewValue4" },
+                "anotherNewInfo": "newInfo"
+            }
+        }
+    ]
+}</div>
+
+      <h4>Response Breakdown — Top-Level Envelope</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>code</code></td><td>Integer</td><td>HTTP-style status code. <code>200</code> = Success (status retrieved). <code>404</code> = process not found. <code>500</code> = internal error.</td></tr>
+          <tr><td><code>statusMessage</code></td><td>String</td><td>Summary of the API call result (not the process result): <code>"Success"</code>, <code>"Not Found"</code>, etc.</td></tr>
+          <tr><td><code>technicalMessage</code></td><td>String / null</td><td><code>null</code> when the API call succeeds. Contains technical error detail if the status query itself failed.</td></tr>
+          <tr><td><code>AsyncProcessStatus</code></td><td>List&lt;Object&gt;</td><td>Array of process status records. <strong>Multiple records</strong> when querying by <code>referenceId</code> (same external Id can spawn multiple runs). <strong>Single record</strong> when querying by <code>asyncProcessId</code>.</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Response Breakdown — Each <code>AsyncProcessStatus[n]</code> Object</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>referenceId</code></td><td>String</td><td>Your external tracking Id (echoed from the create request)</td></tr>
+          <tr><td><code>asyncProcessName</code></td><td>String</td><td>The process name (echoed from create)</td></tr>
+          <tr><td><code>asyncProcessId</code></td><td>String</td><td>The engine-generated unique Id for this specific process run</td></tr>
+          <tr><td><code>status</code></td><td>String</td><td>Overall process status: <code>"Queued"</code>, <code>"InProgress"</code>, <code>"Success"</code>, <code>"Failed"</code>, <code>"Aborted"</code></td></tr>
+          <tr><td><code>message</code></td><td>String</td><td>Human-readable summary: <code>"Completed"</code>, <code>"Step 1 had errors"</code>, <code>"In progress"</code></td></tr>
+          <tr><td><code>stepName</code></td><td>String</td><td>Name of the <strong>current step</strong> being executed (or the last step if finished)</td></tr>
+          <tr><td><code>currentStepNumber</code></td><td>Integer</td><td>Zero-based index of the step currently running (0 = first step)</td></tr>
+          <tr><td><code>totalNumberOfSteps</code></td><td>Integer</td><td>Total number of steps defined in <code>asyncProcessSteps</code></td></tr>
+          <tr><td><code>itemsProcessed</code></td><td>List&lt;StepDetail&gt;</td><td>Per-step breakdown with item-level success/failure tracking (see below)</td></tr>
+          <tr><td><code>additionalData</code></td><td>Object</td><td>Any data that was enriched/modified during processing — may contain new keys added by the steps</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Response Breakdown — Each <code>itemsProcessed[n]</code> Step Detail</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>stepNumber</code></td><td>Integer</td><td>Zero-based step index matching the order in <code>asyncProcessSteps</code></td></tr>
+          <tr><td><code>stepName</code></td><td>String</td><td>Name of this step (e.g., <code>"Validate"</code>, <code>"Price"</code>)</td></tr>
+          <tr><td><code>status</code></td><td>String</td><td>Step-level status: <code>"Success"</code>, <code>"Failed"</code>, <code>"InProgress"</code>, <code>"Queued"</code></td></tr>
+          <tr><td><code>currentNumberOfItemsProccessed</code></td><td>Integer</td><td>How many items have been processed so far in this step</td></tr>
+          <tr><td><code>totalNumberOfItemsToBeProccessed</code></td><td>Integer</td><td>Total items this step needs to process</td></tr>
+          <tr><td><code>message</code></td><td>String</td><td>Step summary: <code>"Completed"</code>, <code>"Completed with errors"</code>, <code>"In progress"</code></td></tr>
+          <tr><td><code>successfully</code></td><td>List&lt;Any&gt;</td><td>The items from <code>itemsToProcessList</code> that were processed without errors</td></tr>
+          <tr><td><code>failed</code></td><td>List&lt;FailDetail&gt;</td><td>Array of failure objects — each containing the failed items, an error code, and a statusMessage</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Response Breakdown — Each <code>failed[n]</code> Error Detail</h4>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>items</code></td><td>List&lt;Any&gt;</td><td>The specific items from <code>itemsToProcessList</code> that failed in this error group</td></tr>
+          <tr><td><code>code</code> / <code>statusCode</code></td><td>Integer</td><td>Application-specific error code identifying the failure type (e.g., <code>5001</code> = Invalid status, <code>5004</code> = Missing data)</td></tr>
+          <tr><td><code>statusMessage</code></td><td>String</td><td>Human-readable error description: <code>"Invalid status"</code>, <code>"Missing data"</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <strong>Walk-through of the example response above:</strong>
+        <ul>
+          <li><strong>Process 9876543</strong> (InProgress): Step "Validate" finished with errors — 2 items succeeded, 2 failure groups reported (codes 5001 &amp; 5004). Step "Price" is currently running (3 of 6 items done, no failures yet). Items that failed validation plus retry items were added to the Price step's input.</li>
+          <li><strong>Process 64221481</strong> (Success): Both steps completed successfully — all 6 items passed Validate and all 6 items passed Price. Zero failures across the board.</li>
+          <li>Both processes share <code>referenceId "12324"</code> — this is why the <code>AsyncProcessStatus</code> array has 2 entries. When you query by <code>asyncProcessId</code> instead, you'd get only one.</li>
+        </ul>
+      </div>
+
+      <div class="tip"><strong>Querying by referenceId vs asyncProcessId:</strong><br>
+        &bull; <strong>By referenceId</strong> — Returns all process runs that share that external Id. Useful when the same business operation triggers multiple async processes (retries, re-runs).<br>
+        &bull; <strong>By asyncProcessId</strong> — Returns exactly one record. Use when you need precise status of a specific run.</div>
+
+      <hr style="margin:2.5rem 0; border:none; border-top:2px dashed var(--border);">
+
+      <h3>Polling Pattern — OmniScript or LWC</h3>
+      <p>If you're building a UI that shows async progress to users, use a polling pattern:</p>
+      <div class="code-block"><span class="cmt">// Pseudocode: poll every 5 seconds until terminal status</span>
+let asyncProcessId = response.asyncProcessId;  <span class="cmt">// from create call</span>
+let polling = true;
+
+while (polling) {
+    await sleep(5000);
+    let status = await callIP('AsyncStatus_GetProcessStatus', { asyncProcessId });
+
+    if (status.status === 'Completed') {
+        showSuccess('Process finished: ' + status.completedItems + ' items done');
+        polling = false;
+    } else if (status.status === 'Failed') {
+        showError('Process failed: ' + status.statusMessage);
+        polling = false;
+    } else {
+        updateProgress(status.completedItems + ' / ' + status.totalItems);
+    }
+}</div>
+      <div class="warning"><strong>Troubleshooting tip:</strong> Always drill down to the <strong>Job</strong> level for the actual error. The parent Process/Step only shows a summary status — the Technical Message on the Job has the stack trace or API error.</div>
+    </section>
+
+    <!-- 4. DELETE ASYNC PROCESSES -->
+    <section id="async-delete">
+      <h2>4. Delete Async Processes</h2>
+      <p>You can delete or abort async processes that are stuck, no longer needed, or failed and need cleanup.</p>
+
+      <h3>Method A — Abort Running Batch Jobs (Apex)</h3>
+      <div class="code-block"><span class="cmt">// Abort all currently running Vlocity batch jobs</span>
+vlocity_cmt.VlocityBatchFramework.abortBatchJobs();</div>
+
+      <div class="code-block"><span class="cmt">// Abort a specific scheduled batch job</span>
+vlocity_cmt.VlocityBatchFramework.abortScheduledBatchJob();</div>
+
+      <h3>Method B — Abort via System.abortJob</h3>
+      <div class="code-block"><span class="cmt">// For standard Apex async jobs — use the CronTrigger Id, NOT the AsyncApexJob Id</span>
+List&lt;CronTrigger&gt; jobs = [
+    SELECT Id FROM CronTrigger
+    WHERE CronJobDetail.JobType = '7'
+];
+for (CronTrigger job : jobs) {
+    System.abortJob(job.Id);
+}</div>
+      <div class="warning"><strong>Common mistake:</strong> Calling <code>System.abortJob</code> with an <code>AsyncApexJob</code> Id throws: <em>"You can't abort scheduled apex jobs by calling System.abortJob with an AsyncApexJob ID. You must use the parent CronTrigger ID."</em></div>
+
+      <h3>Method C — Delete Async Process Records</h3>
+      <div class="code-block"><span class="cmt">// Delete completed/failed async process records for cleanup</span>
+List&lt;vlocity_cmt__AsyncProcess__c&gt; oldProcesses = [
+    SELECT Id FROM vlocity_cmt__AsyncProcess__c
+    WHERE vlocity_cmt__Status__c IN ('Completed', 'Failed')
+    AND CreatedDate &lt; LAST_N_DAYS:30
+];
+delete oldProcesses;</div>
+
+      <h3>Method D — Get Current Running Jobs</h3>
+      <div class="code-block"><span class="cmt">// List batch jobs that are not Aborted, Completed, or Failed</span>
+vlocity_cmt.VlocityBatchFramework.getCurrentBatchJobs();</div>
+      <p>Returns a list of <code>AsyncApexJob</code> records that are still actively running. Use this to identify stuck jobs before aborting.</p>
+
+      <div class="tip"><strong>Best practice:</strong> Before deleting async process records, ensure no downstream logic depends on them (e.g., retry mechanisms, status polling from OmniScripts). Archive the data if audit requirements apply.</div>
+    </section>
+
+    <!-- 5. IP CUSTOM STATUS & FAILURES -->
+    <section id="async-ip-status">
+      <h2>5. Integration Procedure — Custom Status &amp; Failure Handling</h2>
+      <p>When an Integration Procedure runs asynchronously, it reports status back through <strong>three key fields</strong> on the response. These fields are critical for debugging failures and building retry logic.</p>
+
+      <h3>Key Status Fields from IP Response</h3>
+      <table class="data-table">
+        <thead><tr><th>Field</th><th>API Name</th><th>Description</th><th>Example Values</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Custom Status</strong></td><td><code>customStatus</code></td><td>Overall outcome of the IP execution</td><td><code>Success</code>, <code>Failed</code>, <code>Error</code></td></tr>
+          <tr><td><strong>Status Message</strong></td><td><code>statusMessage</code></td><td>Human-readable description of what happened</td><td><code>"Order submission failed: missing required field AccountId"</code></td></tr>
+          <tr><td><strong>Status Code</strong></td><td><code>statusCode</code></td><td>Numeric/string code for programmatic handling</td><td><code>200</code>, <code>400</code>, <code>500</code>, <code>208</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>How an Async Job Shows Failed Status from IP</h3>
+      <p>When an async batch runs an IP for each record and the IP fails, the error details propagate to the <strong>Async Process Job</strong> record. Here is how a failed job looks in the Salesforce UI:</p>
+
+      <div class="ui-mock" style="border-left: 4px solid var(--danger);">
+        <div class="ui-mock-header" style="background:#fde8e8; color:#ea001e;">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Async Process Job — FAILED (Record Detail View)
+        </div>
+        <div class="ui-mock-body" style="background:#fff5f5;">
+          <div class="form-row"><label>Job Name</label><input value="APJ-00042" readonly></div>
+          <div class="form-row"><label style="font-weight:700;color:#ea001e;">Status</label><input value="Failed" readonly style="color:#ea001e;font-weight:700;border-color:#ea001e;"></div>
+          <div class="form-row"><label style="font-weight:700;color:#ea001e;">Status Code</label><input value="400" readonly style="color:#ea001e;font-weight:700;border-color:#ea001e;"></div>
+          <div class="form-row"><label style="font-weight:700;color:#ea001e;">Status Message</label><input value="FIELD_CUSTOM_VALIDATION_EXCEPTION: Missing required field — AccountId cannot be null" readonly style="color:#ea001e;font-weight:700;border-color:#ea001e;width:100%;"></div>
+          <div class="form-row"><label>Technical Message</label><textarea readonly rows="3" style="width:100%;font-family:monospace;font-size:0.85rem;border-color:#ea001e;">vlocity_cmt.IntegrationProcedureService: IP execution failed at step "CreateOrder_DRPost" — 
+FIELD_CUSTOM_VALIDATION_EXCEPTION: [AccountId: Missing required field]
+Stack: Class.vlocity_cmt.DRProcessorService.processDataRaptor line 142</textarea></div>
+          <div class="form-row"><label>Async Process Step</label><input value="Process Order Records" readonly></div>
+          <div class="form-row"><label>Start Time</label><input value="2025-06-10 14:22:33" readonly></div>
+          <div class="form-row"><label>End Time</label><input value="2025-06-10 14:22:35" readonly></div>
+        </div>
+      </div>
+
+      <h3>Setting Custom Status in Your Integration Procedure</h3>
+      <p>To propagate meaningful error information from your IP to the async process, use a <strong>Set Values</strong> element in the IP's <code>catch</code> or conditional branch:</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>Integration Procedure — Set Values for Error Response</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Element</label><input value="SetValues — ErrorResponse" readonly></div>
+          <div class="form-row"><label>Set Value: customStatus</label><input value="Failed" readonly style="color:#ea001e;font-weight:700;"></div>
+          <div class="form-row"><label>Set Value: statusCode</label><input value="400" readonly style="color:#ea001e;font-weight:700;"></div>
+          <div class="form-row"><label>Set Value: statusMessage</label><input value="%ErrorMessage%" readonly style="color:#ea001e;font-weight:700;"></div>
+        </div>
+      </div>
+
+      <div class="code-block"><span class="cmt">// IP JSON structure — error response with custom status</span>
+{
+    "<span class="str">customStatus</span>": "Failed",
+    "<span class="str">statusCode</span>": 400,
+    "<span class="str">statusMessage</span>": "Order submission failed: missing required field AccountId",
+    "<span class="str">errorDetails</span>": {
+        "step": "CreateOrder_DRPost",
+        "exception": "FIELD_CUSTOM_VALIDATION_EXCEPTION",
+        "fields": ["AccountId"]
+    }
+}</div>
+
+      <h3>Another Example — HTTP Callout Error in IP</h3>
+      <div class="ui-mock" style="border-left: 4px solid var(--danger);">
+        <div class="ui-mock-header" style="background:#fde8e8; color:#ea001e;">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          Async Process Job — FAILED (HTTP Callout Timeout)
+        </div>
+        <div class="ui-mock-body" style="background:#fff5f5;">
+          <div class="form-row"><label>Job Name</label><input value="APJ-00089" readonly></div>
+          <div class="form-row"><label style="font-weight:700;color:#ea001e;">Status</label><input value="Failed" readonly style="color:#ea001e;font-weight:700;border-color:#ea001e;"></div>
+          <div class="form-row"><label style="font-weight:700;color:#ea001e;">Status Code</label><input value="503" readonly style="color:#ea001e;font-weight:700;border-color:#ea001e;"></div>
+          <div class="form-row"><label style="font-weight:700;color:#ea001e;">Status Message</label><input value="External system timeout — provisioning service at https://api.telco.com/provision did not respond within 120s" readonly style="color:#ea001e;font-weight:700;border-color:#ea001e;width:100%;"></div>
+          <div class="form-row"><label>Technical Message</label><textarea readonly rows="2" style="width:100%;font-family:monospace;font-size:0.85rem;border-color:#ea001e;">System.CalloutException: Read timed out
+Class.vlocity_cmt.HttpService.makeCallout line 89</textarea></div>
+        </div>
+      </div>
+
+      <h3>Interpreting Status Codes from IP</h3>
+      <table class="data-table">
+        <thead><tr><th>Status Code</th><th>Custom Status</th><th>Typical Cause</th></tr></thead>
+        <tbody>
+          <tr><td><code>200</code></td><td>Success</td><td>IP completed all steps without errors</td></tr>
+          <tr><td><code>208</code></td><td>Error</td><td>Input validation failed (missing mandatory parameters)</td></tr>
+          <tr><td><code>400</code></td><td>Failed</td><td>DML/SOQL error, custom validation exception</td></tr>
+          <tr><td><code>404</code></td><td>Failed</td><td>Record not found (invalid Id passed to IP)</td></tr>
+          <tr><td><code>500</code></td><td>Failed</td><td>Unhandled Apex exception in IP step</td></tr>
+          <tr><td><code>503</code></td><td>Failed</td><td>External system timeout or unavailable</td></tr>
+        </tbody>
+      </table>
+
+      <div class="tip"><strong>Building retry logic:</strong> Query failed Async Process Jobs → extract the input data → resubmit only the failed items. Use <code>statusCode</code> to determine if retry is appropriate (503 = retry, 400 = fix input first).</div>
+    </section>
+
+    <!-- 6. BATCH FRAMEWORK -->
+    <section id="async-batch-framework">
+      <h2>6. VlocityBatchFramework</h2>
+      <p>The <code>VlocityBatchFramework</code> is the Apex backbone of the async engine. It implements <code>Database.Batchable</code>, <code>System.Schedulable</code>, and <code>Database.AllowsCallouts</code>, supporting scheduled and on-demand batch processing.</p>
+
+      <h3>Key Methods</h3>
+      <table class="data-table">
+        <thead><tr><th>Method</th><th>Description</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>startIntegrationProcedureBatch</code></td>
+            <td>Run an Integration Procedure in batch mode</td>
+            <td><code>vlocity_cmt.VlocityBatchFramework.startIntegrationProcedureBatch('Type_Sub', inputList, options);</code></td>
+          </tr>
+          <tr>
+            <td><code>startOpenInterfaceBatch</code></td>
+            <td>Run an Open Interface (VlocityOpenInterface) class in batch</td>
+            <td><code>vlocity_cmt.VlocityBatchFramework.startOpenInterfaceBatch('ClassName.methodName', inputList, options);</code></td>
+          </tr>
+          <tr>
+            <td><code>startScheduledJobs</code></td>
+            <td>Start one, multiple, or all scheduled Vlocity jobs</td>
+            <td><code>vlocity_cmt.VlocityBatchFramework.startScheduledJobs();</code></td>
+          </tr>
+          <tr>
+            <td><code>getCurrentBatchJobs</code></td>
+            <td>Returns <code>AsyncApexJob</code> records that are not Aborted/Completed/Failed</td>
+            <td><code>vlocity_cmt.VlocityBatchFramework.getCurrentBatchJobs();</code></td>
+          </tr>
+          <tr>
+            <td><code>abortBatchJobs</code></td>
+            <td>Abort all currently running Vlocity batch jobs</td>
+            <td><code>vlocity_cmt.VlocityBatchFramework.abortBatchJobs();</code></td>
+          </tr>
+          <tr>
+            <td><code>abortScheduledBatchJob</code></td>
+            <td>Abort scheduled batch job specifically</td>
+            <td><code>vlocity_cmt.VlocityBatchFramework.abortScheduledBatchJob();</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Options Map Parameters</h3>
+      <table class="data-table">
+        <thead><tr><th>Option</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>batchSize</code></td><td>Integer</td><td>Number of records per batch (default varies)</td></tr>
+          <tr><td><code>isInputAsList</code></td><td>Boolean</td><td>Pass entire list as one call vs. one call per item</td></tr>
+          <tr><td><code>chainable</code></td><td>Boolean</td><td>Run batches sequentially instead of in parallel</td></tr>
+          <tr><td><code>vlocityScheduledJobIds</code></td><td>List&lt;String&gt;</td><td>Specific scheduled job IDs to start</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Chaining Scheduled Jobs</h3>
+      <div class="code-block"><span class="cmt">// Chain two scheduled jobs — Job2 starts after Job1 completes</span>
+vlocity_cmt.VlocityBatchFramework.startScheduledJobs(
+    new Map&lt;String, Object&gt;{
+        'vlocityScheduledJobIds' =&gt; new List&lt;String&gt;{
+            '<span class="str">a3Zf4000000T7A1</span>',
+            '<span class="str">a3Zf4000000T7A6</span>'
+        }
+    },
+    new Map&lt;String, Object&gt;{ 'chainable' =&gt; true }
+);</div>
+    </section>
+
+    <!-- QUICK REFERENCE -->
+    <section id="async-ref">
+      <h2>Async Processes Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term / API</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td><code>VOIAsyncProcess</code></td><td>Remote class for starting async processes from Integration Procedures</td></tr>
+          <tr><td><code>startAsyncProcess</code></td><td>Remote method on VOIAsyncProcess to kick off an async process</td></tr>
+          <tr><td><code>VlocityBatchFramework</code></td><td>Core Apex class implementing batch/scheduled async execution</td></tr>
+          <tr><td><code>startIntegrationProcedureBatch</code></td><td>Run an IP in batch mode with input list + options</td></tr>
+          <tr><td><code>startOpenInterfaceBatch</code></td><td>Run a VlocityOpenInterface class in batch mode</td></tr>
+          <tr><td><code>getCurrentBatchJobs()</code></td><td>List all active (non-terminal) batch jobs</td></tr>
+          <tr><td><code>abortBatchJobs()</code></td><td>Abort all running Vlocity batch jobs</td></tr>
+          <tr><td><code>AsyncProcess__c</code></td><td>Parent object tracking overall process status</td></tr>
+          <tr><td><code>AsyncProcessStep__c</code></td><td>Child of Process — represents one logical step</td></tr>
+          <tr><td><code>AsyncProcessJob__c</code></td><td>Child of Step — individual job with status &amp; technical message</td></tr>
+          <tr><td><code>customStatus</code></td><td>IP response field: Success / Failed / Error</td></tr>
+          <tr><td><code>statusCode</code></td><td>IP response field: numeric code (200, 400, 500, etc.)</td></tr>
+          <tr><td><code>statusMessage</code></td><td>IP response field: human-readable error description</td></tr>
+          <tr><td><code>TechnicalMessage__c</code></td><td>Async Process Job field — full error/stack trace detail</td></tr>
+          <tr><td><code>TelcoAdminConsoleController</code></td><td>Admin controller for refreshing batch job lists &amp; running maintenance jobs</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>Official Salesforce Documentation:</strong><br>
+        <a href="https://help.salesforce.com/s/articleView?id=ind.v_dev_async_engine_create_processes.htm&type=5" target="_blank" rel="noopener">Create Async Processes</a> ·
+        <a href="https://help.salesforce.com/s/articleView?id=ind.v_dev_async_engine_get_status_processes.htm&type=5" target="_blank" rel="noopener">Get Status of Async Processes</a> ·
+        <a href="https://help.salesforce.com/s/articleView?id=ind.v_dev_async_engine_delete_processes.htm&type=5" target="_blank" rel="noopener">Delete Async Processes</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-async -->
+
+<!-- ===================== ENTERPRISE SALES MANAGEMENT (ESM) PANEL ===================== -->
+<div id="panel-esm" class="module-panel">
+<div class="layout">
+  <nav class="sidebar" data-panel="esm">
+    <h3>Enterprise Sales Mgmt</h3>
+    <a href="#esm-overview">1. What is ESM?</a>
+    <a href="#esm-architecture">2. Architecture &amp; Licensing</a>
+    <a href="#esm-challenges">3. Business Challenges</a>
+    <a href="#esm-components">4. Components &amp; Capabilities</a>
+    <a href="#esm-product-models">5. Product Models</a>
+    <a href="#esm-quote-lifecycle">6. Quote Lifecycle</a>
+    <a href="#esm-members">7. Quote Members &amp; Groups</a>
+    <a href="#esm-bulk">8. Bulk Operations</a>
+    <a href="#esm-guided">9. Guided Journeys</a>
+    <a href="#esm-orders">10. Orders &amp; Fulfillment</a>
+    <a href="#esm-enrichment">11. Enrichment</a>
+    <a href="#esm-cpq-vs-esm">12. CPQ vs ESM Multisite</a>
+    <a href="#esm-ref">Quick Reference</a>
+  </nav>
+  <main class="main">
+
+    <!-- 1. OVERVIEW -->
+    <section id="esm-overview">
+      <h2>1. What is Enterprise Sales Management?</h2>
+      <p><strong>Enterprise Sales Management (ESM)</strong> is a Salesforce Communications Cloud solution designed to streamline B2B sales processes for communications service providers (CSPs) selling to large, multisite enterprise and government customers.</p>
+
+      <div class="tip">
+        <strong>Simple analogy</strong>
+        Standard CPQ is like ordering a single pizza with custom toppings. <strong>ESM</strong> is like catering 500 offices across the country — same menu, but you need bulk ordering, location tracking, group pricing, and coordinated delivery for each site.
+      </div>
+
+      <p>ESM extends Industries CPQ with prebuilt data models, guided workflows, product models, and templates that handle thousands of line items across multiple locations and subscribers in a single quote.</p>
+
+      <h3>What ESM Gives You</h3>
+      <ul>
+        <li><strong>Configurable UI</strong> for creating and amending quotes in a centralized location</li>
+        <li><strong>Unified transaction support</strong> for large multisite, multi-subscriber quotes</li>
+        <li><strong>Bulk uploads</strong> — import locations and subscribers via CSV/XLS</li>
+        <li><strong>Shared catalog</strong> with predefined product models (Enterprise Mobile, Business Internet, VPN)</li>
+        <li><strong>Guided flows</strong> for browsing products, configuring offers, and viewing quotes</li>
+        <li><strong>Prebuilt templates</strong> for auto-generating proposals and contracts (integrates with CLM)</li>
+        <li><strong>Order automation</strong> — submit all sub-orders at once or individually over time</li>
+      </ul>
+    </section>
+
+    <!-- 2. ARCHITECTURE & LICENSING -->
+    <section id="esm-architecture">
+      <h2>2. ESM Architecture &amp; Licensing</h2>
+      <p>ESM sits on top of Communications Cloud and integrates with multiple Salesforce Industries products.</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          ESM — Architecture Stack
+        </div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1">Enterprise Sales Management (ESM) <span>→ B2B quoting &amp; ordering layer</span></div>
+            <div class="layer layer-2">Industries CPQ + Enterprise Product Catalog (EPC) <span>→ catalog, pricing, rules</span></div>
+            <div class="layer layer-3">OmniStudio (OmniScripts, DataRaptors, IPs, FlexCards) <span>→ guided flows &amp; data</span></div>
+            <div class="layer layer-4">Communications Cloud Data Model + Sales/Service Cloud <span>→ foundation</span></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Licensing Tiers</h3>
+      <table class="data-table">
+        <thead><tr><th>License</th><th>Includes ESM?</th><th>Key Products</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Comms Cloud Growth</strong></td><td>No</td><td>Sales/Service Cloud, Comms Data Model, OmniStudio</td></tr>
+          <tr><td><strong>Comms Cloud Advanced</strong></td><td>Yes</td><td>Growth + CPQ, Doc Gen, ESM, MSM</td></tr>
+          <tr><td><strong>B2B BSS Suite</strong></td><td>Add-on</td><td>Order Management (B2B) + EPC</td></tr>
+          <tr><td><strong>B2C BSS Suite</strong></td><td>Add-on</td><td>Order Management (B2C) + EPC</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Key:</strong> Industries CPQ is <strong>included</strong> with the ESM license. EPC, Order Management, and CLM are separate add-ons depending on your suite.</div>
+
+      <h3>ESM Integrates With</h3>
+      <table class="data-table">
+        <thead><tr><th>Product</th><th>Integration Role</th></tr></thead>
+        <tbody>
+          <tr><td>Industries CPQ</td><td>Product configuration, pricing, cart, rules</td></tr>
+          <tr><td>Enterprise Product Catalog (EPC)</td><td>Product lifecycle, versioning, catalog management</td></tr>
+          <tr><td>Contract Lifecycle Management (CLM)</td><td>Contract generation, templates, renewal revenue</td></tr>
+          <tr><td>Industries Order Management</td><td>Decomposition, orchestration, fulfillment</td></tr>
+          <tr><td>OmniStudio</td><td>Guided journeys (OmniScripts), DataRaptors, Integration Procedures</td></tr>
+          <tr><td>Google Maps API</td><td>Address validation, location visualization on map</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. BUSINESS CHALLENGES -->
+    <section id="esm-challenges">
+      <h2>3. Business Challenges ESM Solves</h2>
+      <p>Sales teams creating quotes for large enterprises face unique challenges that standard CPQ cannot handle alone:</p>
+      <table class="data-table">
+        <thead><tr><th>Challenge</th><th>Without ESM</th><th>With ESM</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Product complexity</strong></td><td>Thousands of line items managed manually</td><td>Predefined product models, bulk edit, group configuration</td></tr>
+          <tr><td><strong>Multiple geographies</strong></td><td>Separate quotes per location, no unified view</td><td>Single quote with 60,000+ line items across locations</td></tr>
+          <tr><td><strong>Extended negotiations</strong></td><td>Slow quote amendments, lost revision history</td><td>In-line price adjustments, quote cloning, dynamic updates</td></tr>
+          <tr><td><strong>Manual data entry</strong></td><td>Typing hundreds of locations one by one</td><td>Bulk CSV/XLS upload in seconds</td></tr>
+          <tr><td><strong>Proposal generation</strong></td><td>Manual document creation, formatting errors</td><td>Prebuilt templates with auto-generation (CLM integration)</td></tr>
+          <tr><td><strong>Order splitting</strong></td><td>All-or-nothing order submission</td><td>Submit all sub-orders at once or individually over time</td></tr>
+        </tbody>
+      </table>
+
+      <div class="example-box">
+        <strong>Real-world scenario:</strong> Infiwave (a CSP) needs to quote 500 office locations for Global Media Corp — each needing Business Internet + VPN + Mobile devices. Without ESM, this means 500 separate quotes. With ESM, it's <strong>one enterprise quote</strong> with bulk-uploaded locations, grouped by region, with shared product configuration.
+      </div>
+    </section>
+
+    <!-- 4. COMPONENTS & CAPABILITIES -->
+    <section id="esm-components">
+      <h2>4. ESM Components &amp; Capabilities</h2>
+      <p>ESM delivers four categories of industry-specific solutions:</p>
+
+      <h3>A. Business Processes</h3>
+      <table class="data-table">
+        <thead><tr><th>Process</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Quote &amp; Order Enrichment</strong></td><td>Add essential info (connection date, billing account, phone numbers) after quote creation but before fulfillment</td></tr>
+          <tr><td><strong>Service Account &amp; Sub-Order Creation</strong></td><td>Converting a quote creates a primary order + sub-orders per location/subscriber. ESM auto-creates service accounts if missing.</td></tr>
+          <tr><td><strong>Address Validation</strong></td><td>Google Maps API integration for address lookup and serviceability checks</td></tr>
+          <tr><td><strong>Location &amp; Subscriber Data Handling</strong></td><td>Bulk CSV/XLS upload, predictive address fetch, query service accounts from business account</td></tr>
+        </tbody>
+      </table>
+
+      <h3>B. Core Workflow Capabilities</h3>
+      <table class="data-table">
+        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Group &amp; Member Quoting</strong></td><td>Group customers/locations to streamline complex deals and handle bulk product requests</td></tr>
+          <tr><td><strong>Member Bulk Upload</strong></td><td>Upload hundreds of locations or subscribers from CSV/XLS in seconds</td></tr>
+          <tr><td><strong>Product Bulk Edit</strong></td><td>Modify multiple line items featuring the same product — bulk add, disconnect, change</td></tr>
+          <tr><td><strong>Quote Cloning</strong></td><td>Duplicate an existing enterprise quote and adjust for specific needs</td></tr>
+          <tr><td><strong>Map Visualization</strong></td><td>View customer locations on a Google Maps integration for geographic planning</td></tr>
+          <tr><td><strong>In-Line Price Adjustments</strong></td><td>Adjust prices directly in the cart during product configuration</td></tr>
+          <tr><td><strong>Linear Relationships</strong></td><td>Products operate independently without complex hierarchical dependencies</td></tr>
+          <tr><td><strong>Quote Summary Page</strong></td><td>Comprehensive overview — offers, discounts, linear relationships, totals</td></tr>
+        </tbody>
+      </table>
+
+      <h3>C. Product Models</h3>
+      <p>ESM provides predefined, configurable product models that CSPs can fine-tune:</p>
+      <ul>
+        <li><strong>Enterprise Mobile</strong> — device + plan bundles for enterprise employees</li>
+        <li><strong>Business Internet</strong> — broadband/fiber for office locations</li>
+        <li><strong>VPN (Virtual Private Network)</strong> — secure connectivity between sites</li>
+        <li><strong>SD-WAN, MPLS, Dedicated Internet</strong> — advanced enterprise connectivity</li>
+      </ul>
+
+      <h3>D. Templates &amp; Core Components</h3>
+      <ul>
+        <li><strong>Proposal templates</strong> — location-based and subscriber-based proposals</li>
+        <li><strong>Contract templates</strong> — prebuilt CLM integration for auto-generation</li>
+        <li><strong>Order orchestration plans</strong> — sample plans for internet and mobile fulfillment</li>
+        <li><strong>Reusable OmniStudio components</strong> — DataRaptors, Integration Procedures, Apex Classes, OmniScripts</li>
+      </ul>
+    </section>
+
+    <!-- 5. PRODUCT MODELS -->
+    <section id="esm-product-models">
+      <h2>5. Predefined Product Models</h2>
+      <p>ESM includes out-of-the-box product models in the shared catalog. These are starting points you customize for your business.</p>
+      <table class="data-table">
+        <thead><tr><th>Product Model</th><th>Typical Offers</th><th>Configuration Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Enterprise Mobile</strong></td><td>Device + Voice + Data plan</td><td>iPhone 15 Pro + Unlimited Talk &amp; Text + 50GB Data</td></tr>
+          <tr><td><strong>Business Internet</strong></td><td>Broadband / Fiber / Dedicated</td><td>1Gbps Fiber + Static IP + SLA 99.9%</td></tr>
+          <tr><td><strong>VPN</strong></td><td>Site-to-site, Remote Access</td><td>MPLS VPN connecting 200 offices with QoS</td></tr>
+          <tr><td><strong>SD-WAN</strong></td><td>Software-defined WAN overlay</td><td>Managed SD-WAN with dual ISP failover</td></tr>
+          <tr><td><strong>Unified Communications</strong></td><td>Voice + Video + Messaging</td><td>UCaaS platform with 500 seats</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>Customization:</strong> These models define the product hierarchy, attributes, and pricing structure. You extend them in EPC Product Console — adding your own attributes, rules, and pricing.</div>
+    </section>
+
+    <!-- 6. QUOTE LIFECYCLE -->
+    <section id="esm-quote-lifecycle">
+      <h2>6. ESM Quote Lifecycle</h2>
+      <p>The ESM quote-to-order lifecycle follows these stages:</p>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header">
+          <div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+          ESM — Quote-to-Order Lifecycle
+        </div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1">1. Opportunity <span>→ Identify enterprise customer need</span></div>
+            <div class="layer layer-2">2. Create Enterprise Quote <span>→ from Account page, with or without guided journey</span></div>
+            <div class="layer layer-3">3. Add Members (Locations / Subscribers) <span>→ manual or CSV/XLS bulk upload</span></div>
+            <div class="layer layer-2">4. Group Members <span>→ organize by region, department, or custom grouping</span></div>
+            <div class="layer layer-3">5. Add &amp; Configure Products <span>→ per member, per group, or standalone</span></div>
+            <div class="layer layer-2">6. Negotiate &amp; Amend <span>→ in-line price adjustments, bulk edit, discounts</span></div>
+            <div class="layer layer-1">7. Enrich Quote <span>→ add phone numbers, connection dates, billing accounts</span></div>
+            <div class="layer layer-4">8. Create Enterprise Order <span>→ primary order + sub-orders per member</span></div>
+            <div class="layer layer-3">9. Submit Orders <span>→ all at once or partial (individual sub-orders)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. QUOTE MEMBERS & GROUPS -->
+    <section id="esm-members">
+      <h2>7. Quote Members &amp; Groups</h2>
+      <p>In ESM, both <strong>locations</strong> and <strong>subscribers</strong> are called <strong>quote members</strong>. Members are organized into <strong>quote groups</strong> for efficient product allocation.</p>
+
+      <h3>Three Ways to Add Products</h3>
+      <table class="data-table">
+        <thead><tr><th>Approach</th><th>When to Use</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Product without member/group</strong></td><td>Customer wants to order but locations/subscribers aren't defined yet</td><td>Add a new mobile phone model for centralized purchasing — no location assigned</td></tr>
+          <tr><td><strong>Product per member</strong></td><td>Each member needs different products or configurations</td><td>Different mobile models per office location, each with unique config</td></tr>
+          <tr><td><strong>Product per group</strong></td><td>Same product + config for all members in the group</td><td>Standardized mobile phone for all sales department offices worldwide</td></tr>
+        </tbody>
+      </table>
+
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>ESM — Quote Members &amp; Groups Structure</div>
+        <div class="ui-mock-body">
+          <div class="layers">
+            <div class="layer layer-1"><strong>Enterprise Quote</strong> — "Global Media Q-2025-001" <span>→ Parent container</span></div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: APAC Offices</strong> — 120 locations <span>→ Same Business Internet config</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Member: Tokyo HQ · Member: Singapore · Member: Sydney ...</div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: EMEA Offices</strong> — 200 locations <span>→ Same VPN + Internet config</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Member: London · Member: Berlin · Member: Paris ...</div>
+            <div class="layer layer-2">&nbsp;&nbsp;↳ <strong>Group: Mobile Subscribers</strong> — 3,000 employees <span>→ Same Enterprise Mobile plan</span></div>
+            <div class="layer layer-3">&nbsp;&nbsp;&nbsp;&nbsp;↳ Subscriber: J. Smith · Subscriber: A. Chen ...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. BULK OPERATIONS -->
+    <section id="esm-bulk">
+      <h2>8. Bulk Operations</h2>
+      <p>ESM's bulk features handle the scale of enterprise deals efficiently.</p>
+
+      <h3>Bulk Upload (CSV/XLS)</h3>
+      <ol>
+        <li>Open the Enterprise Quote record</li>
+        <li>Click <strong>+ Add Locations</strong> or <strong>+ Add Subscribers</strong></li>
+        <li>Select <strong>Upload</strong> and choose a CSV or XLS file</li>
+        <li>Locations/subscribers appear on the quote automatically</li>
+      </ol>
+      <div class="warning"><strong>Avoid duplicates:</strong> Do not edit and re-upload the same file. The system does not deduplicate on re-upload.</div>
+
+      <h3>Bulk Edit</h3>
+      <p>Modify multiple line items simultaneously using the <strong>Bulk Edit</strong> feature:</p>
+      <ul>
+        <li><strong>Bulk Add</strong> — add the same product to multiple members at once</li>
+        <li><strong>Bulk Disconnect</strong> — remove a product from multiple members</li>
+        <li><strong>Bulk Change</strong> — modify attributes or configuration across line items</li>
+      </ul>
+
+      <h3>Quote Cloning</h3>
+      <p>Duplicate an existing enterprise quote to quickly create a similar proposal — adjust members, products, or pricing on the clone without affecting the original.</p>
+    </section>
+
+    <!-- 9. GUIDED JOURNEYS -->
+    <section id="esm-guided">
+      <h2>9. Guided Journeys (OmniScript Flows)</h2>
+      <p>ESM provides configurable <strong>guided journeys</strong> built with OmniScripts that walk sales reps through the quoting process step by step.</p>
+
+      <h3>Six-Step Guided Journey</h3>
+      <div class="ui-mock">
+        <div class="ui-mock-header"><div class="dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>ESM — Guided Journey Steps</div>
+        <div class="ui-mock-body">
+          <div class="form-row"><label>Step 1</label><input value="Add Locations / Subscribers" readonly></div>
+          <div class="form-row"><label>Step 2</label><input value="Group Members" readonly></div>
+          <div class="form-row"><label>Step 3</label><input value="Browse & Select Products" readonly></div>
+          <div class="form-row"><label>Step 4</label><input value="Configure Products & Pricing" readonly></div>
+          <div class="form-row"><label>Step 5</label><input value="Apply Discounts & Adjustments" readonly></div>
+          <div class="form-row"><label>Step 6</label><input value="Review Quote Summary" readonly></div>
+        </div>
+      </div>
+      <p>When creating an enterprise quote, a dialog asks <em>"Do you want to use the guided journey?"</em> — selecting <strong>Yes</strong> launches the OmniScript flow.</p>
+      <div class="tip"><strong>Customization:</strong> Guided journeys are OmniScripts — you can modify steps, add validations, inject Integration Procedure calls, or build entirely new flows.</div>
+    </section>
+
+    <!-- 10. ORDERS & FULFILLMENT -->
+    <section id="esm-orders">
+      <h2>10. Orders &amp; Fulfillment</h2>
+      <p>Converting an enterprise quote to an order creates a <strong>primary order</strong> with <strong>sub-orders</strong> for each quote member.</p>
+
+      <h3>Order Creation Flow</h3>
+      <ol>
+        <li>Open the Enterprise Quote → click <strong>Create Enterprise Order</strong></li>
+        <li>ESM creates service accounts (if they don't exist) for each member</li>
+        <li>A <strong>primary order</strong> is created with linked <strong>sub-orders</strong> per member</li>
+        <li>Click <strong>Create Final Orders</strong> to finalize</li>
+      </ol>
+
+      <h3>Order Submission Options</h3>
+      <table class="data-table">
+        <thead><tr><th>Option</th><th>How</th><th>When to Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Complete submission</strong></td><td>Click <strong>Submit Orders</strong> on the primary order</td><td>Customer is ready for all sub-orders to be processed at once</td></tr>
+          <tr><td><strong>Partial submission</strong></td><td>Click <strong>Submit</strong> on individual sub-orders</td><td>Customer wants to roll out in phases — submit select sub-orders first</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Behind the scenes:</strong> Submitted orders flow into Industries Order Management for decomposition and orchestration — same engine as the Order Management tab in this guide.</div>
+    </section>
+
+    <!-- 11. ENRICHMENT -->
+    <section id="esm-enrichment">
+      <h2>11. Quote &amp; Order Enrichment</h2>
+      <p><strong>Enrichment</strong> is adding essential details after the quote/order is created but before fulfillment. These details may not affect pricing but are required for provisioning.</p>
+      <table class="data-table">
+        <thead><tr><th>Enrichment Data</th><th>Level</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Connection date</td><td>Group / Order</td><td>Set go-live date for all offices in a region</td></tr>
+          <tr><td>Billing account</td><td>Group / Order</td><td>Assign billing entity for the entire group</td></tr>
+          <tr><td>Phone number</td><td>Member / Order Product</td><td>Allocate specific phone numbers per subscriber</td></tr>
+          <tr><td>SIM / IMEI</td><td>Member / Order Product</td><td>Assign device identifiers before shipping</td></tr>
+          <tr><td>Service address details</td><td>Member</td><td>Floor, suite, building info for installation</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 12. CPQ vs ESM MULTISITE -->
+    <section id="esm-cpq-vs-esm">
+      <h2>12. Industries CPQ vs ESM — Multisite Comparison</h2>
+      <table class="data-table">
+        <thead><tr><th>Feature</th><th>Industries CPQ Multisite</th><th>ESM Multisite</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Quote structure</strong></td><td>Parent + child quotes (one child per location)</td><td>Single quote with quote members &amp; groups (up to 60,000 line items)</td></tr>
+          <tr><td><strong>Contract structure</strong></td><td>Contract hierarchy with child contracts</td><td>One quote, one contract for all locations/subscribers</td></tr>
+          <tr><td><strong>Grouping by</strong></td><td>Service points, premises, service accounts, custom objects</td><td>Subscribers or locations organized into quote groups</td></tr>
+          <tr><td><strong>Bulk upload</strong></td><td>Not built-in (custom implementation)</td><td>Built-in CSV/XLS upload with guided process</td></tr>
+          <tr><td><strong>Industry focus</strong></td><td>Broad — Comms, Media, Energy &amp; Utilities</td><td>Specifically B2B communications / CSPs</td></tr>
+          <tr><td><strong>Scale</strong></td><td>Moderate — parent/child architecture</td><td>High — optimized for 1,000+ line items per quote</td></tr>
+          <tr><td><strong>Product models</strong></td><td>Build from scratch in EPC</td><td>Predefined models (Mobile, Internet, VPN) + customize</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><strong>When to choose:</strong> Use <strong>Industries CPQ Multisite</strong> for cross-industry solutions with diverse site types. Use <strong>ESM</strong> when selling telco/comms products at enterprise scale with B2B-specific workflows.</div>
+    </section>
+
+    <!-- QUICK REFERENCE -->
+    <section id="esm-ref">
+      <h2>ESM Quick Reference</h2>
+      <table class="data-table">
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>ESM</td><td>Enterprise Sales Management — B2B quoting &amp; ordering for CSPs</td></tr>
+          <tr><td>Quote Member</td><td>A location or subscriber added to an enterprise quote</td></tr>
+          <tr><td>Quote Group</td><td>A set of quote members grouped for shared product configuration</td></tr>
+          <tr><td>Enterprise Quote</td><td>A single quote containing all members, groups, and products for a deal</td></tr>
+          <tr><td>Primary Order</td><td>Parent order created from an enterprise quote</td></tr>
+          <tr><td>Sub-Order</td><td>Child order per quote member, linked to the primary order</td></tr>
+          <tr><td>Service Account</td><td>Account associated with each sub-order (auto-created by ESM if missing)</td></tr>
+          <tr><td>Enrichment</td><td>Adding provisioning details (phone numbers, dates) after quote creation</td></tr>
+          <tr><td>Guided Journey</td><td>OmniScript-based step-by-step flow for the quoting process</td></tr>
+          <tr><td>Bulk Upload</td><td>Import locations/subscribers via CSV or XLS file</td></tr>
+          <tr><td>Bulk Edit</td><td>Modify multiple line items simultaneously (add, disconnect, change)</td></tr>
+          <tr><td>Linear Relationship</td><td>Products operate independently without hierarchical dependencies</td></tr>
+          <tr><td>Quote Cloning</td><td>Duplicate an existing enterprise quote for reuse</td></tr>
+          <tr><td>Product Model</td><td>Predefined catalog template (Enterprise Mobile, Business Internet, VPN)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>Trailhead Modules:</strong><br>
+        <a href="https://trailhead.salesforce.com/content/learn/modules/enterprise-sales-management-foundations" target="_blank" rel="noopener">ESM Foundations</a> ·
+        <a href="https://trailhead.salesforce.com/content/learn/modules/quotes-and-orders-with-enterprise-sales-management" target="_blank" rel="noopener">Quotes &amp; Orders with ESM</a> ·
+        <a href="https://trailhead.salesforce.com/content/learn/modules/industries-cpq-foundations" target="_blank" rel="noopener">Industries CPQ Foundations</a> ·
+        <a href="https://trailhead.salesforce.com/content/learn/modules/industries-cpq-multisite-quotes-and-orders" target="_blank" rel="noopener">CPQ Multisite Quotes &amp; Orders</a><br><br>
+        <strong>Salesforce Help:</strong><br>
+        <a href="https://help.salesforce.com/s/articleView?id=ind.comms_t_enterprise_sales_management_overview_55069.htm&type=5" target="_blank" rel="noopener">Enterprise Sales Management Overview</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div><!-- end panel-esm -->
 
 <footer>
   Based on Vlocity CME / Salesforce Industries documentation (EPC, CPQ, OmniStudio, Order Orchestration, Advanced Rules &amp; Pricing Exercise Guides)<br>
